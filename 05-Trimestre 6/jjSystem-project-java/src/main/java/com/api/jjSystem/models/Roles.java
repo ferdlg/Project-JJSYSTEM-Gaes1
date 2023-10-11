@@ -1,4 +1,4 @@
-package com.api.jjSystem.modelos;
+package com.api.jjSystem.models;
 
 import jakarta.persistence.*;
 
