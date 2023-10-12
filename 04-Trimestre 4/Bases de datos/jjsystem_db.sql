@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS Citas(
     FOREIGN KEY (idEstadoCita) REFERENCES EstadoCitas (idEstadoCita)
 );
 
-CREATE TABLE IF NOT EXISTS DisponibilidadCronograma(
+CREATE TABLE IF NOT EXISTS DisponibilidadCronogramas(
 	idDisponibilidadCronograma INT NOT NULL AUTO_INCREMENT,
     nombreDisponibilidad VARCHAR(30) NOT NULL,
     PRIMARY KEY (idDisponibilidadCronograma)
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS CronogramaTecnicos(
     PRIMARY KEY (idCronogramaTecnico),
     FOREIGN KEY (Tecnico_idTecnico) REFERENCES Tecnicos (idTecnico), 
     FOREIGN KEY (Cita_idCita) REFERENCES Citas (idCita),
-    FOREIGN KEY (idDisponibilidadCronograma) REFERENCES DisponibilidadCronograma (idDisponibilidadCronograma)
+    FOREIGN KEY (idDisponibilidadCronograma) REFERENCES DisponibilidadCronogramas (idDisponibilidadCronograma)
 );
 
 CREATE TABLE IF NOT EXISTS ActividadCronogramaTecnicos(
@@ -137,21 +137,23 @@ CREATE TABLE IF NOT EXISTS ActividadCronogramaTecnicos(
     PRIMARY KEY (idActividadCronogramaTecnico)
 );
 
-CREATE TABLE IF NOT EXISTS detalleActividadCronograma(
+CREATE TABLE IF NOT EXISTS DetalleActividadCronograma(
+	idDetalleActividad INT NOT NULL AUTO_INCREMENT,
     idCronogramaTecnico INT,
     idActividadCronogramaTecnico INT,
     fechaActividadCronograma DATETIME NOT NULL,
+	primary key(idDetalleActividad),
     FOREIGN KEY (idCronogramaTecnico) REFERENCES CronogramaTecnicos (idCronogramaTecnico),
     FOREIGN KEY (idActividadCronogramaTecnico) REFERENCES ActividadCronogramaTecnicos (idActividadCronogramaTecnico)
 );
 
-CREATE TABLE IF NOT EXISTS categoriaProductos(
+CREATE TABLE IF NOT EXISTS categoriasProductos(
     idCategoriaProducto INT NOT NULL AUTO_INCREMENT,
     nombreCategoria VARCHAR(20),
     PRIMARY KEY(idCategoriaProducto)
 );
 
-CREATE TABLE IF NOT EXISTS proveedorProductos(
+CREATE TABLE IF NOT EXISTS proveedoresProductos(
     idProveedorProducto INT NOT NULL AUTO_INCREMENT,
     nombreProveedor VARCHAR(50) NOT NULL,
     PRIMARY KEY (idProveedorProducto)
@@ -170,11 +172,11 @@ CREATE TABLE IF NOT EXISTS Productos(
     PRIMARY KEY(idProducto),
     FOREIGN KEY(cotizacionIdCotizacion) REFERENCES Cotizaciones (IdCotizacion),
     FOREIGN KEY(AdministradorIdAdministrador) REFERENCES Administrador (IdAdministrador),
-    FOREIGN KEY(idCategoriaProducto) REFERENCES categoriaProductos (idCategoriaProducto),
-	FOREIGN KEY(idProveedorProducto) REFERENCES proveedorProductos (idProveedorProducto)
+    FOREIGN KEY(idCategoriaProducto) REFERENCES categoriasProductos (idCategoriaProducto),
+	FOREIGN KEY(idProveedorProducto) REFERENCES proveedoresProductos (idProveedorProducto)
 );
 
-CREATE TABLE IF NOT EXISTS categoriaServicios(
+CREATE TABLE IF NOT EXISTS categoriasServicios(
     idCategoriaServicio INT NOT NULL AUTO_INCREMENT,
     nombreCategoria VARCHAR(30),
     PRIMARY KEY(idCategoriaServicio)
@@ -188,10 +190,10 @@ CREATE TABLE IF NOT EXISTS Servicios(
     idCategoriaServicio INT,
     PRIMARY KEY (idServicio),
     FOREIGN KEY (Cotizacion_idCotizacion) REFERENCES Cotizaciones (idCotizacion),
-	FOREIGN KEY (idCategoriaServicio) REFERENCES categoriaServicios (idCategoriaServicio)
+	FOREIGN KEY (idCategoriaServicio) REFERENCES categoriasServicios (idCategoriaServicio)
 );
 
-CREATE TABLE IF NOT EXISTS Venta(
+CREATE TABLE IF NOT EXISTS Ventas(
     idVenta INT NOT NULL AUTO_INCREMENT,
     fechaVenta DATE,
     envioIdEnvio INT NOT NULL,
@@ -507,7 +509,7 @@ VALUES
 	('2023-06-15', 'Avenida Carrera 30 # 62-23, Barrio La Macarena', 3434567896, 'Revisión de sistema de control de acceso peatonal', 4, 1, 12, 1),
 	('2023-06-16', 'Calle 85 # 18-34, Barrio El Nogal', 3590123456, 'Visita técnica para evaluación de cerraduras electrónicas', 2, 1, 19, 1);
 
-INSERT INTO DisponibilidadCronograma (nombreDisponibilidad)
+INSERT INTO DisponibilidadCronogramas (nombreDisponibilidad)
 VALUES
 	("Disponible"),
     ("No disponible");
@@ -545,14 +547,14 @@ VALUE
 	(9, 2, '2022-12-12 13:39:50'),
 	(10, 4, '2023-04-25 03:58:09');
 
-INSERT INTO categoriaProductos (nombreCategoria) 
+INSERT INTO categoriasProductos (nombreCategoria) 
 VALUES
 	("Camara"),
     ("DVR"),
     ("Alarma"),
     ("Sensor");
     
-INSERT INTO proveedorProductos (nombreProveedor)
+INSERT INTO proveedoresProductos (nombreProveedor)
 VALUES
 	("TechSecure"),
     ("SecureGuard"),
@@ -602,7 +604,7 @@ VALUES
 	('Sensor de movimiento para exteriores','Sensor de movimiento para exteriores: Diseñado para áreas exteriores, detecta el movimiento y activa una respuesta de seguridad.', 408000, 18, NULL, 1, 4, 4),
 	('Sensor de humo y calor','Sensor de humo y calor: Detecta el humo y los cambios de temperatura causados por un incendio y activa una alarma.', 276000, 20, NULL, 1, 4, 7);
 
-INSERT INTO categoriaServicios (nombreCategoria)
+INSERT INTO categoriasServicios (nombreCategoria)
 VALUES
     ('Instalacion de productos'),
     ('Servicio de análisis'),
@@ -619,7 +621,7 @@ VALUES
     ('Mantenimiento cerca electrica', 'El mantenimiento de una cerca eléctrica implica inspeccionar, limpiar y probar regularmente el sistema para garantizar su funcionamiento adecuado. Es importante revisar los componentes en busca de daños, limpiar la cerca para eliminar la suciedad y realizar pruebas para asegurar la emisión correcta de pulsos eléctricos. También se deben verificar las conexiones eléctricas y realizar reparaciones o reemplazos según sea necesario. Se recomienda contar con la ayuda de un profesional y cumplir con las regulaciones locales.', 7, 3),
     ('Mantenimiento sensores', 'El mantenimiento de sensores se encarga de cuidar y mantener en buen estado los dispositivos electrónicos que detectan cambios en el entorno. Los sensores son utilizados para diferentes propósitos, como medir temperatura, humedad, movimiento, entre otros.', 8, 1);
 
-INSERT INTO Venta (fechaVenta, envioIdEnvio)
+INSERT INTO Ventas (fechaVenta, envioIdEnvio)
 VALUES
     ('2023-01-01', 27),
     ('2023-02-05', 29),
