@@ -1,4 +1,4 @@
 package com.api.jjSystem.models;
 
-public class Cronograma {
+public class cronograma {
 }

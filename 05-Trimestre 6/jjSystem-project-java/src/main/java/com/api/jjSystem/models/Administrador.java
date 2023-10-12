@@ -1,30 +1,26 @@
 package com.api.jjSystem.models;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.math.BigInteger;
 
 @Entity
-@Table(name = "clientes")
-public class Clientes {
+@Table(name = "administrador")
+public class Administrador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idCliente")
+    @Column(name = "idAdministrador")
     private Integer id;
-    private String direccion;
     private BigInteger numeroDocumento;
 
-    //Constructores
-    public Clientes() {
+    public Administrador() {
     }
-
-    public Clientes(Integer id, String direccion, BigInteger numeroDocumento) {
+    public Administrador(Integer id, BigInteger numeroDocumento) {
         this.id = id;
-        this.direccion = direccion;
         this.numeroDocumento = numeroDocumento;
     }
-    //get y set
 
     public Integer getId() {
         return id;
@@ -32,14 +28,6 @@ public class Clientes {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
     }
 
     public BigInteger getNumeroDocumento() {
