@@ -10,14 +10,14 @@ public class Roles {
     //atributos de la clase
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_rol")
+    @Column(name = "idRol")
     private Integer id;
     private String nombreRol;
 
     //Constructor vacio
     public Roles() {
     }
-    //Constructor con los campos de la tabla acceder a los datos de la tabla
+    //Constructor con los campos de la tabla--> acceder a los datos de la tabla
     public Roles(Integer id, String nombreRol) {
         this.id = id;
         this.nombreRol = nombreRol;
