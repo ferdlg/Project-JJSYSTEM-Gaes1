@@ -4,16 +4,16 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "disponibilidadCronogramas")
-public class disponibilidadCronogramas {
+public class DisponibilidadCronogramas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDisponibilidadCronograma")
     private Integer idDisponibilidadCronograma;
     @Column(name = "nombreDisponibilidad")
     private String nombreDisponibilidad;
-    public disponibilidadCronogramas() {
+    public DisponibilidadCronogramas() {
     }
-    public disponibilidadCronogramas(Integer idDisponibilidadCronograma, String nombreDisponibilidad) {
+    public DisponibilidadCronogramas(Integer idDisponibilidadCronograma, String nombreDisponibilidad) {
         this.idDisponibilidadCronograma = idDisponibilidadCronograma;
         this.nombreDisponibilidad = nombreDisponibilidad;
     }

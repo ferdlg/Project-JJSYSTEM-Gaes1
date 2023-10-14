@@ -9,21 +9,21 @@ public class EstadosCitas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEstadoCita")
-    private Integer id;
+    private Integer idEstadoCita;
     @Column(name = "nombreEstadoCita")
     private String nombreEstadoCita;
     public EstadosCitas() {
     }
-    public EstadosCitas(Integer id, String nombreEstadoCita) {
-        this.id = id;
+    public EstadosCitas(Integer idEstadoCita, String nombreEstadoCita) {
+        this.idEstadoCita = idEstadoCita;
         this.nombreEstadoCita = nombreEstadoCita;
     }
     public Integer getId() {
-        return id;
+        return idEstadoCita;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idEstadoCita) {
+        this.idEstadoCita = idEstadoCita;
     }
 
     public String getNombreEstadoCita() {

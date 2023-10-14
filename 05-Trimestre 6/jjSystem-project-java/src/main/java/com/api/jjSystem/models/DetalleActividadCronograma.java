@@ -3,11 +3,10 @@ package com.api.jjSystem.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "detalleActividadCronograma")
-public class detalleActividadCronograma {
+public class DetalleActividadCronograma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +22,10 @@ public class detalleActividadCronograma {
 
     private LocalDateTime fechaActividadCronograma;
     //Constructores
-    public detalleActividadCronograma() {
+    public DetalleActividadCronograma() {
     }
 
-    public detalleActividadCronograma(Integer idDetalleActividad, com.api.jjSystem.models.cronogramaTecnicos cronogramaTecnicos, ActividadesCronogramaTecnicos actividadesCronogramaTecnicos, LocalDateTime fechaActividadCronograma) {
+    public DetalleActividadCronograma(Integer idDetalleActividad, com.api.jjSystem.models.cronogramaTecnicos cronogramaTecnicos, ActividadesCronogramaTecnicos actividadesCronogramaTecnicos, LocalDateTime fechaActividadCronograma) {
         this.idDetalleActividad = idDetalleActividad;
         this.cronogramaTecnicos = cronogramaTecnicos;
         this.actividadesCronogramaTecnicos = actividadesCronogramaTecnicos;
