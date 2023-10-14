@@ -18,15 +18,15 @@ public class cronogramaTecnicos {
     @JoinColumn(name = "Cita_idCita")
     private Citas citas;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "DisponibilidadCronograma_idDisponibilidadCronograma")
-    private DisponibilidadCronograma disponibilidadCronograma;
+    private disponibilidadCronogramas disponibilidadCronograma;
 
     //Constructores
     public cronogramaTecnicos() {
     }
 
-    public cronogramaTecnicos(Integer id, Tecnicos tecnico, Citas citas, DisponibilidadCronograma disponibilidadCronograma) {
+    public cronogramaTecnicos(Integer id, Tecnicos tecnico, Citas citas, disponibilidadCronogramas disponibilidadCronograma) {
         this.id = id;
         this.tecnico = tecnico;
         this.citas = citas;
@@ -58,11 +58,11 @@ public class cronogramaTecnicos {
         this.citas = citas;
     }
 
-    public DisponibilidadCronograma getDisponibilidadCronograma() {
+    public disponibilidadCronogramas getDisponibilidadCronograma() {
         return disponibilidadCronograma;
     }
 
-    public void setDisponibilidadCronograma(DisponibilidadCronograma disponibilidadCronograma) {
+    public void setDisponibilidadCronogramas(disponibilidadCronogramas disponibilidadCronograma) {
         this.disponibilidadCronograma = disponibilidadCronograma;
     }
 }
