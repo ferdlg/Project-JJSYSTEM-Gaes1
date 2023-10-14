@@ -26,12 +26,12 @@ public class ProductosController {
         return productosService.getAllProductos();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{idProducto}")
     public Productos buscarProductosById(@PathVariable Integer idProducto)
     {
         return productosService.getProductoById(idProducto);
     }
-
+    @DeleteMapping("{idProducto}")
     public void deleteProductoById(@PathVariable("idProducto") Integer idProducto)
     {
         productosService.deleteProductos(idProducto);
