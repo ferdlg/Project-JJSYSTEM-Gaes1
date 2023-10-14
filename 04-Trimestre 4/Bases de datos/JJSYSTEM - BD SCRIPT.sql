@@ -37,6 +37,14 @@ CREATE TABLE IF NOT EXISTS Usuarios(
     FOREIGN KEY (idRol) REFERENCES Roles (idRol)
 );
 
+CREATE TABLE IF NOT EXISTS EstadosUsuarios(
+	idEstadoUsuario INT NOT NULL AUTO_INCREMENT,
+    nombreEstadoUsuario VARCHAR(50) NOT NULL,
+    Usuarios_numeroDocumento BIGINT NOT NULL,
+    PRIMARY KEY (idEstadoUsuario),
+    FOREIGN KEY (Usuarios_numeroDocumento) REFERENCES Usuarios (numeroDocumento)
+);
+
 CREATE TABLE IF NOT EXISTS Clientes(
     idCliente INT NOT NULL AUTO_INCREMENT,
     direccion VARCHAR(50) NOT NULL,
@@ -57,7 +65,6 @@ CREATE TABLE IF NOT EXISTS Tecnicos (
     especialidad VARCHAR(50) NOT NULL,
     numeroDocumento BIGINT NOT NULL,
     PRIMARY KEY (idTecnico),
-    KEY numeroDocumento (numeroDocumento),
     FOREIGN KEY (numeroDocumento) REFERENCES usuarios (numeroDocumento)
 );
 
@@ -122,9 +129,8 @@ CREATE TABLE IF NOT EXISTS DisponibilidadCronogramas(
 CREATE TABLE IF NOT EXISTS CronogramaTecnicos(
     idCronogramaTecnico INT NOT NULL AUTO_INCREMENT,
     Tecnico_idTecnico INT,
-    Cita_idCita INT NULL,
-    Envio_idEnvio INT NULL,
-    idDisponibilidadCronograma INT NOT NULL,
+    Cita_idCita INT,
+    idDisponibilidadCronograma INT,
     PRIMARY KEY (idCronogramaTecnico),
     FOREIGN KEY (Tecnico_idTecnico) REFERENCES Tecnicos (idTecnico), 
     FOREIGN KEY (Cita_idCita) REFERENCES Citas (idCita),
@@ -149,7 +155,7 @@ CREATE TABLE IF NOT EXISTS DetalleActividadCronograma(
 
 CREATE TABLE IF NOT EXISTS categoriasProductos(
     idCategoriaProducto INT NOT NULL AUTO_INCREMENT,
-    nombreCategoria VARCHAR(20),
+    nombreCategoria VARCHAR(20) NOT NULL,
     PRIMARY KEY(idCategoriaProducto)
 );
 
@@ -163,12 +169,12 @@ CREATE TABLE IF NOT EXISTS Productos(
     idProducto INT NOT NULL AUTO_INCREMENT,
     nombreProducto TEXT(100) NOT NULL,
     descripcionProducto TEXT(200) NOT NULL,
-    precioProducto FLOAT,
-    cantidad INT,
-    cotizacionIdCotizacion INT NULL,
-    AdministradorIdAdministrador INT NOT NULL,
-    idCategoriaProducto INT NOT NULL,
-    idProveedorProducto INT NOT NULL,
+    precioProducto FLOAT NOT NULL,
+    cantidad INT NOT NULL,
+    cotizacionIdCotizacion INT,
+    AdministradorIdAdministrador INT,
+    idCategoriaProducto INT,
+    idProveedorProducto INT,
     PRIMARY KEY(idProducto),
     FOREIGN KEY(cotizacionIdCotizacion) REFERENCES Cotizaciones (IdCotizacion),
     FOREIGN KEY(AdministradorIdAdministrador) REFERENCES Administrador (IdAdministrador),
@@ -196,9 +202,19 @@ CREATE TABLE IF NOT EXISTS Servicios(
 CREATE TABLE IF NOT EXISTS Ventas(
     idVenta INT NOT NULL AUTO_INCREMENT,
     fechaVenta DATE,
-    envioIdEnvio INT NOT NULL,
+    envioIdEnvio INT,
     PRIMARY KEY(idVenta),
     FOREIGN KEY(envioIdEnvio) REFERENCES Envios (idEnvio)
+);
+
+CREATE TABLE IF NOT EXISTS DetallesVentas(
+	idDetalleVenta INT NOT NULL AUTO_INCREMENT,
+    detallesVenta VARCHAR(300) NOT NULL,
+    subtotalVenta FLOAT NOT NULL,
+    totalVenta FLOAT NOT NULL,
+    Ventas_idVenta INT,
+    PRIMARY KEY (idDetalleVenta),
+    FOREIGN KEY (Ventas_idVenta) REFERENCES Ventas (idVenta)
 );
 
 CREATE TABLE IF NOT EXISTS TipoPQRSF(
@@ -209,13 +225,13 @@ CREATE TABLE IF NOT EXISTS TipoPQRSF(
  
 CREATE TABLE IF NOT EXISTS EstadosPQRSF( 
     idEstadoPQRSF INT NOT NULL AUTO_INCREMENT,
-    nombreEstadoPQRSF VARCHAR (20),
+    nombreEstadoPQRSF VARCHAR (20) NOT NULL,
     PRIMARY KEY (idEstadoPQRSF)
 );
 
 CREATE TABLE IF NOT EXISTS PQRSF(
     idPQRSF INT NOT NULL AUTO_INCREMENT,
-    fechaPQRSF DATE,
+    fechaPQRSF DATE NOT NULL,
     informacionPQRSF TEXT(200) NOT NULL,
     Cliente_idCliente INT NOT NULL,
     TipoPQRSF_idTipoPQRSF INT NOT NULL,

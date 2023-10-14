@@ -6,7 +6,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import java.math.BigInteger;
 
 @Entity
-@Table(name = "administrador")
+@Table(name = "Administrador")
 public class Administrador {
 
     @Id
