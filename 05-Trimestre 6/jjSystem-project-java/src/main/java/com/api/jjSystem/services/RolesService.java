@@ -2,7 +2,6 @@ package com.api.jjSystem.services;
 
 import com.api.jjSystem.Repository.RolesRepository;
 import com.api.jjSystem.models.Roles;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,18 +16,18 @@ public class RolesService {
     {
         return rolesRepository.save(roles);
     }
-    public Roles getRolByid(Integer id)
+    public Roles getRolByid(Integer idRol)
     {
-        Optional<Roles> roles = rolesRepository.findById(id);
-        return roles.get() ;
+        Optional<Roles> roles = rolesRepository.findById(idRol);
+        return roles.get();
     }
 
     public List<Roles> getAllRoles()
     {
         return rolesRepository.findAll();
     }
-    public void deleteRolesById(Integer id)
+    public void deleteRolesById(Integer idRol)
     {
-        rolesRepository.deleteById(id);
+        rolesRepository.deleteById(idRol);
     }
 }

@@ -19,9 +19,9 @@ public class ProductosService {
         return productosRepository.save(producto);
     }
 
-    public Productos getProductoById(Integer id)
+    public Productos getProductoById(Integer idProducto)
     {
-        Optional<Productos> optionalProductos = productosRepository.findById(id);
+        Optional<Productos> optionalProductos = productosRepository.findById(idProducto);
         return optionalProductos.get();
     }
 
@@ -30,9 +30,9 @@ public class ProductosService {
         return productosRepository.findAll();
     }
 
-    public void deleteProductos(Integer id)
+    public void deleteProductos(Integer idProducto)
     {
-        productosRepository.deleteById(id);
+        productosRepository.deleteById(idProducto);
     }
 
 }

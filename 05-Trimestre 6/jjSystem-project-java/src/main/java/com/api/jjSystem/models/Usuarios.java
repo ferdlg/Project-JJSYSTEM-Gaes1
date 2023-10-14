@@ -5,16 +5,21 @@ import jakarta.persistence.*;
 import java.math.BigInteger;
 
 @Entity
-@Table(name = "Usuarios")
+@Table(name = "usuarios")
 public class Usuarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "numeroDocumento")
     private BigInteger numeroDocumento;
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "apellido")
     private String apellido;
+    @Column(name = "email")
     private String email;
+    @Column(name = "password")
     private String password;
+    @Column(name = "numeroContacto")
     private BigInteger numeroContacto;
     @OneToOne
     @JoinColumn(name = "idRol")

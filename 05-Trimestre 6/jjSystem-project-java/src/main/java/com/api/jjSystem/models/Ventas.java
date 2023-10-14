@@ -12,24 +12,24 @@ public class Ventas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idVenta")
-    private Integer id;
+    private Integer idVenta;
 
     private DateFormat fechaVenta;
 
     public Ventas() {
     }
 
-    public Ventas(Integer id, DateFormat fechaVenta) {
-        this.id = id;
+    public Ventas(Integer idVenta, DateFormat fechaVenta) {
+        this.idVenta = idVenta;
         this.fechaVenta = fechaVenta;
     }
 
     public Integer getId() {
-        return id;
+        return idVenta;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idVenta) {
+        this.idVenta = idVenta;
     }
 
     public DateFormat getFechaVenta() {

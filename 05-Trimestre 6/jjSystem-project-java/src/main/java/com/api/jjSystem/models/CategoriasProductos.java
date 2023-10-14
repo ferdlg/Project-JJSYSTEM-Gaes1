@@ -8,24 +8,24 @@ public class CategoriasProductos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCategoriaProducto")
-    private Integer id;
-
+    private Integer idCategoriaProducto;
+    @Column(name = "nombreCategoria")
     private String nombreCategoria;
 
     public CategoriasProductos() {
     }
 
-    public CategoriasProductos(Integer id, String nombreCategoria) {
-        this.id = id;
+    public CategoriasProductos(Integer idCategoriaProducto, String nombreCategoria) {
+        this.idCategoriaProducto = idCategoriaProducto;
         this.nombreCategoria = nombreCategoria;
     }
 
     public Integer getId() {
-        return id;
+        return idCategoriaProducto;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idCategoriaProducto = idCategoriaProducto;
     }
 
     public String getNombreCategoria() {

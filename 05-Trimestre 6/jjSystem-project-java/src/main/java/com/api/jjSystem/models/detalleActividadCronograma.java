@@ -12,7 +12,7 @@ public class detalleActividadCronograma {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDetalleActividad")
-    private Integer id;
+    private Integer idDetalleActividad;
 
     @ManyToOne
     @JoinColumn(name = "idCronogramaTecnico")
@@ -26,8 +26,8 @@ public class detalleActividadCronograma {
     public detalleActividadCronograma() {
     }
 
-    public detalleActividadCronograma(Integer id, com.api.jjSystem.models.cronogramaTecnicos cronogramaTecnicos, ActividadesCronogramaTecnicos actividadesCronogramaTecnicos, LocalDateTime fechaActividadCronograma) {
-        this.id = id;
+    public detalleActividadCronograma(Integer idDetalleActividad, com.api.jjSystem.models.cronogramaTecnicos cronogramaTecnicos, ActividadesCronogramaTecnicos actividadesCronogramaTecnicos, LocalDateTime fechaActividadCronograma) {
+        this.idDetalleActividad = idDetalleActividad;
         this.cronogramaTecnicos = cronogramaTecnicos;
         this.actividadesCronogramaTecnicos = actividadesCronogramaTecnicos;
         this.fechaActividadCronograma = fechaActividadCronograma;
@@ -35,11 +35,11 @@ public class detalleActividadCronograma {
     //get y set
 
     public Integer getId() {
-        return id;
+        return idDetalleActividad;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idDetalleActividad = idDetalleActividad;
     }
 
     public com.api.jjSystem.models.cronogramaTecnicos getCronogramaTecnicos() {

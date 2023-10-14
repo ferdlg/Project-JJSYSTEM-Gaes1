@@ -15,15 +15,15 @@ public class Cotizaciones {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCotizacion")
     private Integer id;
-
+    @Column(name = "fechaCotizacion")
     private Date fechaCotizacion;
-
+    @Column(name = "productoCotizacion")
     private String productoCotizacion;
-
+    @Column(name = "servicioCotizacion")
     private String servicioCotizacion;
-
+    @Column(name = "totalCotizacion")
     private Float totalCotizacion;
-
+    @Column(name = "descripcionCotizacion")
     private String descripcionCotizacion;
 
     public Cotizaciones() {

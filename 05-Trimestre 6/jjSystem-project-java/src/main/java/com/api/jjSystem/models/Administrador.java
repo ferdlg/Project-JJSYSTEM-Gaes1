@@ -12,22 +12,23 @@ public class Administrador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idAdministrador")
-    private Integer id;
+    private Integer idAdministrador;
+    @Column(name = "numeroDocumento")
     private BigInteger numeroDocumento;
 
     public Administrador() {
     }
-    public Administrador(Integer id, BigInteger numeroDocumento) {
-        this.id = id;
+    public Administrador(Integer idAdministrador, BigInteger numeroDocumento) {
+        this.idAdministrador = idAdministrador;
         this.numeroDocumento = numeroDocumento;
     }
 
     public Integer getId() {
-        return id;
+        return idAdministrador;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idAdministrador) {
+        this.idAdministrador = idAdministrador;
     }
 
     public BigInteger getNumeroDocumento() {

@@ -1,35 +1,36 @@
 package com.api.jjSystem.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //Notaciones para mapear la base de datos e indicarle a la amquina con que tabla estamos trbajando
+
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "roles")
 public class Roles {
 
-    //atributos de la clase
+    // Atributos de la clase
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idRol")
-    private Integer id;
+    private Integer idRol;
+
+    @Column(name = "nombreRol")
     private String nombreRol;
 
-    //Constructor vacio
-    public Roles() {
-    }
-    //Constructor con los campos de la tabla--> acceder a los datos de la tabla
-    public Roles(Integer id, String nombreRol) {
-        this.id = id;
-        this.nombreRol = nombreRol;
+    // Métodos Get y Set para cada campo
+
+    public Integer getIdRol() {
+        return idRol;
     }
 
-    //Metodos Get y Set para cada campo
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdRol(Integer idRol) {
+        this.idRol = idRol;
     }
 
     public String getNombreRol() {
