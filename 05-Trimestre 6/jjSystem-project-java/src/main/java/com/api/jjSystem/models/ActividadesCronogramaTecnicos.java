@@ -9,25 +9,25 @@ public class ActividadesCronogramaTecnicos {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "idActividadCronogramaTecnico")
-   private Integer id;
-
+   private Integer idActividadCronogramaTecnico;
+   @Column(name="nombreActividad")
    private String nombreActividad;
 
    //contructor vacio
     public ActividadesCronogramaTecnicos() {
     }
     //Contructor->acceso a datos
-    public ActividadesCronogramaTecnicos(Integer id, String nombreActividad) {
-        this.id = id;
+    public ActividadesCronogramaTecnicos(Integer idActividadCronogramaTecnico, String nombreActividad) {
+        this.idActividadCronogramaTecnico = idActividadCronogramaTecnico;
         this.nombreActividad = nombreActividad;
     }
     //metodos get y set
     public Integer getId() {
-        return id;
+        return idActividadCronogramaTecnico;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idActividadCronogramaTecnico) {
+        this.idActividadCronogramaTecnico = idActividadCronogramaTecnico;
     }
 
     public String getNombreActividad() {

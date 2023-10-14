@@ -10,24 +10,24 @@ public class EstadosUsuarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEstadoUsuario")
-    private Integer id;
+    private Integer idEstadoUsuario;
 
     private String nombreEstadoUsuario;
 
     public EstadosUsuarios() {
     }
 
-    public EstadosUsuarios(Integer id, String nombreEstadoUsuario) {
-        this.id = id;
+    public EstadosUsuarios(Integer idEstadoUsuario, String nombreEstadoUsuario) {
+        this.idEstadoUsuario = idEstadoUsuario;
         this.nombreEstadoUsuario = nombreEstadoUsuario;
     }
 
     public Integer getId() {
-        return id;
+        return idEstadoUsuario;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idEstadoUsuario) {
+        this.idEstadoUsuario = idEstadoUsuario;
     }
 
     public String getNombreEstadoUsuario() {

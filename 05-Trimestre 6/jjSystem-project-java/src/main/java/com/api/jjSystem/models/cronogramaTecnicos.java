@@ -9,7 +9,7 @@ public class cronogramaTecnicos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCronogramaTecnico")
-    private Integer id;
+    private Integer idCronogramaTecnico;
     @OneToOne
     @JoinColumn(name = "Tecnico_idTecnico")
     private Tecnicos tecnico;
@@ -26,8 +26,8 @@ public class cronogramaTecnicos {
     public cronogramaTecnicos() {
     }
 
-    public cronogramaTecnicos(Integer id, Tecnicos tecnico, Citas citas, disponibilidadCronogramas disponibilidadCronograma) {
-        this.id = id;
+    public cronogramaTecnicos(Integer idCronogramaTecnico, Tecnicos tecnico, Citas citas, disponibilidadCronogramas disponibilidadCronograma) {
+        this.idCronogramaTecnico = idCronogramaTecnico;
         this.tecnico = tecnico;
         this.citas = citas;
         this.disponibilidadCronograma = disponibilidadCronograma;
@@ -35,11 +35,11 @@ public class cronogramaTecnicos {
     //get y set
 
     public Integer getId() {
-        return id;
+        return idCronogramaTecnico;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idCronogramaTecnico = idCronogramaTecnico;
     }
 
     public Tecnicos getTecnico() {

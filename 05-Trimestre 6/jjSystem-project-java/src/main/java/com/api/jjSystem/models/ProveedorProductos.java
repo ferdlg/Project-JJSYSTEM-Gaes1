@@ -10,24 +10,24 @@ public class ProveedorProductos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProveedorProducto")
-    private Integer id;
+    private Integer idProveedorProducto;
 
     private String nombreProveedor;
 
     public ProveedorProductos() {
     }
 
-    public ProveedorProductos(Integer id, String nombreProveedor) {
-        this.id = id;
+    public ProveedorProductos(Integer idProveedorProducto, String nombreProveedor) {
+        this.idProveedorProducto = idProveedorProducto;
         this.nombreProveedor = nombreProveedor;
     }
 
     public Integer getId() {
-        return id;
+        return idProveedorProducto;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idProveedorProducto) {
+        this.idProveedorProducto = idProveedorProducto;
     }
 
     public String getNombreProveedor() {

@@ -14,11 +14,15 @@ public class Citas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCita")
     private Integer id;
-
+    @Column(name = "fechaCita")
     private Date fechaCita;
+    @Column(name = "direccion")
     private String direccion;
+    @Column(name = "contactoCliente")
     private BigInteger contactoCliente;
+    @Column(name = "descripcionCita")
     private String descripcionCita;
+
     @ManyToOne //establece la relacion de muchas citas pueden estar asociadas a un tecnico
     @JoinColumn(name = "idTecnico")
     private Tecnicos tecnicos;

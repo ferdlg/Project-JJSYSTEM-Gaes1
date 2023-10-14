@@ -11,27 +11,29 @@ public class Clientes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCliente")
-    private Integer id;
+    private Integer idCliente;
+    @Column(name = "direccion")
     private String direccion;
+    @Column(name = "numeroDocumento")
     private BigInteger numeroDocumento;
 
     //Constructores
     public Clientes() {
     }
 
-    public Clientes(Integer id, String direccion, BigInteger numeroDocumento) {
-        this.id = id;
+    public Clientes(Integer idCliente, String direccion, BigInteger numeroDocumento) {
+        this.idCliente = idCliente;
         this.direccion = direccion;
         this.numeroDocumento = numeroDocumento;
     }
     //get y set
 
     public Integer getId() {
-        return id;
+        return idCliente;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getDireccion() {

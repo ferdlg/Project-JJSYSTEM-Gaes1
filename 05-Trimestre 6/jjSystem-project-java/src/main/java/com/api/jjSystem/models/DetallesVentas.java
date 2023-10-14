@@ -10,7 +10,7 @@ public class DetallesVentas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDetalleVenta")
-    private Integer id;
+    private Integer idDetalleVenta;
 
     private String detallesVenta;
 
@@ -21,19 +21,19 @@ public class DetallesVentas {
     public DetallesVentas() {
     }
 
-    public DetallesVentas(Integer id, String detallesVenta, Float subtotaleVenta, Float totalVenta) {
-        this.id = id;
+    public DetallesVentas(Integer idDetalleVenta, String detallesVenta, Float subtotaleVenta, Float totalVenta) {
+        this.idDetalleVenta = idDetalleVenta;
         this.detallesVenta = detallesVenta;
         this.subtotaleVenta = subtotaleVenta;
         this.totalVenta = totalVenta;
     }
 
     public Integer getId() {
-        return id;
+        return idDetalleVenta;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idDetalleVenta) {
+        this.idDetalleVenta = idDetalleVenta;
     }
 
     public String getDetallesVenta() {

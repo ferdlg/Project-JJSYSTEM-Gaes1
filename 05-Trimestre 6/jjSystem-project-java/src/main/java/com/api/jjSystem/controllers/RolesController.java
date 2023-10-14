@@ -5,14 +5,13 @@ import com.api.jjSystem.services.RolesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.relation.Role;
 import java.util.List;
 
 @RestController
 //establecer la ruta o url del controlador
-@RequestMapping("jjSystem/roles")
+@RequestMapping("api.jjSystem/roles")
 public class RolesController {
-    //inyectar el servicio al controlador
+    /*inyectar el servicio al controlador*/
     @Autowired
     private RolesService rolesService;
 
@@ -27,14 +26,14 @@ public class RolesController {
     {
         return rolesService.getAllRoles();
     }
-    @GetMapping("{id}")
-    public Roles getRolesById(@PathVariable Integer id)
+    @GetMapping("{idRol}")
+    public Roles getRolesById(@PathVariable Integer idRol)
     {
-        return rolesService.getRolByid(id);
+        return rolesService.getRolByid(idRol);
     }
-
-    public void deleteRolesById(@PathVariable("id") Integer id)
+    @DeleteMapping("{idRol}")
+    public void deleteRolesById(@PathVariable("idRol") Integer idRol)
     {
-        rolesService.deleteRolesById(id);
+        rolesService.deleteRolesById(idRol);
     }
 }

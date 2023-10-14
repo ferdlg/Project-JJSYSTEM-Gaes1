@@ -11,25 +11,25 @@ public class Tecnicos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idTecnico")
-    private Integer id;
+    private Integer idTecnico;
     private String especialidad;
     private BigInteger numeroDocumento;
     //Constructores
     public Tecnicos() {
     }
 
-    public Tecnicos(Integer id, String especialidad, BigInteger numeroDocumento) {
-        this.id = id;
+    public Tecnicos(Integer idTecnico, String especialidad, BigInteger numeroDocumento) {
+        this.idTecnico = idTecnico;
         this.especialidad = especialidad;
         this.numeroDocumento = numeroDocumento;
     }
     //Get y set
     public Integer getId() {
-        return id;
+        return idTecnico;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idTecnico) {
+        this.idTecnico = idTecnico;
     }
 
     public String getEspecialidad() {
