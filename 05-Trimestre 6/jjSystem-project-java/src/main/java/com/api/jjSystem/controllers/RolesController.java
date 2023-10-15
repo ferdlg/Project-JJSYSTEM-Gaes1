@@ -15,7 +15,7 @@ public class RolesController {
     @Autowired
     private RolesService rolesService;
 
-    //notaciones @Mapping para mapear y que probar en postman
+    //notaciones @Mapping para mapear y que probar en postman los metodos del Crud
     @PostMapping
     public Roles createRoles(Roles roles)
     {
