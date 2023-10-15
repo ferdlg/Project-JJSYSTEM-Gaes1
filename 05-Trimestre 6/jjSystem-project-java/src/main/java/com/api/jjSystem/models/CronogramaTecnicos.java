@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "cronogramatecnicos")
-public class cronogramaTecnicos {
+public class CronogramaTecnicos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +23,10 @@ public class cronogramaTecnicos {
     private DisponibilidadCronogramas disponibilidadCronograma;
 
     //Constructores
-    public cronogramaTecnicos() {
+    public CronogramaTecnicos() {
     }
 
-    public cronogramaTecnicos(Integer idCronogramaTecnico, Tecnicos tecnico, Citas citas, DisponibilidadCronogramas disponibilidadCronograma) {
+    public CronogramaTecnicos(Integer idCronogramaTecnico, Tecnicos tecnico, Citas citas, DisponibilidadCronogramas disponibilidadCronograma) {
         this.idCronogramaTecnico = idCronogramaTecnico;
         this.tecnico = tecnico;
         this.citas = citas;

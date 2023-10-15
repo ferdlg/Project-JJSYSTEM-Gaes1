@@ -15,7 +15,7 @@ public class DetalleActividadCronograma {
 
     @ManyToOne
     @JoinColumn(name = "idCronogramaTecnico")
-    private cronogramaTecnicos cronogramaTecnicos;
+    private CronogramaTecnicos cronogramaTecnicos;
     @ManyToOne
     @JoinColumn(name = "idActividadCronogramaTecnico")
     private ActividadesCronogramaTecnicos actividadesCronogramaTecnicos;
@@ -25,7 +25,7 @@ public class DetalleActividadCronograma {
     public DetalleActividadCronograma() {
     }
 
-    public DetalleActividadCronograma(Integer idDetalleActividad, com.api.jjSystem.models.cronogramaTecnicos cronogramaTecnicos, ActividadesCronogramaTecnicos actividadesCronogramaTecnicos, LocalDateTime fechaActividadCronograma) {
+    public DetalleActividadCronograma(Integer idDetalleActividad, CronogramaTecnicos cronogramaTecnicos, ActividadesCronogramaTecnicos actividadesCronogramaTecnicos, LocalDateTime fechaActividadCronograma) {
         this.idDetalleActividad = idDetalleActividad;
         this.cronogramaTecnicos = cronogramaTecnicos;
         this.actividadesCronogramaTecnicos = actividadesCronogramaTecnicos;
@@ -41,11 +41,11 @@ public class DetalleActividadCronograma {
         this.idDetalleActividad = idDetalleActividad;
     }
 
-    public com.api.jjSystem.models.cronogramaTecnicos getCronogramaTecnicos() {
+    public CronogramaTecnicos getCronogramaTecnicos() {
         return cronogramaTecnicos;
     }
 
-    public void setCronogramaTecnicos(com.api.jjSystem.models.cronogramaTecnicos cronogramaTecnicos) {
+    public void setCronogramaTecnicos(CronogramaTecnicos cronogramaTecnicos) {
         this.cronogramaTecnicos = cronogramaTecnicos;
     }
 
