@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2e624fd-919f-4ff6-9349-fdac3641aa7a" name="Changes" comment="Modelos Servicios, Categorias Servicios y Productos, Cotizaciones y Ventas">
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/EnviosRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/EstadoEnviosRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/EstadoPQRSFRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/PQRSFRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/PermisosRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/TipoPQRSFRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/EnviosController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/EstadoPQRSF.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/PQRSF.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Permisos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/TipoPQRSF.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EnviosService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EstadoEnviosService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EstadoPQRSFService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/PQRSFService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/PermisosService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/TipoPQRSFService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,7 +117,13 @@
       <workItem from="1697317479415" duration="7675000" />
       <workItem from="1697382497900" duration="62000" />
       <workItem from="1697382621885" duration="779000" />
-      <workItem from="1697385285048" duration="8341000" />
+      <workItem from="1697385285048" duration="8568000" />
+      <workItem from="1697402645415" duration="137000" />
+      <workItem from="1697404203504" duration="426000" />
+      <workItem from="1697506060359" duration="30000" />
+      <workItem from="1697506237147" duration="21000" />
+      <workItem from="1697506422175" duration="20000" />
+      <workItem from="1697513000050" duration="4782000" />
     </task>
     <task id="LOCAL-00001" summary="Modelos Productos, CategoriaProductos y Cambio en nombre carpetas">
       <option name="closed" value="true" />
