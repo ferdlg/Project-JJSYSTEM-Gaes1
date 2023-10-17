@@ -10,7 +10,6 @@ import java.sql.Date;
 
 public class Cotizaciones {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCotizacion")
@@ -25,18 +24,34 @@ public class Cotizaciones {
     private Float totalCotizacion;
     @Column(name = "descripcionCotizacion")
     private String descripcionCotizacion;
+    @ManyToOne
+    @JoinColumn(name = "idCliente")
+    private Clientes clientes;
+    @OneToOne
+    @JoinColumn(name = "idServicio")
+    private Servicios servicios;
+    @ManyToOne
+    @JoinColumn(name = "idProducto")
+    private Productos productos;
+
+    //Constructores
 
     public Cotizaciones() {
     }
 
-    public Cotizaciones(Integer id, Date fechaCotizacion, String productoCotizacion, String servicioCotizacion, Float totalCotizacion, String descripcionCotizacion) {
+    public Cotizaciones(Integer id, Date fechaCotizacion, String productoCotizacion, String servicioCotizacion, Float totalCotizacion, String descripcionCotizacion, Clientes clientes, Servicios servicios, Productos productos) {
         this.id = id;
         this.fechaCotizacion = fechaCotizacion;
         this.productoCotizacion = productoCotizacion;
         this.servicioCotizacion = servicioCotizacion;
         this.totalCotizacion = totalCotizacion;
         this.descripcionCotizacion = descripcionCotizacion;
+        this.clientes = clientes;
+        this.servicios = servicios;
+        this.productos = productos;
     }
+
+    //Getter y Setter
 
     public Integer getId() {
         return id;
@@ -86,4 +101,27 @@ public class Cotizaciones {
         this.descripcionCotizacion = descripcionCotizacion;
     }
 
+    public Clientes getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(Clientes clientes) {
+        this.clientes = clientes;
+    }
+
+    public Servicios getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(Servicios servicios) {
+        this.servicios = servicios;
+    }
+
+    public Productos getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Productos productos) {
+        this.productos = productos;
+    }
 }

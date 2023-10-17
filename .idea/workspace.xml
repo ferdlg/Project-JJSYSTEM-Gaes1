@@ -11,6 +11,18 @@
       <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/PermisosService.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/TipoPQRSFService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/CategoriasProductosRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/CategoriasProductosRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/CategoriaServicios.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/CategoriaServicios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/CategoriasProductos.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/CategoriaProductos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Cotizaciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Cotizaciones.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/DetallesVentas.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/DetallesVentas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/EstadosUsuarios.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/EstadosUsuarios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Productos.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Productos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/ProveedorProductos.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/ProveedorProductos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Servicios.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Servicios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Usuarios.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Usuarios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Ventas.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Ventas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/CategoriasProductosService.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/CategoriasProductosService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,11 +92,9 @@
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/totto/OneDrive/Escritorio/Project-JJSYSTEM-Gaes1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Project-JJSYSTEM-Gaes1/05-Trimestre 6/jjSystem-project-java&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -124,6 +134,8 @@
       <workItem from="1697506237147" duration="21000" />
       <workItem from="1697506422175" duration="20000" />
       <workItem from="1697513000050" duration="4782000" />
+      <workItem from="1697236262391" duration="1280000" />
+      <workItem from="1697511504553" duration="5491000" />
     </task>
     <task id="LOCAL-00001" summary="Modelos Productos, CategoriaProductos y Cambio en nombre carpetas">
       <option name="closed" value="true" />

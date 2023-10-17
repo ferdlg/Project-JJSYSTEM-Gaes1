@@ -10,24 +10,28 @@ public class CategoriaServicios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCategoriaServicio")
-    private Integer idCategoriaServicio;
+    private Integer id;
     @Column(name = "nombreCategoria")
     private String nombreCategoria;
+
+    //Constructores
 
     public CategoriaServicios() {
     }
 
-    public CategoriaServicios(Integer idCategoriaServicio, String nombreCategoria) {
-        this.idCategoriaServicio = idCategoriaServicio;
+    public CategoriaServicios(Integer id, String nombreCategoria) {
+        this.id = id;
         this.nombreCategoria = nombreCategoria;
     }
 
+    //Getter y Setter
+
     public Integer getId() {
-        return idCategoriaServicio;
+        return id;
     }
 
-    public void setId(Integer idCategoriaServicio) {
-        this.idCategoriaServicio = idCategoriaServicio;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombreCategoria() {
