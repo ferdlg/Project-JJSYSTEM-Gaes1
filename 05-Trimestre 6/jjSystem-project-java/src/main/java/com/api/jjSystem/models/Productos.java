@@ -10,31 +10,47 @@ public class Productos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProducto")
     private Integer idProducto;
-    @Column(name = "idProducto")
-    private String nombreProducto;
     @Column(name = "nombreProducto")
-    private String descripcionProducto;
+    private String nombreProducto;
     @Column(name = "descripcionProducto")
-    private Float precioProducto;
+    private String descripcionProducto;
     @Column(name = "precioProducto")
+    private Float precioProducto;
+    @Column(name = "cantidad")
     private Integer cantidad;
+    @ManyToOne
+    @JoinColumn(name = "idAdministrador")
+    private Administrador administrador;
+    @OneToOne
+    @JoinColumn(name = "idCategoriaProducto")
+    private CategoriaProductos categoriaProductos;
+    @ManyToOne
+    @JoinColumn(name = "idProveedorProducto")
+    private ProveedorProductos proveedorProductos;
+
+    //Constructores
 
     public Productos() {
     }
 
-    public Productos(Integer idProducto, String nombreProducto, String descripcionProducto, Float precioProducto, Integer cantidad) {
+    public Productos(Integer idProducto, String nombreProducto, String descripcionProducto, Float precioProducto, Integer cantidad, Administrador administrador, CategoriaProductos categoriaProductos, ProveedorProductos proveedorProductos) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.descripcionProducto = descripcionProducto;
         this.precioProducto = precioProducto;
         this.cantidad = cantidad;
+        this.administrador = administrador;
+        this.categoriaProductos = categoriaProductos;
+        this.proveedorProductos = proveedorProductos;
     }
 
-    public Integer getId() {
+    //Getter y Setter
+
+    public Integer getIdProducto() {
         return idProducto;
     }
 
-    public void setId(Integer idProducto) {
+    public void setIdProducto(Integer idProducto) {
         this.idProducto = idProducto;
     }
 
@@ -68,5 +84,29 @@ public class Productos {
 
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public Administrador getAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(Administrador administrador) {
+        this.administrador = administrador;
+    }
+
+    public CategoriaProductos getCategoriaProductos() {
+        return categoriaProductos;
+    }
+
+    public void setCategoriaProductos(CategoriaProductos categoriaProductos) {
+        this.categoriaProductos = categoriaProductos;
+    }
+
+    public ProveedorProductos getProveedorProductos() {
+        return proveedorProductos;
+    }
+
+    public void setProveedorProductos(ProveedorProductos proveedorProductos) {
+        this.proveedorProductos = proveedorProductos;
     }
 }

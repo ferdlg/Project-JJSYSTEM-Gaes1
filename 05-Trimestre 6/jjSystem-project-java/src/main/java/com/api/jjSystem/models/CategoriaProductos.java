@@ -4,28 +4,32 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "CategoriaProductos")
-public class CategoriasProductos {
+public class CategoriaProductos {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCategoriaProducto")
-    private Integer idCategoriaProducto;
+    private Integer id;
     @Column(name = "nombreCategoria")
     private String nombreCategoria;
 
-    public CategoriasProductos() {
+    //Constructores
+    public CategoriaProductos() {
     }
 
-    public CategoriasProductos(Integer idCategoriaProducto, String nombreCategoria) {
-        this.idCategoriaProducto = idCategoriaProducto;
+    public CategoriaProductos(Integer id, String nombreCategoria) {
+        this.id = id;
         this.nombreCategoria = nombreCategoria;
     }
 
+    //Getter y Setter
+
     public Integer getId() {
-        return idCategoriaProducto;
+        return id;
     }
 
     public void setId(Integer id) {
-        this.idCategoriaProducto = idCategoriaProducto;
+        this.id = id;
     }
 
     public String getNombreCategoria() {

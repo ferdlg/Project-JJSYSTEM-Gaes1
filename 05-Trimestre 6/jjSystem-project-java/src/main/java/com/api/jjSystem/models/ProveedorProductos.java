@@ -11,8 +11,10 @@ public class ProveedorProductos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProveedorProducto")
     private Integer idProveedorProducto;
-
+    @Column(name = "nombreProveedor")
     private String nombreProveedor;
+
+    //Constuctores
 
     public ProveedorProductos() {
     }
@@ -22,11 +24,13 @@ public class ProveedorProductos {
         this.nombreProveedor = nombreProveedor;
     }
 
-    public Integer getId() {
+    //Getter y Setter
+
+    public Integer getIdProveedorProducto() {
         return idProveedorProducto;
     }
 
-    public void setId(Integer idProveedorProducto) {
+    public void setIdProveedorProducto(Integer idProveedorProducto) {
         this.idProveedorProducto = idProveedorProducto;
     }
 
