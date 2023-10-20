@@ -9,7 +9,7 @@ public class CategoriaProductos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCategoriaProducto")
-    private Integer id;
+    private Integer idCategoriaProducto;
     @Column(name = "nombreCategoria")
     private String nombreCategoria;
 
@@ -17,19 +17,19 @@ public class CategoriaProductos {
     public CategoriaProductos() {
     }
 
-    public CategoriaProductos(Integer id, String nombreCategoria) {
-        this.id = id;
+    public CategoriaProductos(Integer idCategoriaProducto, String nombreCategoria) {
+        this.idCategoriaProducto = idCategoriaProducto;
         this.nombreCategoria = nombreCategoria;
     }
 
     //Getter y Setter
 
-    public Integer getId() {
-        return id;
+    public Integer getIdCategoriaProducto() {
+        return idCategoriaProducto;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdCategoriaProducto(Integer idCategoriaProducto) {
+        this.idCategoriaProducto = idCategoriaProducto;
     }
 
     public String getNombreCategoria() {

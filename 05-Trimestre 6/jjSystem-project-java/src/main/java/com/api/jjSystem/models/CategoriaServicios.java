@@ -10,7 +10,7 @@ public class CategoriaServicios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCategoriaServicio")
-    private Integer id;
+    private Integer idCategoriaServicio;
     @Column(name = "nombreCategoria")
     private String nombreCategoria;
 
@@ -19,19 +19,19 @@ public class CategoriaServicios {
     public CategoriaServicios() {
     }
 
-    public CategoriaServicios(Integer id, String nombreCategoria) {
-        this.id = id;
+    public CategoriaServicios(Integer idCategoriaServicio, String nombreCategoria) {
+        this.idCategoriaServicio = idCategoriaServicio;
         this.nombreCategoria = nombreCategoria;
     }
 
     //Getter y Setter
 
-    public Integer getId() {
-        return id;
+    public Integer getIdCategoriaServicio() {
+        return idCategoriaServicio;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdCategoriaServicio(Integer idCategoriaServicio) {
+        this.idCategoriaServicio = idCategoriaServicio;
     }
 
     public String getNombreCategoria() {

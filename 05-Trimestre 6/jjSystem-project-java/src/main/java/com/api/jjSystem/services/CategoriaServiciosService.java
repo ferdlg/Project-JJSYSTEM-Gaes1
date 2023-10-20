@@ -10,22 +10,27 @@ import java.util.Optional;
 
 @Component
 public class CategoriaServiciosService {
+
     @Autowired
     private CategoriaServiciosRepository categoriaServiciosRepository;
-    public CategoriaServicios createCategoria(CategoriaServicios categoriaServicios)
+
+    public CategoriaServicios createCategoriaServicio(CategoriaServicios categoriaServicio)
     {
-        return categoriaServiciosRepository.save(categoriaServicios);
+        return categoriaServiciosRepository.save(categoriaServicio);
     }
-    public CategoriaServicios getcategoriaById(Integer idCategoriaServicio)
+
+    public CategoriaServicios getCategoriaServicioById(Integer idCategoriaServicio)
     {
         Optional<CategoriaServicios> categoriaServicios = categoriaServiciosRepository.findById(idCategoriaServicio);
         return categoriaServicios.get();
     }
-    public List<CategoriaServicios> getAllCategoria()
+
+    public List<CategoriaServicios> getAllCategoriaServicios()
     {
         return categoriaServiciosRepository.findAll();
     }
-    public void deleteCategoriaById(Integer idCategoriaServicio)
+
+    public void deleteCategoriaServicios(Integer idCategoriaServicio)
     {
         categoriaServiciosRepository.deleteById(idCategoriaServicio);
     }

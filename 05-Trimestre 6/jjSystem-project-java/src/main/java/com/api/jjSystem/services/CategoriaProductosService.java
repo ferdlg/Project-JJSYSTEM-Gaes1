@@ -1,6 +1,6 @@
 package com.api.jjSystem.services;
 
-import com.api.jjSystem.Repository.CategoriasProductosRepository;
+import com.api.jjSystem.Repository.CategoriaProductosRepository;
 import com.api.jjSystem.models.CategoriaProductos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,24 +9,28 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class CategoriasProductosService {
-    @Autowired
-    private CategoriasProductosRepository categoriasProductosRepository;
+public class CategoriaProductosService {
 
-    public CategoriaProductos createCategoria(CategoriaProductos categoriaProductos)
+    @Autowired
+    private CategoriaProductosRepository categoriasProductosRepository;
+
+    public CategoriaProductos createCategoriaProducto(CategoriaProductos categoriaProducto)
     {
-        return categoriasProductosRepository.save(categoriaProductos);
+        return categoriasProductosRepository.save(categoriaProducto);
     }
-    public CategoriaProductos getCategoriaById(Integer idCategoriaProducto)
+
+    public CategoriaProductos getCategoriaProductoById(Integer idCategoriaProducto)
     {
         Optional<CategoriaProductos> categoriasProductos = categoriasProductosRepository.findById(idCategoriaProducto);
         return categoriasProductos.get();
     }
-    public List<CategoriaProductos> getAllCategoria()
+
+    public List<CategoriaProductos> getAllCategoriaProductos()
     {
         return categoriasProductosRepository.findAll();
     }
-    public void deleteCategoriaById(Integer idCategoriaProducto)
+
+    public void deleteCategoriaProductos(Integer idCategoriaProducto)
     {
         categoriasProductosRepository.deleteById(idCategoriaProducto);
     }

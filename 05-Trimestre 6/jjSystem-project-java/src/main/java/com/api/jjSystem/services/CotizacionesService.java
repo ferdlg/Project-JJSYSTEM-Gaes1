@@ -10,23 +10,27 @@ import java.util.Optional;
 
 @Component
 public class CotizacionesService {
+
     @Autowired
     private CotizacionesRepository cotizacionesRepository;
 
-    public Cotizaciones createCotizacion(Cotizaciones cotizaciones)
+    public Cotizaciones createCotizacion(Cotizaciones cotizacion)
     {
-        return cotizacionesRepository.save(cotizaciones);
+        return cotizacionesRepository.save(cotizacion);
     }
+
     public Cotizaciones getCotizacionesById(Integer idCotizacion)
     {
         Optional<Cotizaciones> cotizaciones = cotizacionesRepository.findById(idCotizacion);
         return cotizaciones.get();
     }
+
     public List<Cotizaciones> getAllCotizaciones()
     {
         return cotizacionesRepository.findAll();
     }
-    public void deleteCotizacionById(Integer idCotizacion)
+
+    public void deleteCotizacion(Integer idCotizacion)
     {
         cotizacionesRepository.deleteById(idCotizacion);
     }

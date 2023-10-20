@@ -8,23 +8,32 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+
 @Component
 public class VentasService {
+
     @Autowired
     private VentasRepository ventasRepository;
-    public Ventas createVenta(Ventas ventas) {return ventasRepository.save(ventas);}
-    public Ventas getVentaByid(Integer idVenta)
+
+    public Ventas createVenta(Ventas venta)
     {
-        Optional<Ventas> ventas = ventasRepository.findById(idVenta);
-        return ventas.get();
+        return ventasRepository.save(venta);
+    }
+
+    public Ventas getVentaById(Integer idVenta)
+    {
+        Optional<Ventas> optionalVentas = ventasRepository.findById(idVenta);
+        return optionalVentas.get();
     }
 
     public List<Ventas> getAllVentas()
     {
         return ventasRepository.findAll();
     }
-    public void deleteVentasById(Integer idVenta)
+
+    public void deleteVentas(Integer idVenta)
     {
         ventasRepository.deleteById(idVenta);
     }
+
 }

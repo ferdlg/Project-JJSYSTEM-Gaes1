@@ -11,22 +11,27 @@ import java.util.Optional;
 
 @Component
 public class DetallesVentasService {
+
     @Autowired
     private DetallesVentasRepository detallesVentasRepository;
-    public DetallesVentas createDetalle(DetallesVentas detallesVentas)
+
+    public DetallesVentas createDetalleVenta(DetallesVentas detalleVenta)
     {
-        return detallesVentasRepository.save(detallesVentas);
+        return detallesVentasRepository.save(detalleVenta);
     }
-    public DetallesVentas getDetalleById (Integer idDetalleVenta)
+
+    public DetallesVentas getDetallesVentasById (Integer idDetalleVenta)
     {
-        Optional<DetallesVentas> detallesVentas = detallesVentasRepository.findById(idDetalleVenta);
-        return detallesVentas.get();
+        Optional<DetallesVentas> optionalDetallesVentas = detallesVentasRepository.findById(idDetalleVenta);
+        return optionalDetallesVentas.get();
     }
-    public List<DetallesVentas> getAllDetalles()
+
+    public List<DetallesVentas> getAllDetallesVentas()
     {
         return detallesVentasRepository.findAll();
     }
-    public void deleteDetallesById(Integer idDetalleVenta)
+
+    public void deleteDetallesVentas(Integer idDetalleVenta)
     {
         detallesVentasRepository.deleteById(idDetalleVenta);
     }

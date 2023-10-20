@@ -10,22 +10,27 @@ import java.util.Optional;
 
 @Component
 public class EstadosUsuariosService {
+
     @Autowired
     private EstadosUsuariosRepository estadosUsuariosRepository;
-    public EstadosUsuarios createEstado(EstadosUsuarios estadosUsuarios)
+
+    public EstadosUsuarios createEstadoUsuario(EstadosUsuarios estadoUsuario)
     {
-        return estadosUsuariosRepository.save(estadosUsuarios);
+        return estadosUsuariosRepository.save(estadoUsuario);
     }
-    public EstadosUsuarios getEstadoById(Integer idEstadoUsuario)
+
+    public EstadosUsuarios getEstadoUsuarioById(Integer idEstadoUsuario)
     {
-        Optional<EstadosUsuarios> estadosUsuarios = estadosUsuariosRepository.findById(idEstadoUsuario);
-        return estadosUsuarios.get();
+        Optional<EstadosUsuarios> optionalEstadosUsuarios = estadosUsuariosRepository.findById(idEstadoUsuario);
+        return optionalEstadosUsuarios.get();
     }
-    public List<EstadosUsuarios> getAllEstados()
+
+    public List<EstadosUsuarios> getAllEstadosUsuarios()
     {
         return estadosUsuariosRepository.findAll();
     }
-    public void deleteEstadoById(Integer idEstadoUsuario)
+
+    public void deleteEstadosUsuarios(Integer idEstadoUsuario)
     {
         estadosUsuariosRepository.deleteById(idEstadoUsuario);
     }

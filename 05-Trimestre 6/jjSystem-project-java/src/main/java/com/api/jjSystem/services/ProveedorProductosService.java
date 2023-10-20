@@ -10,23 +10,28 @@ import java.util.Optional;
 
 @Component
 public class ProveedorProductosService {
+
     @Autowired
     private ProveedorProductosRepository proveedorProductosRepository;
-    public ProveedorProductos createProveedor(ProveedorProductos proveedorProductos)
+
+    public ProveedorProductos createProveedorProducto(ProveedorProductos proveedorProducto)
     {
-        return proveedorProductosRepository.save(proveedorProductos);
+        return proveedorProductosRepository.save(proveedorProducto);
     }
-    public ProveedorProductos getProveedorById(Integer idProveedorProductos)
+
+    public ProveedorProductos getProveedorProductoById(Integer idProveedorProducto)
     {
-        Optional<ProveedorProductos> proveedorProductos = proveedorProductosRepository.findById(idProveedorProductos);
+        Optional<ProveedorProductos> proveedorProductos = proveedorProductosRepository.findById(idProveedorProducto);
         return proveedorProductos.get();
     }
-    public List<ProveedorProductos> getAllProveedores()
+
+    public List<ProveedorProductos> getAllProveedorProductos()
     {
         return proveedorProductosRepository.findAll();
     }
-    public void deleteProveedorById(Integer idProveedorProductos)
+
+    public void deleteProveedorProductos(Integer idProveedorProducto)
     {
-        proveedorProductosRepository.deleteById(idProveedorProductos);
+        proveedorProductosRepository.deleteById(idProveedorProducto);
     }
 }

@@ -13,7 +13,7 @@ public class Cotizaciones {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCotizacion")
-    private Integer id;
+    private Integer idCotizacion;
     @Column(name = "fechaCotizacion")
     private Date fechaCotizacion;
     @Column(name = "productoCotizacion")
@@ -39,8 +39,8 @@ public class Cotizaciones {
     public Cotizaciones() {
     }
 
-    public Cotizaciones(Integer id, Date fechaCotizacion, String productoCotizacion, String servicioCotizacion, Float totalCotizacion, String descripcionCotizacion, Clientes clientes, Servicios servicios, Productos productos) {
-        this.id = id;
+    public Cotizaciones(Integer idCotizacion, Date fechaCotizacion, String productoCotizacion, String servicioCotizacion, Float totalCotizacion, String descripcionCotizacion, Clientes clientes, Servicios servicios, Productos productos) {
+        this.idCotizacion = idCotizacion;
         this.fechaCotizacion = fechaCotizacion;
         this.productoCotizacion = productoCotizacion;
         this.servicioCotizacion = servicioCotizacion;
@@ -53,12 +53,12 @@ public class Cotizaciones {
 
     //Getter y Setter
 
-    public Integer getId() {
-        return id;
+    public Integer getIdCotizacion() {
+        return idCotizacion;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdCotizacion(Integer idCotizacion) {
+        this.idCotizacion = idCotizacion;
     }
 
     public Date getFechaCotizacion() {

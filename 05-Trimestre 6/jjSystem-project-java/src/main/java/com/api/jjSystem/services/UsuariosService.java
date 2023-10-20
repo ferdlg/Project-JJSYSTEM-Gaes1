@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class UsuariosServices {
+public class UsuariosService {
     @Autowired
     private UsuariosRepository usuariosRepository;
     public Usuarios createUsuario(Usuarios usuarios){return usuariosRepository.save(usuarios); }

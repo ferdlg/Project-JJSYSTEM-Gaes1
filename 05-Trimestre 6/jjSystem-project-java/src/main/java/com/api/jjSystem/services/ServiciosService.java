@@ -10,22 +10,27 @@ import java.util.Optional;
 
 @Component
 public class ServiciosService {
+
     @Autowired
     private ServiciosRepository serviciosRepository;
-    public Servicios createServicio(Servicios servicios)
+
+    public Servicios createServicio(Servicios servicio)
     {
-        return serviciosRepository.save(servicios);
+        return serviciosRepository.save(servicio);
     }
+
     public Servicios getServicioById(Integer idServicio)
     {
-        Optional<Servicios> servicios = serviciosRepository.findById(idServicio);
-        return servicios.get();
+        Optional<Servicios> optionalServicios = serviciosRepository.findById(idServicio);
+        return optionalServicios.get();
     }
+
     public List<Servicios> getAllServicios()
     {
         return serviciosRepository.findAll();
     }
-    public void deleteServiciosById (Integer idServicio)
+
+    public void deleteServicios(Integer idServicio)
     {
         serviciosRepository.deleteById(idServicio);
     }
