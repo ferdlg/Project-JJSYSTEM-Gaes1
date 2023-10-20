@@ -11,9 +11,9 @@ class Pqrsf extends Model
     protected $table = 'pqrsf';
     protected $primaryKey = 'idPQRSF';
 
-    public function estadoPQRSF()
+    public function estadosPQRSF()
     {
-        return $this->belongsTo(estadoPQRSF::class, 'idEstadoPQRSF', 'id');
+        return $this->belongsTo(estadosPQRSF::class, 'idEstadoPQRSF', 'id');
     }
 
     public function tipoPQRSF()

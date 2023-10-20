@@ -1,7 +1,6 @@
 package com.api.jjSystem.services;
 
 import com.api.jjSystem.Repository.EstadoEnviosRepository;
-import com.api.jjSystem.Repository.EstadoPQRSFRepository;
 import com.api.jjSystem.models.EstadoEnvios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

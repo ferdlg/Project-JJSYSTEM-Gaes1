@@ -1,7 +1,6 @@
 package com.api.jjSystem.models;
 
 import jakarta.persistence.*;
-import org.w3c.dom.Text;
 
 import java.util.Date;
 
@@ -23,7 +22,7 @@ public class PQRSF {
 
     @OneToOne
     @JoinColumn(name = "idEstadoPQRSF")
-    private EstadoPQRSF estadoPQRSF;
+    private EstadosPQRSF estadosPQRSF;
 
     @OneToOne
     @JoinColumn(name = "idTipoPQRS")
@@ -32,12 +31,12 @@ public class PQRSF {
     public PQRSF() {
     }
 
-    public PQRSF(Integer id, Date fechaPQRSF, String informacionPQRSF, Clientes clientes, EstadoPQRSF estadoPQRSF, TipoPQRSF tipoPQRSF) {
+    public PQRSF(Integer id, Date fechaPQRSF, String informacionPQRSF, Clientes clientes, EstadosPQRSF estadosPQRSF, TipoPQRSF tipoPQRSF) {
         this.id = id;
         this.fechaPQRSF = fechaPQRSF;
         this.informacionPQRSF = informacionPQRSF;
         this.clientes = clientes;
-        this.estadoPQRSF = estadoPQRSF;
+        this.estadosPQRSF = estadosPQRSF;
         this.tipoPQRSF = tipoPQRSF;
     }
 
@@ -73,12 +72,12 @@ public class PQRSF {
         this.clientes = clientes;
     }
 
-    public EstadoPQRSF getEstadoPQRSF() {
-        return estadoPQRSF;
+    public EstadosPQRSF getEstadoPQRSF() {
+        return estadosPQRSF;
     }
 
-    public void setEstadoPQRSF(EstadoPQRSF estadoPQRSF) {
-        this.estadoPQRSF = estadoPQRSF;
+    public void setEstadoPQRSF(EstadosPQRSF estadosPQRSF) {
+        this.estadosPQRSF = estadosPQRSF;
     }
 
     public TipoPQRSF getTipoPQRSF() {

@@ -14,58 +14,58 @@
 <body>
 
     <header class="header">
-        
+
         <div class="container logo-login-container">
-            
+
             <a href="../../HTML/Cliente_landing_page/index.html" class="logo">J.J SYSTEM</a>
-            
+
             <nav class="login_navigation">
                 <ul>
                     <li><a href="{{asset('../../HTML/formularios/registro.html')}}">Registrarse</a></li>
                     <li><a href="{{asset('../../HTML/formularios/login.html')}}">Iniciar sesión</a></li>
                     <li><a href="#"><img class="user_img" src="{{asset('../../images/ft perfil.png')}}" alt="Foto de perfil"></a></li>
                 </ul>
-                
+
             </nav>
-        
+
         </div>
-        
+
     </header>
 
     <main class="main">
 
         <nav class="navigation_bar">
-            
+
             <div class="search_bar">
 
                 <nav class="navigation_bar_logo">
                     <a href="#"><img class="navigation_img" src="{{asset('../../images/lupa.png')}}" alt="Lupa de navegación"></a>
                 </nav>
-                
+
                 <nav class="navigation_bar_search_box">
                     <input type="text" class="navigation_bar_input" placeholder="buscar" required>
                 </nav>
-            
+
             </div>
 
             <nav class="navigation_bar_items">
-                
+
                 <ul>
                     <li>
                         <a href="#">Servicios</a>
                     </li>
-                    
+
                     <li>
                         <a href="#">Sobre nosotros</a>
                     </li>
-                    
+
                     <li>
                         <a href="#">Contactanos</a>
                     </li>
                 </ul>
-            
+
             </nav>
-        
+
         </nav>
 
         <div class="analysis_service">
@@ -75,12 +75,12 @@
             <div class="pqrsf_description">
 
                 <p>Para nuestra empresa J.J System es muy importante conocer su opinión sobre nuestra prestación <br>
-                 de servicios para poder mejorarlos continuamente, por eso queremos invitarlos a que registren <br> 
+                 de servicios para poder mejorarlos continuamente, por eso queremos invitarlos a que registren <br>
                  sus peticiones, quejas, reclamos, sugerencias y felicitaciones a través de este formulario,<br>
                  diligenciando los datos requeridos para poder responderle oportunamente.</p>
 
             </div>
-        
+
         </div>
 
         <br><div class="container">
@@ -106,7 +106,7 @@
                 <label for="fechaPQRSF" class="form-label"> Fecha</label>
                 <input type="date" class="form-control" id="fechaPQRSF" value="{{ $Pqrsf->fechaPQRSF }}" Required>
               </div>
-      
+
               <br><div class="mb-3">
                   <label for="informacionPQRSF" class="form-label"> Información Pqrsf <br>
                        Si lo considera necesario, por favor especifique servicio, productos y/o personas involucradas.</label>
@@ -124,21 +124,21 @@
                             @endisset
                         </select>
                     </div>
-                </div>    
+                </div>
 
                 <div class="mb-3 row">
-                    <label for="estadoPQRSF" class="col-sm-2 col-form-label">Estado Pqrsf</label>
+                    <label for="estadosPQRSF" class="col-sm-2 col-form-label">Estado Pqrsf</label>
                     <div class="col-sm-5">
-                        <select name="estadoPQRSF" class="form-select" aria-label="Default select example">
+                        <select name="estadosPQRSF" class="form-select" aria-label="Default select example">
                             @isset($estados)
-                                @foreach($estados as $estadoPQRSF)
-                                    <option value="{{$estadoPQRSF->idEstadoPQRSF}}">{{$estadoPQRSF->nombreEstadoPQRSF}}</option>
+                                @foreach($estados as $estadosPQRSF)
+                                    <option value="{{$estadosPQRSF->idEstadoPQRSF}}">{{$estadosPQRSF->nombreEstadoPQRSF}}</option>
                                 @endforeach
                             @endisset
                         </select>
                     </div>
                 </div>
-           
+
     <a href="{{ url('Pqrsf/create') }}" class="btn btn-secondary">Regresar</a>
     <a href="{{ url('Pqrsf/registrospqrsf') }}" class="btn btn-secondary">Guardar</a>
 
@@ -147,16 +147,16 @@
     </main>
 
     <footer class="footer">
-        
+
         <div class="footer_container">
             <p> <a href="#">Diseñador de la página web</a>  | copyright [2023] | J.J System</p>
         </div>
-            
+
         <div class="footer_container">
             <p> <a href="#">Sobre nosotros</a> | <a href="# ">Aviso legal y términos de uso</a> | <a href="#">Políticas de privacidad</a> | <a href="#"> Politica de cookies</a></p>
         </div>
-        
-    </footer> 
+
+    </footer>
     <script src="{{asset('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js')}}" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "EstadoPQRSF")
-public class EstadoPQRSF {
+public class EstadosPQRSF {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,10 +13,10 @@ public class EstadoPQRSF {
 
     private String nombreEstadoPQRSF;
 
-    public EstadoPQRSF() {
+    public EstadosPQRSF() {
     }
 
-    public EstadoPQRSF(Integer id, String nombreEstadoPQRSF) {
+    public EstadosPQRSF(Integer id, String nombreEstadoPQRSF) {
         this.id = id;
         this.nombreEstadoPQRSF = nombreEstadoPQRSF;
     }

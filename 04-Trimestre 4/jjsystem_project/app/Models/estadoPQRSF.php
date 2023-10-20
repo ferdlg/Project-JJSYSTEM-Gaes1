@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class estadoPQRSF extends Model
+class estadosPQRSF extends Model
 {
-    protected $table = 'estadoPQRSF';
+    protected $table = 'estadosPQRSF';
     protected $primaryKey = 'idEstadoPQRSF';
 }
