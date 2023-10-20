@@ -4,6 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="b2e624fd-919f-4ff6-9349-fdac3641aa7a" name="Changes" comment="Modelos Servicios, Categorias Servicios y Productos, Cotizaciones y Ventas">
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EstadoEnviosService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EstadoPQRSFService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/PQRSFService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/PermisosService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/TipoPQRSFService.java" afterDir="false" />
     <list default="true" id="b2e624fd-919f-4ff6-9349-fdac3641aa7a" name="Changes" comment="Cambios en modelos, adición de foreign keys">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/CategoriasProductosRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/CategoriaProductosRepository.java" afterDir="false" />
@@ -129,6 +135,17 @@
       <workItem from="1697053010093" duration="14866000" />
       <workItem from="1697086278173" duration="2186000" />
       <workItem from="1697089256703" duration="312000" />
+      <workItem from="1697236262391" duration="947000" />
+      <workItem from="1697317479415" duration="7675000" />
+      <workItem from="1697382497900" duration="62000" />
+      <workItem from="1697382621885" duration="779000" />
+      <workItem from="1697385285048" duration="8568000" />
+      <workItem from="1697402645415" duration="137000" />
+      <workItem from="1697404203504" duration="426000" />
+      <workItem from="1697506060359" duration="30000" />
+      <workItem from="1697506237147" duration="21000" />
+      <workItem from="1697506422175" duration="20000" />
+      <workItem from="1697513000050" duration="4782000" />
       <workItem from="1697236262391" duration="1280000" />
       <workItem from="1697511504553" duration="5863000" />
       <workItem from="1697776192578" duration="13591000" />
