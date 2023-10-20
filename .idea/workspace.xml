@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2e624fd-919f-4ff6-9349-fdac3641aa7a" name="Changes" comment="Cambios en modelos, adición de foreign keys">
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/EstadoPQRSFController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - BD SCRIPT.sql" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - BD SCRIPT.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/jjsystem_project/app/Http/Controllers/PqrsfController.php" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/jjsystem_project/app/Http/Controllers/PqrsfController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/jjsystem_project/app/Models/Pqrsf.php" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/jjsystem_project/app/Models/Pqrsf.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/jjsystem_project/app/Models/estadoPQRSF.php" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/jjsystem_project/app/Models/estadoPQRSF.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/jjsystem_project/resources/views/Pqrsf/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/jjsystem_project/resources/views/Pqrsf/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/EstadoPQRSFRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/EstadosPQRSFRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/EstadoPQRSF.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/EstadosPQRSF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/PQRSF.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/PQRSF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EstadoEnviosService.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EstadoEnviosService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EstadoPQRSFService.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EstadosPQRSFService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +109,8 @@
       <workItem from="1697236262391" duration="1280000" />
       <workItem from="1697511504553" duration="5863000" />
       <workItem from="1697776192578" duration="13758000" />
-      <workItem from="1697817049392" duration="5289000" />
+      <workItem from="1697817049392" duration="6102000" />
+      <workItem from="1697824275075" duration="22000" />
     </task>
     <task id="LOCAL-00001" summary="Modelos Productos, CategoriaProductos y Cambio en nombre carpetas">
       <option name="closed" value="true" />
@@ -169,6 +159,21 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
