@@ -14,24 +14,24 @@ public class EstadosPQRSFService {
     @Autowired
     private EstadosPQRSFRepository estadosPQRSFRepository;
 
-    public EstadosPQRSF createEstadosPQRSF (EstadosPQRSF estadosPQRSF)
+    public EstadosPQRSF createEstadoPQRSF (EstadosPQRSF estadoPQRSF)
     {
-        return estadosPQRSFRepository.save(estadosPQRSF);
+        return estadosPQRSFRepository.save(estadoPQRSF);
     }
 
-    public EstadosPQRSF getEstadosPQRSFById(Integer idPQRSF)
+    public EstadosPQRSF getEstadoPQRSFById(Integer idEstadoPQRSF)
     {
-        Optional<EstadosPQRSF> optionalEstadoPQRSF = estadosPQRSFRepository.findById(idPQRSF);
-        return optionalEstadoPQRSF.get();
+        Optional<EstadosPQRSF> optionalEstadosPQRSF = estadosPQRSFRepository.findById(idEstadoPQRSF);
+        return optionalEstadosPQRSF.get();
     }
 
-    public List<EstadosPQRSF> getAllEstadosPQRSF()
-    {
-        return estadosPQRSFRepository.findAll();
+        public List<EstadosPQRSF> getAllEstadosPQRSF()
+        {
+            return estadosPQRSFRepository.findAll();
     }
 
-    public void deleteEstadosPQRSF(Integer id)
+    public void deleteEstadosPQRSF(Integer idEstadoPQRSF)
     {
-        estadosPQRSFRepository.deleteById(id);
+        estadosPQRSFRepository.deleteById(idEstadoPQRSF);
     }
 }

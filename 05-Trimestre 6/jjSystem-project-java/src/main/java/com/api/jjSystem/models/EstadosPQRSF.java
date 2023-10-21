@@ -3,30 +3,30 @@ package com.api.jjSystem.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "EstadoPQRSF")
+@Table(name = "EstadosPQRSF")
 public class EstadosPQRSF {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEstadoPQRSF")
-    private Integer id;
+    private Integer idEstadoPQRSF;
 
     private String nombreEstadoPQRSF;
 
     public EstadosPQRSF() {
     }
 
-    public EstadosPQRSF(Integer id, String nombreEstadoPQRSF) {
-        this.id = id;
+    public EstadosPQRSF(Integer idEstadoPQRSF, String nombreEstadoPQRSF) {
+        this.idEstadoPQRSF = idEstadoPQRSF;
         this.nombreEstadoPQRSF = nombreEstadoPQRSF;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdEstadoPQRSF() {
+        return idEstadoPQRSF;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdEstadoPQRSF(Integer idEstadoPQRSF) {
+        this.idEstadoPQRSF = idEstadoPQRSF;
     }
 
     public String getNombreEstadoPQRSF() {
