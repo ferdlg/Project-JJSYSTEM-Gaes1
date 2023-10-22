@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS Tecnicos (
     FOREIGN KEY (numeroDocumento) REFERENCES usuarios (numeroDocumento)
 );
 
-CREATE TABLE IF NOT EXISTS EstadoEnvios(
+CREATE TABLE IF NOT EXISTS EstadosEnvios(
     idEstadoEnvio INT NOT NULL AUTO_INCREMENT,
     nombreEstadoEnvio VARCHAR(20) NOT NULL,
     PRIMARY KEY (idEstadoEnvio)
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS Envios (
     EstadoEnvio_idEstadoEnvio INT,
     PRIMARY KEY (idEnvio),
     FOREIGN KEY (idTecnico) REFERENCES Tecnicos (idTecnico),
-	FOREIGN KEY (EstadoEnvio_idEstadoEnvio) REFERENCES EstadoEnvios (idEstadoEnvio)
+	FOREIGN KEY (EstadoEnvio_idEstadoEnvio) REFERENCES EstadosEnvios (idEstadoEnvio)
 );
 
 CREATE TABLE IF NOT EXISTS Cotizaciones(
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS Cotizaciones(
    CONSTRAINT Cotizaciones_ibfk_1 FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente)
 );
 
-CREATE TABLE IF NOT EXISTS EstadoCitas(
+CREATE TABLE IF NOT EXISTS EstadosCitas(
     idEstadoCita INT NOT NULL AUTO_INCREMENT, 
     nombreEstadoCita VARCHAR(20) NOT NULL, 
     PRIMARY KEY (idEstadoCita)
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS Citas(
     FOREIGN KEY (idTecnico) REFERENCES Tecnicos (idTecnico),
     FOREIGN KEY (idAdministrador) REFERENCES Administrador (idAdministrador),
     FOREIGN KEY (idCotizacion) REFERENCES Cotizaciones (idCotizacion),
-    FOREIGN KEY (idEstadoCita) REFERENCES EstadoCitas (idEstadoCita)
+    FOREIGN KEY (idEstadoCita) REFERENCES EstadosCitas (idEstadoCita)
 );
 
 CREATE TABLE IF NOT EXISTS DisponibilidadCronogramas(
