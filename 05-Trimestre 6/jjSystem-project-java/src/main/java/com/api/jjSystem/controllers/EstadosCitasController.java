@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api.jjSystem/EstadosCitas")
+@RequestMapping("api.jjSystem/estadosCitas")
 public class EstadosCitasController {
     @Autowired
     private EstadosCitasService estadosCitasService;

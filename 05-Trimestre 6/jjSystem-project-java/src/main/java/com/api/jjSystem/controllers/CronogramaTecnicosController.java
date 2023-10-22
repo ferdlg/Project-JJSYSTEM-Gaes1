@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api.jjSystem/Cronograma")
+@RequestMapping("api.jjSystem/cronograma")
 public class CronogramaTecnicosController {
     @Autowired
     private CronogramaTecnicosService cronogramaTecnicosService;

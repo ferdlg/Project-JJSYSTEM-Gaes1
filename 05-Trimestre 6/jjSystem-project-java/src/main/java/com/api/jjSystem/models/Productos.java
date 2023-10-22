@@ -23,25 +23,25 @@ public class Productos {
     private Administrador administrador;
     @OneToOne
     @JoinColumn(name = "idCategoriaProducto")
-    private CategoriaProductos categoriaProductos;
+    private CategoriasProductos categoriasProductos;
     @ManyToOne
     @JoinColumn(name = "idProveedorProducto")
-    private ProveedorProductos proveedorProductos;
+    private ProveedoresProductos proveedoresProductos;
 
     //Constructores
 
     public Productos() {
     }
 
-    public Productos(Integer idProducto, String nombreProducto, String descripcionProducto, Float precioProducto, Integer cantidad, Administrador administrador, CategoriaProductos categoriaProductos, ProveedorProductos proveedorProductos) {
+    public Productos(Integer idProducto, String nombreProducto, String descripcionProducto, Float precioProducto, Integer cantidad, Administrador administrador, CategoriasProductos categoriasProductos, ProveedoresProductos proveedoresProductos) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.descripcionProducto = descripcionProducto;
         this.precioProducto = precioProducto;
         this.cantidad = cantidad;
         this.administrador = administrador;
-        this.categoriaProductos = categoriaProductos;
-        this.proveedorProductos = proveedorProductos;
+        this.categoriasProductos = categoriasProductos;
+        this.proveedoresProductos = proveedoresProductos;
     }
 
     //Getter y Setter
@@ -94,19 +94,19 @@ public class Productos {
         this.administrador = administrador;
     }
 
-    public CategoriaProductos getCategoriaProductos() {
-        return categoriaProductos;
+    public CategoriasProductos getCategoriaProductos() {
+        return categoriasProductos;
     }
 
-    public void setCategoriaProductos(CategoriaProductos categoriaProductos) {
-        this.categoriaProductos = categoriaProductos;
+    public void setCategoriaProductos(CategoriasProductos categoriasProductos) {
+        this.categoriasProductos = categoriasProductos;
     }
 
-    public ProveedorProductos getProveedorProductos() {
-        return proveedorProductos;
+    public ProveedoresProductos getProveedorProductos() {
+        return proveedoresProductos;
     }
 
-    public void setProveedorProductos(ProveedorProductos proveedorProductos) {
-        this.proveedorProductos = proveedorProductos;
+    public void setProveedorProductos(ProveedoresProductos proveedoresProductos) {
+        this.proveedoresProductos = proveedoresProductos;
     }
 }

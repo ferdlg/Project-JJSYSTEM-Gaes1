@@ -1,7 +1,7 @@
 package com.api.jjSystem.services;
 
 import com.api.jjSystem.Repository.ProveedorProductosRepository;
-import com.api.jjSystem.models.ProveedorProductos;
+import com.api.jjSystem.models.ProveedoresProductos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,18 +14,18 @@ public class ProveedorProductosService {
     @Autowired
     private ProveedorProductosRepository proveedorProductosRepository;
 
-    public ProveedorProductos createProveedorProducto(ProveedorProductos proveedorProducto)
+    public ProveedoresProductos createProveedorProducto(ProveedoresProductos proveedorProducto)
     {
         return proveedorProductosRepository.save(proveedorProducto);
     }
 
-    public ProveedorProductos getProveedorProductoById(Integer idProveedorProducto)
+    public ProveedoresProductos getProveedorProductoById(Integer idProveedorProducto)
     {
-        Optional<ProveedorProductos> proveedorProductos = proveedorProductosRepository.findById(idProveedorProducto);
+        Optional<ProveedoresProductos> proveedorProductos = proveedorProductosRepository.findById(idProveedorProducto);
         return proveedorProductos.get();
     }
 
-    public List<ProveedorProductos> getAllProveedorProductos()
+    public List<ProveedoresProductos> getAllProveedorProductos()
     {
         return proveedorProductosRepository.findAll();
     }

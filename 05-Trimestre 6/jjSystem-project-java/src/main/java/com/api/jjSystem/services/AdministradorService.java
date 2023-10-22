@@ -1,9 +1,7 @@
 package com.api.jjSystem.services;
 
 import com.api.jjSystem.Repository.AdministradorRepository;
-import com.api.jjSystem.Repository.ProveedorProductosRepository;
 import com.api.jjSystem.models.Administrador;
-import com.api.jjSystem.models.ProveedorProductos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

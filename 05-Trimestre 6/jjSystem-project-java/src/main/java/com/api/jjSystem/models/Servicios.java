@@ -1,7 +1,6 @@
 package com.api.jjSystem.models;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.MapKeyCompositeType;
 
 @Entity
 @Table(name = "Servicios")
@@ -17,21 +16,21 @@ public class Servicios {
     @Column(name = "descripcionServicio")
     private String descripcionServicio;
     @ManyToOne
-    @JoinColumn(name = "idAdministrador")
-    private Administrador administrador;
+    @JoinColumn(name = "idCotizacion")
+    private Cotizaciones cotizaciones;
     @OneToOne
     @JoinColumn(name = "idCategoriaServicio")
-    private CategoriaServicios categoriaServicios;
+    private CategoriasServicios categoriasServicios;
 
     public Servicios() {
     }
 
-    public Servicios(Integer idServicio, String nombreServicio, String descripcionServicio, Administrador administrador, CategoriaServicios categoriaServicios) {
+    public Servicios(Integer idServicio, String nombreServicio, String descripcionServicio, Cotizaciones cotizaciones, CategoriasServicios categoriasServicios) {
         this.idServicio = idServicio;
         this.nombreServicio = nombreServicio;
         this.descripcionServicio = descripcionServicio;
-        this.administrador = administrador;
-        this.categoriaServicios = categoriaServicios;
+        this.cotizaciones = cotizaciones;
+        this.categoriasServicios = categoriasServicios;
     }
 
     //Getter y Setter
@@ -60,19 +59,19 @@ public class Servicios {
         this.descripcionServicio = descripcionServicio;
     }
 
-    public Administrador getAdministrador() {
-        return administrador;
+    public Cotizaciones getCotizaciones() {
+        return cotizaciones;
     }
 
-    public void setAdministrador(Administrador administrador) {
-        this.administrador = administrador;
+    public void setCotizaciones(Cotizaciones cotizaciones) {
+        this.cotizaciones = cotizaciones;
     }
 
-    public CategoriaServicios getCategoriaServicios() {
-        return categoriaServicios;
+    public CategoriasServicios getCategoriaServicios() {
+        return categoriasServicios;
     }
 
-    public void setCategoriaServicios(CategoriaServicios categoriaServicios) {
-        this.categoriaServicios = categoriaServicios;
+    public void setCategoriaServicios(CategoriasServicios categoriasServicios) {
+        this.categoriasServicios = categoriasServicios;
     }
 }

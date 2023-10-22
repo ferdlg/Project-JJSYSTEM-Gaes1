@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api.jjSystem/ActividadesCronogramaTecnicos")
+@RequestMapping("api.jjSystem/actividadesCronogramaTecnicos")
 public class ActividadesCronogramaTecnicosController {
     @Autowired
     private ActividadesCronogramaTecnicosService actividadesCronogramaTecnicosService;
@@ -17,7 +17,14 @@ public class ActividadesCronogramaTecnicosController {
     {
         return actividadesCronogramaTecnicosService.createActividadesTecnicos(actividadesCronogramaTecnicos);
     }
+
     @GetMapping("{idActividadCronogramaTecnico}")
+    public ActividadesCronogramaTecnicos getActividadesTecnicosById(@PathVariable Integer idActividadCronogramaTecnico)
+    {
+        return actividadesCronogramaTecnicosService.getActidadesTecnicosById(idActividadCronogramaTecnico);
+    }
+
+    @GetMapping
     public List<ActividadesCronogramaTecnicos> getAllActidadesTecnicos()
     {
         return actividadesCronogramaTecnicosService.getAllActidadesTecnicos();

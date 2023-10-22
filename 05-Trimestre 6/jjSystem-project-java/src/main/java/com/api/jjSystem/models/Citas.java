@@ -13,7 +13,7 @@ public class Citas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCita")
-    private Integer id;
+    private Integer idCita;
     @Column(name = "fechaCita")
     private Date fechaCita;
     @Column(name = "direccion")
@@ -43,8 +43,8 @@ public class Citas {
     public Citas() {
     }
 
-    public Citas(Integer id, Date fechaCita, String direccion, BigInteger contactoCliente, String descripcionCita, Tecnicos tecnicos, Administrador administrador, Cotizaciones cotizaciones, EstadosCitas estadosCitas) {
-        this.id = id;
+    public Citas(Integer idCita, Date fechaCita, String direccion, BigInteger contactoCliente, String descripcionCita, Tecnicos tecnicos, Administrador administrador, Cotizaciones cotizaciones, EstadosCitas estadosCitas) {
+        this.idCita = idCita;
         this.fechaCita = fechaCita;
         this.direccion = direccion;
         this.contactoCliente = contactoCliente;
@@ -57,11 +57,11 @@ public class Citas {
     //Get y set
 
     public Integer getId() {
-        return id;
+        return idCita;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer idCita) {
+        this.idCita = idCita;
     }
 
     public Date getFechaCita() {

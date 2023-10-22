@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api.jjSystem/Administrador")
+@RequestMapping("api.jjSystem/administrador")
 public class AdministradorController {
     @Autowired
     private AdministradorService administradorService;
@@ -27,5 +27,9 @@ public class AdministradorController {
     {
         return administradorService.getAdministradorById(idAdministrador);
     }
-
+    @DeleteMapping("{idAdministrador}")
+    public void deleteAdministradorById(@PathVariable("idAdministrador")Integer idAdministrador)
+    {
+        administradorService.deleteAdministradorById(idAdministrador);
+    }
 }

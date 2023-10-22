@@ -1,8 +1,6 @@
 package com.api.jjSystem.controllers;
 
-import com.api.jjSystem.models.CategoriaProductos;
-import com.api.jjSystem.models.CategoriaServicios;
-import com.api.jjSystem.services.CategoriaProductosService;
+import com.api.jjSystem.models.CategoriasServicios;
 import com.api.jjSystem.services.CategoriaServiciosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,25 +9,25 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api.jjSystem/categoriaServicios")
-public class CategoriaServiciosController {
+public class CategoriasServiciosController {
 
     @Autowired
     private CategoriaServiciosService categoriaServiciosService;
 
     @PostMapping
-    public CategoriaServicios createCategoriaServicio(CategoriaServicios categoriaServicios)
+    public CategoriasServicios createCategoriaServicio(CategoriasServicios categoriasServicios)
     {
-        return categoriaServiciosService.createCategoriaServicio(categoriaServicios);
+        return categoriaServiciosService.createCategoriaServicio(categoriasServicios);
     }
 
     @GetMapping
-    public List<CategoriaServicios> getAllCategoriaServicios()
+    public List<CategoriasServicios> getAllCategoriaServicios()
     {
         return categoriaServiciosService.getAllCategoriaServicios();
     }
 
     @GetMapping("{idCategoriaServicio}")
-    public CategoriaServicios buscarCategoriaServiciosById(Integer idCategoriaServicio)
+    public CategoriasServicios buscarCategoriaServiciosById(Integer idCategoriaServicio)
     {
         return categoriaServiciosService.getCategoriaServicioById(idCategoriaServicio);
     }

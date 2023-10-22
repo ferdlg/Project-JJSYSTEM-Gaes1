@@ -26,7 +26,7 @@ public class VentasController {
         return ventasService.getAllVentas();
     }
 
-    @GetMapping
+    @GetMapping("{idVenta}")
     public Ventas buscarVentasById(@PathVariable Integer idVenta)
     {
         return ventasService.getVentaById(idVenta);

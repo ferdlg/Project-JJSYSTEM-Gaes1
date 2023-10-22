@@ -1,7 +1,7 @@
 package com.api.jjSystem.services;
 
 import com.api.jjSystem.Repository.CategoriaProductosRepository;
-import com.api.jjSystem.models.CategoriaProductos;
+import com.api.jjSystem.models.CategoriasProductos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,18 +14,18 @@ public class CategoriaProductosService {
     @Autowired
     private CategoriaProductosRepository categoriasProductosRepository;
 
-    public CategoriaProductos createCategoriaProducto(CategoriaProductos categoriaProducto)
+    public CategoriasProductos createCategoriaProducto(CategoriasProductos categoriaProducto)
     {
         return categoriasProductosRepository.save(categoriaProducto);
     }
 
-    public CategoriaProductos getCategoriaProductoById(Integer idCategoriaProducto)
+    public CategoriasProductos getCategoriaProductoById(Integer idCategoriaProducto)
     {
-        Optional<CategoriaProductos> categoriasProductos = categoriasProductosRepository.findById(idCategoriaProducto);
+        Optional<CategoriasProductos> categoriasProductos = categoriasProductosRepository.findById(idCategoriaProducto);
         return categoriasProductos.get();
     }
 
-    public List<CategoriaProductos> getAllCategoriaProductos()
+    public List<CategoriasProductos> getAllCategoriaProductos()
     {
         return categoriasProductosRepository.findAll();
     }

@@ -3,8 +3,8 @@ package com.api.jjSystem.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "CategoriaProductos")
-public class CategoriaProductos {
+@Table(name = "CategoriasProductos")
+public class CategoriasProductos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,10 +14,10 @@ public class CategoriaProductos {
     private String nombreCategoria;
 
     //Constructores
-    public CategoriaProductos() {
+    public CategoriasProductos() {
     }
 
-    public CategoriaProductos(Integer idCategoriaProducto, String nombreCategoria) {
+    public CategoriasProductos(Integer idCategoriaProducto, String nombreCategoria) {
         this.idCategoriaProducto = idCategoriaProducto;
         this.nombreCategoria = nombreCategoria;
     }

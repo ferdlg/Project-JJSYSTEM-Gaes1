@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api.jjSystem/Citas")
+@RequestMapping("api.jjSystem/citas")
 public class CitasController {
     @Autowired
     private CitasService citasService;

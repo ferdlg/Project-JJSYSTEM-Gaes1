@@ -1,7 +1,7 @@
 package com.api.jjSystem.services;
 
 import com.api.jjSystem.Repository.CategoriaServiciosRepository;
-import com.api.jjSystem.models.CategoriaServicios;
+import com.api.jjSystem.models.CategoriasServicios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,18 +14,18 @@ public class CategoriaServiciosService {
     @Autowired
     private CategoriaServiciosRepository categoriaServiciosRepository;
 
-    public CategoriaServicios createCategoriaServicio(CategoriaServicios categoriaServicio)
+    public CategoriasServicios createCategoriaServicio(CategoriasServicios categoriaServicio)
     {
         return categoriaServiciosRepository.save(categoriaServicio);
     }
 
-    public CategoriaServicios getCategoriaServicioById(Integer idCategoriaServicio)
+    public CategoriasServicios getCategoriaServicioById(Integer idCategoriaServicio)
     {
-        Optional<CategoriaServicios> categoriaServicios = categoriaServiciosRepository.findById(idCategoriaServicio);
+        Optional<CategoriasServicios> categoriaServicios = categoriaServiciosRepository.findById(idCategoriaServicio);
         return categoriaServicios.get();
     }
 
-    public List<CategoriaServicios> getAllCategoriaServicios()
+    public List<CategoriasServicios> getAllCategoriaServicios()
     {
         return categoriaServiciosRepository.findAll();
     }
