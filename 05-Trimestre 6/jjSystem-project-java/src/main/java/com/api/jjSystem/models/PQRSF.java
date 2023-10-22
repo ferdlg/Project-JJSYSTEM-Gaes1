@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "PQRSF")
+@Table(name = "pqrsf")
 public class PQRSF {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,15 +17,15 @@ public class PQRSF {
     private String informacionPQRSF;
 
     @ManyToOne
-    @JoinColumn(name = "idCliente")
+    @JoinColumn(name = "Cliente_idCliente")
     private Clientes clientes;
 
     @OneToOne
-    @JoinColumn(name = "idEstadoPQRSF")
+    @JoinColumn(name = "EstadoPQRSF_idEstadoPQRSF")
     private EstadosPQRSF estadosPQRSF;
 
     @OneToOne
-    @JoinColumn(name = "idTipoPQRS")
+    @JoinColumn(name = "TipoPQRSF_idTipoPQRSF")
     private TipoPQRSF tipoPQRSF;
 
     public PQRSF() {
