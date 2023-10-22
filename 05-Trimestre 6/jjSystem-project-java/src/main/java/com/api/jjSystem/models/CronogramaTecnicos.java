@@ -3,7 +3,7 @@ package com.api.jjSystem.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cronogramatecnicos")
+@Table(name = "CronogramaTecnicos")
 public class CronogramaTecnicos {
 
     @Id
@@ -19,7 +19,7 @@ public class CronogramaTecnicos {
     private Citas citas;
 
     @OneToOne
-    @JoinColumn(name = "DisponibilidadCronograma_idDisponibilidadCronograma")
+    @JoinColumn(name = "idDisponibilidadCronograma")
     private DisponibilidadCronogramas disponibilidadCronograma;
 
     //Constructores

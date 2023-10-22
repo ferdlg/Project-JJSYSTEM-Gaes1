@@ -27,13 +27,14 @@ public class Cotizaciones {
     @ManyToOne
     @JoinColumn(name = "idCliente")
     private Clientes clientes;
+    /***
     @OneToOne
-    @JoinColumn(name = "idServicio")
+    @JoinColumn(name = "servicioCotizacion")
     private Servicios servicios;
     @ManyToOne
-    @JoinColumn(name = "idProducto")
+    @JoinColumn(name = "productoCotizacion")
     private Productos productos;
-
+***/
     //Constructores
 
     public Cotizaciones() {
@@ -47,8 +48,8 @@ public class Cotizaciones {
         this.totalCotizacion = totalCotizacion;
         this.descripcionCotizacion = descripcionCotizacion;
         this.clientes = clientes;
-        this.servicios = servicios;
-        this.productos = productos;
+       /*** this.servicios = servicios;
+        this.productos = productos;***/
     }
 
     //Getter y Setter
@@ -108,7 +109,7 @@ public class Cotizaciones {
     public void setClientes(Clientes clientes) {
         this.clientes = clientes;
     }
-
+/***
     public Servicios getServicios() {
         return servicios;
     }
@@ -123,5 +124,5 @@ public class Cotizaciones {
 
     public void setProductos(Productos productos) {
         this.productos = productos;
-    }
+    }***/
 }

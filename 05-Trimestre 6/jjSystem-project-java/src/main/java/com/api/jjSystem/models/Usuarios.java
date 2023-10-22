@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.math.BigInteger;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "Usuarios")
 public class Usuarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,16 +24,13 @@ public class Usuarios {
     @OneToOne
     @JoinColumn(name = "idRol")
     private Roles roles;
-    @ManyToOne
-    @JoinColumn(name = "idEstadosUsuarios")
-    private EstadosUsuarios estadosUsuarios;
 
     //Constructores
 
     public Usuarios() {
     }
 
-    public Usuarios(BigInteger numeroDocumento, String nombre, String apellido, String email, String password, BigInteger numeroContacto, Roles roles, EstadosUsuarios estadosUsuarios) {
+    public Usuarios(BigInteger numeroDocumento, String nombre, String apellido, String email, String password, BigInteger numeroContacto, Roles roles) {
         this.numeroDocumento = numeroDocumento;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -41,7 +38,6 @@ public class Usuarios {
         this.password = password;
         this.numeroContacto = numeroContacto;
         this.roles = roles;
-        this.estadosUsuarios = estadosUsuarios;
     }
 
     //Get y set
@@ -102,11 +98,5 @@ public class Usuarios {
         this.roles = roles;
     }
 
-    public EstadosUsuarios getEstadosUsuarios() {
-        return estadosUsuarios;
-    }
 
-    public void setEstadosUsuarios(EstadosUsuarios estadosUsuarios) {
-        this.estadosUsuarios = estadosUsuarios;
-    }
 }

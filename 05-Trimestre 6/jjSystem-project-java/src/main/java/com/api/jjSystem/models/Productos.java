@@ -19,7 +19,7 @@ public class Productos {
     @Column(name = "cantidad")
     private Integer cantidad;
     @ManyToOne
-    @JoinColumn(name = "idAdministrador")
+    @JoinColumn(name = "AdministradoridAdministrador")
     private Administrador administrador;
     @OneToOne
     @JoinColumn(name = "idCategoriaProducto")

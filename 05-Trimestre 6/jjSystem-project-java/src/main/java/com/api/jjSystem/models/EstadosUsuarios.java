@@ -2,6 +2,8 @@ package com.api.jjSystem.models;
 
 import jakarta.persistence.*;
 
+import java.math.BigInteger;
+
 @Entity
 @Table(name = "EstadosUsuarios")
 
@@ -14,14 +16,18 @@ public class EstadosUsuarios {
     @Column(name = "nombreEstadoUsuario")
     private String nombreEstadoUsuario;
 
+    @ManyToOne
+    @JoinColumn(name = "Usuarios_numeroDocumento")
+    private Usuarios usuarios;
     //Constructores
 
     public EstadosUsuarios() {
     }
 
-    public EstadosUsuarios(Integer id, String nombreEstadoUsuario) {
+    public EstadosUsuarios(Integer id, String nombreEstadoUsuario, Usuarios usuarios) {
         this.id = id;
         this.nombreEstadoUsuario = nombreEstadoUsuario;
+        this.usuarios = usuarios;
     }
 
     //Getter y Setter
@@ -40,5 +46,13 @@ public class EstadosUsuarios {
 
     public void setNombreEstadoUsuario(String nombreEstadoUsuario) {
         this.nombreEstadoUsuario = nombreEstadoUsuario;
+    }
+
+    public Usuarios getUsuarios(){
+        return usuarios;
+    }
+    public void setUsuarios(Usuarios usuarios)
+    {
+        this.usuarios = usuarios;
     }
 }
