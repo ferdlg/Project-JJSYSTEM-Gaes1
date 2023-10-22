@@ -11,6 +11,7 @@ public class Envios {
     @Column(name = "idEnvio")
     private Integer id;
 
+    @Column(name = "direccion")
     private String direccionEnvio;
 
     @OneToOne
@@ -18,7 +19,7 @@ public class Envios {
     private Tecnicos tecnicos;
 
     @ManyToOne
-    @JoinColumn(name = "idEstadoEnvio")
+    @JoinColumn(name = "EstadoEnvio_idEstadoEnvio")
     private EstadoEnvios estadoEnvios;
 
     public Envios() {
