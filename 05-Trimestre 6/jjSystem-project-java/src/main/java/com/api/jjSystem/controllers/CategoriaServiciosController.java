@@ -29,7 +29,7 @@ public class CategoriaServiciosController {
     }
 
     @GetMapping("{idCategoriaServicio}")
-    public CategoriaServicios buscarCategoriaServiciosById(@PathVariable Integer idCategoriaServicio)
+    public CategoriaServicios buscarCategoriaServiciosById(Integer idCategoriaServicio)
     {
         return categoriaServiciosService.getCategoriaServicioById(idCategoriaServicio);
     }

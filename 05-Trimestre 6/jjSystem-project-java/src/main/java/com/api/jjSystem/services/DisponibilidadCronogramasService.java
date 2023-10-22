@@ -7,6 +7,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -21,6 +22,10 @@ public class DisponibilidadCronogramasService {
     {
         Optional<DisponibilidadCronogramas> disponibilidadCronogramas = disponibilidadCronogramasRepository.findById(idDisponibilidadCronograma);
         return disponibilidadCronogramas.get();
+    }
+    public List<DisponibilidadCronogramas> getAllDisponibilidad()
+    {
+        return disponibilidadCronogramasRepository.findAll();
     }
     public void deleteDisponibilidadById(Integer idDisponibilidadCronograma)
     {

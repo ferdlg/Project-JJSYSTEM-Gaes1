@@ -16,12 +16,12 @@ public class CronogramaTecnicosService {
     {
         return cronogramaTecnicosRepository.save(cronogramaTecnicos);
     }
-    public CronogramaTecnicos getCronogramaById(Integer idCronogramaTecnicos)
+    public CronogramaTecnicos getCronogramaById(Integer idCronogramaTecnico)
     {
-        Optional<CronogramaTecnicosRepository> cronogramaTecnicos = cronogramaTecnicosRepository.findById(idCronogramaTecnicos);
+        Optional<CronogramaTecnicos> cronogramaTecnicos = cronogramaTecnicosRepository.findById(idCronogramaTecnico);
         return cronogramaTecnicos.get();
     }
-    public List<CronogramaTecnicos> getAllCronogramas()
+    public List<CronogramaTecnicos> getAllCronograma()
     {
         return cronogramaTecnicosRepository.findAll();
     }

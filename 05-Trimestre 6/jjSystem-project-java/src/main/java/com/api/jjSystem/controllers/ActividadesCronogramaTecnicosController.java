@@ -1,12 +1,30 @@
 package com.api.jjSystem.controllers;
 
+import com.api.jjSystem.models.ActividadesCronogramaTecnicos;
+import com.api.jjSystem.services.ActividadesCronogramaTecnicosService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api.jjSystem/ActividadesCronogramaTecnicos")
 public class ActividadesCronogramaTecnicosController {
     @Autowired
-    private
+    private ActividadesCronogramaTecnicosService actividadesCronogramaTecnicosService;
+    @PostMapping
+    public ActividadesCronogramaTecnicos createActidadesTecnicos(ActividadesCronogramaTecnicos actividadesCronogramaTecnicos)
+    {
+        return actividadesCronogramaTecnicosService.createActividadesTecnicos(actividadesCronogramaTecnicos);
+    }
+    @GetMapping("{idActividadCronogramaTecnico}")
+    public List<ActividadesCronogramaTecnicos> getAllActidadesTecnicos()
+    {
+        return actividadesCronogramaTecnicosService.getAllActidadesTecnicos();
+    }
+    @DeleteMapping
+    public void deleteActidadesTecnicosById(@PathVariable("idActividadCronogramaTecnico")Integer idActividadCronogramaTecnico)
+    {
+        actividadesCronogramaTecnicosService.deleteActidadesTecnicos(idActividadCronogramaTecnico);
+    }
 }

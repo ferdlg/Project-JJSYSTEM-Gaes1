@@ -21,7 +21,7 @@ public class DetalleActividadCronogramaService {
         Optional<DetalleActividadCronograma> detalleActividadCronograma = detalleActividadCronogramaRepository.findById(idDetalleActividad);
         return detalleActividadCronograma.get();
     }
-    public List<DetalleActividadCronograma> getAllDetalles()
+    public List<DetalleActividadCronograma> getAllDetalle()
     {
         return detalleActividadCronogramaRepository.findAll();
     }

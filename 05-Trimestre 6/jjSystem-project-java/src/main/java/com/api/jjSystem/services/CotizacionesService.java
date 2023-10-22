@@ -14,9 +14,9 @@ public class CotizacionesService {
     @Autowired
     private CotizacionesRepository cotizacionesRepository;
 
-    public Cotizaciones createCotizacion(Cotizaciones cotizacion)
+    public Cotizaciones createCotizacion(Cotizaciones cotizaciones)
     {
-        return cotizacionesRepository.save(cotizacion);
+        return cotizacionesRepository.save(cotizaciones);
     }
 
     public Cotizaciones getCotizacionesById(Integer idCotizacion)
