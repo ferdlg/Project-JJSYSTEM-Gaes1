@@ -20,7 +20,7 @@ public class CitasController {
     @GetMapping
     public List<Citas> getAllCitas()
     {
-        return citasService.getAllCitas();
+        return citasService.getAllCita();
     }
     @GetMapping("idCita")
     public Citas getCitasById(@PathVariable Integer idCita)

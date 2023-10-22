@@ -21,7 +21,7 @@ public class CitasService {
         Optional<Citas> citas= citasRepository.findById(idCita);
         return citas.get();
     }
-    public List<Citas> getAllCitas()
+    public List<Citas> getAllCita()
     {
         return citasRepository.findAll();
     }

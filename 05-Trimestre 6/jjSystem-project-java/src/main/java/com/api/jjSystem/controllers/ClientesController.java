@@ -1,7 +1,9 @@
 package com.api.jjSystem.controllers;
 
 import com.api.jjSystem.models.Citas;
+import com.api.jjSystem.models.Clientes;
 import com.api.jjSystem.services.CitasService;
+import com.api.jjSystem.services.ClientesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,25 +13,25 @@ import java.util.List;
 @RequestMapping("api.jjSystem/clientes")
 public class ClientesController {
     @Autowired
-    private CitasService citasService;
+    private ClientesService clientesService;
     @PostMapping
-    public Citas createCitas(Citas citas)
+    public Clientes createCliente(Clientes clientes)
     {
-        return citasService.createCita(citas);
+        return clientesService.createCliente(clientes);
     }
     @GetMapping
-    public List<Citas> getAllCitas()
+    public List<Clientes> getAllClientes()
     {
-        return citasService.getAllCitas();
+        return clientesService.getAllClientes();
     }
-    @GetMapping("idCita")
-    public Citas getCitasById(@PathVariable Integer idCita)
+    @GetMapping("idCliente")
+    public Clientes getClienteById(@PathVariable Integer idCliente)
     {
-        return citasService.getCitaById(idCita);
+        return clientesService.getClienteById(idCliente);
     }
     @DeleteMapping
-    public void deleteCitasbyId(@PathVariable("idCita")Integer idCita)
+    public void deleteClientebyId(@PathVariable("idCliente")Integer idCliente)
     {
-        citasService.deleteCitaById(idCita);
+        clientesService.deleteClienteById(idCliente);
     }
 }

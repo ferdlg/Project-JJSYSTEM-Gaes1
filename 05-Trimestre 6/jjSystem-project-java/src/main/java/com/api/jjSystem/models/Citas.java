@@ -7,7 +7,7 @@ import java.math.BigInteger;
 import java.util.Date;
 
 @Entity
-@Table(name = "citas")
+@Table(name = "Citas")
 public class Citas {
 
     @Id
