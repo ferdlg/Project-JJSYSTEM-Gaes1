@@ -25,6 +25,12 @@ CREATE TABLE IF NOT EXISTS Roles_has_Permisos(
    FOREIGN KEY (idPermiso) REFERENCES Permisos (idPermiso)
 );
 
+CREATE TABLE IF NOT EXISTS EstadosUsuarios(
+	idEstadoUsuario INT NOT NULL AUTO_INCREMENT,
+    nombreEstadoUsuario VARCHAR(50) NOT NULL,
+    PRIMARY KEY (idEstadoUsuario)
+);
+
 CREATE TABLE IF NOT EXISTS Usuarios(
     numeroDocumento BIGINT NOT NULL,
     nombre VARCHAR(50) DEFAULT NULL,
@@ -32,17 +38,11 @@ CREATE TABLE IF NOT EXISTS Usuarios(
     email VARCHAR(120) DEFAULT NULL,
     password VARCHAR(100) DEFAULT NULL,
     numeroContacto FLOAT DEFAULT NULL,
-    idRol INT,
+    idRol INT NOT NULL,
+    idEstadosUsuarios INT NOT NULL,
     PRIMARY KEY (numeroDocumento),
-    FOREIGN KEY (idRol) REFERENCES Roles (idRol)
-);
-
-CREATE TABLE IF NOT EXISTS EstadosUsuarios(
-	idEstadoUsuario INT NOT NULL AUTO_INCREMENT,
-    nombreEstadoUsuario VARCHAR(50) NOT NULL,
-    Usuarios_numeroDocumento BIGINT NOT NULL,
-    PRIMARY KEY (idEstadoUsuario),
-    FOREIGN KEY (Usuarios_numeroDocumento) REFERENCES Usuarios (numeroDocumento)
+    FOREIGN KEY (idRol) REFERENCES Roles (idRol),
+    FOREIGN KEY (idEstadosUsuarios) REFERENCES EstadosUsuarios (idEstadoUsuario)
 );
 
 CREATE TABLE IF NOT EXISTS Clientes(
@@ -126,6 +126,12 @@ CREATE TABLE IF NOT EXISTS Servicios(
 	FOREIGN KEY (idCategoriaServicio) REFERENCES categoriasServicios (idCategoriaServicio)
 );
 
+CREATE TABLE IF NOT EXISTS EstadosCotizaciones(
+	idEstadoCotizacion INT NOT NULL AUTO_INCREMENT,
+    nombreEstadoCotizacion VARCHAR(20) NOT NULL,
+    PRIMARY KEY (idEstadoCotizacion)
+);
+
 CREATE TABLE IF NOT EXISTS Cotizaciones(
    idCotizacion INT NOT NULL AUTO_INCREMENT,
    fechaCotizacion DATE NOT NULL,
@@ -134,11 +140,13 @@ CREATE TABLE IF NOT EXISTS Cotizaciones(
    idCliente INT NOT NULL,
    idProducto INT NOT NULL,
    idServicio INT NOT NULL,
+   idEstadoCotizacion INT NOT NULL,
    PRIMARY KEY (idCotizacion),
    KEY idCliente (idCliente),
    FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente),
    FOREIGN KEY (idProducto) REFERENCES Productos (idProducto),
-   FOREIGN KEY (idServicio) REFERENCES Servicios (idServicio)
+   FOREIGN KEY (idServicio) REFERENCES Servicios (idServicio),
+   FOREIGN KEY(idEstadoCotizacion) REFERENCES EstadosCotizaciones (idEstadoCotizacion)
 );
 
 CREATE TABLE IF NOT EXISTS EstadosCitas(
@@ -212,9 +220,9 @@ CREATE TABLE IF NOT EXISTS DetallesVentas(
     detallesVenta VARCHAR(300) NOT NULL,
     subtotalVenta FLOAT NOT NULL,
     totalVenta FLOAT NOT NULL,
-    VentasIdVenta INT,
+    IdVenta INT NOT NULL,
     PRIMARY KEY (idDetalleVenta),
-    FOREIGN KEY (VentasIdVenta) REFERENCES Ventas (idVenta)
+    FOREIGN KEY (IdVenta) REFERENCES Ventas (idVenta)
 );
 
 CREATE TABLE IF NOT EXISTS TiposPQRSF(
@@ -345,50 +353,54 @@ VALUES
    (2, 39), 
    (3, 40);
     
-
-INSERT INTO Usuarios (numeroDocumento, nombre, apellido, email, password, numeroContacto, idRol) 
+INSERT INTO EstadosUsuarios (nombreEstadoUsuario)
 VALUES
-	(1021826839, 'Joaco', 'Galindo', 'JGalindo1980@jjsystem.com', '57P92rlN', 3208285814, 1),
-	(1027385914, 'Valentina', 'Gutiérrez', 'vgutierrez@mail.com', '2sY9rT5q', 3123456789, 2),
-	(1094730265, 'Santiago', 'Jiménez', 'sjimenez@mail.com', '6jK7cH3n', 3245678901, 2),
-	(1089456723, 'Isabella', 'Silva', 'isilva@mail.com', '4xG1vB8m', 3356789012, 2),
-	(1056709238, 'Daniel', 'Castro', 'dcastro@mail.com', '9pF6wE2k', 3478901234, 2),
-	(1078964532, 'Emilia', 'Martínez', 'emartinez@mail.com', '3lD5mV7c', 3590123456, 2),
-	(1025637498, 'Sebastián', 'Ramírez', 'sramirez@mail.com', '7nS2bR4g', 3612345678, 2),
-	(1064829375, 'María', 'Fernández', 'mfernandez@mail.com', '1vQ8tZ6f', 3734567890, 2),
-	(1045726398, 'Mateo', 'Vásquez', 'mvasquez@mail.com', '5dX3cN9h', 3856789012, 2),
-	(1038475629, 'Valeria', 'Pérez', 'vperez@mail.com', '8kL4rJ2w', 3978901234, 2),
-	(1015928364, 'Miguel', 'Álvarez', 'malvarez@mail.com', '0zH7yT1x', 3090123456, 2),
-	(1009283754, 'Camila', 'Benítez', 'cbenitez@mail.com', '4tF3kP7s', 3123456780, 2),
-	(1093654782, 'Nicolás', 'Hernández', 'nhernandez@mail.com', '6jM7rG2v', 3234567891, 2),
-	(1082369745, 'Sofía', 'Muñoz', 'smunoz@mail.com', '2pB9lW3d', 3345678902, 2),
-	(1054978632, 'Diego', 'García', 'dgarcia@mail.com', '5xV8gQ1c', 3456789013, 2),
-	(1072369854, 'Valentina', 'Rojas', 'vrojas@mail.com', '7rN4vS6j', 3567890124, 2),
-	(1023986547, 'Daniela', 'Castro', 'dcastro2@mail.com', '3kD1wH8m', 3678901235, 2),
-	(1067582943, 'Andrés', 'Sánchez', 'asanchez@mail.com', '9qT6fJ2b', 3789012346, 2),
-	(1049763258, 'Abril', 'Betancourt', 'abetancourt@mail.com', '1yZ8xG7s', 3890123457, 2),
-	(1038596472, 'Juan', 'Pérez', 'jperez2@mail.com', '5cN2vB4h', 3901234568, 2),
-	(1012375986, 'Samantha', 'González', 'sgonzalez@mail.com', '8wL6mC3q', 3012345679, 2),
-	(1007496358, 'Manuel', 'Jaramillo', 'mjaramillo@mail.com', '0hS9pR7d', 3145678902, 2),
-	(1098576234, 'Luciana', 'López', 'llopez@mail.com', '6nG2sT4r', 3278901234, 2),
-	(1089275463, 'Tomás', 'Moreno', 'tmoreno@mail.com', '2mK9cX5j', 3301234565, 2),
-	(1057468239, 'Camilo', 'Castro', 'ccastro@mail.com', '4bV8nQ1f', 3434567896, 2),
-	(1079358624, 'Ana', 'Sánchez', 'asanchez2@mail.com', '7sW3jH6g', 3567890127, 2),
-	(1028374659, 'Luisa', 'Martínez', 'lmartinez@mail.com', '1rD6tZ2k', 3690123458, 2),
-	(1062937548, 'José', 'Ramírez', 'jramirez@mail.com', '3gF5wC7v', 3723456789, 2),
-	(1045376289, 'María', 'José', 'mariaj@mail.com', '9vM2xR4l', 3856789010, 2),
-	(1038279654, 'Daniel', 'Ramirez', 'danira@mail.com', '5wB4dN1p', 3989012341, 2),
-	(1012547698, 'Carlos', 'Gonzales', 'cargonz@mail.com', '8cQ7hL3y', 3001234562, 2),
-	(1007986453, 'Mar', 'gonzalez', 'maria.gonzalez@jjsystem.com', '6qG2vJ4c', 3001234567, 3),
-	(1098465237, 'Juan', 'Perez', 'juan.perez@jjsystem.com', '0jP9sT5r', 3123456789, 3),
-	(1085679234, 'David', 'Herrero', 'david.smith@jjsystem.com', '2hK9bX7n', 3789012345, 3),
-	(1057623948, 'Sara', 'Johnson', 'sarah.johnson@jjsystem.com', '4fV8mS1g', 3567890123, 3),
-	(1079348562, 'Carlos', 'Rodriguez', 'carlos.rodriguez@jjsystem.com', '7nW3sJ6d', 3456789123, 3),
-	(1029875463, 'Emily', 'Williams', 'emily.williams@jjsystem.com', '1tZ6rD2k', 3890123456, 3),
-	(1068457329, 'Antonio', 'Lopez', 'antonio.lopez@jjsystem.com', '3xH5cF7w', 3456789234, 3),
-	(1045376298, 'Laura', 'Diaz', 'laura.diaz@jjsystem.com', '9lQ2vT4n', 3567834521, 3),
-	(1036485927, 'José', 'Ramírez', 'jose.ramirez@jjsystem.com', '5bN4pR1m', 3789012165, 3),
-	(1019286547, 'Ana', 'castro', 'ana.castro@jjsystem.com', '8gC7sW3j', 3456701234, 3);
+	('Activo'),
+    ('Inactivo');
+
+INSERT INTO Usuarios (numeroDocumento, nombre, apellido, email, password, numeroContacto, idRol, idEstadosUsuarios) 
+VALUES
+	(1021826839, 'Joaco', 'Galindo', 'JGalindo1980@jjsystem.com', '57P92rlN', 3208285814, 1, 1),
+	(1027385914, 'Valentina', 'Gutiérrez', 'vgutierrez@mail.com', '2sY9rT5q', 3123456789, 2, 1),
+	(1094730265, 'Santiago', 'Jiménez', 'sjimenez@mail.com', '6jK7cH3n', 3245678901, 2, 1),
+	(1089456723, 'Isabella', 'Silva', 'isilva@mail.com', '4xG1vB8m', 3356789012, 2, 1),
+	(1056709238, 'Daniel', 'Castro', 'dcastro@mail.com', '9pF6wE2k', 3478901234, 2, 1),
+	(1078964532, 'Emilia', 'Martínez', 'emartinez@mail.com', '3lD5mV7c', 3590123456, 2, 1),
+	(1025637498, 'Sebastián', 'Ramírez', 'sramirez@mail.com', '7nS2bR4g', 3612345678, 2, 1),
+	(1064829375, 'María', 'Fernández', 'mfernandez@mail.com', '1vQ8tZ6f', 3734567890, 2, 1),
+	(1045726398, 'Mateo', 'Vásquez', 'mvasquez@mail.com', '5dX3cN9h', 3856789012, 2, 1),
+	(1038475629, 'Valeria', 'Pérez', 'vperez@mail.com', '8kL4rJ2w', 3978901234, 2, 1),
+	(1015928364, 'Miguel', 'Álvarez', 'malvarez@mail.com', '0zH7yT1x', 3090123456, 2, 1),
+	(1009283754, 'Camila', 'Benítez', 'cbenitez@mail.com', '4tF3kP7s', 3123456780, 2, 1),
+	(1093654782, 'Nicolás', 'Hernández', 'nhernandez@mail.com', '6jM7rG2v', 3234567891, 2, 1),
+	(1082369745, 'Sofía', 'Muñoz', 'smunoz@mail.com', '2pB9lW3d', 3345678902, 2, 1),
+	(1054978632, 'Diego', 'García', 'dgarcia@mail.com', '5xV8gQ1c', 3456789013, 2, 1),
+	(1072369854, 'Valentina', 'Rojas', 'vrojas@mail.com', '7rN4vS6j', 3567890124, 2, 1),
+	(1023986547, 'Daniela', 'Castro', 'dcastro2@mail.com', '3kD1wH8m', 3678901235, 2, 1),
+	(1067582943, 'Andrés', 'Sánchez', 'asanchez@mail.com', '9qT6fJ2b', 3789012346, 2, 1),
+	(1049763258, 'Abril', 'Betancourt', 'abetancourt@mail.com', '1yZ8xG7s', 3890123457, 2, 1),
+	(1038596472, 'Juan', 'Pérez', 'jperez2@mail.com', '5cN2vB4h', 3901234568, 2, 1),
+	(1012375986, 'Samantha', 'González', 'sgonzalez@mail.com', '8wL6mC3q', 3012345679, 2, 1),
+	(1007496358, 'Manuel', 'Jaramillo', 'mjaramillo@mail.com', '0hS9pR7d', 3145678902, 2, 1),
+	(1098576234, 'Luciana', 'López', 'llopez@mail.com', '6nG2sT4r', 3278901234, 2, 1),
+	(1089275463, 'Tomás', 'Moreno', 'tmoreno@mail.com', '2mK9cX5j', 3301234565, 2, 1),
+	(1057468239, 'Camilo', 'Castro', 'ccastro@mail.com', '4bV8nQ1f', 3434567896, 2, 1),
+	(1079358624, 'Ana', 'Sánchez', 'asanchez2@mail.com', '7sW3jH6g', 3567890127, 2, 1),
+	(1028374659, 'Luisa', 'Martínez', 'lmartinez@mail.com', '1rD6tZ2k', 3690123458, 2, 1),
+	(1062937548, 'José', 'Ramírez', 'jramirez@mail.com', '3gF5wC7v', 3723456789, 2, 1),
+	(1045376289, 'María', 'José', 'mariaj@mail.com', '9vM2xR4l', 3856789010, 2, 1),
+	(1038279654, 'Daniel', 'Ramirez', 'danira@mail.com', '5wB4dN1p', 3989012341, 2, 1),
+	(1012547698, 'Carlos', 'Gonzales', 'cargonz@mail.com', '8cQ7hL3y', 3001234562, 2, 1),
+	(1007986453, 'Mar', 'gonzalez', 'maria.gonzalez@jjsystem.com', '6qG2vJ4c', 3001234567, 3, 1),
+	(1098465237, 'Juan', 'Perez', 'juan.perez@jjsystem.com', '0jP9sT5r', 3123456789, 3, 1),
+	(1085679234, 'David', 'Herrero', 'david.smith@jjsystem.com', '2hK9bX7n', 3789012345, 3, 1),
+	(1057623948, 'Sara', 'Johnson', 'sarah.johnson@jjsystem.com', '4fV8mS1g', 3567890123, 3, 1),
+	(1079348562, 'Carlos', 'Rodriguez', 'carlos.rodriguez@jjsystem.com', '7nW3sJ6d', 3456789123, 3, 1),
+	(1029875463, 'Emily', 'Williams', 'emily.williams@jjsystem.com', '1tZ6rD2k', 3890123456, 3, 1),
+	(1068457329, 'Antonio', 'Lopez', 'antonio.lopez@jjsystem.com', '3xH5cF7w', 3456789234, 3, 1),
+	(1045376298, 'Laura', 'Diaz', 'laura.diaz@jjsystem.com', '9lQ2vT4n', 3567834521, 3, 1),
+	(1036485927, 'José', 'Ramírez', 'jose.ramirez@jjsystem.com', '5bN4pR1m', 3789012165, 3, 1),
+	(1019286547, 'Ana', 'castro', 'ana.castro@jjsystem.com', '8gC7sW3j', 3456701234, 3, 1);
 
 INSERT INTO Clientes (direccion, numeroDocumento)
 VALUES
@@ -554,27 +566,32 @@ VALUES
     ('Mantenimiento cerca electrica', 'El mantenimiento de una cerca eléctrica implica inspeccionar, limpiar y probar regularmente el sistema para garantizar su funcionamiento adecuado. Es importante revisar los componentes en busca de daños, limpiar la cerca para eliminar la suciedad y realizar pruebas para asegurar la emisión correcta de pulsos eléctricos. También se deben verificar las conexiones eléctricas y realizar reparaciones o reemplazos según sea necesario. Se recomienda contar con la ayuda de un profesional y cumplir con las regulaciones locales.', 4),
     ('Mantenimiento sensores', 'El mantenimiento de sensores se encarga de cuidar y mantener en buen estado los dispositivos electrónicos que detectan cambios en el entorno. Los sensores son utilizados para diferentes propósitos, como medir temperatura, humedad, movimiento, entre otros.', 2);
 
-INSERT INTO Cotizaciones (fechaCotizacion, totalCotizacion, descripcionCotizacion, idCliente, idProducto, idServicio)
+INSERT INTO EstadosCotizaciones(nombreEstadoCotizacion)
 VALUES
-	('2023-04-15', 75000, 'Instalación de una cámara de seguridad IP en la entrada principal del edificio', 26, 1, 1),
-	('2023-04-16', 100000, 'Suministro de una alarma de intrusión para el hogar', 18, 23, 1),
-	('2023-04-20', 187000, 'Venta', 9, 22, 1),
-	('2023-04-22', 50000, 'Reparación del sistema de monitoreo en la tienda', 11, 3, 6),
-	('2023-04-23', 85000, 'Instalación de cuatro cámaras de seguridad CCTV en la bodega', 1, 7, 1),
-	('2023-04-24', 120000, 'Suministro de una alarma contra incendios para el restaurante', 19, 9, 1),
-	('2023-04-25', 110000, 'Instalación de un sistema de control de acceso biométrico en la empresa', 27, 7, 8),
-	('2023-04-26', 46000, 'Venta de una cámara de seguridad domo para la residencia', 10, 26, 1),
-	('2023-04-28', 55000, 'Venta de un control remoto adicional para la alarma de la tienda', 14, 12, 1),
-	('2023-04-30', 90000, 'Instalación de dos cámaras de seguridad inalámbricas en la casa', 13, 21, 1),
-	('2023-05-01', 110000, 'Suministro de un sistema de intercomunicación para la oficina', 2, 30, 1),
-	('2023-05-02', 70000, 'Reparación del cableado del sistema de seguridad en el almacén', 22, 11, 6),
-	('2023-05-03', 48000, 'Venta de una cerradura electrónica para la puerta principal', 30, 12, 1),
-	('2023-05-04', 100000, 'Sistema de control de acceso con tecnología biométrica para puertas', 25, 21, 6),
-	('2023-05-10', 130000, 'Videoportero con pantalla a color y comunicación bidireccional', 7, 21, 1),
-	('2023-05-11', 350000, 'Sistema de detección de intrusos con sensores de movimiento y sirenas de alarma', 6, 1, 1),
-	('2023-05-12', 200000, 'Torniquetes con lectores de tarjetas para control de acceso peatonal', 5, 2, 1),
-	('2023-05-13', 130000, 'Cámaras de seguridad PTZ con movimiento y zoom controlados remotamente', 12, 2, 3),
-	('2023-05-14', 200000, 'Barreras vehiculares con lector de tarjetas RFID para control de acceso', 23, 2, 3);
+	('Activa'),
+    ('Inactiva');
+
+INSERT INTO Cotizaciones (fechaCotizacion, totalCotizacion, descripcionCotizacion, idCliente, idProducto, idServicio, idEstadoCotizacion)
+VALUES
+	('2023-04-15', 75000, 'Instalación de una cámara de seguridad IP en la entrada principal del edificio', 26, 1, 1, 1),
+	('2023-04-16', 100000, 'Suministro de una alarma de intrusión para el hogar', 18, 23, 1, 1),
+	('2023-04-20', 187000, 'Venta', 9, 22, 1, 1),
+	('2023-04-22', 50000, 'Reparación del sistema de monitoreo en la tienda', 11, 3, 6, 1),
+	('2023-04-23', 85000, 'Instalación de cuatro cámaras de seguridad CCTV en la bodega', 1, 7, 1, 1),
+	('2023-04-24', 120000, 'Suministro de una alarma contra incendios para el restaurante', 19, 9, 1, 1),
+	('2023-04-25', 110000, 'Instalación de un sistema de control de acceso biométrico en la empresa', 27, 7, 8, 1),
+	('2023-04-26', 46000, 'Venta de una cámara de seguridad domo para la residencia', 10, 26, 1, 1),
+	('2023-04-28', 55000, 'Venta de un control remoto adicional para la alarma de la tienda', 14, 12, 1, 1),
+	('2023-04-30', 90000, 'Instalación de dos cámaras de seguridad inalámbricas en la casa', 13, 21, 1, 1),
+	('2023-05-01', 110000, 'Suministro de un sistema de intercomunicación para la oficina', 2, 30, 1, 2),
+	('2023-05-02', 70000, 'Reparación del cableado del sistema de seguridad en el almacén', 22, 11, 6, 2),
+	('2023-05-03', 48000, 'Venta de una cerradura electrónica para la puerta principal', 30, 12, 1, 2),
+	('2023-05-04', 100000, 'Sistema de control de acceso con tecnología biométrica para puertas', 25, 21, 6, 2),
+	('2023-05-10', 130000, 'Videoportero con pantalla a color y comunicación bidireccional', 7, 21, 1, 2),
+	('2023-05-11', 350000, 'Sistema de detección de intrusos con sensores de movimiento y sirenas de alarma', 6, 1, 1, 2),
+	('2023-05-12', 200000, 'Torniquetes con lectores de tarjetas para control de acceso peatonal', 5, 2, 1, 2),
+	('2023-05-13', 130000, 'Cámaras de seguridad PTZ con movimiento y zoom controlados remotamente', 12, 2, 3, 2),
+	('2023-05-14', 200000, 'Barreras vehiculares con lector de tarjetas RFID para control de acceso', 23, 2, 3, 2);
 
 INSERT INTO EstadosCitas (nombreEstadoCita)
 VALUES
@@ -660,7 +677,20 @@ VALUES
     ('2022-08-15', 11, 17),
     ('2022-08-08', 13, 18),
     ('2022-09-01', 12, 19);
-    
+
+INSERT INTO DetallesVentas (detallesVenta, subtotalVenta, totalVenta, idVenta)
+VALUES
+	('Instalación de una cámara de seguridad IP en la entrada principal del edificio', 75000, 80000, 1),
+    ('Suministro de una alarma de intrusión para el hogar', 100000, 100000, 2),
+    ('Venta alarma de detección de gas', 187000, 187000, 3),
+    ('Reparación del sistema de monitoreo en la tienda', 50000, 50000, 4),
+    ('Instalación de cuatro cámaras de seguridad CCTV en la bodega', 80000, 80000, 5),
+    ('Suministro de una alarma contra incendios para el restaurante', 100000, 80000, 6),
+    ('Instalación de un sistema de control de acceso biométrico en la empresa', 75000, 80000, 7),
+    ('Venta de una cámara de seguridad domo para la residencia', 67800, 70000, 8),
+    ('Venta de un control remoto adicional para la alarma de la tienda', 48000, 55000, 9),
+    ('Instalación de dos cámaras de seguridad inalámbricas en la casa', 90000, 150000, 10);
+
 INSERT INTO tiposPQRSF (nombreTipoPQRSF)
 VALUES
 	("Peticion"),
