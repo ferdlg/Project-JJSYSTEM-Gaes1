@@ -23,13 +23,15 @@ public class Cotizaciones {
     @ManyToOne
     @JoinColumn(name = "idCliente")
     private Clientes clientes;
-
     @ManyToOne
     @JoinColumn(name = "idProducto")
     private Productos productos;
     @ManyToOne
     @JoinColumn(name = "idServicio")
     private Servicios servicios;
+    @ManyToOne
+    @JoinColumn(name = "idEstadoCotizacion")
+    private EstadosCotizaciones estadosCotizaciones;
 
 
     //Constructores
@@ -37,7 +39,7 @@ public class Cotizaciones {
     public Cotizaciones() {
     }
 
-    public Cotizaciones(Integer idCotizacion, Date fechaCotizacion, Float totalCotizacion, String descripcionCotizacion, Clientes clientes, Productos productos, Servicios servicios) {
+    public Cotizaciones(Integer idCotizacion, Date fechaCotizacion, Float totalCotizacion, String descripcionCotizacion, Clientes clientes, Productos productos, Servicios servicios, EstadosCotizaciones estadosCotizaciones) {
         this.idCotizacion = idCotizacion;
         this.fechaCotizacion = fechaCotizacion;
         this.totalCotizacion = totalCotizacion;
@@ -45,9 +47,10 @@ public class Cotizaciones {
         this.clientes = clientes;
         this.productos = productos;
         this.servicios = servicios;
+        this.estadosCotizaciones = estadosCotizaciones;
     }
 
-    //Getter y Setter
+//Getter y Setter
 
     public Integer getIdCotizacion() {
         return idCotizacion;
@@ -103,5 +106,13 @@ public class Cotizaciones {
 
     public void setServicios(Servicios servicios) {
         this.servicios = servicios;
+    }
+
+    public EstadosCotizaciones getEstadosCotizaciones() {
+        return estadosCotizaciones;
+    }
+
+    public void setEstadosCotizaciones(EstadosCotizaciones estadosCotizaciones) {
+        this.estadosCotizaciones = estadosCotizaciones;
     }
 }

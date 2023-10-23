@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2e624fd-919f-4ff6-9349-fdac3641aa7a" name="Changes" comment="Cambios en modelos, adición de foreign keys">
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/EstadosCotizacionesRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/EstadosCotizacionesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/EstadosCotizaciones.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EstadosCotizacionesService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - MODELO RELACIONAL.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - MODELO RELACIONAL.mwb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - MODELO RELACIONAL.mwb.bak" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - MODELO RELACIONAL.mwb.bak" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Cotizaciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Cotizaciones.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Productos.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Productos.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,6 +119,7 @@
       <workItem from="1697824555404" duration="3165000" />
       <workItem from="1697943833069" duration="620000" />
       <workItem from="1698019909252" duration="2381000" />
+      <workItem from="1698031139203" duration="1250000" />
     </task>
     <task id="LOCAL-00001" summary="Modelos Productos, CategoriaProductos y Cambio en nombre carpetas">
       <option name="closed" value="true" />
