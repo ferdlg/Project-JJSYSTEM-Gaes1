@@ -16,10 +16,6 @@ public class Cotizaciones {
     private Integer idCotizacion;
     @Column(name = "fechaCotizacion")
     private Date fechaCotizacion;
-    @Column(name = "productoCotizacion")
-    private String productoCotizacion;
-    @Column(name = "servicioCotizacion")
-    private String servicioCotizacion;
     @Column(name = "totalCotizacion")
     private Float totalCotizacion;
     @Column(name = "descripcionCotizacion")
@@ -27,29 +23,28 @@ public class Cotizaciones {
     @ManyToOne
     @JoinColumn(name = "idCliente")
     private Clientes clientes;
-    /***
-    @OneToOne
-    @JoinColumn(name = "servicioCotizacion")
-    private Servicios servicios;
+
     @ManyToOne
-    @JoinColumn(name = "productoCotizacion")
+    @JoinColumn(name = "idProducto")
     private Productos productos;
-***/
+    @ManyToOne
+    @JoinColumn(name = "idServicio")
+    private Servicios servicios;
+
+
     //Constructores
 
     public Cotizaciones() {
     }
 
-    public Cotizaciones(Integer idCotizacion, Date fechaCotizacion, String productoCotizacion, String servicioCotizacion, Float totalCotizacion, String descripcionCotizacion, Clientes clientes, Servicios servicios, Productos productos) {
+    public Cotizaciones(Integer idCotizacion, Date fechaCotizacion, Float totalCotizacion, String descripcionCotizacion, Clientes clientes, Productos productos, Servicios servicios) {
         this.idCotizacion = idCotizacion;
         this.fechaCotizacion = fechaCotizacion;
-        this.productoCotizacion = productoCotizacion;
-        this.servicioCotizacion = servicioCotizacion;
         this.totalCotizacion = totalCotizacion;
         this.descripcionCotizacion = descripcionCotizacion;
         this.clientes = clientes;
-       /*** this.servicios = servicios;
-        this.productos = productos;***/
+        this.productos = productos;
+        this.servicios = servicios;
     }
 
     //Getter y Setter
@@ -68,22 +63,6 @@ public class Cotizaciones {
 
     public void setFechaCotizacion(Date fechaCotizacion) {
         this.fechaCotizacion = fechaCotizacion;
-    }
-
-    public String getProductoCotizacion() {
-        return productoCotizacion;
-    }
-
-    public void setProductoCotizacion(String productoCotizacion) {
-        this.productoCotizacion = productoCotizacion;
-    }
-
-    public String getServicioCotizacion() {
-        return servicioCotizacion;
-    }
-
-    public void setServicioCotizacion(String servicioCotizacion) {
-        this.servicioCotizacion = servicioCotizacion;
     }
 
     public Float getTotalCotizacion() {
@@ -109,14 +88,6 @@ public class Cotizaciones {
     public void setClientes(Clientes clientes) {
         this.clientes = clientes;
     }
-/***
-    public Servicios getServicios() {
-        return servicios;
-    }
-
-    public void setServicios(Servicios servicios) {
-        this.servicios = servicios;
-    }
 
     public Productos getProductos() {
         return productos;
@@ -124,5 +95,13 @@ public class Cotizaciones {
 
     public void setProductos(Productos productos) {
         this.productos = productos;
-    }***/
+    }
+
+    public Servicios getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(Servicios servicios) {
+        this.servicios = servicios;
+    }
 }

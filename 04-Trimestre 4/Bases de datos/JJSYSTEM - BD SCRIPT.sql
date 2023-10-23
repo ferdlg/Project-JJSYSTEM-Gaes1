@@ -78,23 +78,67 @@ CREATE TABLE IF NOT EXISTS Envios (
     idEnvio INT NOT NULL AUTO_INCREMENT,
     direccion VARCHAR(50) NOT NULL,
     idTecnico INT NOT NULL,
-    EstadoEnvio_idEstadoEnvio INT,
+    EstadosEnvios_idEstadoEnvio INT,
     PRIMARY KEY (idEnvio),
     FOREIGN KEY (idTecnico) REFERENCES Tecnicos (idTecnico),
-	FOREIGN KEY (EstadoEnvio_idEstadoEnvio) REFERENCES EstadosEnvios (idEstadoEnvio)
+	FOREIGN KEY (EstadosEnvios_idEstadoEnvio) REFERENCES EstadosEnvios (idEstadoEnvio)
+);
+
+CREATE TABLE IF NOT EXISTS categoriasProductos(
+    idCategoriaProducto INT NOT NULL AUTO_INCREMENT,
+    nombreCategoria VARCHAR(20) NOT NULL,
+    PRIMARY KEY(idCategoriaProducto)
+);
+
+CREATE TABLE IF NOT EXISTS proveedoresProductos(
+    idProveedorProducto INT NOT NULL AUTO_INCREMENT,
+    nombreProveedor VARCHAR(50) NOT NULL,
+    PRIMARY KEY (idProveedorProducto)
+);
+
+CREATE TABLE IF NOT EXISTS Productos(
+    idProducto INT NOT NULL AUTO_INCREMENT,
+    nombreProducto TEXT(100) NOT NULL,
+    descripcionProducto TEXT(200) NOT NULL,
+    precioProducto FLOAT NOT NULL,
+    cantidad INT NOT NULL,
+    AdministradorIdAdministrador INT,
+    idCategoriaProducto INT,
+    idProveedorProducto INT,
+    PRIMARY KEY(idProducto),
+    FOREIGN KEY(AdministradorIdAdministrador) REFERENCES Administrador (IdAdministrador),
+    FOREIGN KEY(idCategoriaProducto) REFERENCES categoriasProductos (idCategoriaProducto),
+	FOREIGN KEY(idProveedorProducto) REFERENCES proveedoresProductos (idProveedorProducto)
+);
+
+CREATE TABLE IF NOT EXISTS categoriasServicios(
+    idCategoriaServicio INT NOT NULL AUTO_INCREMENT,
+    nombreCategoria VARCHAR(30),
+    PRIMARY KEY(idCategoriaServicio)
+);
+
+CREATE TABLE IF NOT EXISTS Servicios(
+    idServicio INT NOT NULL AUTO_INCREMENT,
+    nombreServicio TEXT(100) NOT NULL,
+    descripcionServicio TEXT(200) NOT NULL,
+    idCategoriaServicio INT,
+    PRIMARY KEY (idServicio),
+	FOREIGN KEY (idCategoriaServicio) REFERENCES categoriasServicios (idCategoriaServicio)
 );
 
 CREATE TABLE IF NOT EXISTS Cotizaciones(
    idCotizacion INT NOT NULL AUTO_INCREMENT,
    fechaCotizacion DATE NOT NULL,
-   productoCotizacion VARCHAR(100) NULL,
-   servicioCotizacion VARCHAR(100) NULL,
    totalCotizacion FLOAT NOT NULL,
    descripcionCotizacion TEXT(200) NOT NULL,
    idCliente INT NOT NULL,
+   idProducto INT NOT NULL,
+   idServicio INT NOT NULL,
    PRIMARY KEY (idCotizacion),
    KEY idCliente (idCliente),
-   CONSTRAINT Cotizaciones_ibfk_1 FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente)
+   FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente),
+   FOREIGN KEY (idProducto) REFERENCES Productos (idProducto),
+   FOREIGN KEY (idServicio) REFERENCES Servicios (idServicio)
 );
 
 CREATE TABLE IF NOT EXISTS EstadosCitas(
@@ -153,58 +197,14 @@ CREATE TABLE IF NOT EXISTS DetalleActividadCronograma(
     FOREIGN KEY (idActividadCronogramaTecnico) REFERENCES ActividadCronogramaTecnicos (idActividadCronogramaTecnico)
 );
 
-CREATE TABLE IF NOT EXISTS categoriasProductos(
-    idCategoriaProducto INT NOT NULL AUTO_INCREMENT,
-    nombreCategoria VARCHAR(20) NOT NULL,
-    PRIMARY KEY(idCategoriaProducto)
-);
-
-CREATE TABLE IF NOT EXISTS proveedoresProductos(
-    idProveedorProducto INT NOT NULL AUTO_INCREMENT,
-    nombreProveedor VARCHAR(50) NOT NULL,
-    PRIMARY KEY (idProveedorProducto)
-);
-
-CREATE TABLE IF NOT EXISTS Productos(
-    idProducto INT NOT NULL AUTO_INCREMENT,
-    nombreProducto TEXT(100) NOT NULL,
-    descripcionProducto TEXT(200) NOT NULL,
-    precioProducto FLOAT NOT NULL,
-    cantidad INT NOT NULL,
-    cotizacionIdCotizacion INT,
-    AdministradorIdAdministrador INT,
-    idCategoriaProducto INT,
-    idProveedorProducto INT,
-    PRIMARY KEY(idProducto),
-    FOREIGN KEY(cotizacionIdCotizacion) REFERENCES Cotizaciones (IdCotizacion),
-    FOREIGN KEY(AdministradorIdAdministrador) REFERENCES Administrador (IdAdministrador),
-    FOREIGN KEY(idCategoriaProducto) REFERENCES categoriasProductos (idCategoriaProducto),
-	FOREIGN KEY(idProveedorProducto) REFERENCES proveedoresProductos (idProveedorProducto)
-);
-
-CREATE TABLE IF NOT EXISTS categoriasServicios(
-    idCategoriaServicio INT NOT NULL AUTO_INCREMENT,
-    nombreCategoria VARCHAR(30),
-    PRIMARY KEY(idCategoriaServicio)
-);
-
-CREATE TABLE IF NOT EXISTS Servicios(
-    idServicio INT NOT NULL AUTO_INCREMENT,
-    nombreServicio TEXT(100) NOT NULL,
-    descripcionServicio TEXT(200) NOT NULL,
-    Cotizacion_idCotizacion INT,
-    idCategoriaServicio INT,
-    PRIMARY KEY (idServicio),
-    FOREIGN KEY (Cotizacion_idCotizacion) REFERENCES Cotizaciones (idCotizacion),
-	FOREIGN KEY (idCategoriaServicio) REFERENCES categoriasServicios (idCategoriaServicio)
-);
-
 CREATE TABLE IF NOT EXISTS Ventas(
     idVenta INT NOT NULL AUTO_INCREMENT,
-    fechaVenta DATE,
-    envioIdEnvio INT,
+    fechaVenta DATE NOT NULL,
+    enviosIdEnvio INT NOT NULL,
+    cotizacionesIdCotizacion INT NOT NULL,
     PRIMARY KEY(idVenta),
-    FOREIGN KEY(envioIdEnvio) REFERENCES Envios (idEnvio)
+    FOREIGN KEY(enviosIdEnvio) REFERENCES Envios (idEnvio),
+    FOREIGN KEY(cotizacionesIdCotizacion) REFERENCES Cotizaciones (idCotizacion)
 );
 
 CREATE TABLE IF NOT EXISTS DetallesVentas(
@@ -212,9 +212,9 @@ CREATE TABLE IF NOT EXISTS DetallesVentas(
     detallesVenta VARCHAR(300) NOT NULL,
     subtotalVenta FLOAT NOT NULL,
     totalVenta FLOAT NOT NULL,
-    Ventas_idVenta INT,
+    VentasIdVenta INT,
     PRIMARY KEY (idDetalleVenta),
-    FOREIGN KEY (Ventas_idVenta) REFERENCES Ventas (idVenta)
+    FOREIGN KEY (VentasIdVenta) REFERENCES Ventas (idVenta)
 );
 
 CREATE TABLE IF NOT EXISTS TiposPQRSF(
@@ -233,13 +233,13 @@ CREATE TABLE IF NOT EXISTS PQRSF(
     idPQRSF INT NOT NULL AUTO_INCREMENT,
     fechaPQRSF DATE NOT NULL,
     informacionPQRSF TEXT(200) NOT NULL,
-    Cliente_idCliente INT NOT NULL,
-    TipoPQRSF_idTipoPQRSF INT NOT NULL,
-    EstadoPQRSF_idEstadoPQRSF INT NOT NULL,
+    Clientes_idCliente INT NOT NULL,
+    TiposPQRSF_idTipoPQRSF INT NOT NULL,
+    EstadosPQRSF_idEstadoPQRSF INT NOT NULL,
     PRIMARY KEY (idPQRSF),
-    FOREIGN KEY (Cliente_idCliente) REFERENCES Clientes (idCliente),
-    FOREIGN KEY (TipoPQRSF_idTipoPQRSF) REFERENCES TipoPQRSF (idTipoPQRSF),
-    FOREIGN KEY (EstadoPQRSF_idEstadoPQRSF) REFERENCES EstadosPQRSF (idEstadoPQRSF)
+    FOREIGN KEY (Clientes_idCliente) REFERENCES Clientes (idCliente),
+    FOREIGN KEY (TiposPQRSF_idTipoPQRSF) REFERENCES TiposPQRSF (idTipoPQRSF),
+    FOREIGN KEY (EstadosPQRSF_idEstadoPQRSF) REFERENCES EstadosPQRSF (idEstadoPQRSF)
 );
 
 CREATE TABLE IF NOT EXISTS Respuestas (
@@ -439,13 +439,13 @@ VALUES
 	('instalacion', 1036485927),
 	('analisis', 1019286547);
 
-INSERT INTO EstadoEnvios (nombreEstadoEnvio)
+INSERT INTO EstadosEnvios (nombreEstadoEnvio)
 VALUES
 	("En bodega"),
 	("Llegando"),
 	("Entregado");
 
-INSERT INTO Envios (direccion, idTecnico, EstadoEnvio_idEstadoEnvio)
+INSERT INTO Envios (direccion, idTecnico, EstadosEnvios_idEstadoEnvio)
 VALUES
 	("Calle 23 # 14-34, Barrio La Candelaria", 6, 2),
 	("Carrera 11 # 22-45, Barrio Chapinero Alto", 3, 1),
@@ -477,30 +477,106 @@ VALUES
 	("Carrera 7 # 28-56, Barrio El Polo", 8, 3),
 	("Avenida Boyacá # 72-23, Barrio Salitre Greco", 2, 3),
 	("Calle 39 # 14-34, Barrio Antonio Nariño", 5, 1);
-
-INSERT INTO Cotizaciones (fechaCotizacion, productoCotizacion, servicioCotizacion, totalCotizacion, descripcionCotizacion, idCliente)
+    
+INSERT INTO categoriasProductos (nombreCategoria) 
 VALUES
-	('2023-04-15', 'Cámara de seguridad IP', 'Instalación', 75000, 'Instalación de una cámara de seguridad IP en la entrada principal del edificio', 26),
-	('2023-04-16', 'Alarma de intrusión', 'Venta', 100000, 'Suministro de una alarma de intrusión para el hogar', 18),
-	('2023-04-20', 'Videoportero', 'Venta', 187000, 'Venta', 9),
-	('2023-04-22', 'Sistema de monitoreo', 'Mantenimiento', 50000, 'Reparación del sistema de monitoreo en la tienda', 11),
-	('2023-04-23', 'Cámara de seguridad CCTV', 'Instalación', 85000, 'Instalación de cuatro cámaras de seguridad CCTV en la bodega', 1),
-	('2023-04-24', 'Alarma contra incendios', 'Venta', 120000, 'Suministro de una alarma contra incendios para el restaurante', 19),
-	('2023-04-25', 'Control de acceso biométrico', 'Instalación', 110000, 'Instalación de un sistema de control de acceso biométrico en la empresa', 27),
-	('2023-04-26', 'Cámara de seguridad domo', 'Venta', 46000, 'Venta de una cámara de seguridad domo para la residencia', 10),
-	('2023-04-28', 'Control remoto para alarma', 'Venta', 55000, 'Venta de un control remoto adicional para la alarma de la tienda', 14),
-	('2023-04-30', 'Cámara de seguridad inalámbrica', 'Instalación', 90000, 'Instalación de dos cámaras de seguridad inalámbricas en la casa', 13),
-	('2023-05-01', 'Sistema de intercomunicación', 'Venta', 110000, 'Suministro de un sistema de intercomunicación para la oficina', 2),
-	('2023-05-02', 'Reparación de cableado', 'Mantenimiento', 70000, 'Reparación del cableado del sistema de seguridad en el almacén', 22),
-	('2023-05-03', 'Cerradura', 'Venta', 48000, 'Venta de una cerradura electrónica para la puerta principal', 30),
-	('2023-05-04', 'Control de acceso biométrico', 'Venta e instalación', 100000, 'Sistema de control de acceso con tecnología biométrica para puertas', 25),
-	('2023-05-10', 'Videoportero', 'Venta e instalación', 130000, 'Videoportero con pantalla a color y comunicación bidireccional', 7),
-	('2023-05-11', 'Sistema de detección de intrusos', 'Venta, instalación y mantenimiento', 350000, 'Sistema de detección de intrusos con sensores de movimiento y sirenas de alarma', 6),
-	('2023-05-12', 'Sistema de control de acceso peatonal', 'Venta e instalación', 200000, 'Torniquetes con lectores de tarjetas para control de acceso peatonal', 5),
-	('2023-05-13', 'Cámaras de seguridad PTZ', 'Venta', 130000, 'Cámaras de seguridad PTZ con movimiento y zoom controlados remotamente', 12),
-	('2023-05-14', 'Control de acceso vehicular', 'Venta e instalación', 200000, 'Barreras vehiculares con lector de tarjetas RFID para control de acceso', 23);
+	("Camara"),
+    ("DVR"),
+    ("Alarma"),
+    ("Sensor");
+    
+INSERT INTO proveedoresProductos (nombreProveedor)
+VALUES
+	("TechSecure"),
+    ("SecureGuard"),
+    ("SecureTech Solutions"),
+	("Servicios SafeGuard"),
+    ("TechGuard Systems"),
+    ("Soluciones SecureNet"),
+    ("Servicios de Seguridad Proactiva"),
+    ("Sistemas de Seguridad Global"),
+    ("Security Solutions"),
+    ("Seguridad integrada de Tyco"),
+    ("Soluciones de seguridad Stanley"),
+    ("Soluciones de construcción de Honeywell"),
+    ("Tecnologías de construcción de Siemens"),
+    ("Vida digital de AT&T");
 
-INSERT INTO EstadoCitas (nombreEstadoCita)
+INSERT INTO Productos (nombreProducto, descripcionProducto, precioProducto, cantidad, AdministradorIdAdministrador, idCategoriaProducto, idProveedorProducto)
+VALUES
+	('Cámara de vigilancia HD+','Una cámara de última generación que captura imágenes de alta definición con precisión y nitidez. Su diseño discreto se integra perfectamente en cualquier entorno, ofreciendo una protección encubierta. Fácil de instalar y utilizar, es la elección ideal para mantener tus espacios seguros.', 158000, 12, 1, 1, 3),
+	('Cámara de seguridad IP','Cámara de seguridad IP: Permite una conexión a través de la red para acceder a las imágenes desde cualquier lugar.',526000, 14, 1, 1, 6),
+	('Cámara domo PTZ','Cámara domo PTZ: Posee movimiento y zoom controlables, ideal para monitorear áreas amplias y seguir objetos en movimiento.', 408000, 15, 1, 1, 14),
+	('Cámara bullet infrarroja','Cámara bullet infrarroja: Diseñada para capturar imágenes claras incluso en condiciones de poca luz gracias a su iluminación infrarroja.', 278000, 11, 1, 1, 14),
+	('Cámara de videovigilancia 360°','Cámara de videovigilancia 360°: Proporciona una vista panorámica completa para vigilar grandes espacios sin puntos ciegos.', 116000, 18, 1, 1, 5),
+	('Cámara de vigilancia exterior resistente al agua','Cámara de vigilancia exterior resistente al agua: Diseñada para soportar las condiciones climáticas adversas y mantener la vigilancia en exteriores.', 419000, 16, 1, 1, 11),
+	('Cámara oculta de alta resolución','Cámara oculta de alta resolución: Permite una vigilancia encubierta sin llamar la atención, capturando imágenes detalladas.', 222000, 13, 1, 1, 7),
+	('Cámara de vigilancia panorámica de alta definición','Cámara de vigilancia panorámica de alta definición: Proporciona una vista amplia y de alta calidad para una vigilancia efectiva.', 534000, 17, 1, 1, 8),
+	('Cámara de videovigilancia WiFi','Cámara de videovigilancia WiFi: Conexión inalámbrica que facilita la instalación y el acceso remoto a las imágenes.', 297000, 19, 1, 1, 4),
+	('Cámara de seguridad con visión nocturna','Cámara de seguridad con visión nocturna: Permite la vigilancia continua incluso en condiciones de poca o ninguna luz.', 452000, 12, 1, 1, 6),
+	('DVR de 8 canales','DVR de 8 canales: Permite la grabación y almacenamiento de imágenes de hasta 8 cámaras de vigilancia.', 590000, 2, 1, 2, 8),
+	('DVR de alta capacidad de almacenamiento','DVR de alta capacidad de almacenamiento: Proporciona un espacio amplio para almacenar un gran volumen de imágenes de vigilancia.', 245000, 14, 1, 2, 13),
+	('DVR híbrido analógico/IP','DVR híbrido analógico/IP: Compatible con cámaras analógicas e IP, brindando flexibilidad en la configuración del sistema de vigilancia.', 188000, 18, 1, 2, 14),
+	('DVR de 16 canales con conexión remota','DVR de 16 canales con conexión remota: Permite el acceso y monitoreo remoto de las imágenes de hasta 16 cámaras.', 524000, 10, 1, 2, 11),
+	('DVR de seguridad de 4K Ultra HD','DVR de seguridad de 4K Ultra HD: Ofrece una resolución de imagen excepcional para una visualización detallada y clara.', 358000, 15, 1, 2, 14),
+	('DVR de video vigilancia móvil','DVR de video vigilancia móvil: Diseñado para vehículos, permite la grabación de imágenes en movimiento para una vigilancia en tiempo real.', 143000, 13, 1, 2, 2),
+	('DVR de grabación continua 24/7','DVR de grabación continua 24/7: Permite la grabación constante sin interrupciones para una vigilancia ininterrumpida.', 492000, 16, 1, 2, 12),
+	('Alarma de intrusión inalámbrica','Alarma de intrusión inalámbrica: Detecta la presencia de intrusos y emite una señal de alarma de forma inalámbrica.', 118000, 17, 1, 3, 14),
+	('Alarma de seguridad con detector de movimiento','Alarma de seguridad con detector de movimiento: Activa una alarma cuando se detecta movimiento en el área protegida.', 399000, 20, 1, 3, 13),
+	('Alarma de emergencia sonora y luminosa','Alarma de emergencia sonora y luminosa: Emite una señal sonora y activa luces de advertencia en situaciones de emergencia.', 100000, 10, 1, 3, 11),
+	('Alarma de incendio con sensor de humo','Alarma de incendio con sensor de humo: Detecta la presencia de humo y activa una alarma para alertar sobre un posible incendio.', 352000, 12, 1, 3, 13),
+	('Alarma de detección de gas','Alarma de detección de gas: Detecta la presencia de gases tóxicos o peligrosos y emite una alarma para advertir de una posible fuga.', 474000, 15, 1, 3, 10),
+	('Alarma de seguridad para ventanas y puertas','Alarma de seguridad para ventanas y puertas: Detecta la apertura o manipulación de ventanas y puertas y activa una alarma.', 209000, 14, 1, 3, 3),
+	('Sensor de movimiento infrarrojo pasivo (PIR)','Sensor de movimiento infrarrojo pasivo (PIR): Detecta el movimiento de personas o animales basándose en cambios de temperatura.', 311000, 16, 1, 4, 11),
+	('Sensor de apertura de puertas y ventanas','Sensor de apertura de puertas y ventanas: Detecta la apertura o cierre de puertas y ventanas y envía una señal de alerta.', 191000, 15, 1, 4, 11),
+	('Sensor de inundación inalámbrico','Sensor de inundación inalámbrico: Detecta la presencia de agua y activa una alarma para prevenir daños causados por inundaciones.', 505000, 11, 1, 4, 1),
+	('Sensor de vibración para detección de impactos','Sensor de vibración para detección de impactos: Detecta vibraciones o golpes bruscos y activa una alarma en caso de intento de intrusión.', 482000, 13, 1, 4, 14),
+	('Sensor de temperatura y humedad','Sensor de temperatura y humedad: Monitoriza los cambios de temperatura y humedad en un entorno y envía notificaciones en caso de desviaciones.', 227000, 17, 1, 4, 3),
+	('Sensor de movimiento para exteriores','Sensor de movimiento para exteriores: Diseñado para áreas exteriores, detecta el movimiento y activa una respuesta de seguridad.', 408000, 18, 1, 4, 4),
+	('Sensor de humo y calor','Sensor de humo y calor: Detecta el humo y los cambios de temperatura causados por un incendio y activa una alarma.', 276000, 20, 1, 4, 7);
+
+INSERT INTO categoriasServicios (nombreCategoria)
+VALUES
+	('Venta'),
+    ('Instalacion de productos'),
+    ('Servicio de análisis'),
+    ('Mantenimiento de productos');
+    
+INSERT INTO Servicios (nombreServicio, descripcionServicio, idCategoriaServicio)
+VALUES
+	('Venta', 'Venta de productos', 1),
+    ('Instalacion de camaras', 'Proceso de colocar y configurar cámaras de seguridad en un lugar determinado, con el fin de vigilar y grabar imágenes para proteger la propiedad, prevenir el delito y mejorar la seguridad.', 3),
+    ('Instalacion de sensores', 'Proceso de colocar y configurar dispositivos electrónicos que detectan cambios en el entorno físico y los predeterminados en señales eléctricas para su uso en diversas aplicaciones.', 4),
+    ('Instalacion de cerca electrica', 'Instalación y configuración de un sistema de seguridad que utiliza una barrera electrificada para proteger perímetros y evitar intrusiones no deseadas en propiedades.', 2),
+    ('Analisis', 'El servicio de instalación generalmente incluye una evaluación previa del lugar para determinar la mejor ubicación para las cámaras o cercas y la cantidad de cámaras necesarias para cubrir el área de manera efectiva.', 3),
+    ('Mantenimiento computadores', 'El mantenimiento de computadoras es el cuidado y la atención que se brinda a los equipos informáticos para mantenerlos en buen estado y funcionando correctamente.', 2),
+    ('Mantenimiento camaras', 'El mantenimiento de cámaras implica tareas como limpieza interna y externa, limpieza del sensor, verificación del enfoque, actualización del firmware, revisión de baterías y conexiones, y almacenamiento adecuado. Estas acciones mantienen la calidad de las imágenes, previenen problemas y prolongan la vida útil de las cámaras. Es importante seguir las indicaciones del fabricante y buscar servicios técnicos especializados cuando sea necesario.', 3),
+    ('Mantenimiento cerca electrica', 'El mantenimiento de una cerca eléctrica implica inspeccionar, limpiar y probar regularmente el sistema para garantizar su funcionamiento adecuado. Es importante revisar los componentes en busca de daños, limpiar la cerca para eliminar la suciedad y realizar pruebas para asegurar la emisión correcta de pulsos eléctricos. También se deben verificar las conexiones eléctricas y realizar reparaciones o reemplazos según sea necesario. Se recomienda contar con la ayuda de un profesional y cumplir con las regulaciones locales.', 4),
+    ('Mantenimiento sensores', 'El mantenimiento de sensores se encarga de cuidar y mantener en buen estado los dispositivos electrónicos que detectan cambios en el entorno. Los sensores son utilizados para diferentes propósitos, como medir temperatura, humedad, movimiento, entre otros.', 2);
+
+INSERT INTO Cotizaciones (fechaCotizacion, totalCotizacion, descripcionCotizacion, idCliente, idProducto, idServicio)
+VALUES
+	('2023-04-15', 75000, 'Instalación de una cámara de seguridad IP en la entrada principal del edificio', 26, 1, 1),
+	('2023-04-16', 100000, 'Suministro de una alarma de intrusión para el hogar', 18, 23, 1),
+	('2023-04-20', 187000, 'Venta', 9, 22, 1),
+	('2023-04-22', 50000, 'Reparación del sistema de monitoreo en la tienda', 11, 3, 6),
+	('2023-04-23', 85000, 'Instalación de cuatro cámaras de seguridad CCTV en la bodega', 1, 7, 1),
+	('2023-04-24', 120000, 'Suministro de una alarma contra incendios para el restaurante', 19, 9, 1),
+	('2023-04-25', 110000, 'Instalación de un sistema de control de acceso biométrico en la empresa', 27, 7, 8),
+	('2023-04-26', 46000, 'Venta de una cámara de seguridad domo para la residencia', 10, 26, 1),
+	('2023-04-28', 55000, 'Venta de un control remoto adicional para la alarma de la tienda', 14, 12, 1),
+	('2023-04-30', 90000, 'Instalación de dos cámaras de seguridad inalámbricas en la casa', 13, 21, 1),
+	('2023-05-01', 110000, 'Suministro de un sistema de intercomunicación para la oficina', 2, 30, 1),
+	('2023-05-02', 70000, 'Reparación del cableado del sistema de seguridad en el almacén', 22, 11, 6),
+	('2023-05-03', 48000, 'Venta de una cerradura electrónica para la puerta principal', 30, 12, 1),
+	('2023-05-04', 100000, 'Sistema de control de acceso con tecnología biométrica para puertas', 25, 21, 6),
+	('2023-05-10', 130000, 'Videoportero con pantalla a color y comunicación bidireccional', 7, 21, 1),
+	('2023-05-11', 350000, 'Sistema de detección de intrusos con sensores de movimiento y sirenas de alarma', 6, 1, 1),
+	('2023-05-12', 200000, 'Torniquetes con lectores de tarjetas para control de acceso peatonal', 5, 2, 1),
+	('2023-05-13', 130000, 'Cámaras de seguridad PTZ con movimiento y zoom controlados remotamente', 12, 2, 3),
+	('2023-05-14', 200000, 'Barreras vehiculares con lector de tarjetas RFID para control de acceso', 23, 2, 3);
+
+INSERT INTO EstadosCitas (nombreEstadoCita)
 VALUES
 	('Confirmada'),
 	('Cancelada'),
@@ -563,114 +639,29 @@ VALUE
 	(9, 2, '2022-12-12 13:39:50'),
 	(10, 4, '2023-04-25 03:58:09');
 
-INSERT INTO categoriasProductos (nombreCategoria) 
+INSERT INTO Ventas (fechaVenta, enviosIdEnvio, cotizacionesIdCotizacion)
 VALUES
-	("Camara"),
-    ("DVR"),
-    ("Alarma"),
-    ("Sensor");
+    ('2023-01-01', 27, 1),
+    ('2023-02-05', 29, 2),
+    ('2023-03-10', 30, 3),
+    ('2023-04-15', 16, 4),
+    ('2023-05-20', 28, 5),
+    ('2023-06-25', 26, 6),
+    ('2023-07-30', 17, 7),
+    ('2023-08-04', 22, 8),
+    ('2023-09-09', 24, 9),
+    ('2023-10-14', 23, 10),
+    ('2023-01-26', 25, 11),
+    ('2023-06-15', 21, 12),
+    ('2023-03-03', 20, 13),
+    ('2023-03-12', 19, 14),
+    ('2023-01-18', 18, 15),
+    ('2022-11-24', 15, 16),
+    ('2022-08-15', 11, 17),
+    ('2022-08-08', 13, 18),
+    ('2022-09-01', 12, 19);
     
-INSERT INTO proveedoresProductos (nombreProveedor)
-VALUES
-	("TechSecure"),
-    ("SecureGuard"),
-    ("SecureTech Solutions"),
-	("Servicios SafeGuard"),
-    ("TechGuard Systems"),
-    ("Soluciones SecureNet"),
-    ("Servicios de Seguridad Proactiva"),
-    ("Sistemas de Seguridad Global"),
-    ("Security Solutions"),
-    ("Seguridad integrada de Tyco"),
-    ("Soluciones de seguridad Stanley"),
-    ("Soluciones de construcción de Honeywell"),
-    ("Tecnologías de construcción de Siemens"),
-    ("Vida digital de AT&T");
-
-INSERT INTO Productos (nombreProducto, descripcionProducto, precioProducto, cantidad, cotizacionIdCotizacion, AdministradorIdAdministrador, idCategoriaProducto, idProveedorProducto)
-VALUES
-	('Cámara de vigilancia HD+','Una cámara de última generación que captura imágenes de alta definición con precisión y nitidez. Su diseño discreto se integra perfectamente en cualquier entorno, ofreciendo una protección encubierta. Fácil de instalar y utilizar, es la elección ideal para mantener tus espacios seguros.', 158000, 12, 1, 1, 1, 3),
-	('Cámara de seguridad IP','Cámara de seguridad IP: Permite una conexión a través de la red para acceder a las imágenes desde cualquier lugar.',526000, 14, 11, 1, 1, 6),
-	('Cámara domo PTZ','Cámara domo PTZ: Posee movimiento y zoom controlables, ideal para monitorear áreas amplias y seguir objetos en movimiento.', 408000, 15, 15, 1, 1, 14),
-	('Cámara bullet infrarroja','Cámara bullet infrarroja: Diseñada para capturar imágenes claras incluso en condiciones de poca luz gracias a su iluminación infrarroja.', 278000, 11, 12, 1, 1, 14),
-	('Cámara de videovigilancia 360°','Cámara de videovigilancia 360°: Proporciona una vista panorámica completa para vigilar grandes espacios sin puntos ciegos.', 116000, 18, 1, 1, 1, 5),
-	('Cámara de vigilancia exterior resistente al agua','Cámara de vigilancia exterior resistente al agua: Diseñada para soportar las condiciones climáticas adversas y mantener la vigilancia en exteriores.', 419000, 16, 2, 1, 1, 11),
-	('Cámara oculta de alta resolución','Cámara oculta de alta resolución: Permite una vigilancia encubierta sin llamar la atención, capturando imágenes detalladas.', 222000, 13, 3, 1, 1, 7),
-	('Cámara de vigilancia panorámica de alta definición','Cámara de vigilancia panorámica de alta definición: Proporciona una vista amplia y de alta calidad para una vigilancia efectiva.', 534000, 17, 5, 1, 1, 8),
-	('Cámara de videovigilancia WiFi','Cámara de videovigilancia WiFi: Conexión inalámbrica que facilita la instalación y el acceso remoto a las imágenes.', 297000, 19, 4, 1, 1, 4),
-	('Cámara de seguridad con visión nocturna','Cámara de seguridad con visión nocturna: Permite la vigilancia continua incluso en condiciones de poca o ninguna luz.', 452000, 12, 7, 1, 1, 6),
-	('DVR de 8 canales','DVR de 8 canales: Permite la grabación y almacenamiento de imágenes de hasta 8 cámaras de vigilancia.', 590000, 2, NULL, 1, 2, 8),
-	('DVR de alta capacidad de almacenamiento','DVR de alta capacidad de almacenamiento: Proporciona un espacio amplio para almacenar un gran volumen de imágenes de vigilancia.', 245000, 14, NULL, 1, 2, 13),
-	('DVR híbrido analógico/IP','DVR híbrido analógico/IP: Compatible con cámaras analógicas e IP, brindando flexibilidad en la configuración del sistema de vigilancia.', 188000, 18, 6, 1, 2, 14),
-	('DVR de 16 canales con conexión remota','DVR de 16 canales con conexión remota: Permite el acceso y monitoreo remoto de las imágenes de hasta 16 cámaras.', 524000, 10, 9, 1, 2, 11),
-	('DVR de seguridad de 4K Ultra HD','DVR de seguridad de 4K Ultra HD: Ofrece una resolución de imagen excepcional para una visualización detallada y clara.', 358000, 15, 8, 1, 2, 14),
-	('DVR de video vigilancia móvil','DVR de video vigilancia móvil: Diseñado para vehículos, permite la grabación de imágenes en movimiento para una vigilancia en tiempo real.', 143000, 13, 10, 1, 2, 2),
-	('DVR de grabación continua 24/7','DVR de grabación continua 24/7: Permite la grabación constante sin interrupciones para una vigilancia ininterrumpida.', 492000, 16, 14, 1, 2, 12),
-	('Alarma de intrusión inalámbrica','Alarma de intrusión inalámbrica: Detecta la presencia de intrusos y emite una señal de alarma de forma inalámbrica.', 118000, 17, 16, 1, 3, 14),
-	('Alarma de seguridad con detector de movimiento','Alarma de seguridad con detector de movimiento: Activa una alarma cuando se detecta movimiento en el área protegida.', 399000, 20, 13, 1, 3, 13),
-	('Alarma de emergencia sonora y luminosa','Alarma de emergencia sonora y luminosa: Emite una señal sonora y activa luces de advertencia en situaciones de emergencia.', 100000, 10, 17, 1, 3, 11),
-	('Alarma de incendio con sensor de humo','Alarma de incendio con sensor de humo: Detecta la presencia de humo y activa una alarma para alertar sobre un posible incendio.', 352000, 12, 18, 1, 3, 13),
-	('Alarma de detección de gas','Alarma de detección de gas: Detecta la presencia de gases tóxicos o peligrosos y emite una alarma para advertir de una posible fuga.', 474000, 15, 19, 1, 3, 10),
-	('Alarma de seguridad para ventanas y puertas','Alarma de seguridad para ventanas y puertas: Detecta la apertura o manipulación de ventanas y puertas y activa una alarma.', 209000, 14, NULL, 1, 3, 3),
-	('Sensor de movimiento infrarrojo pasivo (PIR)','Sensor de movimiento infrarrojo pasivo (PIR): Detecta el movimiento de personas o animales basándose en cambios de temperatura.', 311000, 16, NULL, 1, 4, 11),
-	('Sensor de apertura de puertas y ventanas','Sensor de apertura de puertas y ventanas: Detecta la apertura o cierre de puertas y ventanas y envía una señal de alerta.', 191000, 15, NULL, 1, 4, 11),
-	('Sensor de inundación inalámbrico','Sensor de inundación inalámbrico: Detecta la presencia de agua y activa una alarma para prevenir daños causados por inundaciones.', 505000, 11, NULL, 1, 4, 1),
-	('Sensor de vibración para detección de impactos','Sensor de vibración para detección de impactos: Detecta vibraciones o golpes bruscos y activa una alarma en caso de intento de intrusión.', 482000, 13, NULL, 1, 4, 14),
-	('Sensor de temperatura y humedad','Sensor de temperatura y humedad: Monitoriza los cambios de temperatura y humedad en un entorno y envía notificaciones en caso de desviaciones.', 227000, 17, NULL, 1, 4, 3),
-	('Sensor de movimiento para exteriores','Sensor de movimiento para exteriores: Diseñado para áreas exteriores, detecta el movimiento y activa una respuesta de seguridad.', 408000, 18, NULL, 1, 4, 4),
-	('Sensor de humo y calor','Sensor de humo y calor: Detecta el humo y los cambios de temperatura causados por un incendio y activa una alarma.', 276000, 20, NULL, 1, 4, 7);
-
-INSERT INTO categoriasServicios (nombreCategoria)
-VALUES
-    ('Instalacion de productos'),
-    ('Servicio de análisis'),
-    ('Mantenimiento de productos');
-    
-INSERT INTO Servicios (nombreServicio, descripcionServicio, Cotizacion_idCotizacion, idCategoriaServicio)
-VALUES
-    ('Instalacion de camaras', 'Proceso de colocar y configurar cámaras de seguridad en un lugar determinado, con el fin de vigilar y grabar imágenes para proteger la propiedad, prevenir el delito y mejorar la seguridad.', 1, 2),
-    ('Instalacion de sensores', 'Proceso de colocar y configurar dispositivos electrónicos que detectan cambios en el entorno físico y los predeterminados en señales eléctricas para su uso en diversas aplicaciones.', 2, 3),
-    ('Instalacion de cerca electrica', 'Instalación y configuración de un sistema de seguridad que utiliza una barrera electrificada para proteger perímetros y evitar intrusiones no deseadas en propiedades.', 3, 1),
-    ('Analisis', 'El servicio de instalación generalmente incluye una evaluación previa del lugar para determinar la mejor ubicación para las cámaras o cercas y la cantidad de cámaras necesarias para cubrir el área de manera efectiva.', 4, 2),
-    ('Mantenimiento computadores', 'El mantenimiento de computadoras es el cuidado y la atención que se brinda a los equipos informáticos para mantenerlos en buen estado y funcionando correctamente.', 5, 1),
-    ('Mantenimiento camaras', 'El mantenimiento de cámaras implica tareas como limpieza interna y externa, limpieza del sensor, verificación del enfoque, actualización del firmware, revisión de baterías y conexiones, y almacenamiento adecuado. Estas acciones mantienen la calidad de las imágenes, previenen problemas y prolongan la vida útil de las cámaras. Es importante seguir las indicaciones del fabricante y buscar servicios técnicos especializados cuando sea necesario.', 6, 2),
-    ('Mantenimiento cerca electrica', 'El mantenimiento de una cerca eléctrica implica inspeccionar, limpiar y probar regularmente el sistema para garantizar su funcionamiento adecuado. Es importante revisar los componentes en busca de daños, limpiar la cerca para eliminar la suciedad y realizar pruebas para asegurar la emisión correcta de pulsos eléctricos. También se deben verificar las conexiones eléctricas y realizar reparaciones o reemplazos según sea necesario. Se recomienda contar con la ayuda de un profesional y cumplir con las regulaciones locales.', 7, 3),
-    ('Mantenimiento sensores', 'El mantenimiento de sensores se encarga de cuidar y mantener en buen estado los dispositivos electrónicos que detectan cambios en el entorno. Los sensores son utilizados para diferentes propósitos, como medir temperatura, humedad, movimiento, entre otros.', 8, 1);
-
-INSERT INTO Ventas (fechaVenta, envioIdEnvio)
-VALUES
-    ('2023-01-01', 27),
-    ('2023-02-05', 29),
-    ('2023-03-10', 30),
-    ('2023-04-15', 16),
-    ('2023-05-20', 28),
-    ('2023-06-25', 26),
-    ('2023-07-30', 17),
-    ('2023-08-04', 22),
-    ('2023-09-09', 24),
-    ('2023-10-14', 23),
-    ('2023-01-26', 25),
-    ('2023-06-15', 21),
-    ('2023-03-03', 20),
-    ('2023-03-12', 19),
-    ('2023-01-18', 18),
-    ('2022-11-24', 15),
-    ('2022-08-15', 11),
-    ('2022-08-08', 13),
-    ('2022-09-01', 12),
-    ('2021-01-30', 7),
-    ('2022-07-07', 14),
-    ('2022-05-06', 10),
-    ('2023-04-11', 5),
-    ('2023-01-15',6),
-    ('2023-01-23', 9),
-    ('2022-09-25', 8),
-    ('2022-03-21', 2),
-    ('2023-08-15', 3),
-    ('2022-09-28', 4),
-    ('2021-04-25', 1);
-    
-INSERT INTO tipoPQRSF (nombreTipoPQRSF)
+INSERT INTO tiposPQRSF (nombreTipoPQRSF)
 VALUES
 	("Peticion"),
     ("Queja"),
@@ -684,7 +675,7 @@ VALUES
     ("En trámite"),
     ("Resuelta");
     
-INSERT INTO PQRSF (fechaPQRSF, informacionPQRSF, Cliente_idCliente, TipoPQRSF_idTipoPQRSF, EstadoPQRSF_idEstadoPQRSF)
+INSERT INTO PQRSF (fechaPQRSF, informacionPQRSF, Clientes_idCliente, TiposPQRSF_idTipoPQRSF, EstadosPQRSF_idEstadoPQRSF)
 VALUES
     ('2023-01-01', 'Presenté un reclamo sobre un sistema de cámaras de seguridad que no quedó bloqueado durante un robo en mi negocio. Quiero que se investigue y se resuelva el problema para evitar futuras pérdidas.', 1, 3, 3),
     ('2023-01-01', 'Solicito información sobre los precios y la disponibilidad de cámaras de seguridad inalámbricas para instalar en mi hogar. También me gustaría programar una cita con un representante de ventas para discutir las características técnicas del producto.', 2, 1, 3),
@@ -727,7 +718,7 @@ VALUES
     DROP VIEW IF EXISTS Cotizacion_Cliente;
     
     CREATE VIEW Cotizacion_Cliente AS 
-	SELECT concat(nombre, " ", apellido) as Nombre_Usuario, fechaCotizacion as Fecha, productoCotizacion as Producto, servicioCotizacion as Servicio, totalCotizacion as Total
+	SELECT concat(nombre, " ", apellido) as Nombre_Usuario, fechaCotizacion as Fecha, totalCotizacion as Total
     From cotizaciones
     INNER JOIN Clientes on Cotizaciones.idCliente = Clientes.idCliente
     INNER JOIN Usuarios on Clientes.numeroDocumento = Usuarios.numeroDocumento;
@@ -779,10 +770,10 @@ VALUES
 	DROP VIEW IF EXISTS consultarEnvios;
 
 	CREATE VIEW consultarEnvios
-	AS SELECT envios.idEnvio, estadoenvios.nombreEstadoEnvio, envios.direccion,
+	AS SELECT envios.idEnvio, estadosenvios.nombreEstadoEnvio, envios.direccion,
 	tecnicos.idTecnico
-	FROM estadoenvios
-	JOIN envios ON envios.EstadoEnvio_idEstadoEnvio = estadoenvios.idEstadoEnvio
+	FROM estadosenvios
+	JOIN envios ON envios.EstadosEnvios_idEstadoEnvio = estadosenvios.idEstadoEnvio
 	JOIN tecnicos ON tecnicos.idTecnico = envios.idTecnico;
     
 	DROP VIEW IF EXISTS consultarQuejas;
@@ -790,9 +781,9 @@ VALUES
     CREATE VIEW consultarQuejas AS
 	SELECT idPQRSF, fechaPQRSF, informacionPQRSF, idCliente, nombreEstadoPQRSF
 	FROM PQRSF
-	JOIN Clientes c ON PQRSF.Cliente_idCliente = c.idCliente
-	JOIN EstadosPQRSF e ON PQRSF.EstadoPQRSF_idEstadoPQRSF = e.idEstadoPQRSF
-	WHERE TipoPQRSF_idTipoPQRSF = 2;
+	JOIN Clientes c ON PQRSF.Clientes_idCliente = c.idCliente
+	JOIN EstadosPQRSF e ON PQRSF.EstadosPQRSF_idEstadoPQRSF = e.idEstadoPQRSF
+	WHERE TiposPQRSF_idTipoPQRSF = 2;
 
 /*Procedimiento*/
 	
@@ -827,7 +818,7 @@ VALUES
 	AFTER UPDATE ON envios
 	FOR EACH ROW
 	BEGIN
-		IF NEW.EstadoEnvio_idEstadoEnvio = 3 THEN
+		IF NEW.EstadosEnvios_idEstadoEnvio = 3 THEN
 			INSERT INTO enviosEntregados (idEnvio, fecha, idTecnicoEncargado, documentoTecnico)
 			SELECT NEW.idEnvio, NOW(), tecnicos.idTecnico, tecnicos.numeroDocumento
 			FROM tecnicos
@@ -835,4 +826,4 @@ VALUES
 		END IF;
 	END //
 	DELIMITER ;
-	UPDATE envios SET EstadoEnvio_idEstadoEnvio = '3' WHERE envios.idEnvio = 7
+	UPDATE envios SET EstadosEnvios_idEstadoEnvio = '3' WHERE envios.idEnvio = 7
