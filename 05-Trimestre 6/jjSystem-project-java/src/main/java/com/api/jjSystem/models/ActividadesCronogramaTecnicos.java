@@ -3,7 +3,7 @@ package com.api.jjSystem.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "actividadcronogramatecnicos")
+@Table(name = "actividadesCronogramaTecnicos")
 public class ActividadesCronogramaTecnicos {
 
    @Id

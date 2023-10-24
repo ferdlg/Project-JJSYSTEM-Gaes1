@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS Usuarios(
 
 CREATE TABLE IF NOT EXISTS Clientes(
     idCliente INT NOT NULL AUTO_INCREMENT,
-    direccion VARCHAR(50) NOT NULL,
+    direccionCliente VARCHAR(50) NOT NULL,
     numeroDocumento BIGINT NOT NULL,
     PRIMARY KEY (idCliente),
     FOREIGN KEY (numeroDocumento) REFERENCES usuarios (numeroDocumento)
@@ -76,12 +76,12 @@ CREATE TABLE IF NOT EXISTS EstadosEnvios(
 
 CREATE TABLE IF NOT EXISTS Envios (
     idEnvio INT NOT NULL AUTO_INCREMENT,
-    direccion VARCHAR(50) NOT NULL,
-    idTecnico INT NOT NULL,
-    EstadosEnvios_idEstadoEnvio INT,
+    direccionEnvio VARCHAR(50) NOT NULL,
+    idTecnico INT,
+    idEstadoEnvio INT,
     PRIMARY KEY (idEnvio),
     FOREIGN KEY (idTecnico) REFERENCES Tecnicos (idTecnico),
-	FOREIGN KEY (EstadosEnvios_idEstadoEnvio) REFERENCES EstadosEnvios (idEstadoEnvio)
+	FOREIGN KEY (idEstadoEnvio) REFERENCES EstadosEnvios (idEstadoEnvio)
 );
 
 CREATE TABLE IF NOT EXISTS categoriasProductos(
@@ -102,11 +102,11 @@ CREATE TABLE IF NOT EXISTS Productos(
     descripcionProducto TEXT(200) NOT NULL,
     precioProducto FLOAT NOT NULL,
     cantidad INT NOT NULL,
-    AdministradorIdAdministrador INT,
+    idAdministrador INT,
     idCategoriaProducto INT,
     idProveedorProducto INT,
     PRIMARY KEY(idProducto),
-    FOREIGN KEY(AdministradorIdAdministrador) REFERENCES Administrador (IdAdministrador),
+    FOREIGN KEY(idAdministrador) REFERENCES Administrador (idAdministrador),
     FOREIGN KEY(idCategoriaProducto) REFERENCES categoriasProductos (idCategoriaProducto),
 	FOREIGN KEY(idProveedorProducto) REFERENCES proveedoresProductos (idProveedorProducto)
 );
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS EstadosCitas(
 CREATE TABLE IF NOT EXISTS Citas(
     idCita INT NOT NULL AUTO_INCREMENT,
     fechaCita DATE NOT NULL,
-    direccion VARCHAR(50) NOT NULL,
+    direccionCita VARCHAR(50) NOT NULL,
     contactoCliente BIGINT NOT NULL,
     descripcionCita TEXT(200) NOT NULL,
     idTecnico INT,
@@ -180,22 +180,22 @@ CREATE TABLE IF NOT EXISTS DisponibilidadCronogramas(
 
 CREATE TABLE IF NOT EXISTS CronogramaTecnicos(
     idCronogramaTecnico INT NOT NULL AUTO_INCREMENT,
-    Tecnico_idTecnico INT,
-    Cita_idCita INT,
+    idTecnico INT,
+    idCita INT,
     idDisponibilidadCronograma INT,
     PRIMARY KEY (idCronogramaTecnico),
-    FOREIGN KEY (Tecnico_idTecnico) REFERENCES Tecnicos (idTecnico), 
-    FOREIGN KEY (Cita_idCita) REFERENCES Citas (idCita),
+    FOREIGN KEY (idTecnico) REFERENCES Tecnicos (idTecnico), 
+    FOREIGN KEY (idCita) REFERENCES Citas (idCita),
     FOREIGN KEY (idDisponibilidadCronograma) REFERENCES DisponibilidadCronogramas (idDisponibilidadCronograma)
 );
 
-CREATE TABLE IF NOT EXISTS ActividadCronogramaTecnicos(
+CREATE TABLE IF NOT EXISTS ActividadesCronogramaTecnicos(
     idActividadCronogramaTecnico INT NOT NULL AUTO_INCREMENT,
     nombreActividad VARCHAR(30) NOT NULL,
     PRIMARY KEY (idActividadCronogramaTecnico)
 );
 
-CREATE TABLE IF NOT EXISTS DetalleActividadCronograma(
+CREATE TABLE IF NOT EXISTS DetallesActividadCronograma(
 	idDetalleActividad INT NOT NULL AUTO_INCREMENT,
     idCronogramaTecnico INT,
     idActividadCronogramaTecnico INT,
@@ -208,11 +208,11 @@ CREATE TABLE IF NOT EXISTS DetalleActividadCronograma(
 CREATE TABLE IF NOT EXISTS Ventas(
     idVenta INT NOT NULL AUTO_INCREMENT,
     fechaVenta DATE NOT NULL,
-    enviosIdEnvio INT NOT NULL,
-    cotizacionesIdCotizacion INT NOT NULL,
+    idEnvio INT NOT NULL,
+    idCotizacion INT NOT NULL,
     PRIMARY KEY(idVenta),
-    FOREIGN KEY(enviosIdEnvio) REFERENCES Envios (idEnvio),
-    FOREIGN KEY(cotizacionesIdCotizacion) REFERENCES Cotizaciones (idCotizacion)
+    FOREIGN KEY(idEnvio) REFERENCES Envios (idEnvio),
+    FOREIGN KEY(idCotizacion) REFERENCES Cotizaciones (idCotizacion)
 );
 
 CREATE TABLE IF NOT EXISTS DetallesVentas(
@@ -220,9 +220,9 @@ CREATE TABLE IF NOT EXISTS DetallesVentas(
     detallesVenta VARCHAR(300) NOT NULL,
     subtotalVenta FLOAT NOT NULL,
     totalVenta FLOAT NOT NULL,
-    IdVenta INT NOT NULL,
+    idVenta INT NOT NULL,
     PRIMARY KEY (idDetalleVenta),
-    FOREIGN KEY (IdVenta) REFERENCES Ventas (idVenta)
+    FOREIGN KEY (idVenta) REFERENCES Ventas (idVenta)
 );
 
 CREATE TABLE IF NOT EXISTS TiposPQRSF(
@@ -241,24 +241,24 @@ CREATE TABLE IF NOT EXISTS PQRSF(
     idPQRSF INT NOT NULL AUTO_INCREMENT,
     fechaPQRSF DATE NOT NULL,
     informacionPQRSF TEXT(200) NOT NULL,
-    Clientes_idCliente INT NOT NULL,
-    TiposPQRSF_idTipoPQRSF INT NOT NULL,
-    EstadosPQRSF_idEstadoPQRSF INT NOT NULL,
+    idCliente INT NOT NULL,
+    idTipoPQRSF INT NOT NULL,
+    idEstadoPQRSF INT NOT NULL,
     PRIMARY KEY (idPQRSF),
-    FOREIGN KEY (Clientes_idCliente) REFERENCES Clientes (idCliente),
-    FOREIGN KEY (TiposPQRSF_idTipoPQRSF) REFERENCES TiposPQRSF (idTipoPQRSF),
-    FOREIGN KEY (EstadosPQRSF_idEstadoPQRSF) REFERENCES EstadosPQRSF (idEstadoPQRSF)
+    FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente),
+    FOREIGN KEY (idTipoPQRSF) REFERENCES TiposPQRSF (idTipoPQRSF),
+    FOREIGN KEY (idEstadoPQRSF) REFERENCES EstadosPQRSF (idEstadoPQRSF)
 );
 
 CREATE TABLE IF NOT EXISTS Respuestas (
     idRespuesta INT NOT NULL AUTO_INCREMENT,
     fecha DATE NULL,
     informacionRespuesta TEXT(200) NULL,
-    AdministradorId INT NULL,
-    PQRSF_idPQRSF INT NULL,
+    idAdministrador INT NULL,
+    idPQRSF INT NULL,
     PRIMARY KEY (idRespuesta),
-	FOREIGN KEY (AdministradorId) REFERENCES administrador (idAdministrador),
-    FOREIGN KEY (PQRSF_idPQRSF) REFERENCES PQRSF (idPQRSF)
+	FOREIGN KEY (idAdministrador) REFERENCES administrador (idAdministrador),
+    FOREIGN KEY (idPQRSF) REFERENCES PQRSF (idPQRSF)
 );
 
 INSERT INTO ROLES (idRol, nombreRol) 
@@ -402,7 +402,7 @@ VALUES
 	(1036485927, 'José', 'Ramírez', 'jose.ramirez@jjsystem.com', '5bN4pR1m', 3789012165, 3, 1),
 	(1019286547, 'Ana', 'castro', 'ana.castro@jjsystem.com', '8gC7sW3j', 3456701234, 3, 1);
 
-INSERT INTO Clientes (direccion, numeroDocumento)
+INSERT INTO Clientes (direccionCliente, numeroDocumento)
 VALUES
 	('Calle 123 # 45-67', 1027385914),
 	('Carrera 78A # 12-34', 1094730265),
@@ -457,7 +457,7 @@ VALUES
 	("Llegando"),
 	("Entregado");
 
-INSERT INTO Envios (direccion, idTecnico, EstadosEnvios_idEstadoEnvio)
+INSERT INTO Envios (direccionEnvio, idTecnico, idEstadoEnvio)
 VALUES
 	("Calle 23 # 14-34, Barrio La Candelaria", 6, 2),
 	("Carrera 11 # 22-45, Barrio Chapinero Alto", 3, 1),
@@ -514,7 +514,7 @@ VALUES
     ("Tecnologías de construcción de Siemens"),
     ("Vida digital de AT&T");
 
-INSERT INTO Productos (nombreProducto, descripcionProducto, precioProducto, cantidad, AdministradorIdAdministrador, idCategoriaProducto, idProveedorProducto)
+INSERT INTO Productos (nombreProducto, descripcionProducto, precioProducto, cantidad, idAdministrador, idCategoriaProducto, idProveedorProducto)
 VALUES
 	('Cámara de vigilancia HD+','Una cámara de última generación que captura imágenes de alta definición con precisión y nitidez. Su diseño discreto se integra perfectamente en cualquier entorno, ofreciendo una protección encubierta. Fácil de instalar y utilizar, es la elección ideal para mantener tus espacios seguros.', 158000, 12, 1, 1, 3),
 	('Cámara de seguridad IP','Cámara de seguridad IP: Permite una conexión a través de la red para acceder a las imágenes desde cualquier lugar.',526000, 14, 1, 1, 6),
@@ -599,7 +599,7 @@ VALUES
 	('Cancelada'),
 	('Modificada');
 
-INSERT INTO Citas (fechaCita, direccion, contactoCliente, descripcionCita, idTecnico, idAdministrador, idCotizacion, idEstadoCita)
+INSERT INTO Citas (fechaCita, direccionCita, contactoCliente, descripcionCita, idTecnico, idAdministrador, idCotizacion, idEstadoCita)
 VALUES
 	('2023-06-01', 'Calle 23 # 14-34, Barrio La Candelaria', 3478901234, 'Reunión para discutir instalación de cámaras de seguridad', 4, 1, 8, 1),
 	('2023-06-02', 'Carrera 11 # 22-45, Barrio Chapinero Alto', 3734567890, 'Visita técnica para evaluar instalación de sistema de monitoreo', 7, 1, 16, 2),
@@ -623,7 +623,7 @@ VALUES
 	("Disponible"),
     ("No disponible");
 
-INSERT INTO CronogramaTecnicos (Tecnico_idTecnico, Cita_idCita, idDisponibilidadCronograma)
+INSERT INTO CronogramaTecnicos (idTecnico, idCita, idDisponibilidadCronograma)
 VALUES
 	(5, 8, 2),
 	(3, 4, 2),
@@ -656,7 +656,7 @@ VALUE
 	(9, 2, '2022-12-12 13:39:50'),
 	(10, 4, '2023-04-25 03:58:09');
 
-INSERT INTO Ventas (fechaVenta, enviosIdEnvio, cotizacionesIdCotizacion)
+INSERT INTO Ventas (fechaVenta, idEnvio, idCotizacion)
 VALUES
     ('2023-01-01', 27, 1),
     ('2023-02-05', 29, 2),
@@ -705,7 +705,7 @@ VALUES
     ("En trámite"),
     ("Resuelta");
     
-INSERT INTO PQRSF (fechaPQRSF, informacionPQRSF, Clientes_idCliente, TiposPQRSF_idTipoPQRSF, EstadosPQRSF_idEstadoPQRSF)
+INSERT INTO PQRSF (fechaPQRSF, informacionPQRSF, idCliente, idTipoPQRSF, idEstadoPQRSF)
 VALUES
     ('2023-01-01', 'Presenté un reclamo sobre un sistema de cámaras de seguridad que no quedó bloqueado durante un robo en mi negocio. Quiero que se investigue y se resuelva el problema para evitar futuras pérdidas.', 1, 3, 3),
     ('2023-01-01', 'Solicito información sobre los precios y la disponibilidad de cámaras de seguridad inalámbricas para instalar en mi hogar. También me gustaría programar una cita con un representante de ventas para discutir las características técnicas del producto.', 2, 1, 3),
@@ -724,7 +724,7 @@ VALUES
     ('2023-01-01', 'Sugerencia para agregar una función de programación de luces en el sistema de seguridad para disuadir a los ladrones.', 15, 4, 3),
     ('2023-01-01', 'Compre un sistema de seguridad para mi hogar hace tres meses y ha tenido problemas desde entonces. Las alarmas se activan sin motivo aparente y el servicio técnico no ha sido capaz de solucionar el problema.', 16, 2, 3);
 
-INSERT INTO Respuestas (fecha, informacionRespuesta, AdministradorId, PQRSF_idPQRSF)
+INSERT INTO Respuestas (fecha, informacionRespuesta, idAdministrador, idPQRSF)
 VALUES
     ('2023-01-10', 'Gracias por presentar su reclamo sobre el sistema de cámaras de seguridad. Lamentamos mucho lo ocurrido y entendemos la importancia de proteger su negocio. Nos comprometemos a investigar a fondo este incidente y a resolver el problema para evitar futuras pérdidas. Nuestro equipo de soporte técnico se comunicará con usted para recopilar más información y tomar las medidas necesarias. Agradecemos su paciencia y estamos comprometidos en brindarle un servicio de seguridad confiable.', 1, 1),
     ('2023-01-11', 'Agradecemos su interés en nuestras cámaras de seguridad inalámbricas. Con gusto le proporcionaremos la información sobre los precios y disponibilidad de los productos que desea. También le ofrecemos programar una cita con uno de nuestros representantes de ventas, quienes estarán encantados de discutir las características técnicas del producto y responder a todas sus preguntas. Pronto recibirá un correo electrónico con los detalles y opciones para coordinar la cita. Esperamos poder ayudarle a garantizar la seguridad de su hogar.', 1, 2),
@@ -751,7 +751,7 @@ VALUES
 	SELECT concat(nombre, " ", apellido) as Nombre_Usuario, fechaCotizacion as Fecha, totalCotizacion as Total
     From cotizaciones
     INNER JOIN Clientes on Cotizaciones.idCliente = Clientes.idCliente
-    INNER JOIN Usuarios on Clientes.numeroDocumento = Usuarios.numeroDocumento;
+    INNER JOIN Usuarios on Clientes.numeroDocumento = Usuari    os.numeroDocumento;
     
     DROP VIEW IF EXISTS tecnicosActividadCitaAnalisis;
     

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.text.DateFormat;
 
 @Entity
-@Table(name = "Ventas")
+@Table(name = "ventas")
 
 public class Ventas {
 

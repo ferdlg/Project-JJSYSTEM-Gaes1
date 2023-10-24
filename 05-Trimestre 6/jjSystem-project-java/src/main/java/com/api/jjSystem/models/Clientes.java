@@ -12,8 +12,8 @@ public class Clientes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCliente")
     private Integer idCliente;
-    @Column(name = "direccion")
-    private String direccion;
+    @Column(name = "direccionCliente")
+    private String direccionCliente;
     @Column(name = "numeroDocumento")
     private BigInteger numeroDocumento;
 
@@ -21,27 +21,28 @@ public class Clientes {
     public Clientes() {
     }
 
-    public Clientes(Integer idCliente, String direccion, BigInteger numeroDocumento) {
+    public Clientes(Integer idCliente, String direccionCliente, BigInteger numeroDocumento) {
         this.idCliente = idCliente;
-        this.direccion = direccion;
+        this.direccionCliente = direccionCliente;
         this.numeroDocumento = numeroDocumento;
     }
+
     //get y set
 
-    public Integer getId() {
+    public Integer getIdCliente() {
         return idCliente;
     }
 
-    public void setId(Integer idCliente) {
+    public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getDireccionCliente() {
+        return direccionCliente;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setDireccionCliente(String direccionCliente) {
+        this.direccionCliente = direccionCliente;
     }
 
     public BigInteger getNumeroDocumento() {

@@ -11,13 +11,11 @@ public class CronogramaTecnicos {
     @Column(name = "idCronogramaTecnico")
     private Integer idCronogramaTecnico;
     @OneToOne
-    @JoinColumn(name = "Tecnico_idTecnico")
+    @JoinColumn(name = "idTecnico")
     private Tecnicos tecnico;
-
     @OneToOne
-    @JoinColumn(name = "Cita_idCita")
+    @JoinColumn(name = "idCita")
     private Citas citas;
-
     @OneToOne
     @JoinColumn(name = "idDisponibilidadCronograma")
     private DisponibilidadCronogramas disponibilidadCronograma;

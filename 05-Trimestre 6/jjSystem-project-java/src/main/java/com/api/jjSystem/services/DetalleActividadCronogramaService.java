@@ -1,7 +1,7 @@
 package com.api.jjSystem.services;
 
 import com.api.jjSystem.Repository.DetalleActividadCronogramaRepository;
-import com.api.jjSystem.models.DetalleActividadCronograma;
+import com.api.jjSystem.models.DetallesActividadCronograma;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,16 +12,16 @@ import java.util.Optional;
 public class DetalleActividadCronogramaService {
     @Autowired
     private DetalleActividadCronogramaRepository detalleActividadCronogramaRepository;
-    public DetalleActividadCronograma createDetalle(DetalleActividadCronograma detalleActividadCronograma)
+    public DetallesActividadCronograma createDetalle(DetallesActividadCronograma detallesActividadCronograma)
     {
-        return detalleActividadCronogramaRepository.save(detalleActividadCronograma);
+        return detalleActividadCronogramaRepository.save(detallesActividadCronograma);
     }
-    public DetalleActividadCronograma getDetalleByid(Integer idDetalleActividad)
+    public DetallesActividadCronograma getDetalleByid(Integer idDetalleActividad)
     {
-        Optional<DetalleActividadCronograma> detalleActividadCronograma = detalleActividadCronogramaRepository.findById(idDetalleActividad);
+        Optional<DetallesActividadCronograma> detalleActividadCronograma = detalleActividadCronogramaRepository.findById(idDetalleActividad);
         return detalleActividadCronograma.get();
     }
-    public List<DetalleActividadCronograma> getAllDetalle()
+    public List<DetallesActividadCronograma> getAllDetalle()
     {
         return detalleActividadCronogramaRepository.findAll();
     }

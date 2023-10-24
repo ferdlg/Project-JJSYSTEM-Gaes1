@@ -26,14 +26,14 @@ public class EnviosController {
         return enviosService.getAllEnvios();
     }
 
-    @GetMapping("{id}")
-    public Envios buscarEnviosById (@PathVariable Integer id)
+    @GetMapping("{idEnvio}")
+    public Envios buscarEnviosById (@PathVariable Integer idEnvio)
     {
-        return enviosService.getEnvioById(id);
+        return enviosService.getEnvioById(idEnvio);
     }
-    @DeleteMapping("{id}")
-    public void deleteEnviosById (@PathVariable("id") Integer id)
+    @DeleteMapping("{idEnvio}")
+    public void deleteEnvioById (@PathVariable("idEnvio") Integer idEnvio)
     {
-        enviosService.deleteEnvios(id);
+        enviosService.deleteEnvios(idEnvio);
     }
 }

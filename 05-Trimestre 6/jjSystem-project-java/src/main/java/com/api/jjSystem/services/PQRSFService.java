@@ -19,9 +19,9 @@ public class PQRSFService {
         return pqrsfRepository.save(pqrsf);
     }
 
-    public  PQRSF getPQRSFById (Integer id)
+    public  PQRSF getPQRSFById (Integer idPQRSF)
     {
-        Optional<PQRSF> optionalPQRSF = pqrsfRepository.findById(id);
+        Optional<PQRSF> optionalPQRSF = pqrsfRepository.findById(idPQRSF);
         return optionalPQRSF.get();
     }
 
@@ -30,8 +30,8 @@ public class PQRSFService {
         return pqrsfRepository.findAll();
     }
 
-    public void deletePQRSF (Integer id)
+    public void deletePQRSF (Integer idPQRSF)
     {
-        pqrsfRepository.deleteById(id);
+        pqrsfRepository.deleteById(idPQRSF);
     }
 }

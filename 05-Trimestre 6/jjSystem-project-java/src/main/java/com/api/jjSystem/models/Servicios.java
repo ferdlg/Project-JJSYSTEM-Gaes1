@@ -15,9 +15,7 @@ public class Servicios {
     private String nombreServicio;
     @Column(name = "descripcionServicio")
     private String descripcionServicio;
-    @ManyToOne
-    @JoinColumn(name = "Cotizacion_idCotizacion")
-    private Cotizaciones cotizaciones;
+
     @OneToOne
     @JoinColumn(name = "idCategoriaServicio")
     private CategoriasServicios categoriasServicios;
@@ -25,11 +23,10 @@ public class Servicios {
     public Servicios() {
     }
 
-    public Servicios(Integer idServicio, String nombreServicio, String descripcionServicio, Cotizaciones cotizaciones, CategoriasServicios categoriasServicios) {
+    public Servicios(Integer idServicio, String nombreServicio, String descripcionServicio, CategoriasServicios categoriasServicios) {
         this.idServicio = idServicio;
         this.nombreServicio = nombreServicio;
         this.descripcionServicio = descripcionServicio;
-        this.cotizaciones = cotizaciones;
         this.categoriasServicios = categoriasServicios;
     }
 
@@ -59,19 +56,12 @@ public class Servicios {
         this.descripcionServicio = descripcionServicio;
     }
 
-    public Cotizaciones getCotizaciones() {
-        return cotizaciones;
-    }
-
-    public void setCotizaciones(Cotizaciones cotizaciones) {
-        this.cotizaciones = cotizaciones;
-    }
-
-    public CategoriasServicios getCategoriaServicios() {
+    public CategoriasServicios getCategoriasServicios() {
         return categoriasServicios;
     }
 
-    public void setCategoriaServicios(CategoriasServicios categoriasServicios) {
+    public void setCategoriasServicios(CategoriasServicios categoriasServicios) {
         this.categoriasServicios = categoriasServicios;
     }
+
 }

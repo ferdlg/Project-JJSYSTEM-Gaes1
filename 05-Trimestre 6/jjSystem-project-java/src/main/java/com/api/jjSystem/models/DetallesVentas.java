@@ -18,7 +18,7 @@ public class DetallesVentas {
     @Column(name = "totalVenta")
     private Float totalVenta;
     @OneToOne
-    @JoinColumn(name = "Ventas_idVenta")
+    @JoinColumn(name = "idVenta")
     private Ventas ventas;
 
     //Constructores

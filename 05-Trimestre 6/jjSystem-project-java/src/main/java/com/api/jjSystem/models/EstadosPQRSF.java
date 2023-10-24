@@ -3,14 +3,12 @@ package com.api.jjSystem.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "EstadosPQRSF")
+@Table(name = "estadosPQRSF")
 public class EstadosPQRSF {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEstadoPQRSF")
     private Integer idEstadoPQRSF;
-
     private String nombreEstadoPQRSF;
 
     public EstadosPQRSF() {
@@ -36,4 +34,5 @@ public class EstadosPQRSF {
     public void setNombreEstadoPQRSF(String nombreEstadoPQRSF) {
         this.nombreEstadoPQRSF = nombreEstadoPQRSF;
     }
+
 }

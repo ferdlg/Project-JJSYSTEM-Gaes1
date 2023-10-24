@@ -4,40 +4,37 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Envios")
-public class Envios {
 
+public class Envios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEnvio")
-    private Integer id;
-
-    @Column(name = "direccion")
+    private Integer idEnvio;
+    @Column(name = "direccionEnvio")
     private String direccionEnvio;
-
     @OneToOne
     @JoinColumn(name = "idTecnico")
     private Tecnicos tecnicos;
-
     @ManyToOne
-    @JoinColumn(name = "EstadoEnvio_idEstadoEnvio")
-    private EstadoEnvios estadoEnvios;
+    @JoinColumn(name = "idEstadoEnvio")
+    private EstadosEnvios estadosEnvios;
 
     public Envios() {
     }
 
-    public Envios(Integer id, String direccionEnvio, Tecnicos tecnicos, EstadoEnvios estadoEnvios) {
-        this.id = id;
+    public Envios(Integer idEnvio, String direccionEnvio, Tecnicos tecnicos, EstadosEnvios estadosEnvios) {
+        this.idEnvio = idEnvio;
         this.direccionEnvio = direccionEnvio;
         this.tecnicos = tecnicos;
-        this.estadoEnvios = estadoEnvios;
+        this.estadosEnvios = estadosEnvios;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdEnvio() {
+        return idEnvio;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdEnvio(Integer idEnvio) {
+        this.idEnvio = idEnvio;
     }
 
     public String getDireccionEnvio() {
@@ -56,11 +53,11 @@ public class Envios {
         this.tecnicos = tecnicos;
     }
 
-    public EstadoEnvios getEstadoEnvios() {
-        return estadoEnvios;
+    public EstadosEnvios getEstadosEnvios() {
+        return estadosEnvios;
     }
 
-    public void setEstadoEnvios(EstadoEnvios estadoEnvios) {
-        this.estadoEnvios = estadoEnvios;
+    public void setEstadosEnvios(EstadosEnvios estadosEnvios) {
+        this.estadosEnvios = estadosEnvios;
     }
 }

@@ -5,12 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2e624fd-919f-4ff6-9349-fdac3641aa7a" name="Changes" comment="Cambios en modelos, adición de foreign keys">
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/EstadosCotizacionesRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/EstadosCotizacionesController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/EstadosCotizaciones.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EstadosCotizacionesService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/EstadosEnviosController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/TiposPQRSFController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EstadosEnviosService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Cotizaciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Cotizaciones.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - BD SCRIPT.sql" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - BD SCRIPT.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - MODELO RELACIONAL.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - MODELO RELACIONAL.mwb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - MODELO RELACIONAL.mwb.bak" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - MODELO RELACIONAL.mwb.bak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/jjsystem_project/app/Models/Pqrsf.php" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/jjsystem_project/app/Models/Pqrsf.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/DetalleActividadCronogramaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/DetalleActividadCronogramaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/EstadoEnviosRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/EstadosEnviosRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/TipoPQRSFRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/Repository/TiposPQRSFRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/DetalleActividadCronogramaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/DetalleActividadCronogramaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/EnviosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/EnviosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/EstadoEnviosController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/TipoPQRSFController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/ActividadesCronogramaTecnicos.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/ActividadesCronogramaTecnicos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Citas.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Citas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Clientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Clientes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/CronogramaTecnicos.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/CronogramaTecnicos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/DetalleActividadCronograma.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/DetallesActividadCronograma.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/DetallesVentas.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/DetallesVentas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Envios.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Envios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/EstadoEnvios.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/EstadosEnvios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/EstadosPQRSF.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/EstadosPQRSF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/EstadosUsuarios.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/EstadosUsuarios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/PQRSF.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/PQRSF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Productos.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Productos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Servicios.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Servicios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/TipoPQRSF.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/TiposPQRSF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Usuarios.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Usuarios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Ventas.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Ventas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/DetalleActividadCronogramaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/DetalleActividadCronogramaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EnviosService.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EnviosService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/EstadoEnviosService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/PQRSFService.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/PQRSFService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/TipoPQRSFService.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/TiposPQRSFService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +149,8 @@
       <workItem from="1697824555404" duration="3165000" />
       <workItem from="1697943833069" duration="620000" />
       <workItem from="1698019909252" duration="2381000" />
-      <workItem from="1698031139203" duration="1250000" />
+      <workItem from="1698031139203" duration="1849000" />
+      <workItem from="1698166376816" duration="8783000" />
     </task>
     <task id="LOCAL-00001" summary="Modelos Productos, CategoriaProductos y Cambio en nombre carpetas">
       <option name="closed" value="true" />

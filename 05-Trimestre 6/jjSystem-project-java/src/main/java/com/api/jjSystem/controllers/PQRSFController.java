@@ -15,26 +15,26 @@ public class PQRSFController {
     private PQRSFService pqrsfService;
 
     @PostMapping
-    public PQRSF createPQRSF (PQRSF pqrsf)
+    public PQRSF createPQRSF(PQRSF pqrsf)
     {
         return pqrsfService.createPQRSF(pqrsf);
     }
 
     @GetMapping
-    public List<PQRSF> getAllPQRSF ()
+    public List<PQRSF> getAllPQRSF()
     {
         return pqrsfService.getAllPQRSF();
     }
 
-    @GetMapping("{id}")
-    public PQRSF buscarPQRSFById (@PathVariable Integer id)
+    @GetMapping("{idPQRSF}")
+    public PQRSF buscarPQRSFById(@PathVariable Integer id)
     {
         return pqrsfService.getPQRSFById(id);
     }
 
-    @DeleteMapping("{id}")
-    public void deletePQRSFById (@PathVariable("id") Integer id)
+    @DeleteMapping("{idPQRSF}")
+    public void deletePQRSFById(@PathVariable("idPQRSF") Integer idPQRSF)
     {
-        pqrsfService.deletePQRSF(id);
+        pqrsfService.deletePQRSF(idPQRSF);
     }
 }

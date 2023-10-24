@@ -5,14 +5,14 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "detalleActividadCronograma")
-public class DetalleActividadCronograma {
+@Table(name = "detallesActividadCronograma")
+public class DetallesActividadCronograma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDetalleActividad")
     private Integer idDetalleActividad;
-
+    private LocalDateTime fechaActividadCronograma;
     @ManyToOne
     @JoinColumn(name = "idCronogramaTecnico")
     private CronogramaTecnicos cronogramaTecnicos;
@@ -20,12 +20,11 @@ public class DetalleActividadCronograma {
     @JoinColumn(name = "idActividadCronogramaTecnico")
     private ActividadesCronogramaTecnicos actividadesCronogramaTecnicos;
 
-    private LocalDateTime fechaActividadCronograma;
     //Constructores
-    public DetalleActividadCronograma() {
+    public DetallesActividadCronograma() {
     }
 
-    public DetalleActividadCronograma(Integer idDetalleActividad, CronogramaTecnicos cronogramaTecnicos, ActividadesCronogramaTecnicos actividadesCronogramaTecnicos, LocalDateTime fechaActividadCronograma) {
+    public DetallesActividadCronograma(Integer idDetalleActividad, CronogramaTecnicos cronogramaTecnicos, ActividadesCronogramaTecnicos actividadesCronogramaTecnicos, LocalDateTime fechaActividadCronograma) {
         this.idDetalleActividad = idDetalleActividad;
         this.cronogramaTecnicos = cronogramaTecnicos;
         this.actividadesCronogramaTecnicos = actividadesCronogramaTecnicos;

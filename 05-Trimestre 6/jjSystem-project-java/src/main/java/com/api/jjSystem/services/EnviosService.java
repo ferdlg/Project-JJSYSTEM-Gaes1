@@ -20,9 +20,9 @@ public class EnviosService {
         return enviosRepository.save(envio);
     }
 
-    public Envios getEnvioById(Integer id)
+    public Envios getEnvioById(Integer idEnvio)
     {
-        Optional<Envios> optionalEnvios = enviosRepository.findById(id);
+        Optional<Envios> optionalEnvios = enviosRepository.findById(idEnvio);
         return optionalEnvios.get();
     }
 
@@ -31,8 +31,8 @@ public class EnviosService {
         return enviosRepository.findAll();
     }
 
-    public void deleteEnvios(Integer id)
+    public void deleteEnvios(Integer idEnvio)
     {
-        enviosRepository.deleteById(id);
+        enviosRepository.deleteById(idEnvio);
     }
 }

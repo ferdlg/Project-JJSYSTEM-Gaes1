@@ -16,7 +16,7 @@ class Pqrsf extends Model
         return $this->belongsTo(estadosPQRSF::class, 'idEstadoPQRSF', 'id');
     }
 
-    public function tipoPQRSF()
+    public function tiposPQRSF()
     {
         return $this->belongsTo(TipoPQRSF::class, 'TipoPQRSF_idTipoPQRSF');
     }

@@ -5,47 +5,42 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "pqrsf")
+@Table(name = "PQRSF")
 public class PQRSF {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPQRSF")
-    private Integer id;
-
+    private Integer idPQRSF;
     private Date fechaPQRSF;
-
     private String informacionPQRSF;
-
     @ManyToOne
-    @JoinColumn(name = "Cliente_idCliente")
+    @JoinColumn(name = "idCliente")
     private Clientes clientes;
-
     @OneToOne
-    @JoinColumn(name = "EstadoPQRSF_idEstadoPQRSF")
+    @JoinColumn(name = "idEstadoPQRSF")
     private EstadosPQRSF estadosPQRSF;
-
     @OneToOne
-    @JoinColumn(name = "TipoPQRSF_idTipoPQRSF")
-    private TipoPQRSF tipoPQRSF;
+    @JoinColumn(name = "idTipoPQRSF")
+    private TiposPQRSF tiposPQRSF;
 
     public PQRSF() {
     }
 
-    public PQRSF(Integer id, Date fechaPQRSF, String informacionPQRSF, Clientes clientes, EstadosPQRSF estadosPQRSF, TipoPQRSF tipoPQRSF) {
-        this.id = id;
+    public PQRSF(Integer idPQRSF, Date fechaPQRSF, String informacionPQRSF, Clientes clientes, EstadosPQRSF estadosPQRSF, TiposPQRSF tiposPQRSF) {
+        this.idPQRSF = idPQRSF;
         this.fechaPQRSF = fechaPQRSF;
         this.informacionPQRSF = informacionPQRSF;
         this.clientes = clientes;
         this.estadosPQRSF = estadosPQRSF;
-        this.tipoPQRSF = tipoPQRSF;
+        this.tiposPQRSF = tiposPQRSF;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdPQRSF() {
+        return idPQRSF;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdPQRSF(Integer idPQRSF) {
+        this.idPQRSF = idPQRSF;
     }
 
     public Date getFechaPQRSF() {
@@ -72,19 +67,20 @@ public class PQRSF {
         this.clientes = clientes;
     }
 
-    public EstadosPQRSF getEstadoPQRSF() {
+    public EstadosPQRSF getEstadosPQRSF() {
         return estadosPQRSF;
     }
 
-    public void setEstadoPQRSF(EstadosPQRSF estadosPQRSF) {
+    public void setEstadosPQRSF(EstadosPQRSF estadosPQRSF) {
         this.estadosPQRSF = estadosPQRSF;
     }
 
-    public TipoPQRSF getTipoPQRSF() {
-        return tipoPQRSF;
+    public TiposPQRSF getTiposPQRSF() {
+        return tiposPQRSF;
     }
 
-    public void setTipoPQRSF(TipoPQRSF tipoPQRSF) {
-        this.tipoPQRSF = tipoPQRSF;
+    public void setTiposPQRSF(TiposPQRSF tiposPQRSF) {
+        this.tiposPQRSF = tiposPQRSF;
     }
+
 }

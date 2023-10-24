@@ -24,13 +24,16 @@ public class Usuarios {
     @OneToOne
     @JoinColumn(name = "idRol")
     private Roles roles;
+    @ManyToOne
+    @JoinColumn(name = "idEstadoUsuario")
+    private EstadosUsuarios estadosUsuarios;
 
     //Constructores
 
     public Usuarios() {
     }
 
-    public Usuarios(BigInteger numeroDocumento, String nombre, String apellido, String email, String password, BigInteger numeroContacto, Roles roles) {
+    public Usuarios(BigInteger numeroDocumento, String nombre, String apellido, String email, String password, BigInteger numeroContacto, Roles roles, EstadosUsuarios estadosUsuarios) {
         this.numeroDocumento = numeroDocumento;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -38,6 +41,7 @@ public class Usuarios {
         this.password = password;
         this.numeroContacto = numeroContacto;
         this.roles = roles;
+        this.estadosUsuarios = estadosUsuarios;
     }
 
     //Get y set
@@ -98,5 +102,11 @@ public class Usuarios {
         this.roles = roles;
     }
 
+    public EstadosUsuarios getEstadosUsuarios() {
+        return estadosUsuarios;
+    }
 
+    public void setEstadosUsuarios(EstadosUsuarios estadosUsuarios) {
+        this.estadosUsuarios = estadosUsuarios;
+    }
 }

@@ -16,8 +16,8 @@ public class Citas {
     private Integer idCita;
     @Column(name = "fechaCita")
     private Date fechaCita;
-    @Column(name = "direccion")
-    private String direccion;
+    @Column(name = "direccionCita")
+    private String direccionCita;
     @Column(name = "contactoCliente")
     private BigInteger contactoCliente;
     @Column(name = "descripcionCita")
@@ -33,7 +33,7 @@ public class Citas {
 
     @ManyToOne
     @JoinColumn(name = "idCotizacion")
-    private  Cotizaciones cotizaciones;
+    private Cotizaciones cotizaciones;
 
     @ManyToOne
     @JoinColumn(name = "idEstadoCita")
@@ -43,10 +43,10 @@ public class Citas {
     public Citas() {
     }
 
-    public Citas(Integer idCita, Date fechaCita, String direccion, BigInteger contactoCliente, String descripcionCita, Tecnicos tecnicos, Administrador administrador, Cotizaciones cotizaciones, EstadosCitas estadosCitas) {
+    public Citas(Integer idCita, Date fechaCita, String direccionCita, BigInteger contactoCliente, String descripcionCita, Tecnicos tecnicos, Administrador administrador, Cotizaciones cotizaciones, EstadosCitas estadosCitas) {
         this.idCita = idCita;
         this.fechaCita = fechaCita;
-        this.direccion = direccion;
+        this.direccionCita = direccionCita;
         this.contactoCliente = contactoCliente;
         this.descripcionCita = descripcionCita;
         this.tecnicos = tecnicos;
@@ -54,13 +54,14 @@ public class Citas {
         this.cotizaciones = cotizaciones;
         this.estadosCitas = estadosCitas;
     }
+
     //Get y set
 
-    public Integer getId() {
+    public Integer getIdCita() {
         return idCita;
     }
 
-    public void setId(Integer idCita) {
+    public void setIdCita(Integer idCita) {
         this.idCita = idCita;
     }
 
@@ -72,12 +73,12 @@ public class Citas {
         this.fechaCita = fechaCita;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getDireccionCita() {
+        return direccionCita;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setDireccionCita(String direccionCita) {
+        this.direccionCita = direccionCita;
     }
 
     public BigInteger getContactoCliente() {
@@ -127,4 +128,5 @@ public class Citas {
     public void setEstadosCitas(EstadosCitas estadosCitas) {
         this.estadosCitas = estadosCitas;
     }
+
 }
