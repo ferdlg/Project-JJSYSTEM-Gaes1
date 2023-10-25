@@ -24,7 +24,7 @@ public class TiposPQRSFController {
     @GetMapping
     public List<TiposPQRSF> getAllTiposPQRSF ()
     {
-        return tiposPQRSFService.getAllTiposPQRSF()
+        return tiposPQRSFService.getAllTiposPQRSF();
     }
 
     @GetMapping("{idTipoPQRSF}")
