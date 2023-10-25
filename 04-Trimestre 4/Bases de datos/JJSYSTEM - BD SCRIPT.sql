@@ -202,7 +202,7 @@ CREATE TABLE IF NOT EXISTS DetallesActividadCronograma(
     fechaActividadCronograma DATETIME NOT NULL,
 	primary key(idDetalleActividad),
     FOREIGN KEY (idCronogramaTecnico) REFERENCES CronogramaTecnicos (idCronogramaTecnico),
-    FOREIGN KEY (idActividadCronogramaTecnico) REFERENCES ActividadCronogramaTecnicos (idActividadCronogramaTecnico)
+    FOREIGN KEY (idActividadCronogramaTecnico) REFERENCES ActividadesCronogramaTecnicos (idActividadCronogramaTecnico)
 );
 
 CREATE TABLE IF NOT EXISTS Ventas(
@@ -435,7 +435,7 @@ VALUES
 	('Carrera 732Bis # 90-12', 1038279654),
 	('Avenida 369 Este # 34-56', 1012547698);
 
-INSERT INTO ADMINISTRADOR (numeroDocumento) 
+INSERT INTO Administrador (numeroDocumento) 
 value (1021826839);
 
 INSERT INTO Tecnicos (especialidad, numeroDocumento)
@@ -636,14 +636,14 @@ VALUES
 	(6, 10, 2),
 	(4, 2, 1);
 
-INSERT INTO ActividadCronogramaTecnicos (nombreActividad)
+INSERT INTO ActividadesCronogramaTecnicos (nombreActividad)
 VALUES
 	("Cita de Análisis"),
     ("Cita de Mantenimiento"),
     ("Cita de Instalación"),
     ("Entrega de Envío");
     
-INSERT INTO detalleactividadcronograma (idCronogramaTecnico, idActividadCronogramaTecnico, fechaActividadCronograma)
+INSERT INTO detallesactividadcronograma (idCronogramaTecnico, idActividadCronogramaTecnico, fechaActividadCronograma)
 VALUE
 	(1, 1,'2022-07-18 09:30:00'),
 	(2, 2, '2023-02-14 17:00:00'),
@@ -751,7 +751,7 @@ VALUES
 	SELECT concat(nombre, " ", apellido) as Nombre_Usuario, fechaCotizacion as Fecha, totalCotizacion as Total
     From cotizaciones
     INNER JOIN Clientes on Cotizaciones.idCliente = Clientes.idCliente
-    INNER JOIN Usuarios on Clientes.numeroDocumento = Usuari    os.numeroDocumento;
+    INNER JOIN Usuarios on Clientes.numeroDocumento = Usuarios.numeroDocumento;
     
     DROP VIEW IF EXISTS tecnicosActividadCitaAnalisis;
     
@@ -759,9 +759,9 @@ VALUES
 	SELECT t.idTecnico, t.numeroDocumento, u.nombre, u.apellido
 	FROM tecnicos t
 	JOIN usuarios u ON t.numeroDocumento = u.numeroDocumento
-	JOIN cronogramatecnicos c ON t.idTecnico = c.Tecnico_idTecnico
-	JOIN detalleactividadcronograma dac ON c.idCronogramaTecnico = dac.idCronogramaTecnico
-	JOIN actividadcronogramatecnicos ac ON dac.idActividadCronogramaTecnico = ac.idActividadCronogramaTecnico
+	JOIN cronogramatecnicos c ON t.idTecnico = c.idTecnico
+	JOIN detallesactividadcronograma dac ON c.idCronogramaTecnico = dac.idCronogramaTecnico
+	JOIN actividadescronogramatecnicos ac ON dac.idActividadCronogramaTecnico = ac.idActividadCronogramaTecnico
 	WHERE ac.idActividadCronogramaTecnico = 1;
 	
     DROP VIEW IF EXISTS tecnicosActividadCitaMantenimiento;
@@ -770,9 +770,9 @@ VALUES
 	SELECT t.idTecnico, t.numeroDocumento, u.nombre, u.apellido
 	FROM tecnicos t
 	JOIN usuarios u ON t.numeroDocumento = u.numeroDocumento
-	JOIN cronogramatecnicos c ON t.idTecnico = c.Tecnico_idTecnico
-	JOIN detalleactividadcronograma dac ON c.idCronogramaTecnico = dac.idCronogramaTecnico
-	JOIN actividadcronogramatecnicos ac ON dac.idActividadCronogramaTecnico = ac.idActividadCronogramaTecnico
+	JOIN cronogramatecnicos c ON t.idTecnico = c.idTecnico
+	JOIN detallesactividadcronograma dac ON c.idCronogramaTecnico = dac.idCronogramaTecnico
+	JOIN actividadescronogramatecnicos ac ON dac.idActividadCronogramaTecnico = ac.idActividadCronogramaTecnico
 	WHERE ac.idActividadCronogramaTecnico= 2;
 
 	DROP VIEW IF EXISTS tecnicosActividadCitaInstalacion;
@@ -781,9 +781,9 @@ VALUES
 	SELECT t.idTecnico, t.numeroDocumento, u.nombre, u.apellido
 	FROM tecnicos t
 	JOIN usuarios u ON t.numeroDocumento = u.numeroDocumento
-	JOIN cronogramatecnicos c ON t.idTecnico = c.Tecnico_idTecnico
-	JOIN detalleactividadcronograma dac ON c.idCronogramaTecnico = dac.idCronogramaTecnico
-	JOIN actividadcronogramatecnicos ac ON dac.idActividadCronogramaTecnico = ac.idActividadCronogramaTecnico
+	JOIN cronogramatecnicos c ON t.idTecnico = c.idTecnico
+	JOIN detallesactividadcronograma dac ON c.idCronogramaTecnico = dac.idCronogramaTecnico
+	JOIN actividadescronogramatecnicos ac ON dac.idActividadCronogramaTecnico = ac.idActividadCronogramaTecnico
 	WHERE ac.idActividadCronogramaTecnico= 3;
 
 	DROP VIEW IF EXISTS tecnicosActividadEntregaEnvio;
@@ -792,28 +792,28 @@ VALUES
 	SELECT t.idTecnico, t.numeroDocumento, u.nombre, u.apellido
 	FROM tecnicos t
 	JOIN usuarios u ON t.numeroDocumento = u.numeroDocumento
-	JOIN cronogramatecnicos c ON t.idTecnico = c.Tecnico_idTecnico
-	JOIN detalleactividadcronograma dac ON c.idCronogramaTecnico = dac.idCronogramaTecnico
-	JOIN actividadcronogramatecnicos ac ON dac.idActividadCronogramaTecnico = ac.idActividadCronogramaTecnico
+	JOIN cronogramatecnicos c ON t.idTecnico = c.idTecnico
+	JOIN detallesactividadcronograma dac ON c.idCronogramaTecnico = dac.idCronogramaTecnico
+	JOIN actividadescronogramatecnicos ac ON dac.idActividadCronogramaTecnico = ac.idActividadCronogramaTecnico
 	WHERE ac.idActividadCronogramaTecnico = 4;
 
 	DROP VIEW IF EXISTS consultarEnvios;
 
 	CREATE VIEW consultarEnvios
-	AS SELECT envios.idEnvio, estadosenvios.nombreEstadoEnvio, envios.direccion,
+	AS SELECT envios.idEnvio, estadosenvios.nombreEstadoEnvio, envios.direccionEnvio,
 	tecnicos.idTecnico
 	FROM estadosenvios
-	JOIN envios ON envios.EstadosEnvios_idEstadoEnvio = estadosenvios.idEstadoEnvio
+	JOIN envios ON envios.idEstadoEnvio = estadosenvios.idEstadoEnvio
 	JOIN tecnicos ON tecnicos.idTecnico = envios.idTecnico;
     
 	DROP VIEW IF EXISTS consultarQuejas;
     
     CREATE VIEW consultarQuejas AS
-	SELECT idPQRSF, fechaPQRSF, informacionPQRSF, idCliente, nombreEstadoPQRSF
+	SELECT idPQRSF, fechaPQRSF, informacionPQRSF, c.idCliente, nombreEstadoPQRSF
 	FROM PQRSF
-	JOIN Clientes c ON PQRSF.Clientes_idCliente = c.idCliente
-	JOIN EstadosPQRSF e ON PQRSF.EstadosPQRSF_idEstadoPQRSF = e.idEstadoPQRSF
-	WHERE TiposPQRSF_idTipoPQRSF = 2;
+	JOIN Clientes c ON PQRSF.idCliente = c.idCliente
+	JOIN EstadosPQRSF e ON PQRSF.idEstadoPQRSF = e.idEstadoPQRSF
+	WHERE idTipoPQRSF = 2;
 
 /*Procedimiento*/
 	
@@ -829,7 +829,7 @@ VALUES
 	BEGIN
 		DECLARE idCronogramaTecnico INT;
 		SELECT MAX(idCronogramaTecnico) INTO idCronogramaTecnico FROM cronogramatecnicos;
-		INSERT INTO detalleactividadcronograma (idCronogramaTecnico, idActividadCronogramaTecnico, fechaActividadCronograma)
+		INSERT INTO detallesactividadcronograma (idCronogramaTecnico, idActividadCronogramaTecnico, fechaActividadCronograma)
 		VALUES (idCronogramaTecnico, p_idActividadCronogramaTecnico, p_fechaActividadCronograma);
 		UPDATE CronogramaTecnicos
 		SET Tecnico_idTecnico = p_idTecnico
@@ -848,7 +848,7 @@ VALUES
 	AFTER UPDATE ON envios
 	FOR EACH ROW
 	BEGIN
-		IF NEW.EstadosEnvios_idEstadoEnvio = 3 THEN
+		IF NEW.idEstadoEnvio = 3 THEN
 			INSERT INTO enviosEntregados (idEnvio, fecha, idTecnicoEncargado, documentoTecnico)
 			SELECT NEW.idEnvio, NOW(), tecnicos.idTecnico, tecnicos.numeroDocumento
 			FROM tecnicos
@@ -856,4 +856,4 @@ VALUES
 		END IF;
 	END //
 	DELIMITER ;
-	UPDATE envios SET EstadosEnvios_idEstadoEnvio = '3' WHERE envios.idEnvio = 7
+	UPDATE envios SET idEstadoEnvio = '3' WHERE envios.idEnvio = 7
