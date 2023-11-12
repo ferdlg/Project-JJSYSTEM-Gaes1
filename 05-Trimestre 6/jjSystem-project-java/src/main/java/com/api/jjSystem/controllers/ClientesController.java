@@ -29,7 +29,7 @@ public class ClientesController {
     {
         return clientesService.getClienteById(idCliente);
     }
-    @DeleteMapping
+    @DeleteMapping("idCliente")
     public void deleteClientebyId(@PathVariable("idCliente")Integer idCliente)
     {
         clientesService.deleteClienteById(idCliente);

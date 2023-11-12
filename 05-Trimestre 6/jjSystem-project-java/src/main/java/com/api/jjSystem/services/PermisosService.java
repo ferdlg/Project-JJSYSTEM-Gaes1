@@ -14,24 +14,24 @@ public class PermisosService {
     @Autowired
     private PermisosRepository permisosRepository;
 
-    public Permisos createPermisos (Permisos permisos)
+    public Permisos createPermisos (Permisos permiso)
     {
-        return permisosRepository.save(permisos);
+        return permisosRepository.save(permiso);
     }
 
-    public Permisos getPermisosById (Integer id)
+    public Permisos getPermisosById (Integer idPermiso)
     {
-        Optional<Permisos> optionalPermisos = permisosRepository.findById(id);
+        Optional<Permisos> optionalPermisos = permisosRepository.findById(idPermiso);
         return optionalPermisos.get();
     }
 
-    public List<Permisos> getAllPermisos ()
+    public List<Permisos> getAllPermisos()
     {
         return permisosRepository.findAll();
     }
 
-    public void deletePermisos (Integer id)
+    public void deletePermisos(Integer idPermiso)
     {
-        permisosRepository.deleteById(id);
+        permisosRepository.deleteById(idPermiso);
     }
 }

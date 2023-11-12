@@ -9,24 +9,27 @@ public class Permisos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPermiso")
-    private Integer id;
-
+    private Integer idPermiso;
     private String nombrePermiso;
+
+    //Constructores
 
     public Permisos() {
     }
 
-    public Permisos(Integer id, String nombrePermiso) {
-        this.id = id;
+    public Permisos(Integer idPermiso, String nombrePermiso) {
+        this.idPermiso = idPermiso;
         this.nombrePermiso = nombrePermiso;
     }
 
-    public Integer getId() {
-        return id;
+   //Getter y Setter
+
+    public Integer getIdPermiso() {
+        return idPermiso;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdPermiso(Integer idPermiso) {
+        this.idPermiso = idPermiso;
     }
 
     public String getNombrePermiso() {

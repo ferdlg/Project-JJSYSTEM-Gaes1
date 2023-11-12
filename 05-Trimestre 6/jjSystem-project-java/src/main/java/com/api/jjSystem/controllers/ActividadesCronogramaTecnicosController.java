@@ -17,19 +17,18 @@ public class ActividadesCronogramaTecnicosController {
     {
         return actividadesCronogramaTecnicosService.createActividadesTecnicos(actividadesCronogramaTecnicos);
     }
-
+    @GetMapping
+    public List<ActividadesCronogramaTecnicos> getAllActidadesTecnicos()
+    {
+        return actividadesCronogramaTecnicosService.getAllActidadesTecnicos();
+    }
     @GetMapping("{idActividadCronogramaTecnico}")
     public ActividadesCronogramaTecnicos getActividadesTecnicosById(@PathVariable Integer idActividadCronogramaTecnico)
     {
         return actividadesCronogramaTecnicosService.getActidadesTecnicosById(idActividadCronogramaTecnico);
     }
 
-    @GetMapping
-    public List<ActividadesCronogramaTecnicos> getAllActidadesTecnicos()
-    {
-        return actividadesCronogramaTecnicosService.getAllActidadesTecnicos();
-    }
-    @DeleteMapping
+    @DeleteMapping("{idActividadCronogramaTecnico}")
     public void deleteActidadesTecnicosById(@PathVariable("idActividadCronogramaTecnico")Integer idActividadCronogramaTecnico)
     {
         actividadesCronogramaTecnicosService.deleteActidadesTecnicos(idActividadCronogramaTecnico);

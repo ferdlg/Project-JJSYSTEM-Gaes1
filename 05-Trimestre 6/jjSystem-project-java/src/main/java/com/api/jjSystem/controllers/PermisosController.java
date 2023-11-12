@@ -15,7 +15,7 @@ public class PermisosController {
     private PermisosService permisosService;
 
     @PostMapping
-    public Permisos createPermisos (Permisos permisos)
+    public Permisos createPermiso(Permisos permisos)
     {
         return permisosService.createPermisos(permisos);
     }
@@ -26,15 +26,15 @@ public class PermisosController {
        return permisosService.getAllPermisos();
     }
 
-    @GetMapping("{id}")
-    public Permisos buscarPermisoById (@PathVariable Integer id)
+    @GetMapping("{idPermiso}")
+    public Permisos buscarPermisosById (@PathVariable Integer idPermiso)
     {
-        return permisosService.getPermisosById(id);
+        return permisosService.getPermisosById(idPermiso);
     }
 
-    @DeleteMapping("{id}")
-    public void deletePermisoById (@PathVariable("id") Integer id)
+    @DeleteMapping("{idPermiso}")
+    public void deletePermisoById(@PathVariable("idPermiso") Integer idPermiso)
     {
-        permisosService.deletePermisos(id);
+        permisosService.deletePermisos(idPermiso);
     }
 }
