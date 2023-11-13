@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2e624fd-919f-4ff6-9349-fdac3641aa7a" name="Changes" comment="Cambios en modelos, adición de foreign keys">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/ActividadesCronogramaTecnicosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/ActividadesCronogramaTecnicosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/ClientesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/ClientesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/PermisosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/PermisosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Permisos.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Permisos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/PermisosService.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/services/PermisosService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/frontapp/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/frontapp/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/frontapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/frontapp/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/EnviosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/EnviosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Envios.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Envios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,26 +78,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Project-JJSYSTEM-Gaes1/05-Trimestre 6/jjSystem-project-java",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Project-JJSYSTEM-Gaes1/05-Trimestre 6/jjSystem-project-java&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="JjSystemApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="jjSystem" />
@@ -131,6 +130,7 @@
       <workItem from="1698031139203" duration="1849000" />
       <workItem from="1698166376816" duration="11640000" />
       <workItem from="1699756252342" duration="2518000" />
+      <workItem from="1699823286568" duration="3849000" />
     </task>
     <task id="LOCAL-00001" summary="Modelos Productos, CategoriaProductos y Cambio en nombre carpetas">
       <option name="closed" value="true" />
