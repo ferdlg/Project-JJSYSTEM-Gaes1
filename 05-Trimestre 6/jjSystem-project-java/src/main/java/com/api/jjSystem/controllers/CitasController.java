@@ -13,7 +13,7 @@ public class CitasController {
     @Autowired
     private CitasService citasService;
     @PostMapping
-    public Citas createCitas(Citas citas)
+    public Citas createCitas(@RequestBody Citas citas)
     {
         return citasService.createCita(citas);
     }
@@ -22,12 +22,12 @@ public class CitasController {
     {
         return citasService.getAllCita();
     }
-    @GetMapping("idCita")
+    @GetMapping("{idCita}")
     public Citas getCitasById(@PathVariable Integer idCita)
     {
         return citasService.getCitaById(idCita);
     }
-    @DeleteMapping("idCita")
+    @DeleteMapping("{idCita}")
     public void deleteCitasById(@PathVariable("idCita") Integer idCita)
     {
         citasService.deleteCitaById(idCita);

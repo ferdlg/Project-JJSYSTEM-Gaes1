@@ -1,7 +1,9 @@
 package com.api.jjSystem.models;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.math.BigInteger;
 import java.util.Date;
@@ -12,16 +14,22 @@ public class Citas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Nonnull
     @Column(name = "idCita")
     private Integer idCita;
+    @Nonnull
     @Column(name = "fechaCita")
     private Date fechaCita;
+    @Nonnull
     @Column(name = "direccionCita")
     private String direccionCita;
+    @Nonnull
     @Column(name = "contactoCliente")
     private BigInteger contactoCliente;
+    @Nonnull
     @Column(name = "descripcionCita")
     private String descripcionCita;
+
 
     @ManyToOne //establece la relacion de muchas citas pueden estar asociadas a un tecnico
     @JoinColumn(name = "idTecnico")
@@ -31,9 +39,11 @@ public class Citas {
     @JoinColumn(name = "idAdministrador")
     private Administrador administrador;
 
+
     @ManyToOne
     @JoinColumn(name = "idCotizacion")
     private Cotizaciones cotizaciones;
+
 
     @ManyToOne
     @JoinColumn(name = "idEstadoCita")
