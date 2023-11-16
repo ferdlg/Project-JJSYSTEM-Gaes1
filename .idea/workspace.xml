@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2e624fd-919f-4ff6-9349-fdac3641aa7a" name="Changes" comment="Cambios en modelos, adición de foreign keys">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/frontapp/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/frontapp/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/frontapp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/frontapp/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/EnviosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/controllers/EnviosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Envios.java" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/java/com/api/jjSystem/models/Envios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - BD SCRIPT.sql" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - BD SCRIPT.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - MODELO RELACIONAL.mwb" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - MODELO RELACIONAL.mwb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - MODELO RELACIONAL.mwb.bak" beforeDir="false" afterPath="$PROJECT_DIR$/04-Trimestre 4/Bases de datos/JJSYSTEM - MODELO RELACIONAL.mwb.bak" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/05-Trimestre 6/jjSystem-project-java/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,6 +131,10 @@
       <workItem from="1698166376816" duration="11640000" />
       <workItem from="1699756252342" duration="2518000" />
       <workItem from="1699823286568" duration="3849000" />
+      <workItem from="1700096651499" duration="2233000" />
+      <workItem from="1700116844798" duration="1193000" />
+      <workItem from="1700156077377" duration="1346000" />
+      <workItem from="1700157470041" duration="2971000" />
     </task>
     <task id="LOCAL-00001" summary="Modelos Productos, CategoriaProductos y Cambio en nombre carpetas">
       <option name="closed" value="true" />

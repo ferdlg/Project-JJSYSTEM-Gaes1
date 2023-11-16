@@ -39,10 +39,10 @@ CREATE TABLE IF NOT EXISTS Usuarios(
     password VARCHAR(100) DEFAULT NULL,
     numeroContacto FLOAT DEFAULT NULL,
     idRol INT NOT NULL,
-    idEstadosUsuarios INT NOT NULL,
+    idEstadoUsuario INT NOT NULL,
     PRIMARY KEY (numeroDocumento),
     FOREIGN KEY (idRol) REFERENCES Roles (idRol),
-    FOREIGN KEY (idEstadosUsuarios) REFERENCES EstadosUsuarios (idEstadoUsuario)
+    FOREIGN KEY (idEstadoUsuario) REFERENCES EstadosUsuarios (idEstadoUsuario)
 );
 
 CREATE TABLE IF NOT EXISTS Clientes(
@@ -358,7 +358,7 @@ VALUES
 	('Activo'),
     ('Inactivo');
 
-INSERT INTO Usuarios (numeroDocumento, nombre, apellido, email, password, numeroContacto, idRol, idEstadosUsuarios) 
+INSERT INTO Usuarios (numeroDocumento, nombre, apellido, email, password, numeroContacto, idRol, idEstadoUsuario) 
 VALUES
 	(1021826839, 'Joaco', 'Galindo', 'JGalindo1980@jjsystem.com', '57P92rlN', 3208285814, 1, 1),
 	(1027385914, 'Valentina', 'Gutiérrez', 'vgutierrez@mail.com', '2sY9rT5q', 3123456789, 2, 1),
