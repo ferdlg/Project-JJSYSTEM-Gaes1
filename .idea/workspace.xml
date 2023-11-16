@@ -60,7 +60,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -130,7 +130,7 @@
       <workItem from="1700096651499" duration="2233000" />
       <workItem from="1700116844798" duration="1193000" />
       <workItem from="1700156077377" duration="1346000" />
-      <workItem from="1700157470041" duration="3827000" />
+      <workItem from="1700157470041" duration="3915000" />
     </task>
     <task id="LOCAL-00001" summary="Modelos Productos, CategoriaProductos y Cambio en nombre carpetas">
       <option name="closed" value="true" />
