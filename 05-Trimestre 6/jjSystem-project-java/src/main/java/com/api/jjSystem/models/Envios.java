@@ -10,13 +10,13 @@ public class Envios {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEnvio")
     private Integer idEnvio;
-    @Column(name = "direccion")
+    @Column(name = "direccionEnvio")
     private String direccionEnvio;
     @OneToOne
     @JoinColumn(name = "idTecnico")
     private Tecnicos tecnicos;
     @ManyToOne
-    @JoinColumn(name = "EstadoEnvio_idEstadoEnvio")
+    @JoinColumn(name = "idEstadoEnvio")
     private EstadosEnvios estadosEnvios;
 
     public Envios() {
