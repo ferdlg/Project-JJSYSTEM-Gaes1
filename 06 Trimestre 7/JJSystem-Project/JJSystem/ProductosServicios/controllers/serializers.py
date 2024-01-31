@@ -5,7 +5,7 @@ from ..models import *
 class RolesSerializers(serializers.ModelSerializer):
     #incluimos la clase Meta, para que le de instrucciones al serializador
     class Meta:
-    #le indicamos el modelo que debe bucar
+    #le indicamos el modelo que debe buscar
         model = Roles
     #le especificamos los campos que debe serializar
         fields = '__all__'
