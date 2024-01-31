@@ -26,11 +26,28 @@ class ClientesSerializers(serializers.ModelSerializer):
         model = Clientes
         fields = '__all__'
 
-'''
-- categorias productos
-- categorias servicios
-- productos
-- servicios
-- proveedor producto 
+class CategoriasProductosSerializers(serializers.Serializer):
+    class Meta:
+        model = Categoriasproductos
+        fields = '__all__'
 
-'''
+class CategoriasServiciosSerializers(serializers.Serializer):
+    class Meta:
+        model = Categoriasservicios
+        fields = '__all__'
+
+class ProductosSerializer(serializers.Serializer):
+    class Meta: 
+        model = Productos
+        fields = '__all__'
+
+class ServiciosSerializer(serializers.Serializer):
+    class Meta:
+        model = Servicios
+        fields = '__all__'
+
+class ProveedoresProductosSerializer(serializers.Serializer):
+    class Meta:
+        model = Proveedoresproductos
+        fields = '__all__'
+    
