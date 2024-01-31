@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'Envios',
     'ProductosServicios',
     'ServicioTecnico',
-    
+    'Pqrsf'
 ]
 
 MIDDLEWARE = [
@@ -70,7 +70,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':  'jjsystem_db',
-        'PASSWORD': '1021662854',
+        'PASSWORD': '',
+        #'PASSWORD': '1021662854',
         'USER': 'root',
         'HOST': '127.0.0.1',
         'PORT': '3306',
