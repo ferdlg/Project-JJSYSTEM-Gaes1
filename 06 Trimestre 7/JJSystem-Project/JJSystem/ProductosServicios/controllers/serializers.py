@@ -10,6 +10,15 @@ class RolesSerializers(serializers.ModelSerializer):
     #le especificamos los campos que debe serializar
         fields = '__all__'
 
+class PermisosSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Permisos
+        fields = '__all__'
+
+class Rol_has_permisosSerializers(serializers.Serializer):
+    class Meta:
+        model = RolesHasPermisos
+        fields = '__all__'
 '''
 Nota: en tablas en las que debemos traer opciones,
 se deben especificar uno por uno los campos a serializar
@@ -50,4 +59,6 @@ class ProveedoresProductosSerializer(serializers.Serializer):
     class Meta:
         model = Proveedoresproductos
         fields = '__all__'
+
+
     
