@@ -3,6 +3,6 @@ from ..models import Clientes
 from serializers import ClientesSerializers
 
 
-class productosCRUD(viewsets.ModelViewSet):
+class clientesCRUD(viewsets.ModelViewSet):
     queryset = Clientes.objects.all()
     serializer_class = ClientesSerializers

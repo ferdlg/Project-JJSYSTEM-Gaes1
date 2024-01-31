@@ -15,7 +15,7 @@ class PermisosSerializers(serializers.ModelSerializer):
         model = Permisos
         fields = '__all__'
 
-class Rol_has_permisosSerializers(serializers.Serializer):
+class Rol_has_permisosSerializers(serializers.ModelSerializer):
     class Meta:
         model = RolesHasPermisos
         fields = '__all__'
@@ -35,27 +35,27 @@ class ClientesSerializers(serializers.ModelSerializer):
         model = Clientes
         fields = '__all__'
 
-class CategoriasProductosSerializers(serializers.Serializer):
+class CategoriasProductosSerializers(serializers.ModelSerializer):
     class Meta:
         model = Categoriasproductos
         fields = '__all__'
 
-class CategoriasServiciosSerializers(serializers.Serializer):
+class CategoriasServiciosSerializers(serializers.ModelSerializer):
     class Meta:
         model = Categoriasservicios
         fields = '__all__'
 
-class ProductosSerializer(serializers.Serializer):
+class ProductosSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Productos
         fields = '__all__'
 
-class ServiciosSerializer(serializers.Serializer):
+class ServiciosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Servicios
         fields = '__all__'
 
-class ProveedoresProductosSerializer(serializers.Serializer):
+class ProveedoresProductosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Proveedoresproductos
         fields = '__all__'

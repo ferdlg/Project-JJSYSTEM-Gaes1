@@ -7,7 +7,7 @@ class Actividadescronogramatecnicos(models.Model):
     nombreactividad = models.CharField(db_column='nombreActividad', max_length=30)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'actividadescronogramatecnicos'
 
 
@@ -16,7 +16,7 @@ class Administrador(models.Model):
     numerodocumento = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='numeroDocumento')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'administrador'
 
 
@@ -24,7 +24,7 @@ class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
     class Meta:
-        managed = False
+        
         db_table = 'auth_group'
 
 
@@ -34,7 +34,7 @@ class AuthGroupPermissions(models.Model):
     permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
 
     class Meta:
-        managed = False
+        
         db_table = 'auth_group_permissions'
         unique_together = (('group', 'permission'),)
 
@@ -45,7 +45,7 @@ class AuthPermission(models.Model):
     codename = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
+        
         db_table = 'auth_permission'
         unique_together = (('content_type', 'codename'),)
 
@@ -63,7 +63,7 @@ class AuthUser(models.Model):
     date_joined = models.DateTimeField()
 
     class Meta:
-        managed = False
+        
         db_table = 'auth_user'
 
 
@@ -73,7 +73,7 @@ class AuthUserGroups(models.Model):
     group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
 
     class Meta:
-        managed = False
+        
         db_table = 'auth_user_groups'
         unique_together = (('user', 'group'),)
 
@@ -84,7 +84,7 @@ class AuthUserUserPermissions(models.Model):
     permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
 
     class Meta:
-        managed = False
+        
         db_table = 'auth_user_user_permissions'
         unique_together = (('user', 'permission'),)
 
@@ -94,7 +94,7 @@ class Categoriasproductos(models.Model):
     nombrecategoria = models.CharField(db_column='nombreCategoria', max_length=20)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'categoriasproductos'
 
 
@@ -103,7 +103,7 @@ class Categoriasservicios(models.Model):
     nombrecategoria = models.CharField(db_column='nombreCategoria', max_length=30, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'categoriasservicios'
 
 
@@ -119,7 +119,7 @@ class Citas(models.Model):
     idestadocita = models.ForeignKey('Estadoscitas', models.DO_NOTHING, db_column='idEstadoCita')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'citas'
 
 
@@ -129,7 +129,7 @@ class Clientes(models.Model):
     numerodocumento = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='numeroDocumento')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'clientes'
 
 
@@ -144,7 +144,7 @@ class Cotizaciones(models.Model):
     idestadocotizacion = models.ForeignKey('Estadoscotizaciones', models.DO_NOTHING, db_column='idEstadoCotizacion')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'cotizaciones'
 
 
@@ -155,7 +155,7 @@ class Cronogramatecnicos(models.Model):
     iddisponibilidadcronograma = models.ForeignKey('Disponibilidadcronogramas', models.DO_NOTHING, db_column='idDisponibilidadCronograma', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'cronogramatecnicos'
 
 
@@ -166,7 +166,7 @@ class Detallesactividadcronograma(models.Model):
     fechaactividadcronograma = models.DateTimeField(db_column='fechaActividadCronograma')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'detallesactividadcronograma'
 
 
@@ -178,7 +178,7 @@ class Detallesventas(models.Model):
     idventa = models.ForeignKey('Ventas', models.DO_NOTHING, db_column='idVenta')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'detallesventas'
 
 
@@ -187,7 +187,7 @@ class Disponibilidadcronogramas(models.Model):
     nombredisponibilidad = models.CharField(db_column='nombreDisponibilidad', max_length=30)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'disponibilidadcronogramas'
 
 
@@ -201,7 +201,7 @@ class DjangoAdminLog(models.Model):
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
 
     class Meta:
-        managed = False
+        
         db_table = 'django_admin_log'
 
 
@@ -210,7 +210,7 @@ class DjangoContentType(models.Model):
     model = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
+        
         db_table = 'django_content_type'
         unique_together = (('app_label', 'model'),)
 
@@ -222,7 +222,7 @@ class DjangoMigrations(models.Model):
     applied = models.DateTimeField()
 
     class Meta:
-        managed = False
+        
         db_table = 'django_migrations'
 
 
@@ -232,7 +232,7 @@ class DjangoSession(models.Model):
     expire_date = models.DateTimeField()
 
     class Meta:
-        managed = False
+        
         db_table = 'django_session'
 
 
@@ -243,7 +243,7 @@ class Envios(models.Model):
     idestadoenvio = models.ForeignKey('Estadosenvios', models.DO_NOTHING, db_column='idEstadoEnvio', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'envios'
 
 
@@ -254,7 +254,7 @@ class Enviosentregados(models.Model):
     documentotecnico = models.BigIntegerField(db_column='documentoTecnico', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'enviosentregados'
 
 
@@ -263,7 +263,7 @@ class Estadoscitas(models.Model):
     nombreestadocita = models.CharField(db_column='nombreEstadoCita', max_length=20)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'estadoscitas'
 
 
@@ -272,7 +272,7 @@ class Estadoscotizaciones(models.Model):
     nombreestadocotizacion = models.CharField(db_column='nombreEstadoCotizacion', max_length=20)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'estadoscotizaciones'
 
 
@@ -281,7 +281,7 @@ class Estadosenvios(models.Model):
     nombreestadoenvio = models.CharField(db_column='nombreEstadoEnvio', max_length=20)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'estadosenvios'
 
 
@@ -290,7 +290,7 @@ class Estadospqrsf(models.Model):
     nombreestadopqrsf = models.CharField(db_column='nombreEstadoPQRSF', max_length=20)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'estadospqrsf'
 
 
@@ -299,7 +299,7 @@ class Estadosusuarios(models.Model):
     nombreestadousuario = models.CharField(db_column='nombreEstadoUsuario', max_length=50)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'estadosusuarios'
 
 
@@ -309,7 +309,7 @@ class Permisos(models.Model):
     idrol = models.ForeignKey('Roles', models.DO_NOTHING, db_column='idRol', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'permisos'
 
 
@@ -322,7 +322,7 @@ class Pqrsf(models.Model):
     idestadopqrsf = models.ForeignKey(Estadospqrsf, models.DO_NOTHING, db_column='idEstadoPQRSF')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'pqrsf'
 
 
@@ -337,7 +337,7 @@ class Productos(models.Model):
     idproveedorproducto = models.ForeignKey('Proveedoresproductos', models.DO_NOTHING, db_column='idProveedorProducto', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'productos'
 
 
@@ -346,7 +346,7 @@ class Proveedoresproductos(models.Model):
     nombreproveedor = models.CharField(db_column='nombreProveedor', max_length=50)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'proveedoresproductos'
 
 
@@ -358,7 +358,7 @@ class Respuestas(models.Model):
     idpqrsf = models.ForeignKey(Pqrsf, models.DO_NOTHING, db_column='idPQRSF', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'respuestas'
 
 
@@ -367,7 +367,7 @@ class Roles(models.Model):
     nombrerol = models.CharField(db_column='nombreRol', max_length=20, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'roles'
 
 
@@ -376,7 +376,7 @@ class RolesHasPermisos(models.Model):
     idpermiso = models.ForeignKey(Permisos, models.DO_NOTHING, db_column='idPermiso', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'roles_has_permisos'
 
 
@@ -387,7 +387,7 @@ class Servicios(models.Model):
     idcategoriaservicio = models.ForeignKey(Categoriasservicios, models.DO_NOTHING, db_column='idCategoriaServicio', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'servicios'
 
 
@@ -397,7 +397,7 @@ class Tecnicos(models.Model):
     numerodocumento = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='numeroDocumento')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'tecnicos'
 
 
@@ -406,7 +406,7 @@ class Tipospqrsf(models.Model):
     nombretipopqrsf = models.CharField(db_column='nombreTipoPQRSF', max_length=20)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'tipospqrsf'
 
 
@@ -421,7 +421,7 @@ class Usuarios(models.Model):
     idestadosusuarios = models.ForeignKey(Estadosusuarios, models.DO_NOTHING, db_column='idEstadosUsuarios')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'usuarios'
 
 
@@ -432,5 +432,5 @@ class Ventas(models.Model):
     idcotizacion = models.ForeignKey(Cotizaciones, models.DO_NOTHING, db_column='idCotizacion')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'ventas'
