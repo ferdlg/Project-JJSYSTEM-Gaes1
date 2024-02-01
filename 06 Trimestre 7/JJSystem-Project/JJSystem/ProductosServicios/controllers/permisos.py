@@ -3,6 +3,6 @@ from ..models import Permisos
 from serializers import PermisosSerializers
 
 
-class productosCRUD(viewsets.ModelViewSet):
+class permisosCRUD(viewsets.ModelViewSet):
     queryset = Permisos.objects.all()
     serializer_class = PermisosSerializers

@@ -3,6 +3,6 @@ from ..models import Proveedoresproductos
 from serializers import ProveedoresProductosSerializer
 
 
-class productosCRUD(viewsets.ModelViewSet):
+class proveedoresCRUD(viewsets.ModelViewSet):
     queryset = Proveedoresproductos.objects.all()
     serializer_class = ProveedoresProductosSerializer
