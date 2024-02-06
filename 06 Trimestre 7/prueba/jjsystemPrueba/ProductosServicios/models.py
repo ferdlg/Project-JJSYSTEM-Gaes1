@@ -393,8 +393,10 @@ class Servicios(models.Model):
     idcategoriaservicio = models.ForeignKey(Categoriasservicios, models.DO_NOTHING, db_column='idCategoriaServicio', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        
         db_table = 'servicios'
+    
+    
 
 
 class Tecnicos(models.Model):
