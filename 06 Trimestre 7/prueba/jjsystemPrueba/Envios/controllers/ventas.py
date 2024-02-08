@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from ..models import *
-from serializers import VentasSerializers
+from .serializers import VentasSerializers
 
-class enviosCRUD (viewsets.ModelViewSet):
+class ventasCRUD (viewsets.ModelViewSet):
     queryset = Ventas.objects.all()
     serializer_class = VentasSerializers
