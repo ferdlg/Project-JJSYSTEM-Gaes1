@@ -884,6 +884,24 @@ DROP PROCEDURE IF EXISTS CrearProducto;
 
 /*Trigger*/
 
+DELIMITER //
+    CREATE TRIGGER asignarCategoriaProducto
+    BEFORE INSERT ON productos
+    FOR EACH ROW 
+    BEGIN 
+		IF NEW.nombreProducto LIKE 'Camara%' THEN
+			SET NEW.idCategoriaProducto = (SELECT idCategoriaProducto FROM categoriasProducto WHERE nombreCategoria = 'Camara');
+		ELSEIF NEW.nombreProducto LIKE 'DVR%' THEN
+			SET NEW.idCategoriaProducto = (SELECT idCategoriaProducto FROM categoriasProducto WHERE nombreCategoria = 'DVR');
+		ELSEIF NEW.nombreProducto LIKE 'Alarma%' THEN
+			SET NEW.idCategoriaProducto = (SELECT idCategoriaProducto FROM categoriasProducto WHERE nombreCategoria = 'Alarma');
+		ELSEIF NEW.nombreProducto LIKE 'Sensor%' THEN
+			SET NEW.idCategoriaProducto = (SELECT idCategoriaProducto FROM categoriasProducto WHERE nombreCategoria = 'Sensor');
+		ELSE 
+			SET NEW.idCategoriaProducto = NULL;
+		END IF;
+	END;
+
 	DROP TABLE IF EXISTS enviosEntregados;
 	CREATE table enviosEntregados (idEnvio int, fecha datetime, idTecnicoEncargado int, documentoTecnico bigint);
 	DROP TRIGGER IF EXISTS enviosEntregados;
