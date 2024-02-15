@@ -744,6 +744,20 @@ VALUES
     ('2023-01-25', 'Lamentamos mucho los inconvenientes que ha experimentado con su sistema de seguridad y el servicio al cliente. Entendemos su frustración y nos disculpamos por las dificultades para contactarnos. Nos gustaría resolver este problema lo antes posible. Nuestro equipo de soporte técnico se pondrá en contacto con usted para solucionar los problemas con su sistema y brindarle la asistencia necesaria. Valoramos su paciencia y confianza en nuestra empresa, y trabajaremos arduamente para resolver esta situación.', 1, 16);
     
     /*Vistas*/
+
+     DROP VIEW IF EXISTS Producto_Categoria;
+    
+    CREATE VIEW Producto_Categoria AS 
+	SELECT concat(nombreProducto, nombreCategoria) as Producto, nombreCategoria as Categoria
+    From productos
+    INNER JOIN categoriasproductos on productos.idCategoriaProducto = categoriasproductos.idCategoriaProducto;
+    
+      DROP VIEW IF EXISTS Servicio_Categoria;
+    
+    CREATE VIEW Servicio_Categoria AS 
+	SELECT concat(nombreServicio, nombreCategoria) as Servicio, nombreCategoria as Categoria
+    From servicios
+    INNER JOIN categoriasservicios on servicios.idCategoriaServicio = categoriasservicios.idCategoriaServicio;
     
     DROP VIEW IF EXISTS Cotizacion_Cliente;
     
