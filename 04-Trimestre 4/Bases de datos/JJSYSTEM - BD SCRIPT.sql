@@ -121,6 +121,7 @@ CREATE TABLE IF NOT EXISTS Servicios(
     idServicio INT NOT NULL AUTO_INCREMENT,
     nombreServicio TEXT(100) NOT NULL,
     descripcionServicio TEXT(200) NOT NULL,
+    precioServicio FLOAT NOT NULL, 
     idCategoriaServicio INT,
     PRIMARY KEY (idServicio),
 	FOREIGN KEY (idCategoriaServicio) REFERENCES categoriasServicios (idCategoriaServicio)
