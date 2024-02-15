@@ -830,7 +830,38 @@ VALUES
 	WHERE idTipoPQRSF = 2;
 
 /*Procedimiento*/
-	
+
+
+DROP PROCEDURE IF EXISTS CrearProducto;
+    DELIMITER //
+	CREATE PROCEDURE CrearProducto(
+		IN p_nombreProducto TEXT(100),
+		IN p_descripcionProducto TEXT(200),
+		IN p_precioProducto FLOAT,
+		IN p_cantidad INT,
+        IN p_idAdministrador INT,
+        IN p_idCategoriaProducto INT,
+        IN p_idProveedorProducto INT
+	)
+	BEGIN
+		INSERT INTO productos (nombreProducto, descripcionProducto, precioProducto, cantidad, idAdministrador , idCategoriaProducto, idProveedorProducto )
+		VALUES (p_nombreProducto,p_descripcionProducto, p_precioProducto, p_cantidad, p_idAdministrador, p_idCategoriaProducto, p_idProveedorProducto );
+	END //
+	DELIMITER ;
+    
+    DROP PROCEDURE IF EXISTS CrearServicio;
+    DELIMITER //
+    CREATE PROCEDURE CrearServicio(
+		IN p_nombreServicio TEXT(100),
+		IN p_descripcionServicio TEXT(200),
+		IN p_idCategoriaServicio INT
+    )
+	BEGIN
+		INSERT INTO servicios (nombreServicio, descripcionServicio, idCategoriaServicio)
+		VALUES (p_nombreServicio, p_descripcionServicio, p_idCategoriaServicio);
+	END //
+	DELIMITER ;
+
     DROP PROCEDURE IF EXISTS AsignarActividad;
 	
     DELIMITER //
