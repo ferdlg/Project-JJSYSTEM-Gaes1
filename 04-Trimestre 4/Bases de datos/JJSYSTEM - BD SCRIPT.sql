@@ -262,6 +262,12 @@ CREATE TABLE IF NOT EXISTS Respuestas (
     FOREIGN KEY (idPQRSF) REFERENCES PQRSF (idPQRSF)
 );
 
+CREATE table IF NOT EXISTS historialCotizaciones (
+	idCotizacion int,
+    fechaCreada datetime DEFAULT CURRENT_TIMESTAMP, 
+    fechaActualizacion datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 INSERT INTO ROLES (idRol, nombreRol) 
 VALUES
 	(1, "Administrador"),
@@ -941,11 +947,6 @@ DELIMITER //
 		END IF;
 	END;
 
-	DROP TABLE IF EXISTS historialCotizaciones;
-	CREATE table historialCotizaciones (
-	idCotizacion int,
-    fechaCreada datetime DEFAULT CURRENT_TIMESTAMP, 
-    fechaActualizacion datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);
     
 	DROP TRIGGER IF EXISTS Cotizaciones;
     
@@ -962,39 +963,40 @@ DELIMITER //
 	DROP TABLE IF EXISTS enviosEntregados;
 	CREATE table enviosEntregados (idEnvio int, fecha datetime, idTecnicoEncargado int, documentoTecnico bigint);
 	DROP TRIGGER IF EXISTS enviosEntregados;
-    
+  DROP TABLE IF EXISTS enviosEntregados;
+	CREATE table enviosEntregados (idEnvio int, fecha datetime, idTecnicoEncargado int, documentoTecnico bigint);
+	
+    DROP TRIGGER IF EXISTS enviosEntregados;
     DELIMITER //
-	CREATE TRIGGER enviosEntregados
-	AFTER UPDATE ON envios
-	FOR EACH ROW
-	BEGIN
-		IF NEW.idEstadoEnvio = 3 THEN
-			INSERT INTO enviosEntregados (idEnvio, fecha, idTecnicoEncargado, documentoTecnico)
-			SELECT NEW.idEnvio, NOW(), tecnicos.idTecnico, tecnicos.numeroDocumento
-			FROM tecnicos
-			WHERE tecnicos.idTecnico = NEW.idTecnico;
-		END IF;
-	END //
-	DELIMITER ;
-	UPDATE envios SET idEstadoEnvio = '3' WHERE envios.idEnvio = 7
+CREATE TRIGGER enviosEntregados
+AFTER UPDATE ON envios
+FOR EACH ROW
+BEGIN
+	IF NEW.idEstadoEnvio = 3 THEN
+		INSERT INTO enviosEntregados (idEnvio, fecha, idTecnicoEncargado, documentoTecnico)
+		SELECT NEW.idEnvio, NOW(), tecnicos.idTecnico, tecnicos.numeroDocumento
+		FROM tecnicos
+		WHERE tecnicos.idTecnico = NEW.idTecnico;
+	END IF;
+END //
+DELIMITER ;
 
+UPDATE envios SET idEstadoEnvio = '3' WHERE envios.idEnvio = 7;
 
-	CREATE TABLE IF NOT EXISTS historialPQRSFporTipoEstado (
-    	idRegistro INT AUTO_INCREMENT PRIMARY KEY,
-    	idPQRSF INT,
-    	idTipoPQRSF INT,
-    	idEstadoPQRSF INT,
-    	fechaRegistro DATETIME
-	);
+CREATE TABLE IF NOT EXISTS historialPQRSFporTipoEstado (
+	idRegistro INT AUTO_INCREMENT PRIMARY KEY,
+	idPQRSF INT,
+	idTipoPQRSF INT,
+	idEstadoPQRSF INT,
+	fechaRegistro DATETIME
+);
 
-
-	DELIMITER //
-	CREATE TRIGGER registroPQRSFPorTipoEstado
-	AFTER INSERT ON PQRSF
-	FOR EACH ROW
-	BEGIN
-
-    	INSERT INTO historialPQRSFporTipoEstado (idPQRSF, idTipoPQRSF, idEstadoPQRSF, fechaRegistro)
-    	SELECT (NEW.idPQRSF, NEW.idTipoPQRSF, NEW.idEstadoPQRSF, NOW());
-	END; //
-	DELIMITER ;
+DELIMITER //
+CREATE TRIGGER registroPQRSFPorTipoEstado
+AFTER INSERT ON PQRSF
+FOR EACH ROW
+BEGIN
+	INSERT INTO historialPQRSFporTipoEstado (idPQRSF, idTipoPQRSF, idEstadoPQRSF, fechaRegistro)
+	SELECT NEW.idPQRSF, NEW.idTipoPQRSF, NEW.idEstadoPQRSF, NOW();
+END; //
+DELIMITER ;
