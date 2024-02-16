@@ -883,6 +883,18 @@ DROP PROCEDURE IF EXISTS CrearProducto;
 	END //
 	DELIMITER ;
 
+    DELIMITER //
+	CREATE PROCEDURE RegistrarEnvio(
+	    IN p_direccionEnvio VARCHAR(255),
+	    IN p_idTecnico INT,
+	    IN p_idEstadoEnvio INT
+	)
+	BEGIN
+	    INSERT INTO envios (direccionEnvio, idTecnico, idEstadoEnvio)
+	    VALUES (p_direccionEnvio, p_idTecnico, p_idEstadoEnvio);
+	END //
+	DELIMITER ;
+
 /*Trigger*/
 
 DELIMITER //
