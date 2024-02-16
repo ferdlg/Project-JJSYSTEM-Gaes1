@@ -903,6 +903,24 @@ DELIMITER //
 		END IF;
 	END;
 
+	DROP TABLE IF EXISTS historialCotizaciones;
+	CREATE table historialCotizaciones (
+	idCotizacion int,
+    fechaCreada datetime DEFAULT CURRENT_TIMESTAMP, 
+    fechaActualizacion datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);
+    
+	DROP TRIGGER IF EXISTS Cotizaciones;
+    
+    DELIMITER //
+	CREATE TRIGGER cotizacionesHistorial
+	AFTER UPDATE ON historialCotizaciones
+	FOR EACH ROW
+	BEGIN
+		INSERT INTO cotizacionesHistorial (idCotizacion, fechaCreada, fechaActualizacion)
+        VALUES (NEW.idCotizacion, NOW(), NEW.fechaActualizacion);
+	END; //
+	DELIMITER ;
+
 	DROP TABLE IF EXISTS enviosEntregados;
 	CREATE table enviosEntregados (idEnvio int, fecha datetime, idTecnicoEncargado int, documentoTecnico bigint);
 	DROP TRIGGER IF EXISTS enviosEntregados;
