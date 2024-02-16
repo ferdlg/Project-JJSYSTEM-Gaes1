@@ -3,6 +3,6 @@ from ..models import Cronogramatecnicos
 from .serializers import CronogramatecnicosSerializers
 
 
-class clientesCRUD(viewsets.ModelViewSet):
+class cronogramatecnicosCRUD(viewsets.ModelViewSet):
     queryset = Cronogramatecnicos.objects.all()
     serializer_class = CronogramatecnicosSerializers

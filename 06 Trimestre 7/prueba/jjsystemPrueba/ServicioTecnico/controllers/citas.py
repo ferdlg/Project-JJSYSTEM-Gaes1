@@ -3,6 +3,6 @@ from ..models import Citas
 from .serializers import CitasSerializers
 
 
-class clientesCRUD(viewsets.ModelViewSet):
+class citasCRUD(viewsets.ModelViewSet):
     queryset = Citas.objects.all()
     serializer_class = CitasSerializers

@@ -3,6 +3,6 @@ from ..models import Estadoscotizaciones
 from .serializers import EstadoscotizacionesSerializers
 
 
-class clientesCRUD(viewsets.ModelViewSet):
+class estadocotizacionesCRUD(viewsets.ModelViewSet):
     queryset = Estadoscotizaciones.objects.all()
     serializer_class = EstadoscotizacionesSerializers
