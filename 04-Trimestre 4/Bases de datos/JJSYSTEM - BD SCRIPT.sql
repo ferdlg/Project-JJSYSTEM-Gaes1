@@ -823,12 +823,21 @@ VALUES
     
 	DROP VIEW IF EXISTS consultarQuejas;
     
-    CREATE VIEW consultarQuejas AS
+    	CREATE VIEW consultarQuejas AS
 	SELECT idPQRSF, fechaPQRSF, informacionPQRSF, c.idCliente, nombreEstadoPQRSF
 	FROM PQRSF
 	JOIN Clientes c ON PQRSF.idCliente = c.idCliente
 	JOIN EstadosPQRSF e ON PQRSF.idEstadoPQRSF = e.idEstadoPQRSF
 	WHERE idTipoPQRSF = 2;
+
+	DROP VIEW IF EXISTS Detalle_Envios;
+
+	CREATE VIEW Detalle_Envios AS 
+	SELECT envios.idEnvio, envios.direccionEnvio, tecnicos.numeroDocumento, estadosenvios.nombreEstadoEnvio
+	FROM envios
+	INNER JOIN tecnicos ON envios.idTecnico = tecnicos.idTecnico
+	INNER JOIN estadosenvios ON envios.idEstadoEnvio = estadosenvios.idEstadoEnvio;
+
 
 /*Procedimiento*/
 
