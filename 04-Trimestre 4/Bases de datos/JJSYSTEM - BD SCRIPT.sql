@@ -905,6 +905,22 @@ DROP PROCEDURE IF EXISTS CrearProducto;
 	END //
 	DELIMITER ;
 
+   DROP PROCEDURE IF EXISTS RegistrarPQRSF;
+   DELIMITER //
+	CREATE PROCEDURE RegistrarPQRSF(
+	    IN p_fechaPQRSF DATE,
+	    IN p_informacionPQRSF TEXT(200),
+	    IN p_idCliente INT,
+	    IN p_idEstadoPQRSF INT,
+	    IN p_idTipoPQRSF INT
+	)
+	BEGIN
+	    INSERT INTO PQRSF (fechaPQRSF, informacionPQRSF, idCliente, idEstadoPQRSF, idTipoPQRSF)
+	    VALUES (p_fechaPQRSF, p_informacionPQRSF, p_idCliente, p_idEstadoPQRSF, p_idTipoPQRSF); 
+	END //
+	DELIMITER ;
+
+
 /*Trigger*/
 
 DELIMITER //
@@ -961,3 +977,24 @@ DELIMITER //
 	END //
 	DELIMITER ;
 	UPDATE envios SET idEstadoEnvio = '3' WHERE envios.idEnvio = 7
+
+
+	CREATE TABLE IF NOT EXISTS historialPQRSFporTipoEstado (
+    	idRegistro INT AUTO_INCREMENT PRIMARY KEY,
+    	idPQRSF INT,
+    	idTipoPQRSF INT,
+    	idEstadoPQRSF INT,
+    	fechaRegistro DATETIME
+	);
+
+
+	DELIMITER //
+	CREATE TRIGGER registroPQRSFPorTipoEstado
+	AFTER INSERT ON PQRSF
+	FOR EACH ROW
+	BEGIN
+
+    	INSERT INTO historialPQRSFporTipoEstado (idPQRSF, idTipoPQRSF, idEstadoPQRSF, fechaRegistro)
+    	SELECT (NEW.idPQRSF, NEW.idTipoPQRSF, NEW.idEstadoPQRSF, NOW());
+	END; //
+	DELIMITER ;
