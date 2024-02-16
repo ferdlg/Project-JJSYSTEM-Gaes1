@@ -883,6 +883,7 @@ DROP PROCEDURE IF EXISTS CrearProducto;
 	END //
 	DELIMITER ;
 
+    DROP PROCEDURE IF EXISTS RegistrarEnvio;
     DELIMITER //
 	CREATE PROCEDURE RegistrarEnvio(
 	    IN p_direccionEnvio VARCHAR(255),
