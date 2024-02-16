@@ -823,12 +823,21 @@ VALUES
     
 	DROP VIEW IF EXISTS consultarQuejas;
     
-    CREATE VIEW consultarQuejas AS
+    	CREATE VIEW consultarQuejas AS
 	SELECT idPQRSF, fechaPQRSF, informacionPQRSF, c.idCliente, nombreEstadoPQRSF
 	FROM PQRSF
 	JOIN Clientes c ON PQRSF.idCliente = c.idCliente
 	JOIN EstadosPQRSF e ON PQRSF.idEstadoPQRSF = e.idEstadoPQRSF
 	WHERE idTipoPQRSF = 2;
+
+	DROP VIEW IF EXISTS Detalle_Envios;
+
+	CREATE VIEW Detalle_Envios AS 
+	SELECT envios.idEnvio, envios.direccionEnvio, tecnicos.numeroDocumento, estadosenvios.nombreEstadoEnvio
+	FROM envios
+	INNER JOIN tecnicos ON envios.idTecnico = tecnicos.idTecnico
+	INNER JOIN estadosenvios ON envios.idEstadoEnvio = estadosenvios.idEstadoEnvio;
+
 
 /*Procedimiento*/
 
@@ -883,6 +892,19 @@ DROP PROCEDURE IF EXISTS CrearProducto;
 	END //
 	DELIMITER ;
 
+    DROP PROCEDURE IF EXISTS RegistrarEnvio;
+    DELIMITER //
+	CREATE PROCEDURE RegistrarEnvio(
+	    IN p_direccionEnvio VARCHAR(255),
+	    IN p_idTecnico INT,
+	    IN p_idEstadoEnvio INT
+	)
+	BEGIN
+	    INSERT INTO envios (direccionEnvio, idTecnico, idEstadoEnvio)
+	    VALUES (p_direccionEnvio, p_idTecnico, p_idEstadoEnvio);
+	END //
+	DELIMITER ;
+
 /*Trigger*/
 
 DELIMITER //
@@ -902,6 +924,24 @@ DELIMITER //
 			SET NEW.idCategoriaProducto = NULL;
 		END IF;
 	END;
+
+	DROP TABLE IF EXISTS historialCotizaciones;
+	CREATE table historialCotizaciones (
+	idCotizacion int,
+    fechaCreada datetime DEFAULT CURRENT_TIMESTAMP, 
+    fechaActualizacion datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);
+    
+	DROP TRIGGER IF EXISTS Cotizaciones;
+    
+    DELIMITER //
+	CREATE TRIGGER cotizacionesHistorial
+	AFTER UPDATE ON historialCotizaciones
+	FOR EACH ROW
+	BEGIN
+		INSERT INTO cotizacionesHistorial (idCotizacion, fechaCreada, fechaActualizacion)
+        VALUES (NEW.idCotizacion, NOW(), NEW.fechaActualizacion);
+	END; //
+	DELIMITER ;
 
 	DROP TABLE IF EXISTS enviosEntregados;
 	CREATE table enviosEntregados (idEnvio int, fecha datetime, idTecnicoEncargado int, documentoTecnico bigint);
