@@ -265,7 +265,8 @@ CREATE TABLE IF NOT EXISTS Respuestas (
 CREATE table IF NOT EXISTS historialCotizaciones (
 	idCotizacion int,
     fechaCreada datetime DEFAULT CURRENT_TIMESTAMP, 
-    fechaActualizacion datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    fechaActualizacion datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    foreign key(idCotizacion) references cotizaciones (idCotizacion)
 );
 
 INSERT INTO ROLES (idRol, nombreRol) 
@@ -988,7 +989,9 @@ CREATE TABLE IF NOT EXISTS historialPQRSFporTipoEstado (
 	idPQRSF INT,
 	idTipoPQRSF INT,
 	idEstadoPQRSF INT,
-	fechaRegistro DATETIME
+	fechaRegistro DATETIME,
+    primary key(idRegistro),
+    foreign key(idPQRSF) references PQRSF (idPQRSF)
 );
 
 DELIMITER //
