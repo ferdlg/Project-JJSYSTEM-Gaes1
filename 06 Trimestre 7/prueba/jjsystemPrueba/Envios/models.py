@@ -279,6 +279,9 @@ class Estadosenvios(models.Model):
     idestadoenvio = models.AutoField(db_column='idEstadoEnvio', primary_key=True)  # Field name made lowercase.
     nombreestadoenvio = models.CharField(db_column='nombreEstadoEnvio', max_length=20)  # Field name made lowercase.
 
+    def __str__(self):
+        return self.idestadoenvio
+
     class Meta:
         managed = False
         db_table = 'estadosenvios'
@@ -395,6 +398,9 @@ class Tecnicos(models.Model):
     especialidad = models.CharField(max_length=50)
     numerodocumento = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='numeroDocumento')  # Field name made lowercase.
 
+    def __str__(self):
+        return self.idtecnico
+    
     class Meta:
         managed = False
         db_table = 'tecnicos'
