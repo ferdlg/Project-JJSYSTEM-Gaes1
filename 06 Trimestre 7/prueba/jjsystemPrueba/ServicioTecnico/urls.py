@@ -10,6 +10,8 @@ from .controllers.disponibilidadcronograma import disponibilidadcronogramaCRUD
 from .controllers.estadocotizaciones import estadocotizacionesCRUD
 from .controllers.tecnicos import tecnicosCRUD
 
+#urls back 
+
 router = DefaultRouter()
 router.register(r'actividades_cronograma', actividadesCrogTecCRUD)
 router.register(r'citas',citasCRUD)
@@ -20,12 +22,14 @@ router.register(r'disponibilidad_cronograma', disponibilidadcronogramaCRUD)
 router.register(r'estado_cotizaciones',estadocotizacionesCRUD)
 router.register(r'tecnicos', tecnicosCRUD)
 
-from .views import index , citaAnalisis , citaInstalacion , citaMantenimiento
+
+# urls front 
+from .views import index
 
 urlpatterns=[
     path('',include(router.urls)),
     path('index/', index , name='index'),
     path('cita_analisis/', citasCRUD.as_view({'get':'cita_analisis'}), name='cita_analisis'),
-    path('cita_instalacion/', citaInstalacion, name='cita_instalacion'),
-    path('cita_mantenimiento/', citaMantenimiento, name='cita_mantenimiento'),
+    path('cita_instalacion/', citasCRUD.as_view({'get':'cita_instalacion'}), name='cita_instalacion'),
+    path('cita_mantenimiento/', citasCRUD.as_view({'get':'cita_mantenimiento'}), name='cita_mantenimiento'),
 ]
