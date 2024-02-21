@@ -109,7 +109,7 @@ body {
     padding: 0;
     margin-left: 0rem;
     padding-top: 0rem;
-    position: relative;  
+    position: relative;
     width: 100%;
 }
 
@@ -153,7 +153,6 @@ body {
     text-decoration: none;
     
 }
-
 
 .btn-citas:hover {
     background-color: #082439;

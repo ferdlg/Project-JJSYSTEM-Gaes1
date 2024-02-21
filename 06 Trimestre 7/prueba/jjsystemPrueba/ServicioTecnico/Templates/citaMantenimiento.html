@@ -1,0 +1,105 @@
+{% extends "menu.html" %}
+{% block titulo %} Citas | Mantenimiento {% endblock %}
+
+{% block contenido %}
+<section class="available_prod">
+    <div class="container">
+        <div class="row">
+            <div class="allowed_prod">
+                <h2 class="font-weight-bold">Citas de Mantenimiento </h2>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container-citas">
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">idCita </th>
+            <th scope="col">fechaCita</th>
+            <th scope="col">direccion</th>
+            <th scope="col">contactoCliente</th>
+            <th scope="col">descripcionCita</th>
+            <th scope="col">idTecnico</th>
+            <th scope="col">idAdministrador</th>
+            <th scope="col">idCotizacion</th>
+            <th scope="col">idEstadoCita</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cita in citas%}
+            <tr>
+                <td>{{cita.idCita}}</td>
+                <td>{{cita.fechaCita}}</td>
+                <td>{{cita.direccion}}</td>
+                <td>{{cita.contactoCliente}}</td>
+                <td>{{cita.descripcionCita}}</td>
+                <td>{{cita.idTecnico}}</td>
+                <td>{{cita.idAdministrador}}</td>
+                <td>{{cita.idCotizacion}}</td>
+                <td>{{cita.idEstadoCita}}</td>
+                <td><a href="">Editar</a></td>
+                <td> 
+                <img src="" alt="Editar" data-toggle="modal"
+                    data-target="#delete{{cita.idCita}}">
+                </td>
+                {% include "Citas/info" %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </section>
+    <section>
+        <button type="button" class="btn btn-create btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">+ Crear cita</button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cita de Mantenimiento</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% if form.errors %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <ul>
+                                {% for error in form.errors %}
+                                <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="fecha" class="col-form-label">Fecha:</label>
+                                <input type="date" class="form-control" name="fechaCita" id="fechaCita" value="{{ form.fechaCita.value }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="direccion" class="col-form-label">Dirección:</label>
+                                <input type="text" class="form-control" name="direccion" id="direccion" value="{{ form.direccion.value }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactoCliente" class="col-form-label">Número de contacto del cliente:</label>
+                                <input type="number" class="form-control" name="contactoCliente" id="contactoCliente" value="{{ form.contactoCliente.value }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="descripcionCita" class="col-form-label">Descripción:</label>
+                                <textarea class="form-control" name="descripcionCita" id="descripcionCita" required>{{ form.descripcionCita.value }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="idTecnico" class="col-form-label">ID del técnico:</label>
+                                <input type="number" class="form-control" name="idTecnico" id="idTecnico" value="{{ form.idTecnico.value }}">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-cancelar btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-create btn-success">Aceptar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

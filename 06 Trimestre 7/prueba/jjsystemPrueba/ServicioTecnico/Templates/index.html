@@ -1,28 +1,55 @@
 {% extends "menu.html" %}
 {% block titulo %} Index {% endblock %}
+
 {% block contenido %}
-<div class="w-100">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <h4 class="greetings">Hola, Yoanny</h4>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto profile">
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                        <img src="{% static 'images/fotoperfil.png' %}" class="img-fluid rounded-circle avatar mr-2" alt="Foto de perfil">
-                        Joanny Lopez
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Mi perfil</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item href="{{route('logout')}}" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">Cerrar sesión</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>        
-                    </div>
-                    </li>
-                </ul>
+            <section class="available_prod">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="{% url 'cita_analisis' %}" class="btn-citas btn-primary">Citas de Analisis</a>
+                    <a href="{% url 'cita_instalacion' %}" class="btn-citas btn-primary">Citas de Instalacion</a>
+                    <a href="{% url 'cita_mantenimiento' %}" class="btn-citas btn-primary">Citas de Mantenimiento</a>
                 </div>
-        </nav>
+            </section>
+            <div class="titulo-reporte">
+                <h4>Reportes : </h4>
+            </div>
+            <section class="container-reportes">
+                
+                <div class="reporte">
+                    <h5>Reporte#00000</h4>
+                    <h6>Nombre del tecnico</h5>
+                </div>
+                <div class="reporte">
+                    <h5>Reporte#00000</h4>
+                    <h6>Nombre del tecnico</h5>
+                </div>
+                <div class="reporte">
+                    <h5>Reporte#00000</h5>
+                    <h6>Nombre del tecnico</h5>
+                </div>
+                <div class="reporte">
+                    <h5>Reporte#00000</h4>
+                    <h6>Nombre del tecnico</h5>
+                </div>
+                <div class="reporte">
+                    <h5>Reporte#00000</h4>
+                    <h6>Nombre del tecnico</h5>
+                </div>
+                <div class="reporte">
+                    <h5>Reporte#00000</h5>
+                    <h6>Nombre del tecnico</h6>
+                </div>
+                <div class="reporte">
+                    <h5>Reporte#00000</h4>
+                    <h6>Nombre del tecnico</h5>
+                </div>
+                <div class="estado-reportes">
+                    <button class="boton-estado">Leidos</>
+                    <button class="boton-estado">No leidos</>
+                </div>
+
+            </section>
+        </div>
+    </div>
 </div>
+
 {% endblock %}
