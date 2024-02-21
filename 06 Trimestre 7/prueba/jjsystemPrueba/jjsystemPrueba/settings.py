@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'ProductosServicios',
     'ServicioTecnico',
     'Envios',
-    'Pqrsf',
-    'Usuarios'
+    'Pqrsf'
 ]
 
 REST_FRAMEWORK = {
@@ -93,7 +92,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'jjsystem_db',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '1021662854',
         'HOST': 'localhost',
         'PORT': '3306'
     }
