@@ -16,6 +16,7 @@ router.register(r'ventas', ventasCRUD)
 urlpatterns=[
     path('', views.home, name='home'),
     path('create/', views.createEnvioView, name='createEnvio'),
+    path('editarEnvio/<idEnvio>', views.editarEnvio, name='editarEnvio'),
     path('eliminarEnvio/<idEnvio>', views.eliminarEnvio, name='eliminarEnvio'),
     path('api/', include(router.urls)),
 ]
