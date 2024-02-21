@@ -15,35 +15,35 @@
     <table class="table">
         <thead>
             <tr>
-            <th scope="col">idCita </th>
-            <th scope="col">fechaCita</th>
-            <th scope="col">direccion</th>
-            <th scope="col">contactoCliente</th>
-            <th scope="col">descripcionCita</th>
-            <th scope="col">idTecnico</th>
-            <th scope="col">idAdministrador</th>
-            <th scope="col">idCotizacion</th>
-            <th scope="col">idEstadoCita</th>
+            <th scope="col">Cita </th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Contacto</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Tecnico</th>
+            <th scope="col">Administrador</th>
+            <th scope="col">Cotizacion</th>
+            <th scope="col">Estado</th>
             </tr>
         </thead>
         <tbody>
             {% for cita in citas%}
             <tr>
-                <td>{{cita.idCita}}</td>
-                <td>{{cita.fechaCita}}</td>
-                <td>{{cita.direccion}}</td>
-                <td>{{cita.contactoCliente}}</td>
-                <td>{{cita.descripcionCita}}</td>
-                <td>{{cita.idTecnico}}</td>
-                <td>{{cita.idAdministrador}}</td>
-                <td>{{cita.idCotizacion}}</td>
-                <td>{{cita.idEstadoCita}}</td>
+                <td>{{citas.idcita}}</td>
+                <td>{{citas.fechacita}}</td>
+                <td>{{citas.direccioncita}}</td>
+                <td>{{citas.contactocliente}}</td>
+                <td>{{citas.descripcioncita}}</td>
+                <td>{{citas.idtecnico}}</td>
+                <td>{{citas.idadministrador}}</td>
+                <td>{{citas.idcotizacion}}</td>
+                <td>{{citas.idestadocita}}</td>
                 <td><a href="">Editar</a></td>
                 <td> 
                 <img src="" alt="Editar" data-toggle="modal"
                     data-target="#delete{{cita.idCita}}">
                 </td>
-                {% include "Citas/info" %}
+                {% include "info.html" %}
             </tr>
             {% endfor %}
         </tbody>
