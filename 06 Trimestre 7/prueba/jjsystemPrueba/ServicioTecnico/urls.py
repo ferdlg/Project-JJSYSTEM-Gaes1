@@ -24,3 +24,7 @@ router.register(r'tecnicos', tecnicosCRUD)
 urlpatterns = {
     path('index/', index , name='index')
 }
+
+urlpatterns=[
+    path('',include(router.urls)),
+]
