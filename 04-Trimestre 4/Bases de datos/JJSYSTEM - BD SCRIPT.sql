@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS Servicios(
     idServicio INT NOT NULL AUTO_INCREMENT,
     nombreServicio TEXT(100) NOT NULL,
     descripcionServicio TEXT(200) NOT NULL,
-    precioServicio FLOAT NOT NULL, 
+    precioServicio FLOAT, 
     idCategoriaServicio INT,
     PRIMARY KEY (idServicio),
 	FOREIGN KEY (idCategoriaServicio) REFERENCES categoriasServicios (idCategoriaServicio)
@@ -962,12 +962,10 @@ DELIMITER //
 	DELIMITER ;
 
 	DROP TABLE IF EXISTS enviosEntregados;
-	CREATE table enviosEntregados (idEnvio int, fecha datetime, idTecnicoEncargado int, documentoTecnico bigint);
+	CREATE table enviosEntregados (
+    idEnvio int primary key,
+    fecha datetime, idTecnicoEncargado int, documentoTecnico bigint);
 	DROP TRIGGER IF EXISTS enviosEntregados;
-  DROP TABLE IF EXISTS enviosEntregados;
-	CREATE table enviosEntregados (idEnvio int, fecha datetime, idTecnicoEncargado int, documentoTecnico bigint);
-	
-    DROP TRIGGER IF EXISTS enviosEntregados;
     DELIMITER //
 CREATE TRIGGER enviosEntregados
 AFTER UPDATE ON envios
@@ -990,7 +988,6 @@ CREATE TABLE IF NOT EXISTS historialPQRSFporTipoEstado (
 	idTipoPQRSF INT,
 	idEstadoPQRSF INT,
 	fechaRegistro DATETIME,
-    primary key(idRegistro),
     foreign key(idPQRSF) references PQRSF (idPQRSF)
 );
 
