@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'ServicioTecnico',
     'Envios',
     'Pqrsf',
-    'Usuarios'
 ]
 
 REST_FRAMEWORK = {

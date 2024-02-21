@@ -19,3 +19,7 @@ router.register(r'detalles_actividades',detallesactividadesCRUD)
 router.register(r'disponibilidad_cronograma', disponibilidadcronogramaCRUD)
 router.register(r'estado_cotizaciones',estadocotizacionesCRUD)
 router.register(r'tecnicos', tecnicosCRUD)
+
+urlpatterns=[
+    path('',include(router.urls)),
+]

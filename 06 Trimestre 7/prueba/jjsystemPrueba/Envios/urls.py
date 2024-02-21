@@ -1,5 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from . import views
 
 from .controllers.envios import enviosCRUD
 from .controllers.estadosenvios import estadosenviosCRUD
@@ -13,5 +14,5 @@ router.register(r'tecnicos', tecnicosCRUD)
 router.register(r'ventas', ventasCRUD)
 
 urlpatterns=[
-    path('',include(router.urls)),
+    path('',(views.home))
 ]
