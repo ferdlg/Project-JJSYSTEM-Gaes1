@@ -2,52 +2,54 @@
 {% block titulo %} Citas | Instalacion {% endblock %}
 
 {% block contenido %}
-<section class="available_prod">
-    <div class="container">
-        <div class="row">
-            <div class="allowed_prod">
-                <h2 class="font-weight-bold">Citas de instalacion</h2>
+<div id="content">
+    <section class="available_prod">
+        <div class="container">
+            <div class="row">
+                <div class="allowed_prod">
+                    <h2 class="font-weight-bold">Citas de Instalacion</h2>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="container-citas">
-    <table class="table">
-        <thead>
-            <tr>
-            <th scope="col">Cita </th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Direccion</th>
-            <th scope="col">Contacto</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col">Tecnico</th>
-            <th scope="col">Administrador</th>
-            <th scope="col">Cotizacion</th>
-            <th scope="col">Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for cita in citas%}
-            <tr>
-                <td>{{citas.idcita}}</td>
-                <td>{{citas.fechacita}}</td>
-                <td>{{citas.direccioncita}}</td>
-                <td>{{citas.contactocliente}}</td>
-                <td>{{citas.descripcioncita}}</td>
-                <td>{{citas.idtecnico}}</td>
-                <td>{{citas.idadministrador}}</td>
-                <td>{{citas.idcotizacion}}</td>
-                <td>{{citas.idestadocita}}</td>
-                <td><a href="">Editar</a></td>
-                <td> 
-                <img src="" alt="Editar" data-toggle="modal"
-                    data-target="#delete{{cita.idCita}}">
-                </td>
-                {% include "info.html" %}
-            </tr>
-            {% endfor %}
-        </tbody>
-        </table>
+    </section>
+
+    <section class="container-citas">
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">Cita </th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Contacto</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Tecnico</th>
+                <th scope="col">Administrador</th>
+                <th scope="col">Cotizacion</th>
+                <th scope="col">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cita in citas%}
+                <tr>
+                    <td>{{cita.idcita}}</td>
+                    <td>{{cita.fechacita}}</td>
+                    <td>{{cita.direccioncita}}</td>
+                    <td>{{cita.contactocliente}}</td>
+                    <td>{{cita.descripcioncita}}</td>
+                    <td>{{cita.idtecnico}}</td>
+                    <td>{{cita.idadministrador}}</td>
+                    <td>{{cita.idcotizacion}}</td>
+                    <td>{{cita.idestadocita}}</td>
+                    <td>
+                        <a href="{url 'editar_citas'}" class="btn btn-primary btn-sw"> Editar </a> 
+                    </td>
+                    <td>
+                        <a href="" class="btn btn-danger btn-sw"> Eliminar </a>                  
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
     </section>
     <section>
         <button type="button" class="btn btn-create btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">+ Crear cita</button>
@@ -55,7 +57,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Cita de instalacion</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Cita de análisis</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -71,26 +73,30 @@
                         </div>
                         {% endif %}
                         <form method="post">
-                            {% csrf_token %}
+                            <!-- {% csrf_token %} -->
                             <div class="form-group">
-                                <label for="fecha" class="col-form-label">Fecha:</label>
-                                <input type="date" class="form-control" name="fechaCita" id="fechaCita" value="{{ form.fechaCita.value }}" required>
+                                <label for="fechacita" class="col-form-label">Fecha:</label>
+                                <input type="date" class="form-control" name="fechacita" id="fechacita" value="{{ form.fechacita.value }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="direccion" class="col-form-label">Dirección:</label>
-                                <input type="text" class="form-control" name="direccion" id="direccion" value="{{ form.direccion.value }}" required>
+                                <label for="direccioncita" class="col-form-label">Dirección:</label>
+                                <input type="text" class="form-control" name="direccioncita" id="direccioncita" value="{{ form.direccioncita.value }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="contactoCliente" class="col-form-label">Número de contacto del cliente:</label>
-                                <input type="number" class="form-control" name="contactoCliente" id="contactoCliente" value="{{ form.contactoCliente.value }}" required>
+                                <label for="contactocliente" class="col-form-label">Número de contacto del cliente:</label>
+                                <input type="number" class="form-control" name="contactocliente" id="contactocliente" value="{{ form.contactocliente.value }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="descripcionCita" class="col-form-label">Descripción:</label>
-                                <textarea class="form-control" name="descripcionCita" id="descripcionCita" required>{{ form.descripcionCita.value }}</textarea>
+                                <label for="descripcioncita" class="col-form-label">Descripción:</label>
+                                <textarea class="form-control" name="descripcioncita" id="descripcioncita" required>{{ form.descripcioncita.value }}</textarea>
                             </div>
                             <div class="form-group">
-                                <label for="idTecnico" class="col-form-label">ID del técnico:</label>
-                                <input type="number" class="form-control" name="idTecnico" id="idTecnico" value="{{ form.idTecnico.value }}">
+                                <label for="idtecnico" class="col-form-label">ID del técnico:</label>
+                                <input type="number" class="form-control" name="idtecnico" id="idtecnico" value="{{ form.idtecnico.value }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="idcotizacion" class="col-form-label">ID Cotizacion:</label>
+                                <input type="number" class="form-control" name="idcotizacion" id="idcotizacion" value="{{ form.idcotizacion.value }}">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-cancelar btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -102,4 +108,5 @@
             </div>
         </div>
     </section>
+</div>
 {% endblock %}

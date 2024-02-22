@@ -12,7 +12,7 @@
                 <form class="modalCitas" action="{% url 'Citas' cita.idCita %}" 
                     method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% method 'DELETE' %}
+                    <input type="hidden" name="_method" value="DELETE">
                     <p>
                         ¿Está seguro de que desea eliminar la cita
                         <strong>{{ cita.descripcionCita }}</strong>?
