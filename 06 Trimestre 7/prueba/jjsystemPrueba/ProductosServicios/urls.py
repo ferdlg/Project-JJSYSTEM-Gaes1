@@ -24,6 +24,8 @@ router.register(r'roles', rolesCRUD)
 router.register(r'servicios', serviciosCRUD)
 
 urlpatterns=[
-    path('', views.home, name='home'),
+    path('', views.home, name='homeProductos'),
     path('api/', include(router.urls)),
+    path('create/', views.createProductoView, name='createProducto'),
+    path('eliminarProducto/<idProducto>', views.eliminarProducto, name='eliminarProducto'),
 ]

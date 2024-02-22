@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ENVIOS</title>
+    <title>PRODUCTOS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
@@ -98,13 +98,13 @@
                                 <a href="#" class="btn btn-primary btn-sw"> Editar </a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-danger btn-sw"> eliminar </a>
+                                <a href="{% url 'eliminarProducto' idProducto=producto.idproducto %}" class="btn btn-danger btn-sw"> eliminar </a>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-                <a href="#" class="btn btn-primary btn-sm">Añadir Proucto</a>
+                <a href="{% url 'createProducto'%}" class="btn btn-primary btn-sm">Añadir Producto</a>
                 <a href="" class="btn btn-success btn-sm">Exportar</a>
             </section>
         </div>
