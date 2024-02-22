@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="{% static 'css/normalize.css'%}">
     <link rel="stylesheet" href="{% static 'css/crearCitas.css'%}">
     <link rel="stylesheet" href="{% static 'css/servicioTecnicoAdmin.css'%}">
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" >
+
 
     <title>{% block titulo %} {% endblock %}</title>
 </head>
@@ -41,7 +42,7 @@
                             <ul class="navbar-nav ml-auto profile">
                                 <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="" class="img-fluid rounded-circle avatar mr-2" alt="Foto de perfil">
+                                    <img src="{% static 'images/fotoperfil.png' %}" class="img-fluid rounded-circle avatar mr-2" alt="Foto de perfil">
                                     {Admin.name}
                                 </a>
                                 <div class="dropdown-menu">
