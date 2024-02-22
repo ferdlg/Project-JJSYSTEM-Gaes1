@@ -6,3 +6,6 @@ def landing(request):
 
 def servicios(request):
     return render(request, 'landing/Servicios.html')
+
+def productos(request):
+    return render(request, 'landing/Productos.html')

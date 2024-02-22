@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from ProductosServicios.views import landing, servicios
+from ProductosServicios.views import landing, servicios, productos
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +25,6 @@ urlpatterns = [
     path('envios/', include('Envios.urls')),
     path('pqrsf/', include('Pqrsf.urls')),
     path('', landing, name='landing'),
-    path('servicios/', servicios, name='servicios')
+    path('servicios/', servicios, name='servicios'),
+    path('productos/', productos, name='productos')
 ]
