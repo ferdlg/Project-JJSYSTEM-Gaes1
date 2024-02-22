@@ -27,5 +27,6 @@ urlpatterns=[
     path('', views.home, name='homeProductos'),
     path('api/', include(router.urls)),
     path('create/', views.createProductoView, name='createProducto'),
+    path('editarProducto/<idProducto>', views.editarProducto, name='editarProducto'),
     path('eliminarProducto/<idProducto>', views.eliminarProducto, name='eliminarProducto'),
 ]
