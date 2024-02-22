@@ -18,7 +18,7 @@ def createEnvioView(request):
         try:
             # Convertir idtecnico a entero
             idtecnico = int(idtecnico)
-
+            
             # Obtener la instancia de Tecnicos
             idtecnico = Tecnicos.objects.get(idtecnico=idtecnico)
 
@@ -41,6 +41,30 @@ def createEnvioView(request):
 
     estados = Estadosenvios.objects.all()
     return render(request, "crudAdmin/Create.html", {"estados": estados})
+
+def editarEnvio(request, idEnvio):
+    envio = Envios.objects.get(idenvio=idEnvio)
+    estados = Estadosenvios.objects.all()
+
+    if request.method == 'POST':
+        # Obtener los datos de la petición
+        direccion = request.POST.get('direccion')
+        idtecnico = int(request.POST.get('idtecnico'))
+        idestadoenvio = int(request.POST.get('estado'))
+
+        # Obtener las instancias de Tecnicos y Estadosenvios
+        idtecnico = Tecnicos.objects.get(idtecnico=idtecnico)
+        idestadoenvio = Estadosenvios.objects.get(idestadoenvio=idestadoenvio)
+
+        # Actualizar los campos del objeto envio
+        envio.direccionenvio = direccion
+        envio.idtecnico = idtecnico
+        envio.idestadoenvio = idestadoenvio
+        envio.save()
+
+        return redirect('home')
+
+    return render(request, "crudAdmin/Editar.html", {"envio": envio, "estados": estados})
 
 def eliminarEnvio(request, idEnvio):
     envio = Envios.objects.get(idenvio = idEnvio)
