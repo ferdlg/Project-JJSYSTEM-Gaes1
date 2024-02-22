@@ -22,11 +22,11 @@
         </div>
         <div class="menu">
             <a href="#" class="d-block text-light font-weight-light">Inicio</a>
-            <a href="#" class="d-block text-light font-weight-light">Productos y Servicios</a>                   
-            <a href="#" class="d-block text-light font-weight-light">Servicio Tecnico</a>
             <div class="a-selected">
-                <a href="#" class="d-block text-light font-weight-light">Envios</a>
-            </div>
+                <a href="#" class="d-block text-light font-weight-light">Productos y Servicios</a> 
+            </div>                  
+            <a href="#" class="d-block text-light font-weight-light">Servicio Tecnico</a>
+            <a href="#" class="d-block text-light font-weight-light">Envios</a>
             <a href="#" class="d-block text-light font-weight-light">PQRSF</a>
             <a href="#" class="d-block text-light font-weight-light">Clientes</a>
             <a href="#" class="d-block text-light font-weight-light">Tecnicos</a>
@@ -58,7 +58,7 @@
             <div class="container" style="margin-left:30px ">
                 <div class="row">
                     <div class="col-lg-9 allowed_prod">
-                        <h2 class="font-weight-bold"> ENVIOS: </h2>
+                        <h2 class="font-weight-bold"> PRODUCTOS DISPONIBLES: </h2>
                     </div>
                 </div>
             </div>
@@ -74,31 +74,37 @@
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Dirección</th>
-                            <th scope="col">ID Tecnico</th>
-                            <th scope="col">Estado</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Proveedor</th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for e in envios %}
+                        {% for producto in productos %}
                         <tr>
-                            <td>{{e.idenvio}}</td>
-                            <td>{{e.direccionenvio}}</td>
-                            <td>{{e.idtecnico.idtecnico}}</td>
-                            <td>{{e.idestadoenvio.nombreestadoenvio}}</td>
+                            <td>{{producto.idproducto}}</td>
+                            <td>{{producto.nombreproducto}}</td>
+                            <td>{{producto.descripcionproducto}}</td>
+                            <td>{{producto.precioproducto}}</td>
+                            <td>{{producto.cantidad}}</td>
+                            <td>{{producto.idcategoriaproducto.nombrecategoria}}</td>
+                            <td>{{producto.idproveedorproducto.nombreproveedor}}</td>
                             <td> 
-                                <a href="{% url 'editarEnvio' idEnvio=e.idenvio %}" class="btn btn-primary btn-sw"> Editar </a>
+                                <a href="#" class="btn btn-primary btn-sw"> Editar </a>
                             </td>
                             <td>
-                                <a href="{% url 'eliminarEnvio' idEnvio=e.idenvio %}" class="btn btn-danger btn-sw"> eliminar </a>
+                                <a href="#" class="btn btn-danger btn-sw"> eliminar </a>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-                <a href="{% url 'createEnvio'%}" class="btn btn-primary btn-sm">Añadir Envio</a>
+                <a href="#" class="btn btn-primary btn-sm">Añadir Envio</a>
                 <a href="" class="btn btn-success btn-sm">Exportar</a>
             </section>
         </div>

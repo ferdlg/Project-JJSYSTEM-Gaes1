@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .models import Productos
 # Create your views here.
 def landing(request):
     return render(request, 'landing/Index.html')
@@ -9,3 +9,7 @@ def servicios(request):
 
 def productos(request):
     return render(request, 'landing/Productos.html')
+
+def home(request):
+    productos = Productos.objects.all()
+    return render(request, "crudAdmin/Index.html", {"productos": productos})

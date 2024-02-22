@@ -1,5 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from . import views
 
 from .controllers.categoriasproductos import categoriaproductosCRUD
 from .controllers.categoriasservicios import categoriaserviciosCRUD
@@ -23,5 +24,6 @@ router.register(r'roles', rolesCRUD)
 router.register(r'servicios', serviciosCRUD)
 
 urlpatterns=[
-    path('',include(router.urls)),
+    path('', views.home, name='home'),
+    path('api/', include(router.urls)),
 ]
