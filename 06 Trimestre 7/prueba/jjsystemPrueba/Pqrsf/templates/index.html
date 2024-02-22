@@ -1,0 +1,95 @@
+
+
+{% block content %}
+    <div class="d-flex">
+        <div id="sidebar-container" class="bg-primary">
+            <div class="logo">
+                <h2 class="text-light font-weight-bold">J.J System</h2>
+            </div>
+            <div class="menu">
+                <a href="#" class="d-block text-light font-weight-light">Inicio</a>
+                <a href="#" class="d-block text-light font-weight-light">Productos y Servicios</a>
+                <a href="#" class="d-block text-light font-weight-light">Servicio Tecnico</a>
+                <a href="#" class="d-block text-light font-weight-light">Envios</a>
+                <div class="a-selected">
+                    <a href="#" class="d-block text-light font-weight-light">PQRSF</a>
+                </div>
+                <a href="#" class="d-block text-light font-weight-light">Clientes</a>
+                <a href="#" class="d-block text-light font-weight-light">Tecnicos</a>
+                <a href="#" class="d-block text-light font-weight-light">Ajustes</a>
+            </div>
+        </div>
+
+        <div class="w-100">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <h4 class="greetings">Hola, Yoanny</h4>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto profile">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle font-weight-bold" href="#" role="button"
+                               data-toggle="dropdown" aria-expanded="false">
+                                <img src="{{asset('images/fotoperfil.png')}}" class="img-fluid rounded-circle avatar mr-2"
+                                     alt="Foto de perfil">
+                                Joanny Lopez
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Mi perfil</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Cerrar sesión</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9 allowed_prod">
+                            <h2 class="font-weight-bold">PQRSF</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="s-data-table">
+                    <table class="table data-table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Información</th>
+                            <th scope="col">ID Cliente</th>
+                            <th scope="col">Tipo Pqrsf</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for pqrsf_item in pqrsf %}
+                            <tr>
+                                <td>{{ pqrsf_item.idPQRSF }}</td>
+                                <td>{{ pqrsf_item.fechaPQRSF }}</td>
+                                <td>{{ pqrsf_item.informacionPQRSF }}</td>
+                                <td>{{ pqrsf_item.Cliente_idCliente }}</td>
+                                <td>{{ pqrsf_item.TipoPQRSF_idTipoPQRSF }}</td>
+                                <td>{{ pqrsf_item.EstadoPQRSF_idEstadoPQRSF }}</td>
+                                <td><a href="{% url 'editarPqrsf' pqrsf_item.idPQRSF %}" class="btn btn-primary btn-sw">Editar</a></td>
+                                <td>
+                                    <form action="{% url 'eliminarPqrsf' pqrsf_item.idPQRSF %}" method="post">
+                                        {% csrf_token %}
+                                        {% method 'delete' %}
+                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <a href="{% url 'createPqrsf' %}" class="btn btn-primary btn-sm">Añadir Pqrsf</a>
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock %}
