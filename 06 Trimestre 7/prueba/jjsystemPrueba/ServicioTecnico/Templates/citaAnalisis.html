@@ -73,7 +73,7 @@
                             </ul>
                         </div>
                         {% endif %}
-                        <form method="post" action="{% url 'crear_citas' %}">
+                        <form method="POST" action="{% url 'crear_citas' %}">
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="fechacita" class="col-form-label">Fecha:</label>

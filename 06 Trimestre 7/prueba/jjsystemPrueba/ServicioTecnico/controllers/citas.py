@@ -15,6 +15,7 @@ class citasCRUD(viewsets.ModelViewSet):
         citas_queryset = Citas.objects.filter(idcotizacion__idservicio__idcategoriaservicio = 3)
         citas_serializer = CitasSerializer(citas_queryset, many = True)
         citas_data = citas_serializer.data
+        print(citas_data)
         return render(request, 'citaAnalisis.html', {'citas': citas_data})
     
     #Metodo para obtener solo las citas de instalacion
@@ -23,6 +24,7 @@ class citasCRUD(viewsets.ModelViewSet):
         citas_queryset = Citas.objects.filter(idcotizacion__idservicio__idcategoriaservicio = 2)
         citas_serializer = CitasSerializer(citas_queryset, many = True)
         citas_data = citas_serializer.data
+        print(citas_data)
         return render(request, 'citaInstalacion.html', {'citas': citas_data})
         
     #Metodo para obtener solo las citas de mantenimiento
@@ -34,7 +36,7 @@ class citasCRUD(viewsets.ModelViewSet):
         return render(request, 'citaMantenimiento.html', {'citas': citas_data})
     
     
-    def crear_cita(self, request):
+    def crear_citas(self, request):
         if request.method == 'POST':
             fechacita = request.POST.get('fechacita')
             direccioncita = request.POST.get('direccioncita')
@@ -45,23 +47,27 @@ class citasCRUD(viewsets.ModelViewSet):
             idcotizacion = request.POST.get('idcotizacion')
             idestadocita = request.POST.get('idestadocita')
             try:
+                idtecnico = int(idtecnico)
                 tecnico = Tecnicos.objects.get(idtecnico=idtecnico)
+                idadministrador = int(idadministrador)
                 administrador = Administrador.objects.get(idadministrador=idadministrador)
+                idcotizacion = int(idcotizacion)
                 cotizacion = Cotizaciones.objects.get(idcotizacion=idcotizacion)
+                idestadocita = int(idestadocita)
                 estadocita = Estadoscitas.objects.get(idestadocita=idestadocita)
-                # Crear la instancia de Envios
+                # Crear la instancia de la cita
                 cita = Citas.objects.create(
-                        fechacita= fechacita,
-                        direccioncita= direccioncita,
-                        contactocliente= contactocliente,
-                        descripcioncita= descripcioncita,
-                        idtecnico= tecnico,
-                        idadministrador= administrador,
-                        idcotizacion= cotizacion,
-                        idestadocita= estadocita
+                    fechacita=fechacita,
+                    direccioncita=direccioncita,
+                    contactocliente=contactocliente,
+                    descripcioncita=descripcioncita,
+                    idtecnico=tecnico,
+                    idadministrador=administrador,
+                    idcotizacion=cotizacion,
+                    idestadocita=estadocita
                 )
 
-                return redirect('index.html', {'citas': cita})
+                return redirect('cita_analisis')
 
             except Tecnicos.DoesNotExist:
                 print("Error: No se encontró el Técnico.")
@@ -69,8 +75,8 @@ class citasCRUD(viewsets.ModelViewSet):
                 print("Error: No se encontró el estado de la cita.")
 
         estados = Estadoscitas.objects.all()
-        return render(request, 'index.html', {'estados': estados})
-    
+        return render(request, 'citaAnalisis.html', {'estados': estados})
+        
     @api_view(['PUT'])
     def editar_cita(self, request , idcita):
         cita_actualizada = Citas.objects.update(idcita = idcita)
