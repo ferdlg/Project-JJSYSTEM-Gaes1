@@ -12,4 +12,4 @@ def productos(request):
 
 def home(request):
     productos = Productos.objects.all()
-    return render(request, "crudAdmin/Index.html", {"productos": productos})
+    return render(request, "crudAdmin/IndexProductos.html", {"productos": productos})
