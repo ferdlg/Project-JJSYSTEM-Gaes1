@@ -32,7 +32,7 @@ def createEnvioView(request):
                 idestadoenvio=estado
             )
 
-            return redirect('home')
+            return redirect('servicio_tecnico')
 
         except Tecnicos.DoesNotExist:
             print("Error: No se encontró el Técnico.")

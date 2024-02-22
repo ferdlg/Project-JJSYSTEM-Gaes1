@@ -52,13 +52,13 @@
             </tbody>
         </table>
     </section>
-    <section>
+     <section>
         <button type="button" class="btn btn-create btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">+ Crear cita</button>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Cita de análisis</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Cita</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -73,8 +73,8 @@
                             </ul>
                         </div>
                         {% endif %}
-                        <form method="post">
-                            <!-- {% csrf_token %} -->
+                        <form method="post" action="{% url 'crear_citas' %}">
+                            {% csrf_token %}
                             <div class="form-group">
                                 <label for="fechacita" class="col-form-label">Fecha:</label>
                                 <input type="date" class="form-control" name="fechacita" id="fechacita" value="{{ form.fechacita.value }}" required>
@@ -92,12 +92,20 @@
                                 <textarea class="form-control" name="descripcioncita" id="descripcioncita" required>{{ form.descripcioncita.value }}</textarea>
                             </div>
                             <div class="form-group">
-                                <label for="idtecnico" class="col-form-label">ID del técnico:</label>
+                                <label for="idtecnico" class="col-form-label">ID Tecnico:</label>
                                 <input type="number" class="form-control" name="idtecnico" id="idtecnico" value="{{ form.idtecnico.value }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="idadministrador" class="col-form-label">ID Administrador:</label>
+                                <input type="number" class="form-control" name="idadministrador" id="idadministrador" value="{{ form.idadministrador.value }}">
                             </div>
                             <div class="form-group">
                                 <label for="idcotizacion" class="col-form-label">ID Cotizacion:</label>
                                 <input type="number" class="form-control" name="idcotizacion" id="idcotizacion" value="{{ form.idcotizacion.value }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="idestadocita" class="col-form-label">Estado cita:</label>
+                                <input type="number" class="form-control" name="idestadocita" id="idestadocita" value="{{ form.idestadocita.value }}">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-cancelar btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -109,5 +117,6 @@
             </div>
         </div>
     </section>
+    
 </div>
 {% endblock %}

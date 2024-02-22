@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework import viewsets
-from ..models import Citas , Servicios, Cotizaciones, Categoriasservicios
+from ..models import Citas , Servicios, Cotizaciones, Categoriasservicios, Tecnicos, Administrador , Estadoscitas
 from .serializers import CitasSerializer
+from rest_framework.decorators import api_view
+
 
 class citasCRUD(viewsets.ModelViewSet):
     queryset = Citas.objects.all()
@@ -31,20 +33,50 @@ class citasCRUD(viewsets.ModelViewSet):
         citas_data = citas_serializer.data
         return render(request, 'citaMantenimiento.html', {'citas': citas_data})
     
-    def crear_cita(self, request):
-        citas_queryset = Citas.objects.create(
-                                    fechacita = fechacita,
-                                    direccioncita= direccioncita,
-                                    contactocliente= contactocliente,
-                                    descripcioncita= descripcioncita,
-                                    idtecnico= idtecnico,
-                                    idadministrador= idadministrador,
-                                    idcotizacion= idcotizacion
-                                    )
-        return 
     
-    def editar_cita(self, request):
+    def crear_cita(self, request):
+        if request.method == 'POST':
+            fechacita = request.POST.get('fechacita')
+            direccioncita = request.POST.get('direccioncita')
+            contactocliente = request.POST.get('contactocliente')
+            descripcioncita = request.POST.get('descripcioncita')
+            idtecnico = request.POST.get('idtecnico')
+            idadministrador = request.POST.get('idadministrador')
+            idcotizacion = request.POST.get('idcotizacion')
+            idestadocita = request.POST.get('idestadocita')
+            try:
+                tecnico = Tecnicos.objects.get(idtecnico=idtecnico)
+                administrador = Administrador.objects.get(idadministrador=idadministrador)
+                cotizacion = Cotizaciones.objects.get(idcotizacion=idcotizacion)
+                estadocita = Estadoscitas.objects.get(idestadocita=idestadocita)
+                # Crear la instancia de Envios
+                cita = Citas.objects.create(
+                        fechacita= fechacita,
+                        direccioncita= direccioncita,
+                        contactocliente= contactocliente,
+                        descripcioncita= descripcioncita,
+                        idtecnico= tecnico,
+                        idadministrador= administrador,
+                        idcotizacion= cotizacion,
+                        idestadocita= estadocita
+                )
+
+                return redirect('index.html', {'citas': cita})
+
+            except Tecnicos.DoesNotExist:
+                print("Error: No se encontró el Técnico.")
+            except Estadoscitas.DoesNotExist:
+                print("Error: No se encontró el estado de la cita.")
+
+        estados = Estadoscitas.objects.all()
+        return render(request, 'index.html', {'estados': estados})
+    
+    @api_view(['PUT'])
+    def editar_cita(self, request , idcita):
+        cita_actualizada = Citas.objects.update(idcita = idcita)
         return render(request, 'EditCitas.html')
     
-    def eliminar_cita(self, request):
-        return
+    @api_view(['DELETE'])
+    def eliminar_cita(self, request, idcita):
+        cita_eliminada = Citas.objects.delete(idcita = idcita)
+        return render()
