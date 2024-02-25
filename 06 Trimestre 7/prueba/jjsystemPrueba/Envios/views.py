@@ -1,11 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Envios
 from .models import Estadosenvios
 from .models import Tecnicos
 
 # Create your views here.
-
-def home(request):
+def homeEnvios(request):
     envios = Envios.objects.all()
     return render(request, "crudAdmin/Index.html", {"envios": envios})
 
