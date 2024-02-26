@@ -77,12 +77,44 @@ class citasCRUD(viewsets.ModelViewSet):
         estados = Estadoscitas.objects.all()
         return render(request, 'citaAnalisis.html', {'estados': estados})
         
-    @api_view(['PUT'])
-    def editar_cita(self, request , idcita):
-        cita_actualizada = Citas.objects.update(idcita = idcita)
-        return render(request, 'EditCitas.html')
     
-    @api_view(['DELETE'])
-    def eliminar_cita(self, request, idcita):
+    def editar_citas(request, idcita):
+        cita = Citas.objects.get(idcita=idcita)
+        estados = Estadoscitas.objects.all()
+
+        if request.method == 'POST':
+            # Obtener los datos de la petición
+            fechacita = request.POST.get('fechacita')
+            direccioncita = request.POST.get('direccioncita')
+            contactocliente = request.POST.get('contactocliente')
+            descripcioncita = request.POST.get('descripcioncita')
+            idtecnico = int(request.POST.get('idtecnico'))
+            idadministrador = int(request.POST.get('idadministrador'))
+            idcotizacion = int(request.POST.get('idcotizacion'))
+            idestadocita = int(request.POST.get('idestadocita'))
+
+            # Obtener las instancias de Tecnicos, Administrador, Cotizaciones y Estadoscitas
+            idtecnico = Tecnicos.objects.get(idtecnico=idtecnico)
+            idadministrador = Administrador.objects.get(idadministrador=idadministrador)
+            idcotizacion = Cotizaciones.objects.get(idcotizacion=idcotizacion)
+            idestadocita = Estadoscitas.objects.get(idestadocita=idestadocita)
+
+            # Actualizar los campos del objeto cita
+            cita.fechacita = fechacita
+            cita.direccioncita = direccioncita
+            cita.contactocliente = contactocliente
+            cita.descripcioncita = descripcioncita
+            cita.idtecnico = idtecnico
+            cita.idadministrador = idadministrador
+            cita.idcotizacion = idcotizacion
+            cita.idestadocita = idestadocita
+            cita.save()
+
+            return redirect('index')  
+
+        return render(request,'Templates/EditarCitas.html', {"citas": cita})
+
+    def eliminar_citas(self, request, idcita):
         cita_eliminada = Citas.objects.delete(idcita = idcita)
-        return render()
+        cita_eliminada.delete()
+        return render('index')

@@ -41,17 +41,17 @@
                     <td>{{cita.idcotizacion}}</td>
                     <td>{{cita.idestadocita}}</td>
                     <td>
-                        <a href="{url 'editar_citas'}" class="btn btn-primary btn-sw"> Editar </a> 
+                        <a href="{% static 'EditarCitas.html' idcita=cita.idcita %}" class="btn btn-primary btn-sw"> Editar </a> 
                     </td>
                     <td>
-                        <a href="" class="btn btn-danger btn-sw"> Eliminar </a>                  
+                        <a href="{% url 'eliminar_citas' cita.idcita %}" class="btn btn-danger btn-sw"> Eliminar </a>                  
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
             </table>
     </section>
-     <section>
+    <section>
         <button type="button" class="btn btn-create btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">+ Crear cita</button>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

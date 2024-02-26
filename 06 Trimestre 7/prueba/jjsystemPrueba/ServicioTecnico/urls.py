@@ -33,5 +33,6 @@ urlpatterns=[
     path('cita_instalacion/', citasCRUD.as_view({'get':'cita_instalacion'}), name='cita_instalacion'),
     path('cita_mantenimiento/', citasCRUD.as_view({'get':'cita_mantenimiento'}), name='cita_mantenimiento'),
     path('crear_citas/', citasCRUD.as_view({'post':'crear_citas'}), name='crear_citas'),
-    path('editar_citas/', citasCRUD.as_view({'put': 'editar_cita'}), name='editar_citas')
+    path('editar_citas/<idcita>/', citasCRUD.as_view({'put': 'editar_citas'}), name='editar_citas'),
+    path('eliminar_citas/<int:idcita>/',citasCRUD.as_view({'delete':'eliminar_citas'}),name='eliminar_citas')
 ]
