@@ -1,0 +1,25 @@
+.Register {
+    display: flex;
+    background-image: url('./Portada.jpeg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+    
+  .Register .overlay {
+      background-color: var(--moradoOscuroHover);
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .inputsContainer{
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }

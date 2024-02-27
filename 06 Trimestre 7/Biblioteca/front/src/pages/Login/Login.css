@@ -1,0 +1,19 @@
+.Login {
+    display: flex;
+    background-image: url('./Portada.jpeg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+    
+  .Login .overlay {
+      background-color: var(--moradoOscuroHover);
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+  }
+    
