@@ -3,8 +3,11 @@ from django.shortcuts import render, redirect
 from .models import Envios
 from .models import Estadosenvios
 from .models import Tecnicos
-
+from Account.views import role_required
 # Create your views here.
+
+@login_required
+@role_required(1)
 def homeEnvios(request):
     envios = Envios.objects.all()
     return render(request, "crudAdmin/Index.html", {"envios": envios})
@@ -32,7 +35,7 @@ def createEnvioView(request):
                 idestadoenvio=estado
             )
 
-            return redirect('home')
+            return redirect('homeEnvios')
 
         except Tecnicos.DoesNotExist:
             print("Error: No se encontró el Técnico.")
@@ -62,7 +65,7 @@ def editarEnvio(request, idEnvio):
         envio.idestadoenvio = idestadoenvio
         envio.save()
 
-        return redirect('home')
+        return redirect('homeEnvios')
 
     return render(request, "crudAdmin/Editar.html", {"envio": envio, "estados": estados})
 
@@ -70,4 +73,4 @@ def eliminarEnvio(request, idEnvio):
     envio = Envios.objects.get(idenvio = idEnvio)
     envio.delete()
 
-    return redirect('home')
+    return redirect('homeEnvios')

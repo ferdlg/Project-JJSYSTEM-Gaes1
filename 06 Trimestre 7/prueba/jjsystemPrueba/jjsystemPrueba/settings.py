@@ -42,8 +42,13 @@ INSTALLED_APPS = [
     'ProductosServicios',
     'ServicioTecnico',
     'Envios',
-    'Pqrsf'
+    'Pqrsf',
+    'Account'
 ]
+
+AUTHENTICATION_BACKENDS = ['Account.backends.UsuariosBackend']
+LOGIN_URL = 'login'
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':[
