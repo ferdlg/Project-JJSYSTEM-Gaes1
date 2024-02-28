@@ -1,6 +1,6 @@
 
-
-{% block content %}
+{% extends "menuPqrsf.html" %}
+{% block contenido %}
     <div class="analysis_service">
         <br><h1>Registrar Pqrsf</h1>
 
@@ -54,7 +54,7 @@
                     <textarea class="form-control" id="informacionPQRSF" name="informacionPQRSF" rows="3">{{ request.POST.informacionPQRSF }}</textarea>
                 </div>
 
-                <a href="{% url 'homePqrsf' %}" class="btn btn-secondary">Regresar</a>
+                <a href="{% url 'indexPqrsf' %}" class="btn btn-secondary">Regresar</a>
                 <button type="submit" class="btn btn-success">Guardar</button>
 
             </form>

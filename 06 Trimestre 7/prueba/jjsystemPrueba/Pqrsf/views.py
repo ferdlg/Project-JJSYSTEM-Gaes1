@@ -5,18 +5,16 @@ from .models import Tipospqrsf
 
 # Create your views here
 
-def index(request):
-    return render(request, 'index.html')
+def indexPqrsf(request):
+    pqrsf_item = Pqrsf.objects.all()
+    return render(request, 'indexPqrsf.html', {"pqrsf": pqrsf_item})
 
-def edit(request):
-    return render(request, 'edit.html')
+def editPqrsf(request):
+    return render(request, 'editPqrsf.html')
 
-def create(request):
-    return render(request, 'create.html')  
+def createPqrsf(request):
+    return render(request, 'createPqrsf.html')  
 
-def home(request):
-    pqrsf = Pqrsf.objects.all()
-    return render(request, "crudAdmin/Index.html", {"pqrsf": pqrsf})
 
 def createPqrsfView(request):
     if request.method == 'POST':
@@ -26,57 +24,57 @@ def createPqrsfView(request):
         tipopqrsf = request.POST.get('tipo')
 
         # Obtener la instancia de EstadosPqrsf
-        estado = EstadosPqrsf.objects.get(idestadopqrsf=idestadopqrsf)
+        estado = Estadospqrsf.objects.get(idestadopqrsf=estadopqrsf)
 
         # Obtener la instancia de TiposPqrsf
-        tipo = TiposPqrsf.objects.get(idtipopqrsf=idtipopqrsf)
+        tipo = Tipospqrsf.objects.get(idtipopqrsf=tipopqrsf)
 
         # Crear la instancia de Pqrsf
         pqrsf = Pqrsf.objects.create(
-            fechapqrsf=fecha,
-            informacionpqrsf=informacion,
-            estadopqrsf=estado,
-            tipopqrsf=tipo
+            fechapqrsf=fechapqrsf,
+            informacionpqrsf=informacionpqrsf,
+            estadopqrsf=estadopqrsf,
+            tipopqrsf=tipopqrsf
         )
 
-        return redirect('homePqrsf')
+        return redirect('indexPqrsf')
 
 
-    estados = EstadosPqrsf.objects.all()
-    tipos = TiposPqrsf.objects.all()
-    return render(request, "crudAdmin/Create.html", {"estados": estados, "tipos": tipos})    
+    estados = Estadospqrsf.objects.all()
+    tipos = Tipospqrsf.objects.all()
+    return render(request, "templates/CreatePqrsf.html", {"estados": estados, "tipos": tipos})    
 
 def editarPqrsf(request, idPQRSF):
     pqrsf = Pqrsf.objects.get(idpqrsf=idPQRSF)
-    estados = EstadosPqrsf.objects.all()
-    tipos = TiposPqrsf.objects.all()
+    estados = Estadospqrsf.objects.all()
+    tipos = Tipospqrsf.objects.all()
 
     if request.method == 'POST':
         #obtener los datos de la petición
         fechapqrsf = request.POST.get('fecha')
         informacionpqrsf = request.POST.get('informacion')
-        estadopqrsf = request.POST.get('estado')
-        tipopqrsf = request.POST.get('tipo')
+        idestadopqrsf = request.POST.get('estado')
+        idtipopqrsf = request.POST.get('tipo')
 
         #obtener la instancia de EstadosPqrsf
-        idestadopqrsf = EstadosPqrsf.objects.get(idestadopqrsf=idestadopqrsf)
+        idestadopqrsf = Estadospqrsf.objects.get(idestadopqrsf=idestadopqrsf)
 
         #obtener la instancia de TiposPqrsf
-        idtipopqrsf = TiposPqrsf.objects.get(idtipopqrsf=idtipopqrsf)
+        idtipopqrsf = Tipospqrsf.objects.get(idtipopqrsf=idtipopqrsf)
 
         #actualizar los campos del objeto pqrsf
-        pqrsf.fechapqrsf = fecha
-        pqrsf.infomacionpqrsf = informacion
-        pqrsf.estadopqrsf = estado
-        pqrsf.tipopqrsf = tipo
+        pqrsf.fechapqrsf = fechapqrsf
+        pqrsf.informacionpqrsf = informacionpqrsf
+        pqrsf.idestadopqrsf = idestadopqrsf
+        pqrsf.idtipopqrsf = idtipopqrsf
         pqrsf.save()
 
-        return redirect('homePqrsf')
+        return redirect('indexPqrsf')
 
-    return render(request, "crudAdmin/Editar.html", {"pqrsf": pqrsf, "estados": estados, "tipos": tipos})
+    return render(request, "templates/editarPqrsf.html", {"pqrsf": pqrsf, "estados": estados, "tipos": tipos})
 
-def eliminarPqrsf(request, idPQRSF):
-    pqrsf = Pqrsf.objects.get(idpqrsf = idPQRSF)
+def eliminarPqrsf(request, idpqrsf):
+    pqrsf = Pqrsf.objects.get(idpqrsf = idpqrsf)
     pqrsf.delete()
 
-    return redirect('homePqrsf')
+    return redirect('indexPqrsf')
