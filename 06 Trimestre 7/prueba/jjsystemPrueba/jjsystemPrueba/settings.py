@@ -42,8 +42,13 @@ INSTALLED_APPS = [
     'ProductosServicios',
     'ServicioTecnico',
     'Envios',
-    'Pqrsf'
+    'Pqrsf',
+    'Account'
 ]
+
+AUTHENTICATION_BACKENDS = ['Account.backends.UsuariosBackend']
+LOGIN_URL = 'login'
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':[
@@ -92,8 +97,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'jjsystem_db',
         'USER': 'root',
-        'PASSWORD': '1021662854',
-        #'PASSWORD': '',
+        #'PASSWORD': '1021662854',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306'
     }
