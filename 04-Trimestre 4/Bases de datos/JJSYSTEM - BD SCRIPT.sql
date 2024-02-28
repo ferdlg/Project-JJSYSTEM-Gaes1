@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS Usuarios(
     numeroContacto FLOAT DEFAULT NULL,
     idRol INT NOT NULL,
     idEstadosUsuarios INT NOT NULL,
-    last_login DATATIME NULL;
+    last_login DATETIME NULL,
     PRIMARY KEY (numeroDocumento),
     FOREIGN KEY (idRol) REFERENCES Roles (idRol),
     FOREIGN KEY (idEstadosUsuarios) REFERENCES EstadosUsuarios (idEstadoUsuario)

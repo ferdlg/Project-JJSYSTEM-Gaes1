@@ -418,7 +418,6 @@ class Usuarios(models.Model):
     numerocontacto = models.FloatField(db_column='numeroContacto', blank=True, null=True)  # Field name made lowercase.
     idrol = models.ForeignKey(Roles, models.DO_NOTHING, db_column='idRol')  # Field name made lowercase.
     idestadosusuarios = models.ForeignKey(Estadosusuarios, models.DO_NOTHING, db_column='idEstadosUsuarios')  # Field name made lowercase.
-    last_login = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         managed = False

@@ -21,7 +21,7 @@
         <a href="{% url 'landing' %}" class="logo">J.J SYSTEM</a>
         <nav class="login_navigation">
             <ul>
-                <li><button><a href="#">Registrarse</a></button></li>
+                <li><button><a href="{% url 'register' %}">Registrarse</a></button></li>
                 <li><button><a href="{% url 'login' %}">Iniciar sesión</a></button></li>
                 <li><a href="#"><img class="user_img" src="{% static 'images/landing/fotoperfil.png' %}" alt="Foto de perfil"></a></li>
             </ul>
@@ -42,6 +42,9 @@
 
         <nav class="navigation_bar_items">
             <ul>
+                <li>
+                <a href="{% url 'productos' %}">Productos</a> 
+                </li>
                 <li>
                     <a href="{% url 'servicios' %}">Servicios</a> 
                 </li>

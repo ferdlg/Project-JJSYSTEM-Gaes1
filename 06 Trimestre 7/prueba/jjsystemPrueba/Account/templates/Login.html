@@ -8,12 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
-<body>
-    <button class="btn-login btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Iniciar sesión
-    </button>
-    
-    <form method="post" action="{% url 'login' %}" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<body> 
+    <form method="post" action="{% url 'login' %}" class="modal" id="exampleModal"  data-bs-backdrop="static">
         {% csrf_token %}
         <div class="modal-dialog">
             <div class="modal-content">
@@ -44,5 +40,11 @@
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+        var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        myModal.show();
+    });
+    </script>
 </body>
 </html>
