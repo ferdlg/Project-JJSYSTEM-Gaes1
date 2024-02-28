@@ -41,11 +41,10 @@
                     <td>{{ pqrsf_item.idcliente }}</td>
                     <td>{{ pqrsf_item.idtipopqrsf }}</td>
                     <td>{{ pqrsf_item.idestadopqrsf }}</td>
-                    <td><a href="{% url 'editPqrsf' idPqrsf=pqrsf_item.idPqrsf %}" class="btn btn-primary btn-sw">Editar</a></td>
+                    <td><a href="{% url 'editarPqrsf' idPqrsf=pqrsf_item.idpqrsf %}" class="btn btn-primary btn-sw">Editar</a></td>
                     <td>
-                        <form action="{% url 'eliminarPqrsf' idPqrsf=pqrsf_item.idPqrsf %}" method="post">
+                        <form action="{% url 'eliminarPqrsf' idPqrsf=pqrsf_item.idpqrsf %}" method="post">
                             {% csrf_token %}
-                            
                             <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                         </form>
                     </td>

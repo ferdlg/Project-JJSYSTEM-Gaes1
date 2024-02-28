@@ -42,10 +42,10 @@ def createPqrsfView(request):
 
     estados = Estadospqrsf.objects.all()
     tipos = Tipospqrsf.objects.all()
-    return render(request, "templates/CreatePqrsf.html", {"estados": estados, "tipos": tipos})    
+    return render(request, "createPqrsf.html", {"estados": estados, "tipos": tipos})    
 
-def editarPqrsf(request, idPQRSF):
-    pqrsf = Pqrsf.objects.get(idpqrsf=idPQRSF)
+def editarPqrsf(request, idPqrsf):
+    pqrsf_item = Pqrsf.objects.get(idpqrsf=idPqrsf)
     estados = Estadospqrsf.objects.all()
     tipos = Tipospqrsf.objects.all()
 
@@ -63,15 +63,15 @@ def editarPqrsf(request, idPQRSF):
         idtipopqrsf = Tipospqrsf.objects.get(idtipopqrsf=idtipopqrsf)
 
         #actualizar los campos del objeto pqrsf
-        pqrsf.fechapqrsf = fechapqrsf
-        pqrsf.informacionpqrsf = informacionpqrsf
-        pqrsf.idestadopqrsf = idestadopqrsf
-        pqrsf.idtipopqrsf = idtipopqrsf
-        pqrsf.save()
+        pqrsf_item.fechapqrsf = fechapqrsf
+        pqrsf_item.informacionpqrsf = informacionpqrsf
+        pqrsf_item.idestadopqrsf = idestadopqrsf
+        pqrsf_item.idtipopqrsf = idtipopqrsf
+        pqrsf_item.save()
 
         return redirect('indexPqrsf')
 
-    return render(request, "templates/editarPqrsf.html", {"pqrsf": pqrsf, "estados": estados, "tipos": tipos})
+    return render(request, "editarPqrsf.html", {"pqrsf": pqrsf_item, "estados": estados, "tipos": tipos})
 
 def eliminarPqrsf(request, idpqrsf):
     pqrsf = Pqrsf.objects.get(idpqrsf = idpqrsf)

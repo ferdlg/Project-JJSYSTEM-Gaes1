@@ -25,9 +25,8 @@
         </div>
     {% endif %}
 
-    <form action="{% url 'editPqrsf' idPqrsf=pqrsf_item.idPqrsf %}" method="post">
+    <form action="{% url 'editarPqrsf' idPqrsf=pqrsf_item.idpqrsf %}" method="post">
         {% csrf_token %}
-        
 
       <div class="mb-3">
         <label for="fechaPQRSF" class="form-label"> Fecha</label>

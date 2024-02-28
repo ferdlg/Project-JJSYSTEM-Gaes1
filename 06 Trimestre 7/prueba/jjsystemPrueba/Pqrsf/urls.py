@@ -13,8 +13,8 @@ router.register(r'Pqrsf', pqrsfCRUD)
 
 urlpatterns=[
     path('',include(router.urls)),
-    path('editPqrsf/<idPqrsf>', views.editPqrsf, name='editPqrsf'),
+    path('editarPqrsf/<idPqrsf>', views.editarPqrsf, name='editarPqrsf'),
     path('indexPqrsf/', views.indexPqrsf, name='indexPqrsf'),
     path('createPqrsf/', views.createPqrsfView, name='createPqrsf'),
-    path('eliminarPqrsf/<iPpqrsf>', views.eliminarPqrsf, name='eliminarPqrsf'),
+    path('eliminarPqrsf/<idPqrsf>', views.eliminarPqrsf, name='eliminarPqrsf'),
 ]
