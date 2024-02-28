@@ -20,8 +20,8 @@
             <a href="{% url 'landing' %}" class="logo">J.J SYSTEM</a>
             <nav class="login_navigation">
                 <ul>
-                    <li><a href="#">Registrarse</a></li>
-                    <li><a href="#">Iniciar sesión</a></li>
+                    <li><a href="{% url 'register' %}">Registrarse</a></li>
+                    <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
                     <li><a href="#"><img class="user_img" src="{% static 'images/fotoperfil.png' %}" alt="Foto de perfil"></a></li>
                 </ul>
             </nav>    

@@ -142,9 +142,17 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'ServicioTecnico', 'static'),
+    os.path.join(BASE_DIR, 'Account', 'static'),
+    os.path.join(BASE_DIR, 'ProductosServicios', 'static'),
+    os.path.join(BASE_DIR, 'Pqrsf', 'static'),
+    os.path.join(BASE_DIR, 'Envios', 'static'),
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'ServicioTecnico')
+MEDIA_ROOT = [os.path.join(BASE_DIR, 'ServicioTecnico'),
+            os.path.join(BASE_DIR, 'Account'),
+            os.path.join(BASE_DIR, 'ProductosServicios'),
+            os.path.join(BASE_DIR, 'Pqrsf'),
+            os.path.join(BASE_DIR, 'Envios'),]
 MEDIA_URL = 'images/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

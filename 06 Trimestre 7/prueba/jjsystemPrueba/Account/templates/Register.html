@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="{% static 'css/registro.css' %}">
 </head>
 <body>
-        <form method="POST" action="{% url 'register' %}" data-bs-backdrop="static">
+
+        <form method="POST" action="{% url 'register' %}">
             {% csrf_token %}
-            <div class="modal" id="exampleModal">
+            <div class="modal" id="exampleModal" data-bs-backdrop="static">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-body">
@@ -42,5 +43,6 @@
     myModal.show();
 });
 </script>
+
 </body>
 </html>
