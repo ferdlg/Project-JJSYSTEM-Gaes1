@@ -1,0 +1,37 @@
+DROP DATABASE IF exists biblioteca_db;
+CREATE DATABASE biblioteca_db;
+
+CREATE TABLE usuarios(
+	id_usuario INT auto_increment NOT NULL primary KEY,
+    username VARCHAR(50),
+    email VARCHAR(200),
+    password VARCHAR(200)
+);
+
+CREATE TABLE categoria_libros(
+	id_categoria INT auto_increment NOT NULL primary KEY,
+    categoria VARCHAR(50)
+);
+
+CREATE TABLE estado_libros(
+	id_estado INT auto_increment NOT NULL primary KEY,
+    estado VARCHAR(50)
+);
+
+CREATE TABLE libros(
+	id_libro INT auto_increment NOT NULL primary KEY,
+    nombre VARCHAR(50),
+    autor VARCHAR(50),
+    descripcion VARCHAR(200),
+    id_categoria_fk INT,
+    id_estado_fk INT,
+    foreign key (id_categoria_fk) references categoria_libros(id_categoria),
+    foreign key (id_estado_fk) references estado_libros(id_estado)
+);
+
+CREATE TABLE libro_usuario(
+	id_libro_fk INT,
+    id_usuario_fk INT,
+    foreign key (id_libro_fk) references libros (id_libro),
+    foreign key (id_usuario_fk) references usuarios(id_usuario)
+);
