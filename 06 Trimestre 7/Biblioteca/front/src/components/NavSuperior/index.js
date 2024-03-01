@@ -12,7 +12,7 @@ const NavSuperior = () => {
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse opciones" id="navbarSupportedContent">
-        <Link to="/Libros" className='btn_outline_blanco p-2'>Libros</Link>
+        <Link to="/libros" className='btn_outline_blanco p-2'>Libros</Link>
         <Link to="/Usuarios" className='btn_outline_blanco p-2'>Usuarios</Link>
         <Link to="/#" className='btn_outline_blanco p-2'>Informacion</Link>
         <Link to="/Categorias" className='btn_outline_blanco p-2'>Categorias</Link>

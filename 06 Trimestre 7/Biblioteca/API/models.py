@@ -166,7 +166,7 @@ class Usuarios(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     username = models.CharField(max_length=50, blank=True, null=True)
     email = models.CharField(max_length=200, blank=True, null=True)
-    password = models.CharField(max_length=200, blank=True, null=True)
+    password = models.CharField(max_length=200, blank=True, null=False)
 
     class Meta:
         managed = False

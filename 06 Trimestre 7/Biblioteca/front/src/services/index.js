@@ -15,9 +15,9 @@ const apiService = {
     },
     registrarLibro : async(libro) => {
         try{
-            libro.estado = 0;
             const url_libro = url + "libros/";
-            const response = await axios.get(url_libro);
+            console.log(libro)
+            const response = await axios.post(url_libro, libro);
             const data = response.data;
             return data;
         }catch (error){
@@ -73,7 +73,7 @@ const apiService = {
     registrarUSuarios : async(usuario) => {
         try{
             usuario.estado = 0
-            const url_registrarusuario = url + "usuarios/";
+            const url_registrarusuario = url + "registro/";
             const response = await axios.get(url_registrarusuario, usuario);
             const data = response.data;
             return data;
