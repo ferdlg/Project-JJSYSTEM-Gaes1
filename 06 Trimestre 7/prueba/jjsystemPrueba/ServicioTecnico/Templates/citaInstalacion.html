@@ -41,7 +41,7 @@
                     <td>{{cita.idcotizacion}}</td>
                     <td>{{cita.idestadocita}}</td>
                     <td>
-                        <a href="{% static 'EditarCitas.html' idcita=cita.idcita %}" class="btn btn-primary btn-sw"> Editar </a> 
+                        <a href="{% url 'editar_citas' idcita=cita.idcita %}" class="btn btn-primary btn-sw"> Editar </a> 
                     </td>
                     <td>
                         <a href="{% url 'eliminar_citas' cita.idcita %}" class="btn btn-danger btn-sw"> Eliminar </a>                  
