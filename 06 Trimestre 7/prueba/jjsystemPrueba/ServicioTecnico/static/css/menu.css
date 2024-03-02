@@ -36,7 +36,7 @@
     
     .offcanvas {
         background-color: var(--color-primary) !important; /* Color de fondo */
-        max-width: 250px;
+        max-width: 300px;
         border-top-right-radius: 15px;
         border-bottom-right-radius: 15px;
     }
