@@ -42,8 +42,9 @@ urlpatterns=[
     path('editarServicio/<idServicio>', views.editarServicio, name='editarServicio'),
     path('eliminarServicio/<idServicio>', views.eliminarServicio, name='eliminarServicio'),
 
-    # path('categoriaServicio/', views.createCategoriaServicioView, name = 'createCategoriaServicio'),
-    # path('editarCategoriaServicio/<idCategoria>', views.editarCategoriaServicioView, name='editarCategoriaServicio'),
-    # path('eliminarCategoriaServicio/<idCategoria>', views.eliminarCategoriaServicioView, name = 'eliminarCategoriaServicio')
+    path('categoriaServicio/', views.home_categoriaServicios, name = 'categoriaServicios'),
+    path('createCategoriaServicio/', views.createCategoriaServicioView, name="createCategoriaServicio"),
+    path('editarCategoriaServicio/<idCategoriaServicio>', views.editarCategoriaServicioView, name='editarCategoriaServicio'),
+    path('eliminarCategoriaServicio/<idCategoriaServicio>', views.eliminarCategoriaServicioView, name = 'eliminarCategoriaServicio')
 
 ]
