@@ -2,7 +2,7 @@
 {% block titulo %} Citas | Instalacion {% endblock %}
 
 {% block contenido %}
-<div id="content">
+<div class="content">
     <section class="available_prod">
         <div class="container">
             <div class="row">
@@ -12,7 +12,12 @@
             </div>
         </div>
     </section>
-
+    <section style="padding: 30px;">
+        <form class="form-inline position-relative my-2 d-inline-block">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar cita por id" aria-label="Search">
+            <button class="btn btn-search position-absolute" type="submit"></button>
+        </form>
+    </section>
     <section class="container-citas">
         <table class="table">
             <thead>
@@ -26,6 +31,7 @@
                 <th scope="col">Administrador</th>
                 <th scope="col">Cotizacion</th>
                 <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,11 +46,9 @@
                     <td>{{cita.idadministrador}}</td>
                     <td>{{cita.idcotizacion}}</td>
                     <td>{{cita.idestadocita}}</td>
-                    <td>
-                        <a href="{% url 'editar_citas' idcita=cita.idcita %}" class="btn btn-primary btn-sw"> Editar </a> 
-                    </td>
-                    <td>
-                        <a href="{% url 'eliminar_citas' cita.idcita %}" class="btn btn-danger btn-sw"> Eliminar </a>                  
+                    <td class="d-flex justify-content-between">
+                        <a href="{{cita.idcita}}" class="btn btn-primary btn-sw me-2"> Editar </a> 
+                        <a href="{{cita.idcita}}" class="btn btn-danger btn-sw"> Eliminar </a>                  
                     </td>
                 </tr>
                 {% endfor %}

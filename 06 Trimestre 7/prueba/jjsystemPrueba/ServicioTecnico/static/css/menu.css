@@ -4,8 +4,9 @@
         --color-selected: rgba(36, 126, 194, 0.763);
         --color-white-second:rgb(226, 226, 226); /* Color cuando el elemento está seleccionado */
     }
-    body{
-        font-family: 'Montserrat',  sans-serif;
+    body {
+        font-family: 'Montserrat', sans-serif;
+        color: var(--light);
     }
   /* Estilo para el navbar */
     .navbar{
