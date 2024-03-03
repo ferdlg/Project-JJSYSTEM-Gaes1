@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/indexServicioTecnico.css' %}">
     <link rel="stylesheet" href="{% static 'css/citas.css' %}">
     {% block titulo %} {% endblock %}
+    <title>{% block titulo %}{% endblock %}</title>
 </head>
 <body>
   <nav class="navbar navbar-dark bg-dark fixed-top">
@@ -43,7 +44,7 @@
               <a class="nav-link" aria-current="page" href="#">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Productos y Servicios</a>
+              <a class="nav-link" href="{% url 'homeProductos' %}">Productos y Servicios</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,10 +55,10 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Envios</a>
+              <a class="nav-link" href="{% url 'homeEnvios' %}">Envios</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">PQRSF</a>
+              <a class="nav-link" href="{% url 'indexPqrsf' %}">PQRSF</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Tecnicos</a>
