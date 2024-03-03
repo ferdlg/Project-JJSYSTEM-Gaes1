@@ -27,13 +27,23 @@ urlpatterns=[
     path('', views.home, name='home'),
     path('productos', views.home_productos, name='homeProductos'),
     path('api/', include(router.urls)),
-    
+
     path('createProducto/', views.createProductoView, name='createProducto'),
     path('editarProducto/<idProducto>', views.editarProducto, name='editarProducto'),
     path('eliminarProducto/<idProducto>', views.eliminarProducto, name='eliminarProducto'),
 
+    path('categoriaProducto/', views.home_categoriaProductos, name='categoriaProductos'),
+    path('crearCategoriaProducto/', views.createCategoriaProductoView, name = 'createCategoriaProducto'),
+    path('editarCategoriaProducto/<idCategoriaProducto>', views.editarCategoriaProductoView, name='editarCategoriaProducto'),
+    path('eliminarCategoriaProducto/<idCategoriaProducto>', views.eliminarCategoriaProductoView, name = 'eliminarCategoriaProducto'),
+
     path('servicios/', views.home_servicios, name='homeServicios'),
-    path('createServicios', views.createServiciosView, name='createServicios'),
+    path('createServicio/', views.createServiciosView, name='createServicio'),
     path('editarServicio/<idServicio>', views.editarServicio, name='editarServicio'),
     path('eliminarServicio/<idServicio>', views.eliminarServicio, name='eliminarServicio'),
+
+    # path('categoriaServicio/', views.createCategoriaServicioView, name = 'createCategoriaServicio'),
+    # path('editarCategoriaServicio/<idCategoria>', views.editarCategoriaServicioView, name='editarCategoriaServicio'),
+    # path('eliminarCategoriaServicio/<idCategoria>', views.eliminarCategoriaServicioView, name = 'eliminarCategoriaServicio')
+
 ]
