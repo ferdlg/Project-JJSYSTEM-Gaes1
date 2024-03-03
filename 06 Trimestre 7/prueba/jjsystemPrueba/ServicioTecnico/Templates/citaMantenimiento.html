@@ -2,12 +2,12 @@
 {% block titulo %} Citas | Mantenimiento {% endblock %}
 
 {% block contenido %}
-<div class="content">
+<div class="content margin-top: 70px; margin-bottom: 70px;">
     <section class="available_prod">
         <div class="container">
             <div class="row">
                 <div class="allowed_prod">
-                    <h2 class="font-weight-bold">Citas de Mantenimiento</h2>
+                    <h2 class="font-weight-bold text-center text-lg-left">Citas de Mantenimiento</h2>
                 </div>
             </div>
         </div>
@@ -31,7 +31,8 @@
                 <th scope="col">Administrador</th>
                 <th scope="col">Cotizacion</th>
                 <th scope="col">Estado</th>
-                <th scope="col">Acciones</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -46,8 +47,10 @@
                     <td>{{cita.idadministrador}}</td>
                     <td>{{cita.idcotizacion}}</td>
                     <td>{{cita.idestadocita}}</td>
-                    <td class="d-flex justify-content-between">
+                    <td>
                         <a href="{{cita.idcita}}" class="btn btn-primary btn-sw me-2"> Editar </a> 
+                    </td>
+                    <td>
                         <a href="{{cita.idcita}}" class="btn btn-danger btn-sw"> Eliminar </a>                  
                     </td>
                 </tr>

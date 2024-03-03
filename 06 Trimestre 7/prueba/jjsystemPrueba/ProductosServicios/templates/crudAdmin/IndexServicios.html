@@ -1,12 +1,12 @@
 {% extends "menu.html" %}
-{% block titulo %} Productos {% endblock %}
+{% block titulo %} Servicios {% endblock %}
 {% block contenido %}
 <div class="content">
     <nav class="available_prod">
         <div class="container">
             <div class="row">
                 <div class="allowed_prod">
-                    <h2 class="font-weight-bold text-center text-lg-left">Productos</h2>
+                    <h2 class="font-weight-bold text-center text-lg-left">Servicios</h2>
                 </div>
             </div>
         </div>
@@ -17,8 +17,9 @@
             <button class="btn btn-search position-absolute" type="submit"></button>
         </form>
     </section>
-        <a href="{% url 'createProducto'%}" class="btn btn-success" style="margin-bottom:  5px;">Agregar Producto</a>
+        <a href="{% url 'createProducto'%}" class="btn btn-success" style="margin-bottom:  5px;">Agregar Servicio</a>
         <a href="#" class="btn btn-success" style="margin-bottom:  5px; background-color: rgb(73, 2, 139);">Categorias</a>
+
     <section class="s-data-table">
         <table class="table data-table table-bordered">
             <thead>
@@ -26,29 +27,23 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripción</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Cantidad</th>
                     <th scope="col">Categoría</th>
-                    <th scope="col">Proveedor</th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                {% for producto in productos %}
+                {% for servicio in servicios %}
                 <tr>
-                    <td>{{producto.idproducto}}</td>
-                    <td>{{producto.nombreproducto}}</td>
-                    <td>{{producto.descripcionproducto}}</td>
-                    <td>{{producto.precioproducto}}</td>
-                    <td>{{producto.cantidad}}</td>
-                    <td>{{producto.idcategoriaproducto.nombrecategoria}}</td>
-                    <td>{{producto.idproveedorproducto.nombreproveedor}}</td>
+                    <td>{{servicio.idservicio}}</td>
+                    <td>{{servicio.nombreservicio}}</td>
+                    <td>{{servicio.descripcionservicio}}</td>
+                    <td>{{servicio.idcategoriaservicio.nombrecategoria}}</td>
                     <td> 
-                        <a href="{% url 'editarProducto' idProducto=producto.idproducto %}" class="btn btn-primary btn-sw"> Editar </a>
+                        <a href="{% url 'editarServicio' idServicio=servicio.idservicio %}" class="btn btn-primary btn-sw"> Editar </a>
                     </td>
                     <td>
-                        <a href="{% url 'eliminarProducto' idProducto=producto.idproducto %}" class="btn btn-danger btn-sw"> eliminar </a>
+                        <a href="{% url 'eliminarServicio' idServicio=servicio.idservicio %}" class="btn btn-danger btn-sw"> eliminar </a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -56,14 +51,14 @@
         </table>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                {% if productos.has_previous %}
-                <li class="page-item"><a class="page-link" href="?page={{ productos.previous_page_number }}">&laquo;</a></li>
+                {% if servicios.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ servicios.previous_page_number }}">&laquo;</a></li>
                 {% endif %}
-                {% for i in productos.paginator.page_range %}
-                <li class="page-item {% if productos.number == i %}active{% endif %}"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% for i in servicios.paginator.page_range %}
+                <li class="page-item {% if servicios.number == i %}active{% endif %}"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
                 {% endfor %}
-                {% if productos.has_next %}
-                <li class="page-item"><a class="page-link" href="?page={{ productos.next_page_number }}">&raquo;</a></li>
+                {% if servicios.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ servicios.next_page_number }}">&raquo;</a></li>
                 {% endif %}
             </ul>
         </nav>

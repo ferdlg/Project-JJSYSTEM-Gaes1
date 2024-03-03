@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Productos
-from .models import Categoriasproductos
+from .models import Productos, Servicios
+from .models import Categoriasproductos , Categoriasservicios
 from .models import Proveedoresproductos
+from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
+
+
 # Create your views here.
 def landing(request):
     return render(request, 'landing/Index.html')
@@ -13,8 +16,39 @@ def productos(request):
     return render(request, 'landing/Productos.html')
 
 def home(request):
-    productos = Productos.objects.all()
+    return render(request, "crudAdmin/IndexProductosServicios.html")
+
+def home_productos(request):
+    # Obtener todos los productos
+    productos_list = Productos.objects.all()
+
+    # Configurar la paginación
+    paginator = Paginator(productos_list, 10)  # Mostrar 10 productos por página
+    page_number = request.GET.get('page')      # Obtener el número de página solicitado
+    try:
+        productos = paginator.page(page_number)
+    except PageNotAnInteger:
+        productos = paginator.page(1)
+    except EmptyPage:
+        productos = paginator.page(paginator.num_pages)
+
     return render(request, "crudAdmin/IndexProductos.html", {"productos": productos})
+
+def home_servicios(request):
+    # Obtener todos los productos
+    servicios_list = Servicios.objects.all()
+
+    # Configurar la paginación
+    paginator = Paginator(servicios_list, 10)  # Mostrar 10 productos por página
+    page_number = request.GET.get('page')      # Obtener el número de página solicitado
+    try:
+        servicios = paginator.page(page_number)
+    except PageNotAnInteger:
+        servicios = paginator.page(1)
+    except EmptyPage:
+        servicios = paginator.page(paginator.num_pages)
+
+    return render(request, "crudAdmin/IndexServicios.html", {"servicios": servicios})
 
 def createProductoView(request):
     if request.method == 'POST':
@@ -80,7 +114,57 @@ def editarProducto(request, idProducto):
     return render(request, "crudAdmin/EditarProducto.html", {"producto": producto, "categorias": categorias, "proveedores": proveedores})
 
 def eliminarProducto(request, idProducto):
-    envio = Productos.objects.get(idproducto = idProducto)
-    envio.delete()
+    producto = Productos.objects.get(idproducto = idProducto)
+    producto.delete()
 
     return redirect('homeProductos')
+
+
+def createServiciosView(request):
+    if request.method == 'POST':
+        nombreservicio = request.POST.get('nombre')
+        descripcionservicio = request.POST.get('descripcion')
+        idcategoriaservicio = request.POST.get('categoria')
+            
+        # Obtener la instancia de categorias
+        categoria = Categoriasservicios.objects.get(idcategoriaservicio=idcategoriaservicio)
+
+        # Crear la instancia de producto
+        servicio = Servicios.objects.create(
+                nombreservicio = nombreservicio,
+                descripcionservicio = descripcionservicio,
+                idcategoriaservicio = categoria
+            )
+        return redirect('homeServicios')
+
+    categorias = Categoriasservicios.objects.all()
+    return render(request, "crudAdmin/CreateServicio.html", {"categorias": categorias})
+
+def editarServicio(request, idServicio):
+    servicio = Servicios.objects.get(idservicio=idServicio)
+    categorias = Categoriasservicios.objects.all()
+
+    if request.method == 'POST':
+        # Obtener los datos de la petición
+        nombreservicio = request.POST.get('nombre')
+        descripcionservicio = request.POST.get('descripcion')
+        idcategoriaservicio = request.POST.get('categoria')
+
+        # Obtener la instancia de categorias
+        categoria = Categoriasproductos.objects.get(idcategoriservicio=idcategoriaservicio)
+
+        # Actualizar los campos del objeto envio
+        servicio.nombreproducto = nombreservicio
+        servicio.descripcionproducto = descripcionservicio
+        servicio.idcategoriaproducto = categoria
+        servicio.save()
+
+        return redirect('homeServicios')
+
+    return render(request, "crudAdmin/EditarProducto.html", {"servicio": servicio, "categorias": categorias})
+
+def eliminarServicio(request, idServicio):
+    servicio = Productos.objects.get(idservicio = idServicio)
+    servicio.delete()
+
+    return redirect('homeServicios')
