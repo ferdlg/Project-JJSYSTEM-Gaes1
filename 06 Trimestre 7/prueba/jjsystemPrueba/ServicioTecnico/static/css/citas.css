@@ -12,6 +12,7 @@ body {
 /* Estilos para la sección de las citas */
 .content {
     margin: 4%; 
+    bottom: 10px;
 }
 
 .available_prod {

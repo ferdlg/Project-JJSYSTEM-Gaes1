@@ -4,9 +4,7 @@
     --color-botones:rgba(21, 107, 0, 0.772);
     --color-botones-hover:rgba(0, 53, 6, 0.833);
 }
-body{
 
-}
 .contenedor-cotizaciones {
     display: flex;
     flex-direction: column; 
@@ -39,7 +37,7 @@ body{
     background-color: var(--color-botones-hover);
     border-color: var(--color-botones-hover);
 }
-.card {
+.contenedor-citas .card {
     flex: 0 1 calc(30% - 20px); 
     margin: 10px; 
 }

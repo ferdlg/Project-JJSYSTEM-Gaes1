@@ -24,9 +24,16 @@ router.register(r'roles', rolesCRUD)
 router.register(r'servicios', serviciosCRUD)
 
 urlpatterns=[
-    path('', views.home, name='homeProductos'),
+    path('', views.home, name='home'),
+    path('productos', views.home_productos, name='homeProductos'),
     path('api/', include(router.urls)),
-    path('create/', views.createProductoView, name='createProducto'),
+    
+    path('createProducto/', views.createProductoView, name='createProducto'),
     path('editarProducto/<idProducto>', views.editarProducto, name='editarProducto'),
     path('eliminarProducto/<idProducto>', views.eliminarProducto, name='eliminarProducto'),
+
+    path('servicios/', views.home_servicios, name='homeServicios'),
+    path('createServicios', views.createServiciosView, name='createServicios'),
+    path('editarServicio/<idServicio>', views.editarServicio, name='editarServicio'),
+    path('eliminarServicio/<idServicio>', views.eliminarServicio, name='eliminarServicio'),
 ]
