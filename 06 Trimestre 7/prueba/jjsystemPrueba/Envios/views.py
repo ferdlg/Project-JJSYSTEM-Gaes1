@@ -7,7 +7,7 @@ from Account.views import role_required
 # Create your views here.
 
 @login_required
-@role_required(2)
+@role_required(1)
 def homeEnvios(request):
     envios = Envios.objects.all()
     return render(request, "crudAdmin/Index.html", {"envios": envios})

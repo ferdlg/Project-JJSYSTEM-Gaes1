@@ -1,0 +1,10 @@
+.custom-input-group {
+    display: flex;
+    width: 30%;
+    margin-top: 2%;
+}
+
+.custom-form-control {
+    flex: 1; 
+}
+
