@@ -4,7 +4,9 @@
     --color-botones:rgba(21, 107, 0, 0.772);
     --color-botones-hover:rgba(0, 53, 6, 0.833);
 }
+body{
 
+}
 .contenedor-cotizaciones {
     display: flex;
     flex-direction: column; 
@@ -13,6 +15,7 @@
 }
 .contenedor-cotizaciones .card{
     background-color: rgba(146, 154, 181, 0.315);
+    margin-top: 4%;
 }
 .contenedor-cotizaciones a {
     background-color: var(--color-botones);

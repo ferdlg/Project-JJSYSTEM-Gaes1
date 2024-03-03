@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
     <link rel="stylesheet" href="{% static 'css/indexServicioTecnico.css' %}">
     <link rel="stylesheet" href="{% static 'css/citas.css' %}">
-    {% block titulo %} {% endblock %}
     <title>{% block titulo %}{% endblock %}</title>
 </head>
 <body>
@@ -46,22 +45,14 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'homeProductos' %}">Productos y Servicios</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Servicio Técnico
-              </a>
-              <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item" href="#">Técnicos</a></li>
-              </ul>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">Servicio Técnico</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'homeEnvios' %}">Envios</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'indexPqrsf' %}">PQRSF</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Tecnicos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Ajustes</a>
