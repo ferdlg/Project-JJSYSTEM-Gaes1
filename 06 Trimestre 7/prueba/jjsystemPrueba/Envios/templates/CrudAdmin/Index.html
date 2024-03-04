@@ -5,14 +5,24 @@
     {% load static %}
 
     <link rel="stylesheet" href="{% static 'css/envios.css' %}">
-        <div id="content" style="margin-top:30px ">
-            <section style="padding: 30px;">
-                <form class="form-inline">
+        <div id="content" style="margin: 40px; margin-top: 70px;">
+            <nav class="available_prod">
+                <div class="container">
+                    <div class="row">
+                        <div class="allowed_prod">
+                            <h2 class="font-weight-bold text-center text-lg-left">Envios</h2>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>    
+        <div id="content" style="margin: 40px">
+            <section style="padding: 5px; padding-top: 0%;">
+                <form class="form-inline" method="GET">
                     <div class="custom-input-group">
-                        <input type="search" class="form-control custom-form-control" placeholder="Buscar" aria-label="Search">
-                        <button type="submit" class="btn btn-search">?</button>
-                        <div class="d-flex justify-content-between">
-                            <a href="{% url 'createEnvio'%}" class="btn btn-primary btn">Añadir Envio</a>
+                        <input type="search" class="form-control custom-form-control" name="search" placeholder="Buscar" aria-label="Search" style="margin: 5px">
+                        <div class="d-flex justify-content-between" style="padding: 4px">
+                            <a href="{% url 'createEnvio'%}" class="btn btn-primary btn">Añadir Envío</a>
                         </div>
                     </div>
                 </form>

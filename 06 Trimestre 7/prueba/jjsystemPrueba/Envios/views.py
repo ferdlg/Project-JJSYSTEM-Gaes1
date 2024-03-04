@@ -9,8 +9,14 @@ from Account.views import role_required
 @login_required
 @role_required(1)
 def homeEnvios(request):
-    envios = Envios.objects.all()
-    return render(request, "crudAdmin/Index.html", {"envios": envios})
+    search_query = request.GET.get('search', '')
+
+    if search_query:
+        envios = Envios.objects.filter(idenvio__iexact=search_query)
+    else:
+        envios = Envios.objects.all()
+
+    return render(request, "crudAdmin/Index.html", {"envios": envios, "search_query": search_query})
 
 def createEnvioView(request):
     if request.method == 'POST':
@@ -74,3 +80,4 @@ def eliminarEnvio(request, idEnvio):
     envio.delete()
 
     return redirect('homeEnvios')
+
