@@ -18,10 +18,10 @@
         </div>    
         <div id="content" style="margin: 40px">
             <section style="padding: 5px; padding-top: 0%;">
-                <form class="form-inline" method="GET">
-                    <div class="custom-input-group">
-                        <input type="search" class="form-control custom-form-control" name="search" placeholder="Buscar" aria-label="Search" style="margin: 5px">
-                        <div class="d-flex justify-content-between" style="padding: 4px">
+                <form class="form-inline" method="GET" style="width:25%">
+                    <div class="input-group">
+                        <input type="search" class="form-control" name="search" placeholder="Buscar" aria-label="Search" >
+                        <div class="d-flex justify-content-between" style="padding-left: 10px">
                             <a href="{% url 'createEnvio'%}" class="btn btn-primary btn">Añadir Envío</a>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                     </tbody>
                 </table>
             </section>
-            <div class="d-flex justify-content-start">
+            <div class="d-flex justify-content-start" style="margin-bottom: 70px;">
                 <a href="" class="btn btn-success btn">Exportar</a>
             </div>
         </div>

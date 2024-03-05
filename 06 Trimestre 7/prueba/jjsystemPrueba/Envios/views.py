@@ -18,6 +18,8 @@ def homeEnvios(request):
 
     return render(request, "crudAdmin/Index.html", {"envios": envios, "search_query": search_query})
 
+@login_required
+@role_required(1)
 def createEnvioView(request):
     if request.method == 'POST':
         direccion = request.POST.get('direccion')
@@ -51,6 +53,8 @@ def createEnvioView(request):
     estados = Estadosenvios.objects.all()
     return render(request, "crudAdmin/Create.html", {"estados": estados})
 
+@login_required
+@role_required(1)
 def editarEnvio(request, idEnvio):
     envio = Envios.objects.get(idenvio=idEnvio)
     estados = Estadosenvios.objects.all()
@@ -75,9 +79,25 @@ def editarEnvio(request, idEnvio):
 
     return render(request, "crudAdmin/Editar.html", {"envio": envio, "estados": estados})
 
+@login_required
+@role_required(1)
 def eliminarEnvio(request, idEnvio):
     envio = Envios.objects.get(idenvio = idEnvio)
     envio.delete()
 
     return redirect('homeEnvios')
+
+#Views del tecnico
+
+@login_required
+@role_required(1)
+def homeEnviosTecnico(request):
+    search_query = request.GET.get('search', '')
+
+    if search_query:
+        envios = Envios.objects.filter(idtecnico__exact=search_query)
+    else:
+        envios = Envios.objects.all()
+
+    return render(request, "tecnico/IndexTecnico.html", {"envios": envios, "search_query": search_query})
 
