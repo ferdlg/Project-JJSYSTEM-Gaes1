@@ -23,7 +23,7 @@ def home_productos(request):
     productos_list = Productos.objects.all()
 
     # Configurar la paginación
-    paginator = Paginator(productos_list, 10)  # Mostrar 10 productos por página
+    paginator = Paginator(productos_list, 5)  # Mostrar 10 productos por página
     page_number = request.GET.get('page')      # Obtener el número de página solicitado
     try:
         productos = paginator.page(page_number)
