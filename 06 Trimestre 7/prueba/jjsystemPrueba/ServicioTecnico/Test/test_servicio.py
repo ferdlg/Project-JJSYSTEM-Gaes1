@@ -1,20 +1,24 @@
+import os
+from unittest import TestCase
+import django
 import pytest
 
-from ..models import Servicios
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jjsystemPrueba.settings')
+django.setup()
 
+from ..models import Servicios, Categoriasservicios
 
-class TestServicio():
-    def __init__(self, nombreservicio,descripcionservicio,idcategoriaservicio):
-        self.nombreservicio = nombreservicio
-        self.descripcionservicio = descripcionservicio
-        self.idcategoriaservicio = idcategoriaservicio
-        
+class TestServicio(TestCase):
 
-    def test_crear_servicio(self):
-        servicio = Servicios(servicio.nombreservicio, servicio.descripcionservicio, servicio.idcategoriaservicio)
-        nombreservicio = 'Mantenimiento',
-        descripcionservicio = 'servicio mantenimiento',
-        idcategoriaservicio = '1'
+    def setUp(self):
+        categoria = Categoriasservicios.objects.get(idcategoriaservicio = 1)
+        self.servicio = Servicios.objects.create(
+            nombreservicio='prueba',
+            descripcionservicio='prueba test',
+            idcategoriaservicio= categoria
+        )
 
-        assert servicio.nombreservicio == 'Mantenimiento'
-
+    def test_servicio_crear(self):
+        servicio = Servicios.objects.get(idservicio=self.servicio.idservicio)
+        self.assertEqual(servicio.nombreservicio, 'prueba')
+        self.assertEqual(servicio.descripcionservicio, 'prueba test')
