@@ -90,7 +90,7 @@ def eliminarEnvio(request, idEnvio):
 #Views del tecnico
 
 @login_required
-@role_required(1)
+@role_required(3)
 def homeEnviosTecnico(request):
     search_query = request.GET.get('search', '')
 

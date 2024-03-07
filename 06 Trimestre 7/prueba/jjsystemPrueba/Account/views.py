@@ -10,11 +10,11 @@ def userLogin(request):
     if request.user.is_authenticated:
         # Si el usuario ya está autenticado, no vuelve al login
         if request.user.idrol.idrol == 1:
-            return HttpResponse('Vista admin')
+            return redirect('homeEnvios')
         elif request.user.idrol.idrol == 2:
             return HttpResponse('Vista cliente')
         elif request.user.idrol.idrol == 3:
-            return HttpResponse('Vista tecnico')
+            return redirect('homeTecnicosEnvios')
         else:
             return redirect('vista_por_defecto')
 
@@ -27,11 +27,11 @@ def userLogin(request):
             if user is not None:
                 login(request, user)
                 if user.idrol.idrol == 1:
-                    return HttpResponse('Vista admin')
+                    return redirect('homeEnvios')
                 elif user.idrol.idrol == 2:
                     return HttpResponse('Vista cliente')
                 elif user.idrol.idrol == 3:
-                    return HttpResponse('Vista tecnico')
+                    return redirect('homeTecnicosEnvios')
                 else:
                     return redirect('vista_por_defecto')
             else:
