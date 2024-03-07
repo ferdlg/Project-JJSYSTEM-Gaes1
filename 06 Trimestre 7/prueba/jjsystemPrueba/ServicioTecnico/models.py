@@ -1,3 +1,10 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
 
@@ -17,6 +24,76 @@ class Administrador(models.Model):
     class Meta:
         managed = False
         db_table = 'administrador'
+
+
+class AuthGroup(models.Model):
+    name = models.CharField(unique=True, max_length=150)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group'
+
+
+class AuthGroupPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        unique_together = (('group', 'permission'),)
+
+
+class AuthPermission(models.Model):
+    name = models.CharField(max_length=255)
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    codename = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_permission'
+        unique_together = (('content_type', 'codename'),)
+
+
+class AuthUser(models.Model):
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.IntegerField()
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    email = models.CharField(max_length=254)
+    is_staff = models.IntegerField()
+    is_active = models.IntegerField()
+    date_joined = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+
+
+class AuthUserGroups(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_groups'
+        unique_together = (('user', 'group'),)
+
+
+class AuthUserUserPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_user_permissions'
+        unique_together = (('user', 'permission'),)
+
 
 class Categoriasproductos(models.Model):
     idcategoriaproducto = models.AutoField(db_column='idCategoriaProducto', primary_key=True)  # Field name made lowercase.
@@ -119,6 +196,21 @@ class Disponibilidadcronogramas(models.Model):
         managed = False
         db_table = 'disponibilidadcronogramas'
 
+
+class DjangoAdminLog(models.Model):
+    action_time = models.DateTimeField()
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200)
+    action_flag = models.PositiveSmallIntegerField()
+    change_message = models.TextField()
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
+
+
 class DjangoContentType(models.Model):
     app_label = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
@@ -162,7 +254,7 @@ class Envios(models.Model):
 
 
 class Enviosentregados(models.Model):
-    idenvio = models.IntegerField(db_column='idEnvio', blank=True, null=True)  # Field name made lowercase.
+    idenvio = models.IntegerField(db_column='idEnvio', primary_key=True)  # Field name made lowercase.
     fecha = models.DateTimeField(blank=True, null=True)
     idtecnicoencargado = models.IntegerField(db_column='idTecnicoEncargado', blank=True, null=True)  # Field name made lowercase.
     documentotecnico = models.BigIntegerField(db_column='documentoTecnico', blank=True, null=True)  # Field name made lowercase.
@@ -194,9 +286,6 @@ class Estadosenvios(models.Model):
     idestadoenvio = models.AutoField(db_column='idEstadoEnvio', primary_key=True)  # Field name made lowercase.
     nombreestadoenvio = models.CharField(db_column='nombreEstadoEnvio', max_length=20)  # Field name made lowercase.
 
-    def __str__(self):
-        return self.idestadoenvio
-
     class Meta:
         managed = False
         db_table = 'estadosenvios'
@@ -218,6 +307,28 @@ class Estadosusuarios(models.Model):
     class Meta:
         managed = False
         db_table = 'estadosusuarios'
+
+
+class Historialcotizaciones(models.Model):
+    idcotizacion = models.ForeignKey(Cotizaciones, models.DO_NOTHING, db_column='idCotizacion', blank=True, null=True)  # Field name made lowercase.
+    fechacreada = models.DateTimeField(db_column='fechaCreada', blank=True, null=True)  # Field name made lowercase.
+    fechaactualizacion = models.DateTimeField(db_column='fechaActualizacion', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'historialcotizaciones'
+
+
+class Historialpqrsfportipoestado(models.Model):
+    idregistro = models.AutoField(db_column='idRegistro', primary_key=True)  # Field name made lowercase.
+    idpqrsf = models.ForeignKey('Pqrsf', models.DO_NOTHING, db_column='idPQRSF', blank=True, null=True)  # Field name made lowercase.
+    idtipopqrsf = models.IntegerField(db_column='idTipoPQRSF', blank=True, null=True)  # Field name made lowercase.
+    idestadopqrsf = models.IntegerField(db_column='idEstadoPQRSF', blank=True, null=True)  # Field name made lowercase.
+    fecharegistro = models.DateTimeField(db_column='fechaRegistro', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'historialpqrsfportipoestado'
 
 
 class Permisos(models.Model):
@@ -301,9 +412,11 @@ class Servicios(models.Model):
     idservicio = models.AutoField(db_column='idServicio', primary_key=True)  # Field name made lowercase.
     nombreservicio = models.TextField(db_column='nombreServicio')  # Field name made lowercase.
     descripcionservicio = models.TextField(db_column='descripcionServicio')  # Field name made lowercase.
+    precioservicio = models.FloatField(db_column='precioServicio', blank=True, null=True)  # Field name made lowercase.
     idcategoriaservicio = models.ForeignKey(Categoriasservicios, models.DO_NOTHING, db_column='idCategoriaServicio', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
+        managed = False
         db_table = 'servicios'
 
 
@@ -312,9 +425,6 @@ class Tecnicos(models.Model):
     especialidad = models.CharField(max_length=50)
     numerodocumento = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='numeroDocumento')  # Field name made lowercase.
 
-    def __str__(self):
-        return self.idtecnico
-    
     class Meta:
         managed = False
         db_table = 'tecnicos'
@@ -338,16 +448,11 @@ class Usuarios(models.Model):
     numerocontacto = models.FloatField(db_column='numeroContacto', blank=True, null=True)  # Field name made lowercase.
     idrol = models.ForeignKey(Roles, models.DO_NOTHING, db_column='idRol')  # Field name made lowercase.
     idestadosusuarios = models.ForeignKey(Estadosusuarios, models.DO_NOTHING, db_column='idEstadosUsuarios')  # Field name made lowercase.
-    last_login = models.DateTimeField(null=True, blank=True)
-
-    def is_authenticated(self):
-        return True
-
+    last_login = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'usuarios'
-
 
 
 class Ventas(models.Model):
