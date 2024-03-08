@@ -26,6 +26,7 @@ router.register(r'servicios', serviciosCRUD)
 urlpatterns=[
     path('', views.home, name='home'),
     path('productos', views.home_productos, name='homeProductos'),
+    path('landing/',views.menuLanding, name='menuLanding'),
     path('api/', include(router.urls)),
 
     path('createProducto/', views.createProductoView, name='createProducto'),

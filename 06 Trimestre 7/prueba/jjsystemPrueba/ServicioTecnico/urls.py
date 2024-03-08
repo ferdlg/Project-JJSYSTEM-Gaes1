@@ -24,11 +24,12 @@ router.register(r'tecnicos', tecnicosCRUD)
 
 
 # urls front 
-from .views import index
+from .views import index, indexTecnicos
 
 urlpatterns=[
     path('',include(router.urls)),
     path('index/', index , name='index'),
+    path('index/tecnicos/', indexTecnicos, name='indexTecnicos'),
 
     path('cita_analisis/', citasCRUD.as_view({'get':'cita_analisis'}), name='cita_analisis'),
     path('cita_instalacion/', citasCRUD.as_view({'get':'cita_instalacion'}), name='cita_instalacion'),
@@ -39,4 +40,6 @@ urlpatterns=[
 
     path('ver_cotizaciones/', cotizacionesCRUD.as_view({'get':'listar_cotizaciones'}), name='ver_cotizaciones'),
     path('crear_cotizaciones/', cotizacionesCRUD.as_view({'post':'crear_cotizaciones'}), name='crear_cotizaciones')
+
+
 ]

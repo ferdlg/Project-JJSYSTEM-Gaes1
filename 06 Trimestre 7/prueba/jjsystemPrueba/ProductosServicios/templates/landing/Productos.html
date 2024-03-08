@@ -1,33 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos - J.J System</title>
-    <link rel="stylesheet" href="{% static 'css/venta_productos.css' %}">
-    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" >
-</head>
-
-<body>
-    <header class="header">
-        <div class="container logo-login-container">
-            <a href="{% url 'landing' %}" class="logo">J.J SYSTEM</a>
-            <nav class="login_navigation">
-                <ul>
-                    <li><a href="{% url 'register' %}">Registrarse</a></li>
-                    <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
-                    <li><a href="#"><img class="user_img" src="{% static 'images/fotoperfil.png' %}" alt="Foto de perfil"></a></li>
-                </ul>
-            </nav>    
-        </div>
-    </header>
-
+{% extends "landing/menuLanding.html" %}
+{% block titulo %} Landing {% endblock %}
+{% load static %} 
+{% block contenido %}
     <main class="main">
         <div class="product_container">  
             <h1>VENTA DE PRODUCTOS</h1>
@@ -120,14 +94,4 @@
             </div>
         </div>
     </main>
-
-    <footer class="footer">       
-        <div class="footer_container">
-            <p> <a href="#">Diseñador de la página web</a>  | copyright [2023] | J.J System</p>
-        </div>            
-        <div class="footer_container">
-            <p> <a href="#">Sobre nosotros</a> | <a href="# ">Aviso legal y términos de uso</a> | <a href="#">Políticas de privacidad</a> | <a href="#"> Politica de cookies</a></p>
-        </div>
-    </footer> 
-</body>
-</html>
+{% endblock %}

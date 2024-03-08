@@ -9,6 +9,9 @@ from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 def landing(request):
     return render(request, 'landing/Index.html')
 
+def menuLanding(request):
+    return render(request, 'landing/index2.html')
+
 def servicios(request):
     return render(request, 'landing/Servicios.html')
 

@@ -6,3 +6,6 @@ from .controllers.citas import citasCRUD
 
 def index (request):
     return render(request, 'index.html')
+
+def indexTecnicos(request):
+    return render(request, 'tecnicos.html')

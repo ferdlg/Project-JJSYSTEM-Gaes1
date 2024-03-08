@@ -1,0 +1,110 @@
+:root {
+    --color-primary: #263465; /* Color principal */
+    --color-white: #ffffff; /* Color blanco */
+    --color-selected: rgba(36, 126, 194, 0.763);
+    --color-white-second: rgb(226, 226, 226); /* Color cuando el elemento está seleccionado */
+}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+@font-face 
+{src: url(../fuentes/Berlin-sans-serif.ttf);
+font-family: 'Berlin';
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-white); /* Cambiado a var(--color-white) */
+}
+
+/* Estilos para la barra de navegación principal */
+.navbar-landing {
+    background-color: var(--color-white);
+    padding: 10px;
+}
+
+.navbar-landing .navbar-brand {
+    color: var(--color-primary); /* Texto en color principal */
+    font-weight: bold; /* Negrita */
+    font-size: 1.5rem; /* Tamaño de fuente más grande */
+}
+
+.navbar-landing button {
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.navbar-landing button:hover{
+    background-color: var(--color-selected);
+    color: #ffffff ;
+    text-decoration: none !important;
+}
+.navbar-landing button a {
+    color: var(--color-primary) !important;
+}
+.navbar-landing a:hover{
+    color: var(--color-white);
+}
+.navbar-landing .user_img {
+    width: 3rem; /* Tamaño de la imagen de perfil */
+    height: 3rem;
+    border-radius: 50%; /* Forma circular */
+    margin-right: 10px; /* Ajuste de margen en píxeles */
+}
+
+/* Estilos para la barra de navegación de búsqueda */
+.navbar-buscar {
+    background-color: var(--color-primary) !important; /* Color primario */
+    color: var(--color-white); /* Texto en color claro */
+    padding: 10px;
+}
+
+.navbar-buscar .form-control {
+    background-color: var(--color-white); /* Fondo blanco */
+    color: var(--color-primary); /* Texto en color oscuro */
+}
+
+.navbar-buscar .btn-outline-success {
+    color: var(--color-white); /* Texto en color claro */
+    border-color: var(--color-white); /* Borde en color claro */
+}
+.navbar-buscar .btn-info{
+    text-decoration: none !important;
+    color: #ffffff;
+}
+.navbar-buscar .btn-info:hover{
+    background-color: var(--color-selected) !important;
+}
+/* Estilos generales */
+.container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-fluid form {
+    margin-right: 10px; /* Ajuste de margen en píxeles */
+}
+
+.container-fluid .btn-info {
+    background-color: transparent;
+    color: var(--color-white);
+    border: none;
+    cursor: pointer;
+}
+
+.container-fluid button a {
+    text-decoration: none;
+    color: var(--color-white); /* Texto en color claro */
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--color-primary) !important; /* Color de fondo */
+    text-align: center;
+    padding: 10px 0; /* Espaciado interno */
+}
+.text-muted {
+    color: var(--color-white) !important;
+}
