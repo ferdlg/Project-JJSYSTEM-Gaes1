@@ -4,20 +4,26 @@
     --color-selected: rgba(36, 126, 194, 0.763);
     --color-white-second: rgb(226, 226, 226); /* Color cuando el elemento está seleccionado */
 }
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
-@font-face 
-{src: url(../fuentes/Berlin-sans-serif.ttf);
-font-family: 'Berlin';
+
+@font-face {
+    src: url('../fuentes/Berlin-sans-serif.ttf');
+    font-family: 'Berlin';
 }
+
 body {
     font-family: 'Montserrat', sans-serif;
-    color: var(--color-white); /* Cambiado a var(--color-white) */
+    color: var(--color-white); /* Texto en color blanco */
 }
 
 /* Estilos para la barra de navegación principal */
 .navbar-landing {
-    background-color: var(--color-white);
-    padding: 10px;
+    position: fixed; /* Navbar fija */
+    top: 0; /* Posiciona en la parte superior */
+    left: 0; /* Posiciona en el lado izquierdo */
+    width: 100%; /* Ancho completo */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    background-color: var(--color-white); /* Fondo blanco */
+    padding: 10px; /* Espaciado interno */
 }
 
 .navbar-landing .navbar-brand {
@@ -33,29 +39,37 @@ body {
     cursor: pointer;
     border-radius: 5px;
 }
-.navbar-landing button:hover{
-    background-color: var(--color-selected);
-    color: #ffffff ;
-    text-decoration: none !important;
+
+.navbar-landing button:hover {
+    background-color: var(--color-selected); /* Color de fondo al pasar el cursor */
+    color: #ffffff; /* Texto en color blanco */
 }
+
 .navbar-landing button a {
-    color: var(--color-primary) !important;
+    color: var(--color-primary) !important; /* Texto en color principal */
 }
-.navbar-landing a:hover{
-    color: var(--color-white);
+
+.navbar-landing a:hover {
+    color: var(--color-white); /* Texto en color blanco al pasar el cursor */
 }
+
 .navbar-landing .user_img {
     width: 3rem; /* Tamaño de la imagen de perfil */
     height: 3rem;
     border-radius: 50%; /* Forma circular */
-    margin-right: 10px; /* Ajuste de margen en píxeles */
+    margin-right: 10px; /* Margen derecho */
 }
 
 /* Estilos para la barra de navegación de búsqueda */
 .navbar-buscar {
-    background-color: var(--color-primary) !important; /* Color primario */
-    color: var(--color-white); /* Texto en color claro */
-    padding: 10px;
+    position: fixed; /* Navbar fija */
+    top: 60px; /* Espaciado desde la parte superior */
+    left: 0; /* Posiciona en el lado izquierdo */
+    width: 100%; /* Ancho completo */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    background-color: var(--color-primary) !important; /* Fondo en color principal */
+    color: var(--color-white); /* Texto en color blanco */
+    padding: 10px; /* Espaciado interno */
 }
 
 .navbar-buscar .form-control {
@@ -64,16 +78,19 @@ body {
 }
 
 .navbar-buscar .btn-outline-success {
-    color: var(--color-white); /* Texto en color claro */
-    border-color: var(--color-white); /* Borde en color claro */
+    color: var(--color-white); /* Texto en color blanco */
+    border-color: var(--color-white); /* Borde en color blanco */
 }
-.navbar-buscar .btn-info{
+
+.navbar-buscar .btn-info {
     text-decoration: none !important;
-    color: #ffffff;
+    color: #ffffff; /* Texto en color blanco */
 }
-.navbar-buscar .btn-info:hover{
-    background-color: var(--color-selected) !important;
+
+.navbar-buscar .btn-info:hover {
+    background-color: var(--color-selected) !important; /* Color de fondo al pasar el cursor */
 }
+
 /* Estilos generales */
 .container-fluid {
     display: flex;
@@ -82,7 +99,7 @@ body {
 }
 
 .container-fluid form {
-    margin-right: 10px; /* Ajuste de margen en píxeles */
+    margin-right: 10px; /* Margen derecho */
 }
 
 .container-fluid .btn-info {
@@ -93,18 +110,19 @@ body {
 }
 
 .container-fluid button a {
-    text-decoration: none;
-    color: var(--color-white); /* Texto en color claro */
+    text-decoration: none; /* Quita el subrayado del enlace */
+    color: var(--color-white); /* Texto en color blanco */
 }
 
 .footer {
     position: relative;
     bottom: 0;
     width: 100%;
-    background-color: var(--color-primary) !important; /* Color de fondo */
+    background-color: var(--color-primary) !important; /* Fondo en color principal */
     text-align: center;
     padding: 10px 0; /* Espaciado interno */
 }
+
 .text-muted {
-    color: var(--color-white) !important;
+    color: var(--color-white) !important; /* Texto en color blanco */
 }
