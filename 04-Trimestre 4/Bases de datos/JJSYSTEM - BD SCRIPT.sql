@@ -103,6 +103,7 @@ CREATE TABLE IF NOT EXISTS Productos(
     descripcionProducto TEXT(200) NOT NULL,
     precioProducto FLOAT NOT NULL,
     cantidad INT NOT NULL,
+    foto VARCHAR(200) NUL,
     idAdministrador INT,
     idCategoriaProducto INT,
     idProveedorProducto INT,
@@ -559,9 +560,9 @@ VALUES
 INSERT INTO categoriasServicios (nombreCategoria)
 VALUES
 	('Venta'),
-    ('Instalacion de productos'),
-    ('Servicio de análisis'),
-    ('Mantenimiento de productos');
+    ('Instalacion'),
+    ('Análisis'),
+    ('Mantenimiento');
     
 INSERT INTO Servicios (nombreServicio, descripcionServicio, idCategoriaServicio)
 VALUES
