@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS Productos(
     descripcionProducto TEXT(200) NOT NULL,
     precioProducto FLOAT NOT NULL,
     cantidad INT NOT NULL,
-    foto VARCHAR(200) NUL,
+    foto VARCHAR(200) NULL,
     idAdministrador INT,
     idCategoriaProducto INT,
     idProveedorProducto INT,
