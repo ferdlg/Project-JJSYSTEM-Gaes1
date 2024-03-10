@@ -18,6 +18,7 @@ def servicios_landing(request, categoria):
     servicios = Servicios.objects.filter(idcategoriaservicio=categoria)
     return render(request, 'landing/ServiciosCategorias.html', {'servicios': servicios})
 
+
 #filtrar productos en la landing
 def productos(request):
     categorias = Categoriasproductos.objects.all()
@@ -37,6 +38,11 @@ def productos(request):
         return render(request, 'landing/Productos.html', {"message": message, "categorias": categorias})
 
     return render(request, 'landing/Productos.html', {"productos": productos, "categorias": categorias})
+
+# Filtrar producto por id
+def producto(request, id):
+    producto = Productos.objects.get(idproducto = id)
+    return render(request, 'landing/VisualizaciónProducto.html',{'producto':producto})
 
 def home(request):
     return render(request, "crudAdmin/IndexProductosServicios.html")

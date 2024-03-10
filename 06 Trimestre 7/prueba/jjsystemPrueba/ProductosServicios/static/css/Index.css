@@ -59,9 +59,10 @@ body {
     object-fit: cover;
     border-radius: 5px; 
 }
+/* div contenido de visualizar productod */
 .contenido{
-    padding: 30px;
-    margin-top: 130px;
+    padding: 0px;
+    margin-top: 0px;
 }
 
 .contenido-servicios{
