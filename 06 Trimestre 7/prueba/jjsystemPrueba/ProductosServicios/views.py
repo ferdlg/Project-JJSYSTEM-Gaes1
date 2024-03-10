@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Productos, Servicios
-from .models import Categoriasproductos , Categoriasservicios
-from .models import Proveedoresproductos
-from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
+from .models import Categoriasproductos 
 
 
 # Create your views here.
@@ -40,3 +38,15 @@ def producto(request, id):
 
 def home(request):
     return render(request, "crudAdmin/IndexProductosServicios.html")
+
+
+def buscar_productos_servicios(request):
+    if request.method == 'GET':
+        palabra_clave = request.GET.get('palabra_clave')
+
+        productos = Productos.objects.filter(nombreproducto__icontains=palabra_clave)
+        servicios = Servicios.objects.filter(nombreservicio__icontains=palabra_clave)
+
+        return render(request, 'landing/resultados_busqueda.html', {'productos': productos, 'servicios': servicios})
+    else:
+        return render(request, 'landing/index.html')

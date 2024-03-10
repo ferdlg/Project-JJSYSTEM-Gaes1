@@ -27,6 +27,7 @@ urlpatterns=[
     path('', views.home, name='home'),
     path('productos',home_productos, name='homeProductos'),
     path('serviciosLanding/<int:categoria>/',servicios_landing, name='serviciosLanding'),
+    path('buscar/', views.buscar_productos_servicios, name='buscar'),
     path('verProducto/<id>/', views.producto, name='verProducto'),
     path('api/', include(router.urls)),
 
