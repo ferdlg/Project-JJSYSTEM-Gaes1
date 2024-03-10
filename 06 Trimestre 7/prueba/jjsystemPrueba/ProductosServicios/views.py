@@ -13,8 +13,20 @@ def servicios(request):
     return render(request, 'landing/Servicios.html')
 
 def productos(request):
-    productos= Productos.objects.all()
-    return render(request, 'landing/Productos.html', {"productos": productos})
+    categorias = Categoriasproductos.objects.all()
+    selected_category = request.GET.get('categoria')
+    if selected_category == "-1":
+        productos = Productos.objects.all()
+    elif selected_category:
+        productos = Productos.objects.filter(idcategoriaproducto=selected_category)
+    if not productos:
+        if selected_category:
+            message = "No hay productos disponibles en esta categoría"
+        else:
+            message = "No hay productos disponibles"
+        return render(request, 'landing/Productos.html', {"message": message, "categorias": categorias})
+
+    return render(request, 'landing/Productos.html', {"productos": productos, "categorias": categorias})
 
 def home(request):
     return render(request, "crudAdmin/IndexProductosServicios.html")
