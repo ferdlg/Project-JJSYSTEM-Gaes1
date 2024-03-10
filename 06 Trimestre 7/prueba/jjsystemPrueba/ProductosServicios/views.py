@@ -9,16 +9,26 @@ from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 def landing(request):
     return render(request, 'landing/Index.html')
 
+# mostrar template de servicios
 def servicios(request):
     return render(request, 'landing/Servicios.html')
 
+# servicios filtrados en la landing 
+def servicios_landing(request, categoria):
+    servicios = Servicios.objects.filter(idcategoriaservicio=categoria)
+    return render(request, 'landing/ServiciosCategorias.html', {'servicios': servicios})
+
+#filtrar productos en la landing
 def productos(request):
     categorias = Categoriasproductos.objects.all()
     selected_category = request.GET.get('categoria')
+    productos = Productos.objects.all()
+
     if selected_category == "-1":
-        productos = Productos.objects.all()
+        productos
     elif selected_category:
         productos = Productos.objects.filter(idcategoriaproducto=selected_category)
+
     if not productos:
         if selected_category:
             message = "No hay productos disponibles en esta categoría"
@@ -31,6 +41,8 @@ def productos(request):
 def home(request):
     return render(request, "crudAdmin/IndexProductosServicios.html")
 
+
+# Productos en dashboard admin
 def home_productos(request):
     # Obtener todos los productos
     productos_list = Productos.objects.all()
@@ -47,6 +59,7 @@ def home_productos(request):
 
     return render(request, "crudAdmin/IndexProductos.html", {"productos": productos})
 
+# Servicios en dashboard admin
 def home_servicios(request):
     # Obtener todos los productos
     servicios_list = Servicios.objects.all()
