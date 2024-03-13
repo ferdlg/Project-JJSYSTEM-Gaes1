@@ -754,7 +754,7 @@ VALUES
     ('2023-01-25', 'Lamentamos mucho los inconvenientes que ha experimentado con su sistema de seguridad y el servicio al cliente. Entendemos su frustración y nos disculpamos por las dificultades para contactarnos. Nos gustaría resolver este problema lo antes posible. Nuestro equipo de soporte técnico se pondrá en contacto con usted para solucionar los problemas con su sistema y brindarle la asistencia necesaria. Valoramos su paciencia y confianza en nuestra empresa, y trabajaremos arduamente para resolver esta situación.', 1, 16);
     
     /*Vistas*/
-
+    
      DROP VIEW IF EXISTS Producto_Categoria;
     
     CREATE VIEW Producto_Categoria AS 
@@ -847,6 +847,21 @@ VALUES
 	INNER JOIN tecnicos ON envios.idTecnico = tecnicos.idTecnico
 	INNER JOIN estadosenvios ON envios.idEstadoEnvio = estadosenvios.idEstadoEnvio;
 
+    DROP VIEW IF EXISTS detalle_envios_y_ventas;
+
+    CREATE VIEW detalle_envios_y_ventas AS
+    SELECT
+        envios.idEnvio,
+        envios.direccionEnvio,
+        detallesventas.detallesVenta,
+        tecnicos.idTecnico AS tecnicoAsignado,
+        tecnicos.numeroDocumento,
+        ventas.fechaVenta
+    FROM
+        envios
+        JOIN ventas ON envios.idEnvio = ventas.idEnvio
+        JOIN detallesventas ON ventas.idVenta = detallesventas.idVenta
+        JOIN tecnicos ON envios.idTecnico = tecnicos.idTecnico;
 
 /*Procedimiento*/
 
