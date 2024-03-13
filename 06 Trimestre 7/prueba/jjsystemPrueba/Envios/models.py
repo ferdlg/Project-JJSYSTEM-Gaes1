@@ -419,7 +419,7 @@ class Usuarios(models.Model):
     numerodocumento = models.BigIntegerField(db_column='numeroDocumento', primary_key=True)  # Field name made lowercase.
     nombre = models.CharField(max_length=50, blank=True, null=True)
     apellido = models.CharField(max_length=50, blank=True, null=True)
-    email = models.CharField(max_length=120, blank=True, null=True)
+    email = models.EmailField(max_length=120, blank=True, null=True)
     password = models.CharField(max_length=100, blank=True, null=True)
     numerocontacto = models.FloatField(db_column='numeroContacto', blank=True, null=True)  # Field name made lowercase.
     idrol = models.ForeignKey(Roles, models.DO_NOTHING, db_column='idRol')  # Field name made lowercase.
