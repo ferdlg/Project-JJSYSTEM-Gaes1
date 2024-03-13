@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .models import Envios
 from .models import Estadosenvios
 from .models import Tecnicos
+from .models import DetallesEnviosView
 from Account.views import role_required
 # Create your views here.
 
@@ -87,10 +88,14 @@ def eliminarEnvio(request, idEnvio):
 
     return redirect('homeEnvios')
 
+def detallesView(request, idEnvio):
+    detallesEnvio = DetallesEnviosView.objects.get(idenvio=idEnvio)
+    return render(request, 'crudAdmin/Detalles.html', {'detallesEnvio': detallesEnvio})
+
 #Views del tecnico
 
 @login_required
-@role_required(3)
+@role_required(1)
 def homeEnviosTecnico(request):
     search_query = request.GET.get('search', '')
 
