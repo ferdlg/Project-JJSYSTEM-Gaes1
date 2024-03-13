@@ -30,6 +30,7 @@ urlpatterns=[
     path('',include(router.urls)),
     path('index/', index , name='index'),
     path('index/tecnicos/', indexTecnicos, name='indexTecnicos'),
+    path('index/tecnicos/ver_tecnicos', tecnicosCRUD.listar_tecnicos, name='verTecnicos'),
 
     path('cita_analisis/', citasCRUD.as_view({'get':'cita_analisis'}), name='cita_analisis'),
     path('cita_instalacion/', citasCRUD.as_view({'get':'cita_instalacion'}), name='cita_instalacion'),

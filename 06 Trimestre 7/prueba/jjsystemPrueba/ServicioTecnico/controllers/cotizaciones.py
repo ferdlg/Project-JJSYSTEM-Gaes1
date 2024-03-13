@@ -11,8 +11,9 @@ class cotizacionesCRUD(viewsets.ModelViewSet):
     queryset = Cotizaciones.objects.all()
     serializer_class = CotizacionesSerializer
 
-    def listar_cotizaciones(self, request):
-        cotizaciones_list = self.queryset
+    @classmethod
+    def listar_cotizaciones(cls, request):
+        cotizaciones_list = cls.queryset
             # Configurar la paginación
         paginator = Paginator(cotizaciones_list, 5)  # Mostrar 10 productos por página
         page_number = request.GET.get('page')      # Obtener el número de página solicitado
