@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="allowed_prod">
-                    <h2 class="font-weight-bold text-center text-lg-left">pqrsf_item</h2>
+                    <h2 class="font-weight-bold text-center text-lg-left">pqrsf</h2>
                 </div>
             </div>
         </div>
@@ -49,14 +49,14 @@
         </table>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                {% if pqrsf_item.has_previous %}
-                <li class="page-item"><a class="page-link" href="?page={{ pqrsf_item.previous_page_number }}">&laquo;</a></li>
+                {% if pqrsf.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ pqrsf.previous_page_number }}">&laquo;</a></li>
                 {% endif %}
-                {% for i in pqrsf_item.paginator.page_range %}
-                <li class="page-item {% if pqrsf_item.number == i %}active{% endif %}"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% for i in pqrsf.paginator.page_range %}
+                <li class="page-item {% if pqrsf.number == i %}active{% endif %}"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
                 {% endfor %}
-                {% if pqrsf_item.has_next %}
-                <li class="page-item"><a class="page-link" href="?page={{ pqrsf_item.next_page_number }}">&raquo;</a></li>
+                {% if pqrsf.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ pqrsf.next_page_number }}">&raquo;</a></li>
                 {% endif %}
             </ul>
         </nav>
