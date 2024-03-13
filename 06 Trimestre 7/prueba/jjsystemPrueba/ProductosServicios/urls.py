@@ -7,6 +7,7 @@ from .controllers.categoriasservicios import categoriaserviciosCRUD , home_categ
 from .controllers.clientes import clientesCRUD
 from .controllers.permisos import permisosCRUD
 from .controllers.productos import productosCRUD , home_productos , createProductoView, editarProducto, eliminarProducto
+from .controllers.ventas import ventasCRUD, home_ventas,createVenta, editVenta, deleteVenta
 from .controllers.proveedoresproductos import proveedoresCRUD
 from .controllers.rol_has_permisos import rol_has_permisosCRUD
 from .controllers.roles import rolesCRUD
@@ -22,10 +23,13 @@ router.register(r'proveedoresproductos', proveedoresCRUD)
 router.register(r'rol_has_permisos', rol_has_permisosCRUD)
 router.register(r'roles', rolesCRUD)
 router.register(r'servicios', serviciosCRUD)
+router.register(r'ventas', ventasCRUD)
+
 
 urlpatterns=[
     path('', views.home, name='home'),
     path('productos',home_productos, name='homeProductos'),
+    path('ventas', home_ventas, name='homeVentas' ),
     path('serviciosLanding/<int:categoria>/',servicios_landing, name='serviciosLanding'),
     path('buscar/', views.buscar_productos_servicios, name='buscar'),
     path('verProducto/<id>/', views.producto, name='verProducto'),

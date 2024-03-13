@@ -20,6 +20,15 @@
           <a href="{% url 'homeServicios' %}" class="btn btn-primary">Ir a servicios</a>
         </div>
       </div>
+      <div class="card" style="width: 18rem;">
+        <img src="{% static 'images/services_images/ventas.jpeg' %}" class="card-img-top" alt="ventas dashboard">
+        <div class="card-body">
+            <h5 class="card-title">Ventas</h5>
+            <p class="card-text">Gestión de ventas.</p>
+            <a href="{% url 'homeVentas' %}" class="btn btn-primary">Ir a ventas</a>
+        </div>
+    </div>
+    
 </section>
 
 {% endblock %}

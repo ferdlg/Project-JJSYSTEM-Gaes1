@@ -2,12 +2,27 @@ from django.shortcuts import render, redirect
 from .models import Pqrsf
 from .models import Estadospqrsf
 from .models import Tipospqrsf
+from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 
 # Create your views here
+def home_pqrsf(request):
+    pqrsf_list = Pqrsf.objects.all()
+
+    paginator = Paginator(pqrsf_list, 5)
+    page_number = request.GET.get('page')
+    try:
+        pqrsf_item = paginator.page(page_number)
+    except PageNotAnInteger:
+        pqrsf_item = paginator.page(1)
+    except EmptyPage:
+        pqrsf_item = paginator.page(paginator.num_pages)
+    
+    return render(request, "pqrsf.html", {"pqrsf":pqrsf_item})
+
+    
 
 def indexPqrsf(request):
-    pqrsf_item = Pqrsf.objects.all()
-    return render(request, 'indexPqrsf.html', {"pqrsf": pqrsf_item})
+    return render(request, 'indexPqrsf.html')
 
 def editPqrsf(request):
     return render(request, 'editPqrsf.html')

@@ -59,3 +59,13 @@ class ProveedoresProductosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Proveedoresproductos
         fields = '__all__'
+    
+class VentasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ventas
+        fields = '__all__'
+
+class DetalleVentasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model =Detallesventas
+        fields = '__all__'

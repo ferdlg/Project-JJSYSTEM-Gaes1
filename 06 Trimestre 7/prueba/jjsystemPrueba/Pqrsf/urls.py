@@ -15,6 +15,7 @@ urlpatterns=[
     path('',include(router.urls)),
     path('editarPqrsf/<int:idPqrsf>', views.editarPqrsf, name='editarPqrsf'),
     path('indexPqrsf/', views.indexPqrsf, name='indexPqrsf'),
+    path('indexPqrsf/pqrsf', views.home_pqrsf, name='homePqrsf'),
     path('createPqrsf/', views.createPqrsfView, name='createPqrsf'),
     path('eliminarPqrsf/<idPqrsf>', views.eliminarPqrsf, name='eliminarPqrsf'),
 ]
