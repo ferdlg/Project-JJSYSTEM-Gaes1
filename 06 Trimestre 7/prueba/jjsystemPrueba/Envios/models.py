@@ -440,3 +440,16 @@ class Ventas(models.Model):
     class Meta:
         managed = False
         db_table = 'ventas'
+
+#Vista
+class DetallesEnviosView(models.Model):
+    idenvio = models.IntegerField(primary_key=True)
+    direccionenvio = models.CharField(max_length=255)
+    detallesventa = models.CharField(max_length=255)
+    tecnicoasignado = models.IntegerField()
+    numerodocumento = models.CharField(max_length=255)
+    fechaventa = models.DateField()
+
+    class Meta:
+        managed = False
+        db_table = 'detalle_envios_y_ventas'

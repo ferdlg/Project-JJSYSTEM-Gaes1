@@ -38,6 +38,7 @@
                             <th scope="col">Estado</th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,11 +48,14 @@
                             <td>{{e.direccionenvio}}</td>
                             <td>{{e.idtecnico.idtecnico}}</td>
                             <td>{{e.idestadoenvio.nombreestadoenvio}}</td>
-                            <td> 
+                            <td class="col text-center"> 
                                 <a href="{% url 'editarEnvio' idEnvio=e.idenvio %}" class="btn btn-primary btn-sw"> Editar </a>
                             </td>
-                            <td>
+                            <td class="col text-center">
                                 <a href="{% url 'eliminarEnvio' idEnvio=e.idenvio %}" class="btn btn-danger btn-sw"> eliminar </a>
+                            </td>
+                            <td class="col text-center"> 
+                                <a href="{% url 'detallesView' idEnvio=e.idenvio %}" class="" style="font-size: 14px;"> Mas información </a>
                             </td>
                         </tr>
                         {% endfor %}
