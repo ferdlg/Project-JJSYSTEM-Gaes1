@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Usuarios(
     nombre VARCHAR(50) DEFAULT NULL,
     apellido VARCHAR(50) DEFAULT NULL,
     email VARCHAR(120) DEFAULT NULL,
-    contrasena VARCHAR(100) DEFAULT NULL,
+    password VARCHAR(100) DEFAULT NULL,
     numeroContacto FLOAT DEFAULT NULL,
     idRol INT NOT NULL,
     idEstadosUsuarios INT NOT NULL,
@@ -279,6 +279,14 @@ CREATE TABLE IF NOT EXISTS historialCotizaciones (
     fechaCreada datetime DEFAULT CURRENT_TIMESTAMP, 
     fechaActualizacion datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     foreign key(idCotizacion) references Cotizaciones (idCotizacion)
+);
+CREATE TABLE detalle_envios_ventas (
+    idenvio INT PRIMARY KEY,
+    direccionenvio VARCHAR(255),
+    detallesventa VARCHAR(255),
+    tecnicoasignado INT,
+    numerodocumento VARCHAR(255),
+    fechaventa DATE
 );
 
 
@@ -603,28 +611,76 @@ VALUES
     ('Inactiva');
 
 
-INSERT INTO Cotizaciones (fechaCotizacion, totalCotizacion, descripcionCotizacion, idCliente, idProducto, idServicio, idEstadoCotizacion)
+INSERT INTO Cotizaciones (fechaCotizacion, totalCotizacion, descripcionCotizacion, idCliente, idEstadoCotizacion)
 VALUES
-    ('2023-04-15', 75000, 'Instalación de una cámara de seguridad IP en la entrada principal del edificio', 26, 1, 1, 1),
-    ('2023-04-16', 100000, 'Suministro de una alarma de intrusión para el hogar', 18, 23, 1, 1),
-    ('2023-04-20', 187000, 'Venta', 9, 22, 1, 1),
-    ('2023-04-22', 50000, 'Reparación del sistema de monitoreo en la tienda', 11, 3, 6, 1),
-    ('2023-04-23', 85000, 'Instalación de cuatro cámaras de seguridad CCTV en la bodega', 1, 7, 1, 1),
-    ('2023-04-24', 120000, 'Suministro de una alarma contra incendios para el restaurante', 19, 9, 1, 1),
-    ('2023-04-25', 110000, 'Instalación de un sistema de control de acceso biométrico en la empresa', 27, 7, 8, 1),
-    ('2023-04-26', 46000, 'Venta de una cámara de seguridad domo para la residencia', 10, 26, 1, 1),
-    ('2023-04-28', 55000, 'Venta de un control remoto adicional para la alarma de la tienda', 14, 12, 1, 1),
-    ('2023-04-30', 90000, 'Instalación de dos cámaras de seguridad inalámbricas en la casa', 13, 21, 1, 1),
-    ('2023-05-01', 110000, 'Suministro de una alarma contra intrusos para la oficina', 17, 14, 1, 1),
-    ('2023-05-02', 78000, 'Mantenimiento preventivo de las cámaras de vigilancia en el estacionamiento', 25, 4, 7, 1),
-    ('2023-05-03', 140000, 'Instalación de un sistema de cámaras de seguridad en el edificio de apartamentos', 8, 25, 1, 1),
-    ('2023-05-05', 68000, 'Venta de un sensor de movimiento para el patio trasero', 21, 16, 1, 1),
-    ('2023-05-07', 125000, 'Instalación de una alarma con sensor de humo en la cocina del restaurante', 20, 25, 1, 1),
-    ('2023-05-08', 95000, 'Venta de una cámara de vigilancia panorámica para la tienda de conveniencia', 5, 19, 1, 1),
-    ('2023-05-10', 76000, 'Instalación de una alarma perimetral en el jardín de la casa', 2, 18, 1, 1),
-    ('2023-05-12', 105000, 'Venta de un sensor de vibración para la alarma de la empresa', 24, 15, 1, 1),
-    ('2023-05-14', 92000, 'Instalación de una cámara de seguridad oculta en la sala de reuniones', 4, 13, 1, 1),
-    ('2023-05-15', 65000, 'Venta de una alarma de emergencia para el taller mecánico', 16, 11, 1, 1);
+    ('2023-04-15', 75000, 'Instalación de una cámara de seguridad IP en la entrada principal del edificio', 26, 1),
+    ('2023-04-16', 100000, 'Suministro de una alarma de intrusión para el hogar', 18, 1),
+    ('2023-04-20', 187000, 'Venta', 9, 1),
+    ('2023-04-22', 50000, 'Reparación del sistema de monitoreo en la tienda', 11, 1),
+    ('2023-04-23', 85000, 'Instalación de cuatro cámaras de seguridad CCTV en la bodega', 1, 1),
+    ('2023-04-24', 120000, 'Suministro de una alarma contra incendios para el restaurante', 19, 1),
+    ('2023-04-25', 110000, 'Instalación de un sistema de control de acceso biométrico en la empresa', 27, 1),
+    ('2023-04-26', 46000, 'Venta de una cámara de seguridad domo para la residencia', 10, 1),
+    ('2023-04-28', 55000, 'Venta de un control remoto adicional para la alarma de la tienda', 14, 1),
+    ('2023-04-30', 90000, 'Instalación de dos cámaras de seguridad inalámbricas en la casa', 13, 1),
+    ('2023-05-01', 110000, 'Suministro de una alarma contra intrusos para la oficina', 17, 1),
+    ('2023-05-02', 78000, 'Mantenimiento preventivo de las cámaras de vigilancia en el estacionamiento', 25, 1),
+    ('2023-05-03', 140000, 'Instalación de un sistema de cámaras de seguridad en el edificio de apartamentos', 8, 1),
+    ('2023-05-05', 68000, 'Venta de un sensor de movimiento para el patio trasero', 21, 1),
+    ('2023-05-07', 125000, 'Instalación de una alarma con sensor de humo en la cocina del restaurante', 20, 1),
+    ('2023-05-08', 95000, 'Venta de una cámara de vigilancia panorámica para la tienda de conveniencia', 5, 1),
+    ('2023-05-10', 76000, 'Instalación de una alarma perimetral en el jardín de la casa', 2, 1),
+    ('2023-05-12', 105000, 'Venta de un sensor de vibración para la alarma de la empresa', 24, 1),
+    ('2023-05-14', 92000, 'Instalación de una cámara de seguridad oculta en la sala de reuniones', 4, 1),
+    ('2023-05-15', 65000, 'Venta de una alarma de emergencia para el taller mecánico', 16, 1);
+
+INSERT INTO Cotizaciones_Productos (idProducto, idCotizacion, cantidad)
+VALUES
+    (1, 1, 1),
+    (23, 2, 1),
+    (22, 3, 1),
+    (3, 4, 1),
+    (7, 5, 4),
+    (9, 6, 1),
+    (7, 7, 1),
+    (26, 8, 1),
+    (12, 9, 1),
+    (21, 10, 2),
+    (14, 11, 1),
+    (4, 12, 1),
+    (25, 13, 1),
+    (16, 14, 1),
+    (25, 15, 1),
+    (19, 16, 1),
+    (18, 17, 1),
+    (15, 18, 1),
+    (13, 19, 1),
+    (11, 20, 1);
+
+
+INSERT INTO Cotizaciones_Servicios (idServicio, idCotizacion)
+VALUES
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (6, 4),
+    (1, 5),
+    (1, 6),
+    (8, 7),
+    (1, 8),
+    (1, 9),
+    (1, 10),
+    (1, 11),
+    (7, 12),
+    (1, 13),
+    (1, 14),
+    (1, 15),
+    (1, 16),
+    (1, 17),
+    (1, 18),
+    (1, 19),
+    (1, 20);
+    
 INSERT INTO EstadosCitas (nombreEstadoCita)
 VALUES
 	('Confirmada'),
