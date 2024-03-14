@@ -95,10 +95,10 @@ WSGI_APPLICATION = 'jjsystemPrueba.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'jjsystem_db_prueba',
+        'NAME': 'jjsystem_db',
         'USER': 'root',
-        'PASSWORD': '1021662854',
-        #'PASSWORD': '',
+        #'PASSWORD': '1021662854',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306'
     }
