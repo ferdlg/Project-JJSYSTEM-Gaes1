@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'jjsystemPrueba.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'jjsystem_db',
+        'NAME': 'jjsystem_db_prueba',
         'USER': 'root',
         'PASSWORD': '1021662854',
         #'PASSWORD': '',

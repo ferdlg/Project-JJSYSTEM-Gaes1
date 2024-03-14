@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from ..models import Detallesventas
+from Account.models import Detallesventas
 from .serializers import DetalleVentasSerializer
 
 

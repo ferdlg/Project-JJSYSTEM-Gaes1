@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS Roles(
 CREATE TABLE IF NOT EXISTS Permisos(
    idPermiso INT NOT NULL AUTO_INCREMENT,
    nombrePermiso VARCHAR(20),
-   idRol int,
+   idRol INT,
    PRIMARY KEY (idPermiso),
    FOREIGN KEY (idRol) REFERENCES Roles (idRol)
 );
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Roles_has_Permisos(
 );
 
 CREATE TABLE IF NOT EXISTS EstadosUsuarios(
-	idEstadoUsuario INT NOT NULL AUTO_INCREMENT,
+    idEstadoUsuario INT NOT NULL AUTO_INCREMENT,
     nombreEstadoUsuario VARCHAR(50) NOT NULL,
     PRIMARY KEY (idEstadoUsuario)
 );
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Usuarios(
     nombre VARCHAR(50) DEFAULT NULL,
     apellido VARCHAR(50) DEFAULT NULL,
     email VARCHAR(120) DEFAULT NULL,
-    password VARCHAR(100) DEFAULT NULL,
+    contrasena VARCHAR(100) DEFAULT NULL,
     numeroContacto FLOAT DEFAULT NULL,
     idRol INT NOT NULL,
     idEstadosUsuarios INT NOT NULL,
@@ -51,14 +51,14 @@ CREATE TABLE IF NOT EXISTS Clientes(
     direccionCliente VARCHAR(50) NOT NULL,
     numeroDocumento BIGINT NOT NULL,
     PRIMARY KEY (idCliente),
-    FOREIGN KEY (numeroDocumento) REFERENCES usuarios (numeroDocumento)
+    FOREIGN KEY (numeroDocumento) REFERENCES Usuarios (numeroDocumento)
 );
 
 CREATE TABLE IF NOT EXISTS Administrador(
     idAdministrador INT NOT NULL AUTO_INCREMENT,
     numeroDocumento BIGINT NOT NULL,
     PRIMARY KEY (idAdministrador),
-    FOREIGN KEY (numeroDocumento) REFERENCES usuarios (numeroDocumento)
+    FOREIGN KEY (numeroDocumento) REFERENCES Usuarios (numeroDocumento)
 );
 
 CREATE TABLE IF NOT EXISTS Tecnicos (
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS Tecnicos (
     especialidad VARCHAR(50) NOT NULL,
     numeroDocumento BIGINT NOT NULL,
     PRIMARY KEY (idTecnico),
-    FOREIGN KEY (numeroDocumento) REFERENCES usuarios (numeroDocumento)
+    FOREIGN KEY (numeroDocumento) REFERENCES Usuarios (numeroDocumento)
 );
 
 CREATE TABLE IF NOT EXISTS EstadosEnvios(
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS Envios (
     idEstadoEnvio INT,
     PRIMARY KEY (idEnvio),
     FOREIGN KEY (idTecnico) REFERENCES Tecnicos (idTecnico),
-	FOREIGN KEY (idEstadoEnvio) REFERENCES EstadosEnvios (idEstadoEnvio)
+    FOREIGN KEY (idEstadoEnvio) REFERENCES EstadosEnvios (idEstadoEnvio)
 );
 
 CREATE TABLE IF NOT EXISTS categoriasProductos(
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS Productos(
     PRIMARY KEY(idProducto),
     FOREIGN KEY(idAdministrador) REFERENCES Administrador (idAdministrador),
     FOREIGN KEY(idCategoriaProducto) REFERENCES categoriasProductos (idCategoriaProducto),
-	FOREIGN KEY(idProveedorProducto) REFERENCES proveedoresProductos (idProveedorProducto)
+    FOREIGN KEY(idProveedorProducto) REFERENCES proveedoresProductos (idProveedorProducto)
 );
 
 CREATE TABLE IF NOT EXISTS categoriasServicios(
@@ -126,30 +126,40 @@ CREATE TABLE IF NOT EXISTS Servicios(
     precioServicio FLOAT, 
     idCategoriaServicio INT,
     PRIMARY KEY (idServicio),
-	FOREIGN KEY (idCategoriaServicio) REFERENCES categoriasServicios (idCategoriaServicio)
+    FOREIGN KEY (idCategoriaServicio) REFERENCES categoriasServicios (idCategoriaServicio)
 );
 
 CREATE TABLE IF NOT EXISTS EstadosCotizaciones(
-	idEstadoCotizacion INT NOT NULL AUTO_INCREMENT,
+    idEstadoCotizacion INT NOT NULL AUTO_INCREMENT,
     nombreEstadoCotizacion VARCHAR(20) NOT NULL,
     PRIMARY KEY (idEstadoCotizacion)
 );
 
 CREATE TABLE IF NOT EXISTS Cotizaciones(
-   idCotizacion INT NOT NULL AUTO_INCREMENT,
-   fechaCotizacion DATE NOT NULL,
-   totalCotizacion FLOAT NOT NULL,
-   descripcionCotizacion TEXT(200) NOT NULL,
-   idCliente INT NOT NULL,
-   idProducto INT NOT NULL,
-   idServicio INT NOT NULL,
-   idEstadoCotizacion INT NOT NULL,
-   PRIMARY KEY (idCotizacion),
-   KEY idCliente (idCliente),
-   FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente),
-   FOREIGN KEY (idProducto) REFERENCES Productos (idProducto),
-   FOREIGN KEY (idServicio) REFERENCES Servicios (idServicio),
-   FOREIGN KEY(idEstadoCotizacion) REFERENCES EstadosCotizaciones (idEstadoCotizacion)
+    idCotizacion INT NOT NULL AUTO_INCREMENT,
+    fechaCotizacion DATE NOT NULL,
+    totalCotizacion FLOAT NOT NULL,
+    descripcionCotizacion TEXT(200) NOT NULL,
+    idCliente INT NOT NULL,
+    idEstadoCotizacion INT NOT NULL,
+    PRIMARY KEY (idCotizacion),
+    FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente),
+    FOREIGN KEY (idEstadoCotizacion) REFERENCES EstadosCotizaciones (idEstadoCotizacion)
+);
+
+CREATE TABLE IF NOT EXISTS Cotizaciones_Productos(
+    idCotizacion INT,
+    idProducto INT,
+    cantidad INT,
+    FOREIGN KEY (idCotizacion) REFERENCES Cotizaciones (idCotizacion),
+    FOREIGN KEY (idProducto) REFERENCES Productos (idProducto)
+);
+
+CREATE TABLE IF NOT EXISTS Cotizaciones_Servicios(
+    idCotizacion INT,
+    idServicio INT,
+    FOREIGN KEY (idCotizacion) REFERENCES Cotizaciones (idCotizacion),
+    FOREIGN KEY (idServicio) REFERENCES Servicios (idServicio)
 );
 
 CREATE TABLE IF NOT EXISTS EstadosCitas(
@@ -176,7 +186,7 @@ CREATE TABLE IF NOT EXISTS Citas(
 );
 
 CREATE TABLE IF NOT EXISTS DisponibilidadCronogramas(
-	idDisponibilidadCronograma INT NOT NULL AUTO_INCREMENT,
+    idDisponibilidadCronograma INT NOT NULL AUTO_INCREMENT,
     nombreDisponibilidad VARCHAR(30) NOT NULL,
     PRIMARY KEY (idDisponibilidadCronograma)
 );
@@ -199,11 +209,11 @@ CREATE TABLE IF NOT EXISTS ActividadesCronogramaTecnicos(
 );
 
 CREATE TABLE IF NOT EXISTS DetallesActividadCronograma(
-	idDetalleActividad INT NOT NULL AUTO_INCREMENT,
+    idDetalleActividad INT NOT NULL AUTO_INCREMENT,
     idCronogramaTecnico INT,
     idActividadCronogramaTecnico INT,
     fechaActividadCronograma DATETIME NOT NULL,
-	primary key(idDetalleActividad),
+    PRIMARY KEY(idDetalleActividad),
     FOREIGN KEY (idCronogramaTecnico) REFERENCES CronogramaTecnicos (idCronogramaTecnico),
     FOREIGN KEY (idActividadCronogramaTecnico) REFERENCES ActividadesCronogramaTecnicos (idActividadCronogramaTecnico)
 );
@@ -219,7 +229,7 @@ CREATE TABLE IF NOT EXISTS Ventas(
 );
 
 CREATE TABLE IF NOT EXISTS DetallesVentas(
-	idDetalleVenta INT NOT NULL AUTO_INCREMENT,
+    idDetalleVenta INT NOT NULL AUTO_INCREMENT,
     detallesVenta VARCHAR(300) NOT NULL,
     subtotalVenta FLOAT NOT NULL,
     totalVenta FLOAT NOT NULL,
@@ -260,66 +270,70 @@ CREATE TABLE IF NOT EXISTS Respuestas (
     idAdministrador INT NULL,
     idPQRSF INT NULL,
     PRIMARY KEY (idRespuesta),
-	FOREIGN KEY (idAdministrador) REFERENCES administrador (idAdministrador),
+    FOREIGN KEY (idAdministrador) REFERENCES Administrador (idAdministrador),
     FOREIGN KEY (idPQRSF) REFERENCES PQRSF (idPQRSF)
 );
 
-CREATE table IF NOT EXISTS historialCotizaciones (
-	idCotizacion int,
+CREATE TABLE IF NOT EXISTS historialCotizaciones (
+    idCotizacion int,
     fechaCreada datetime DEFAULT CURRENT_TIMESTAMP, 
     fechaActualizacion datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    foreign key(idCotizacion) references cotizaciones (idCotizacion)
+    foreign key(idCotizacion) references Cotizaciones (idCotizacion)
 );
+
+
 
 INSERT INTO ROLES (idRol, nombreRol) 
 VALUES
-	(1, "Administrador"),
+	(1, "Gerente"),
     (2, "Cliente"),
     (3, "Tecnico");
     
+-- Inserción de permisos
 INSERT INTO PERMISOS (nombrePermiso, idRol) 
 VALUES
-	("agregarProducto",1),
-    ("modificarProducto",1),
-    ("eliminarProducto",1),
-    ("agregarServicio",1),
-    ("modificarServicio",1),
-    ("eliminarServicio",1),
-    ("consultarCotizacion",1),
-    ("consultarVenta", 1),
-    ("confirmarCita",1),
-    ("modificarCita",1),
-    ("cancelarCita",1),
-    ("asignarCita",1),
-    ("asignarActividad",1),
-    ("modificarActividad",1),
-    ("eliminarActividad",1),
-    ("consultarActividad",1),
-    ("asignarEnvio",1),
-    ("modificarEnvio",1),
-    ("ConsultarPQRSF",1),
-    ("agregarEstadoPQRSF",1),
-    ("modificarEstadoPQRSF",1),
-    ("eliminarEstadoPQRSF",1),
-    ("registrarRespuesta",1),
-    ("modificarRespuesta",1),
-    ("eliminarRespuesta",1),
-    ("consultarProducto",2),
-    ("consultarServicio",2),
-    ("crearCotizacion",2),
-    ("modificarCotizacion",2),
-    ("eliminarCotizacion",2),
-    ("consultarCotizacion",2),
-    ("crearCita",2),
-    ("modificarCita",2),
-    ("eliminarCita",2),
-    ("consultarCita",2),
-    ("consultarEnvios",2),
-    ("crearPQRSF",2),
-    ("consultarPQRSF",2),
-	("consultarRespuesta",2),
-    ("consultarActividades",3);
-    
+	('agregarProducto', 1),
+    ('modificarProducto', 1),
+    ('eliminarProducto', 1),
+    ('agregarServicio', 1),
+    ('modificarServicio', 1),
+    ('eliminarServicio', 1),
+    ('consultarCotizacion', 1),
+    ('consultarVenta', 1),
+    ('confirmarCita', 1),
+    ('modificarCita', 1),
+    ('cancelarCita', 1),
+    ('asignarCita', 1),
+    ('asignarActividad', 1),
+    ('modificarActividad', 1),
+    ('eliminarActividad', 1),
+    ('consultarActividad', 1),
+    ('asignarEnvio', 1),
+    ('modificarEnvio', 1),
+    ('ConsultarPQRSF', 1),
+    ('agregarEstadoPQRSF', 1),
+    ('modificarEstadoPQRSF', 1),
+    ('eliminarEstadoPQRSF', 1),
+    ('registrarRespuesta', 1),
+    ('modificarRespuesta', 1),
+    ('eliminarRespuesta', 1),
+    ('consultarProducto', 2),
+    ('consultarServicio', 2),
+    ('crearCotizacion', 2),
+    ('modificarCotizacion', 2),
+    ('eliminarCotizacion', 2),
+    ('consultarCotizacion', 2),
+    ('crearCita', 2),
+    ('modificarCita', 2),
+    ('eliminarCita', 2),
+    ('consultarCita', 2),
+    ('consultarEnvios', 2),
+    ('crearPQRSF', 2),
+    ('consultarPQRSF', 2),
+    ('consultarRespuesta', 2),
+    ('consultarActividades', 3);
+
+-- Inserción de asignación de permisos a roles
 INSERT INTO Roles_has_Permisos (idRol, idPermiso)
 VALUES 
    (1, 1), 
@@ -362,143 +376,150 @@ VALUES
    (2, 38), 
    (2, 39), 
    (3, 40);
-    
+
+-- Inserción de estados de usuarios
 INSERT INTO EstadosUsuarios (nombreEstadoUsuario)
 VALUES
-	('Activo'),
+    ('Activo'),
     ('Inactivo');
 
+-- Inserción de usuarios
 INSERT INTO Usuarios (numeroDocumento, nombre, apellido, email, password, numeroContacto, idRol, idEstadosUsuarios) 
 VALUES
-	(1021826839, 'Joaco', 'Galindo', 'JGalindo1980@jjsystem.com', '57P92rlN', 3208285814, 1, 1),
-	(1027385914, 'Valentina', 'Gutiérrez', 'vgutierrez@mail.com', '2sY9rT5q', 3123456789, 2, 1),
-	(1094730265, 'Santiago', 'Jiménez', 'sjimenez@mail.com', '6jK7cH3n', 3245678901, 2, 1),
-	(1089456723, 'Isabella', 'Silva', 'isilva@mail.com', '4xG1vB8m', 3356789012, 2, 1),
-	(1056709238, 'Daniel', 'Castro', 'dcastro@mail.com', '9pF6wE2k', 3478901234, 2, 1),
-	(1078964532, 'Emilia', 'Martínez', 'emartinez@mail.com', '3lD5mV7c', 3590123456, 2, 1),
-	(1025637498, 'Sebastián', 'Ramírez', 'sramirez@mail.com', '7nS2bR4g', 3612345678, 2, 1),
-	(1064829375, 'María', 'Fernández', 'mfernandez@mail.com', '1vQ8tZ6f', 3734567890, 2, 1),
-	(1045726398, 'Mateo', 'Vásquez', 'mvasquez@mail.com', '5dX3cN9h', 3856789012, 2, 1),
-	(1038475629, 'Valeria', 'Pérez', 'vperez@mail.com', '8kL4rJ2w', 3978901234, 2, 1),
-	(1015928364, 'Miguel', 'Álvarez', 'malvarez@mail.com', '0zH7yT1x', 3090123456, 2, 1),
-	(1009283754, 'Camila', 'Benítez', 'cbenitez@mail.com', '4tF3kP7s', 3123456780, 2, 1),
-	(1093654782, 'Nicolás', 'Hernández', 'nhernandez@mail.com', '6jM7rG2v', 3234567891, 2, 1),
-	(1082369745, 'Sofía', 'Muñoz', 'smunoz@mail.com', '2pB9lW3d', 3345678902, 2, 1),
-	(1054978632, 'Diego', 'García', 'dgarcia@mail.com', '5xV8gQ1c', 3456789013, 2, 1),
-	(1072369854, 'Valentina', 'Rojas', 'vrojas@mail.com', '7rN4vS6j', 3567890124, 2, 1),
-	(1023986547, 'Daniela', 'Castro', 'dcastro2@mail.com', '3kD1wH8m', 3678901235, 2, 1),
-	(1067582943, 'Andrés', 'Sánchez', 'asanchez@mail.com', '9qT6fJ2b', 3789012346, 2, 1),
-	(1049763258, 'Abril', 'Betancourt', 'abetancourt@mail.com', '1yZ8xG7s', 3890123457, 2, 1),
-	(1038596472, 'Juan', 'Pérez', 'jperez2@mail.com', '5cN2vB4h', 3901234568, 2, 1),
-	(1012375986, 'Samantha', 'González', 'sgonzalez@mail.com', '8wL6mC3q', 3012345679, 2, 1),
-	(1007496358, 'Manuel', 'Jaramillo', 'mjaramillo@mail.com', '0hS9pR7d', 3145678902, 2, 1),
-	(1098576234, 'Luciana', 'López', 'llopez@mail.com', '6nG2sT4r', 3278901234, 2, 1),
-	(1089275463, 'Tomás', 'Moreno', 'tmoreno@mail.com', '2mK9cX5j', 3301234565, 2, 1),
-	(1057468239, 'Camilo', 'Castro', 'ccastro@mail.com', '4bV8nQ1f', 3434567896, 2, 1),
-	(1079358624, 'Ana', 'Sánchez', 'asanchez2@mail.com', '7sW3jH6g', 3567890127, 2, 1),
-	(1028374659, 'Luisa', 'Martínez', 'lmartinez@mail.com', '1rD6tZ2k', 3690123458, 2, 1),
-	(1062937548, 'José', 'Ramírez', 'jramirez@mail.com', '3gF5wC7v', 3723456789, 2, 1),
-	(1045376289, 'María', 'José', 'mariaj@mail.com', '9vM2xR4l', 3856789010, 2, 1),
-	(1038279654, 'Daniel', 'Ramirez', 'danira@mail.com', '5wB4dN1p', 3989012341, 2, 1),
-	(1012547698, 'Carlos', 'Gonzales', 'cargonz@mail.com', '8cQ7hL3y', 3001234562, 2, 1),
-	(1007986453, 'Mar', 'gonzalez', 'maria.gonzalez@jjsystem.com', '6qG2vJ4c', 3001234567, 3, 1),
-	(1098465237, 'Juan', 'Perez', 'juan.perez@jjsystem.com', '0jP9sT5r', 3123456789, 3, 1),
-	(1085679234, 'David', 'Herrero', 'david.smith@jjsystem.com', '2hK9bX7n', 3789012345, 3, 1),
-	(1057623948, 'Sara', 'Johnson', 'sarah.johnson@jjsystem.com', '4fV8mS1g', 3567890123, 3, 1),
-	(1079348562, 'Carlos', 'Rodriguez', 'carlos.rodriguez@jjsystem.com', '7nW3sJ6d', 3456789123, 3, 1),
-	(1029875463, 'Emily', 'Williams', 'emily.williams@jjsystem.com', '1tZ6rD2k', 3890123456, 3, 1),
-	(1068457329, 'Antonio', 'Lopez', 'antonio.lopez@jjsystem.com', '3xH5cF7w', 3456789234, 3, 1),
-	(1045376298, 'Laura', 'Diaz', 'laura.diaz@jjsystem.com', '9lQ2vT4n', 3567834521, 3, 1),
-	(1036485927, 'José', 'Ramírez', 'jose.ramirez@jjsystem.com', '5bN4pR1m', 3789012165, 3, 1),
-	(1019286547, 'Ana', 'castro', 'ana.castro@jjsystem.com', '8gC7sW3j', 3456701234, 3, 1);
+    (1021826839, 'Joaco', 'Galindo', 'JGalindo1980@jjsystem.com', '57P92rlN', 3208285814, 1, 1),
+    (1027385914, 'Valentina', 'Gutiérrez', 'vgutierrez@mail.com', '2sY9rT5q', 3123456789, 2, 1),
+    (1094730265, 'Santiago', 'Jiménez', 'sjimenez@mail.com', '6jK7cH3n', 3245678901, 2, 1),
+    (1089456723, 'Isabella', 'Silva', 'isilva@mail.com', '4xG1vB8m', 3356789012, 2, 1),
+    (1056709238, 'Daniel', 'Castro', 'dcastro@mail.com', '9pF6wE2k', 3478901234, 2, 1),
+    (1078964532, 'Emilia', 'Martínez', 'emartinez@mail.com', '3lD5mV7c', 3590123456, 2, 1),
+    (1025637498, 'Sebastián', 'Ramírez', 'sramirez@mail.com', '7nS2bR4g', 3612345678, 2, 1),
+    (1064829375, 'María', 'Fernández', 'mfernandez@mail.com', '1vQ8tZ6f', 3734567890, 2, 1),
+    (1045726398, 'Mateo', 'Vásquez', 'mvasquez@mail.com', '5dX3cN9h', 3856789012, 2, 1),
+    (1038475629, 'Valeria', 'Pérez', 'vperez@mail.com', '8kL4rJ2w', 3978901234, 2, 1),
+    (1015928364, 'Miguel', 'Álvarez', 'malvarez@mail.com', '0zH7yT1x', 3090123456, 2, 1),
+    (1009283754, 'Camila', 'Benítez', 'cbenitez@mail.com', '4tF3kP7s', 3123456780, 2, 1),
+    (1093654782, 'Nicolás', 'Hernández', 'nhernandez@mail.com', '6jM7rG2v', 3234567891, 2, 1),
+    (1082369745, 'Sofía', 'Muñoz', 'smunoz@mail.com', '2pB9lW3d', 3345678902, 2, 1),
+    (1054978632, 'Diego', 'García', 'dgarcia@mail.com', '5xV8gQ1c', 3456789013, 2, 1),
+    (1072369854, 'Valentina', 'Rojas', 'vrojas@mail.com', '7rN4vS6j', 3567890124, 2, 1),
+    (1023986547, 'Daniela', 'Castro', 'dcastro2@mail.com', '3kD1wH8m', 3678901235, 2, 1),
+    (1067582943, 'Andrés', 'Sánchez', 'asanchez@mail.com', '9qT6fJ2b', 3789012346, 2, 1),
+    (1049763258, 'Abril', 'Betancourt', 'abetancourt@mail.com', '1yZ8xG7s', 3890123457, 2, 1),
+    (1038596472, 'Juan', 'Pérez', 'jperez2@mail.com', '5cN2vB4h', 3901234568, 2, 1),
+    (1012375986, 'Samantha', 'González', 'sgonzalez@mail.com', '8wL6mC3q', 3012345679, 2, 1),
+    (1007496358, 'Manuel', 'Jaramillo', 'mjaramillo@mail.com', '0hS9pR7d', 3145678902, 2, 1),
+    (1098576234, 'Luciana', 'López', 'llopez@mail.com', '6nG2sT4r', 3278901234, 2, 1),
+    (1089275463, 'Tomás', 'Moreno', 'tmoreno@mail.com', '2mK9cX5j', 3301234565, 2, 1),
+    (1057468239, 'Camilo', 'Castro', 'ccastro@mail.com', '4bV8nQ1f', 3434567896, 2, 1),
+    (1079358624, 'Ana', 'Sánchez', 'asanchez@mail.com', '7sW3jH6g', 3567890127, 2, 1),
+    (1028374659, 'Luisa', 'Martínez', 'lmartinez@mail.com', '1rD6tZ2k', 3690123458, 2, 1),
+    (1062937548, 'José', 'Ramírez', 'jramirez@mail.com', '3gF5wC7v', 3723456789, 2, 1),
+    (1045376289, 'María', 'José', 'mariaj@mail.com', '9vM2xR4l', 3856789010, 2, 1),
+    (1038279654, 'Daniel', 'Ramirez', 'danira@mail.com', '5wB4dN1p', 3989012341, 2, 1),
+    (1012547698, 'Carlos', 'Gonzales', 'cargonz@mail.com', '8cQ7hL3y', 3001234562, 2, 1),
+    (1007986453, 'Mar', 'gonzalez', 'maria.gonzalez@jjsystem.com', '6qG2vJ4c', 3001234567, 3, 1),
+    (1098465237, 'Juan', 'Perez', 'juan.perez@jjsystem.com', '0jP9sT5r', 3123456789, 3, 1),
+    (1085679234, 'David', 'Herrero', 'david.smith@jjsystem.com', '2hK9bX7n', 3789012345, 3, 1),
+    (1057623948, 'Sara', 'Johnson', 'sarah.johnson@jjsystem.com', '4fV8mS1g', 3567890123, 3, 1),
+    (1079348562, 'Carlos', 'Rodriguez', 'carlos.rodriguez@jjsystem.com', '7nW3sJ6d', 3456789123, 3, 1),
+    (1029875463, 'Emily', 'Williams', 'emily.williams@jjsystem.com', '1tZ6rD2k', 3890123456, 3, 1),
+    (1068457329, 'Antonio', 'Lopez', 'antonio.lopez@jjsystem.com', '3xH5cF7w', 3456789234, 3, 1),
+    (1045376298, 'Laura', 'Diaz', 'laura.diaz@jjsystem.com', '9lQ2vT4n', 3567834521, 3, 1),
+    (1036485927, 'José', 'Ramírez', 'jose.ramirez@jjsystem.com', '5bN4pR1m', 3789012165, 3, 1),
+    (1019286547, 'Ana', 'castro', 'ana.castro@jjsystem.com', '8gC7sW3j', 3456701234, 3, 1);
 
+-- Inserción de clientes
 INSERT INTO Clientes (direccionCliente, numeroDocumento)
 VALUES
-	('Calle 123 # 45-67', 1027385914),
-	('Carrera 78A # 12-34', 1094730265),
-	('Avenida 987 Sur # 56-78', 1089456723),
-	('Calle 456B # 90-12', 1056709238),
-	('Transversal 654 Este # 34-56', 1078964532),
-	('Diagonal 321Bis # 78-90', 1025637498),
-	('Calle 789 Norte # 12-34', 1064829375),
-	('Carrera 246Bis # 56-78', 1045726398),
-	('Avenida 753 Sur # 90-12', 1038475629),
-	('Calle 864 Este # 34-56', 1015928364),
-	('Carrera 231Bis # 78-90', 1009283754),
-	('Avenida 875 Norte # 12-34', 1093654782),
-	('Calle 692Bis # 56-78', 1082369745),
-	('Carrera 318Bis # 90-12', 1054978632),
-	('Avenida 947 Sur # 34-56', 1072369854),
-	('Calle 526 Este # 78-90', 1023986547),
-	('Carrera 183Bis # 12-34', 1067582943),
-	('Avenida 796 Norte # 56-78', 1049763258),
-	('Calle 459Bis # 90-12', 1038596472),
-	('Carrera 102Bis # 34-56', 1012375986),
-	('Avenida 735 Sur # 78-90', 1007496358),
-	('Calle 384 Este # 12-34', 1098576234),
-	('Carrera 961Bis # 56-78', 1089275463),
-	('Avenida 578 Norte # 90-12', 1057468239),
-	('Calle 215Bis # 34-56', 1079358624),
-	('Carrera 849 Este # 78-90', 1028374659),
-	('Avenida 476Bis # 12-34', 1062937548),
-	('Calle 103 Sur # 56-78', 1045376289),
-	('Carrera 732Bis # 90-12', 1038279654),
-	('Avenida 369 Este # 34-56', 1012547698);
+    ('Calle 123 # 45-67', 1027385914),
+    ('Carrera 78A # 12-34', 1094730265),
+    ('Avenida 987 Sur # 56-78', 1089456723),
+    ('Calle 456B # 90-12', 1056709238),
+    ('Transversal 654 Este # 34-56', 1078964532),
+    ('Diagonal 321Bis # 78-90', 1025637498),
+    ('Calle 789 Norte # 12-34', 1064829375),
+    ('Carrera 246Bis # 56-78', 1045726398),
+    ('Avenida 753 Sur # 90-12', 1038475629),
+    ('Calle 864 Este # 34-56', 1015928364),
+    ('Carrera 231Bis # 78-90', 1009283754),
+    ('Avenida 875 Norte # 12-34', 1093654782),
+    ('Calle 692Bis # 56-78', 1082369745),
+    ('Carrera 318Bis # 90-12', 1054978632),
+    ('Avenida 947 Sur # 34-56', 1072369854),
+    ('Calle 526 Este # 78-90', 1023986547),
+    ('Carrera 183Bis # 12-34', 1067582943),
+    ('Avenida 796 Norte # 56-78', 1049763258),
+    ('Calle 459Bis # 90-12', 1038596472),
+    ('Carrera 102Bis # 34-56', 1012375986),
+    ('Avenida 735 Sur # 78-90', 1007496358),
+    ('Calle 384 Este # 12-34', 1098576234),
+    ('Carrera 961Bis # 56-78', 1089275463),
+    ('Avenida 578 Norte # 90-12', 1057468239),
+    ('Calle 215Bis # 34-56', 1079358624),
+    ('Carrera 849 Este # 78-90', 1028374659),
+    ('Avenida 476Bis # 12-34', 1062937548),
+    ('Calle 103 Sur # 56-78', 1045376289),
+    ('Carrera 732Bis # 90-12', 1038279654),
+    ('Avenida 369 Este # 34-56', 1012547698);
 
+-- Inserción de administradores
 INSERT INTO Administrador (numeroDocumento) 
-value (1021826839);
+VALUES (1021826839);
 
+-- Inserción de técnicos
 INSERT INTO Tecnicos (especialidad, numeroDocumento)
 VALUES
-	('analisis', 1007986453),
-	('mantenimiento', 1098465237),
-	('instalacion', 1085679234),
-	('analisis', 1057623948),
-	('mantenimiento', 1079348562),
-	('instalacion', 1029875463),
-	('analisis', 1068457329),
-	('mantenimiento', 1045376298),
-	('instalacion', 1036485927),
-	('analisis', 1019286547);
+    ('analisis', 1007986453),
+    ('mantenimiento', 1098465237),
+    ('instalacion', 1085679234),
+    ('analisis', 1057623948),
+    ('mantenimiento', 1079348562),
+    ('instalacion', 1029875463),
+    ('analisis', 1068457329),
+    ('mantenimiento', 1045376298),
+    ('instalacion', 1036485927),
+    ('analisis', 1019286547);
 
+-- Inserción de estados de envío
 INSERT INTO EstadosEnvios (nombreEstadoEnvio)
 VALUES
-	("En bodega"),
-	("Llegando"),
-	("Entregado");
+    ('En bodega'),
+    ('Llegando'),
+    ('Entregado');
 
+-- Inserción de envíos
 INSERT INTO Envios (direccionEnvio, idTecnico, idEstadoEnvio)
 VALUES
-	("Calle 23 # 14-34, Barrio La Candelaria", 6, 2),
-	("Carrera 11 # 22-45, Barrio Chapinero Alto", 3, 1),
-	("Avenida Caracas # 67-89, Barrio Quinta Camacho", 10, 3),
-	("Calle 72 # 5-67, Barrio La Cabrera", 4, 1),
-	("Carrera 9 # 122-21, Barrio Usaquén", 1, 1),
-	("Calle 26 # 68-34, Barrio El Campín", 9, 3),
-	("Avenida Suba # 100-23, Barrio Suba", 7, 2),
-	("Carrera 7 # 32-12, Barrio La Merced", 8, 3),
-	("Calle 63 # 15-34, Barrio San Felipe", 2, 1),
-	("Carrera 13 # 26-45, Barrio La Soledad", 5, 3),
-	("Avenida Calle 100 # 19-34, Barrio Chicó Norte", 6, 2),
-	("Calle 53 # 12-56, Barrio Galerías", 3, 3),
-	("Carrera 15 # 78-34, Barrio Santa Bárbara", 10, 1),
-	("Calle 72 # 11-45, Barrio Rosales", 4, 2),
-	("Avenida Carrera 30 # 62-23, Barrio La Macarena", 1, 1),
-	("Calle 85 # 18-34, Barrio El Nogal", 9, 3),
-	("Carrera 5 # 9-12, Barrio La Catedral", 7, 2),
-	("Avenida 68 # 13-56, Barrio Los Andes", 8, 1),
-	("Calle 19 # 10-34, Barrio La Perseverancia", 2, 1),
-	("Carrera 17 # 21-45, Barrio Teusaquillo", 5, 2),
-	("Avenida Caracas # 47-89, Barrio Santa Isabel", 6, 2),
-	("Calle 100 # 13-67, Barrio El Refugio", 3, 3),
-	("Carrera 30 # 45-21, Barrio El Recuerdo", 10, 1),
-	("Calle 72 # 19-56, Barrio La Castellana", 4, 3),
-	("Carrera 13 # 21-34, Barrio San Luis", 1, 2),
-	("Avenida Suba # 70-12, Barrio La Floresta", 9, 1),
-	("Calle 63 # 12-45, Barrio La Estancia", 7, 2),
-	("Carrera 7 # 28-56, Barrio El Polo", 8, 3),
-	("Avenida Boyacá # 72-23, Barrio Salitre Greco", 2, 3),
-	("Calle 39 # 14-34, Barrio Antonio Nariño", 5, 1);
+    ('Calle 23 # 14-34, Barrio La Candelaria', 6, 2),
+    ('Carrera 11 # 22-45, Barrio Chapinero Alto', 3, 1),
+    ('Avenida Caracas # 67-89, Barrio Quinta Camacho', 10, 3),
+    ('Calle 72 # 5-67, Barrio La Cabrera', 4, 1),
+    ('Carrera 9 # 122-21, Barrio Usaquén', 1, 1),
+    ('Calle 26 # 68-34, Barrio El Campín', 9, 3),
+    ('Avenida Suba # 100-23, Barrio Suba', 7, 2),
+    ('Carrera 7 # 32-12, Barrio La Merced', 8, 3),
+    ('Calle 63 # 15-34, Barrio San Felipe', 2, 1),
+    ('Carrera 13 # 26-45, Barrio La Soledad', 5, 3),
+    ('Avenida Calle 100 # 19-34, Barrio Chicó Norte', 6, 2),
+    ('Calle 53 # 12-56, Barrio Galerías', 3, 3),
+    ('Carrera 15 # 78-34, Barrio Santa Bárbara', 10, 1),
+    ('Calle 72 # 11-45, Barrio Rosales', 4, 2),
+    ('Avenida Carrera 30 # 62-23, Barrio La Macarena', 1, 1),
+    ('Calle 85 # 18-34, Barrio El Nogal', 9, 3),
+    ('Carrera 5 # 9-12, Barrio La Catedral', 7, 2),
+    ('Avenida 68 # 13-56, Barrio Los Andes', 8, 1),
+    ('Calle 19 # 10-34, Barrio La Perseverancia', 2, 1),
+    ('Carrera 17 # 21-45, Barrio Teusaquillo', 5, 2),
+    ('Avenida Caracas # 47-89, Barrio Santa Isabel', 6, 2),
+    ('Calle 100 # 13-67, Barrio El Refugio', 3, 3),
+    ('Carrera 30 # 45-21, Barrio El Recuerdo', 10, 1),
+    ('Calle 72 # 19-56, Barrio La Castellana', 4, 3),
+    ('Carrera 13 # 21-34, Barrio San Luis', 1, 2),
+    ('Avenida Suba # 70-12, Barrio La Floresta', 9, 1),
+    ('Calle 63 # 12-45, Barrio La Estancia', 7, 2),
+    ('Carrera 7 # 28-56, Barrio El Polo', 8, 3),
+    ('Avenida Boyacá # 72-23, Barrio Salitre Greco', 2, 3),
+    ('Calle 39 # 14-34, Barrio Antonio Nariño', 5, 1); 
     
 INSERT INTO categoriasProductos (nombreCategoria) 
 VALUES
@@ -581,28 +602,29 @@ VALUES
 	('Activa'),
     ('Inactiva');
 
+
 INSERT INTO Cotizaciones (fechaCotizacion, totalCotizacion, descripcionCotizacion, idCliente, idProducto, idServicio, idEstadoCotizacion)
 VALUES
-	('2023-04-15', 75000, 'Instalación de una cámara de seguridad IP en la entrada principal del edificio', 26, 1, 1, 1),
-	('2023-04-16', 100000, 'Suministro de una alarma de intrusión para el hogar', 18, 23, 1, 1),
-	('2023-04-20', 187000, 'Venta', 9, 22, 1, 1),
-	('2023-04-22', 50000, 'Reparación del sistema de monitoreo en la tienda', 11, 3, 6, 1),
-	('2023-04-23', 85000, 'Instalación de cuatro cámaras de seguridad CCTV en la bodega', 1, 7, 1, 1),
-	('2023-04-24', 120000, 'Suministro de una alarma contra incendios para el restaurante', 19, 9, 1, 1),
-	('2023-04-25', 110000, 'Instalación de un sistema de control de acceso biométrico en la empresa', 27, 7, 8, 1),
-	('2023-04-26', 46000, 'Venta de una cámara de seguridad domo para la residencia', 10, 26, 1, 1),
-	('2023-04-28', 55000, 'Venta de un control remoto adicional para la alarma de la tienda', 14, 12, 1, 1),
-	('2023-04-30', 90000, 'Instalación de dos cámaras de seguridad inalámbricas en la casa', 13, 21, 1, 1),
-	('2023-05-01', 110000, 'Suministro de un sistema de intercomunicación para la oficina', 2, 30, 1, 2),
-	('2023-05-02', 70000, 'Reparación del cableado del sistema de seguridad en el almacén', 22, 11, 6, 2),
-	('2023-05-03', 48000, 'Venta de una cerradura electrónica para la puerta principal', 30, 12, 1, 2),
-	('2023-05-04', 100000, 'Sistema de control de acceso con tecnología biométrica para puertas', 25, 21, 6, 2),
-	('2023-05-10', 130000, 'Videoportero con pantalla a color y comunicación bidireccional', 7, 21, 1, 2),
-	('2023-05-11', 350000, 'Sistema de detección de intrusos con sensores de movimiento y sirenas de alarma', 6, 1, 1, 2),
-	('2023-05-12', 200000, 'Torniquetes con lectores de tarjetas para control de acceso peatonal', 5, 2, 1, 2),
-	('2023-05-13', 130000, 'Cámaras de seguridad PTZ con movimiento y zoom controlados remotamente', 12, 2, 3, 2),
-	('2023-05-14', 200000, 'Barreras vehiculares con lector de tarjetas RFID para control de acceso', 23, 2, 3, 2);
-
+    ('2023-04-15', 75000, 'Instalación de una cámara de seguridad IP en la entrada principal del edificio', 26, 1, 1, 1),
+    ('2023-04-16', 100000, 'Suministro de una alarma de intrusión para el hogar', 18, 23, 1, 1),
+    ('2023-04-20', 187000, 'Venta', 9, 22, 1, 1),
+    ('2023-04-22', 50000, 'Reparación del sistema de monitoreo en la tienda', 11, 3, 6, 1),
+    ('2023-04-23', 85000, 'Instalación de cuatro cámaras de seguridad CCTV en la bodega', 1, 7, 1, 1),
+    ('2023-04-24', 120000, 'Suministro de una alarma contra incendios para el restaurante', 19, 9, 1, 1),
+    ('2023-04-25', 110000, 'Instalación de un sistema de control de acceso biométrico en la empresa', 27, 7, 8, 1),
+    ('2023-04-26', 46000, 'Venta de una cámara de seguridad domo para la residencia', 10, 26, 1, 1),
+    ('2023-04-28', 55000, 'Venta de un control remoto adicional para la alarma de la tienda', 14, 12, 1, 1),
+    ('2023-04-30', 90000, 'Instalación de dos cámaras de seguridad inalámbricas en la casa', 13, 21, 1, 1),
+    ('2023-05-01', 110000, 'Suministro de una alarma contra intrusos para la oficina', 17, 14, 1, 1),
+    ('2023-05-02', 78000, 'Mantenimiento preventivo de las cámaras de vigilancia en el estacionamiento', 25, 4, 7, 1),
+    ('2023-05-03', 140000, 'Instalación de un sistema de cámaras de seguridad en el edificio de apartamentos', 8, 25, 1, 1),
+    ('2023-05-05', 68000, 'Venta de un sensor de movimiento para el patio trasero', 21, 16, 1, 1),
+    ('2023-05-07', 125000, 'Instalación de una alarma con sensor de humo en la cocina del restaurante', 20, 25, 1, 1),
+    ('2023-05-08', 95000, 'Venta de una cámara de vigilancia panorámica para la tienda de conveniencia', 5, 19, 1, 1),
+    ('2023-05-10', 76000, 'Instalación de una alarma perimetral en el jardín de la casa', 2, 18, 1, 1),
+    ('2023-05-12', 105000, 'Venta de un sensor de vibración para la alarma de la empresa', 24, 15, 1, 1),
+    ('2023-05-14', 92000, 'Instalación de una cámara de seguridad oculta en la sala de reuniones', 4, 13, 1, 1),
+    ('2023-05-15', 65000, 'Venta de una alarma de emergencia para el taller mecánico', 16, 11, 1, 1);
 INSERT INTO EstadosCitas (nombreEstadoCita)
 VALUES
 	('Confirmada'),

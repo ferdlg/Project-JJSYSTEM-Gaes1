@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from rest_framework import viewsets
-from ..models import *
+from Account.models import *
 from .serializers import VentasSerializer
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 

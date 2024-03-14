@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from ..models import Disponibilidadcronogramas
+from Account.models import Disponibilidadcronogramas
 from .serializers import DisponibilidadcronogramasSerializer
 
 

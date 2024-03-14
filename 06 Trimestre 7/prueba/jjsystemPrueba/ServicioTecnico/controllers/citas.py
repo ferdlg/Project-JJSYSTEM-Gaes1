@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
-from ..models import Citas , Servicios, Cotizaciones, Categoriasservicios, Tecnicos, Administrador , Estadoscitas
+from Account.models import Citas , Servicios, Cotizaciones, Categoriasservicios, Tecnicos, Administrador , Estadoscitas
 from .serializers import CitasSerializer
 from rest_framework.decorators import api_view
 

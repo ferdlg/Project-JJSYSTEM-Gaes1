@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from rest_framework import viewsets
-from ..models import Categoriasproductos, Categoriasservicios, Servicios
+from Account.models import Categoriasproductos, Categoriasservicios, Servicios
 from .serializers import ServiciosSerializer
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 

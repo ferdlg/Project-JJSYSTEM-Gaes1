@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from ..models import Cronogramatecnicos
+from Account.models import Cronogramatecnicos
 from .serializers import CronogramatecnicosSerializer
 
 

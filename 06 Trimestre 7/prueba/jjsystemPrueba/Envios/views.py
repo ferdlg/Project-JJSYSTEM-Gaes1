@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import Envios
-from .models import Estadosenvios
-from .models import Tecnicos
-from .models import DetallesEnviosView
+from Account.models import Envios
+from Account.models import Estadosenvios
+from Account.models import Tecnicos
+from Account.models import DetalleEnviosVentas
 from Account.views import role_required
 # Create your views here.
 
@@ -89,7 +89,7 @@ def eliminarEnvio(request, idEnvio):
     return redirect('homeEnvios')
 
 def detallesView(request, idEnvio):
-    detallesEnvio = DetallesEnviosView.objects.get(idenvio=idEnvio)
+    detallesEnvio = DetalleEnviosVentas.objects.get(idenvio=idEnvio)
     return render(request, 'crudAdmin/Detalles.html', {'detallesEnvio': detallesEnvio})
 
 #Views del tecnico

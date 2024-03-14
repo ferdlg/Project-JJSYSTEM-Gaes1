@@ -17,7 +17,48 @@
             <button class="btn btn-search position-absolute" type="submit"></button>
         </form>
     </section>
-        <a href="#" class="btn btn-success" style="margin-bottom:  5px;">Registrar Tecnico</a>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registrar-tecnico">Registrar Tecnico</button>
+    <!-- Modal de registrar  -->
+    <div class="modal fade" id="registrar-tecnico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black;">Registrar Tecnico</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{% url 'register' %}">
+                        {% csrf_token %}
+                        <div class="modal" id="exampleModal" data-bs-backdrop="static">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Registrarse</h1>
+                                            {{ form.as_p }}
+                                        <div class="cont-footer">
+                                            <div class="modal-footer">
+                                                <input type="radio" name="AceptaTerminos" id="AceptaTerminos" required/>
+                                                <a href="#">Acepto los términos y condiciones.</a>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="#" class="link">Iniciar Sesión</a>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-cancelar btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn-registrar btn-primary">Registrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
         <section class="s-data-table">
         <table class="table data-table table-bordered">
             <thead>
@@ -27,6 +68,7 @@
                     <th scope="col">No. Documento</th>
                     <th scope="col">Especialidad</th>
                     <th scope="col">Correo</th>
+                    <th </th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -44,6 +86,9 @@
                     </td>
                     <td>
                         <a href="#" class="btn btn-danger btn-sw"> Eliminar </a>
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-info btn-sw"> Ver Agenda </a>
                     </td>
                 </tr>
                 {% endfor %}

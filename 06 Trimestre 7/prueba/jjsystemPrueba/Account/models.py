@@ -18,6 +18,76 @@ class Administrador(models.Model):
         managed = False
         db_table = 'administrador'
 
+
+class AuthGroup(models.Model):
+    name = models.CharField(unique=True, max_length=150)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group'
+
+
+class AuthGroupPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        unique_together = (('group', 'permission'),)
+
+
+class AuthPermission(models.Model):
+    name = models.CharField(max_length=255)
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    codename = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_permission'
+        unique_together = (('content_type', 'codename'),)
+
+
+class AuthUser(models.Model):
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.IntegerField()
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    email = models.CharField(max_length=254)
+    is_staff = models.IntegerField()
+    is_active = models.IntegerField()
+    date_joined = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+
+
+class AuthUserGroups(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_groups'
+        unique_together = (('user', 'group'),)
+
+
+class AuthUserUserPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_user_permissions'
+        unique_together = (('user', 'permission'),)
+
+
 class Categoriasproductos(models.Model):
     idcategoriaproducto = models.AutoField(db_column='idCategoriaProducto', primary_key=True)  # Field name made lowercase.
     nombrecategoria = models.CharField(db_column='nombreCategoria', max_length=20)  # Field name made lowercase.
@@ -68,13 +138,30 @@ class Cotizaciones(models.Model):
     totalcotizacion = models.FloatField(db_column='totalCotizacion')  # Field name made lowercase.
     descripcioncotizacion = models.TextField(db_column='descripcionCotizacion')  # Field name made lowercase.
     idcliente = models.ForeignKey(Clientes, models.DO_NOTHING, db_column='idCliente')  # Field name made lowercase.
-    idproducto = models.ForeignKey('Productos', models.DO_NOTHING, db_column='idProducto')  # Field name made lowercase.
-    idservicio = models.ForeignKey('Servicios', models.DO_NOTHING, db_column='idServicio')  # Field name made lowercase.
     idestadocotizacion = models.ForeignKey('Estadoscotizaciones', models.DO_NOTHING, db_column='idEstadoCotizacion')  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'cotizaciones'
+
+
+class CotizacionesProductos(models.Model):
+    idcotizacion = models.ForeignKey(Cotizaciones, models.DO_NOTHING, db_column='idCotizacion', blank=True, null=True)  # Field name made lowercase.
+    idproducto = models.ForeignKey('Productos', models.DO_NOTHING, db_column='idProducto', blank=True, null=True)  # Field name made lowercase.
+    cantidad = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'cotizaciones_productos'
+
+
+class CotizacionesServicios(models.Model):
+    idcotizacion = models.ForeignKey(Cotizaciones, models.DO_NOTHING, db_column='idCotizacion', blank=True, null=True)  # Field name made lowercase.
+    idservicio = models.ForeignKey('Servicios', models.DO_NOTHING, db_column='idServicio', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'cotizaciones_servicios'
 
 
 class Cronogramatecnicos(models.Model):
@@ -86,6 +173,19 @@ class Cronogramatecnicos(models.Model):
     class Meta:
         managed = False
         db_table = 'cronogramatecnicos'
+
+
+class DetalleEnviosVentas(models.Model):
+    idenvio = models.IntegerField(primary_key=True)
+    direccionenvio = models.CharField(max_length=255, blank=True, null=True)
+    detallesventa = models.CharField(max_length=255, blank=True, null=True)
+    tecnicoasignado = models.IntegerField(blank=True, null=True)
+    numerodocumento = models.CharField(max_length=255, blank=True, null=True)
+    fechaventa = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'detalle_envios_ventas'
 
 
 class Detallesactividadcronograma(models.Model):
@@ -118,6 +218,21 @@ class Disponibilidadcronogramas(models.Model):
     class Meta:
         managed = False
         db_table = 'disponibilidadcronogramas'
+
+
+class DjangoAdminLog(models.Model):
+    action_time = models.DateTimeField()
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200)
+    action_flag = models.PositiveSmallIntegerField()
+    change_message = models.TextField()
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
+
 
 class DjangoContentType(models.Model):
     app_label = models.CharField(max_length=100)
@@ -162,7 +277,7 @@ class Envios(models.Model):
 
 
 class Enviosentregados(models.Model):
-    idenvio = models.IntegerField(db_column='idEnvio', blank=True, null=True)  # Field name made lowercase.
+    idenvio = models.IntegerField(db_column='idEnvio', primary_key=True)  # Field name made lowercase.
     fecha = models.DateTimeField(blank=True, null=True)
     idtecnicoencargado = models.IntegerField(db_column='idTecnicoEncargado', blank=True, null=True)  # Field name made lowercase.
     documentotecnico = models.BigIntegerField(db_column='documentoTecnico', blank=True, null=True)  # Field name made lowercase.
@@ -194,9 +309,6 @@ class Estadosenvios(models.Model):
     idestadoenvio = models.AutoField(db_column='idEstadoEnvio', primary_key=True)  # Field name made lowercase.
     nombreestadoenvio = models.CharField(db_column='nombreEstadoEnvio', max_length=20)  # Field name made lowercase.
 
-    def __str__(self):
-        return self.idestadoenvio
-
     class Meta:
         managed = False
         db_table = 'estadosenvios'
@@ -218,6 +330,28 @@ class Estadosusuarios(models.Model):
     class Meta:
         managed = False
         db_table = 'estadosusuarios'
+
+
+class Historialcotizaciones(models.Model):
+    idcotizacion = models.ForeignKey(Cotizaciones, models.DO_NOTHING, db_column='idCotizacion', blank=True, null=True)  # Field name made lowercase.
+    fechacreada = models.DateTimeField(db_column='fechaCreada', blank=True, null=True)  # Field name made lowercase.
+    fechaactualizacion = models.DateTimeField(db_column='fechaActualizacion', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'historialcotizaciones'
+
+
+class Historialpqrsfportipoestado(models.Model):
+    idregistro = models.AutoField(db_column='idRegistro', primary_key=True)  # Field name made lowercase.
+    idpqrsf = models.ForeignKey('Pqrsf', models.DO_NOTHING, db_column='idPQRSF', blank=True, null=True)  # Field name made lowercase.
+    idtipopqrsf = models.IntegerField(db_column='idTipoPQRSF', blank=True, null=True)  # Field name made lowercase.
+    idestadopqrsf = models.IntegerField(db_column='idEstadoPQRSF', blank=True, null=True)  # Field name made lowercase.
+    fecharegistro = models.DateTimeField(db_column='fechaRegistro', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'historialpqrsfportipoestado'
 
 
 class Permisos(models.Model):
@@ -249,6 +383,7 @@ class Productos(models.Model):
     descripcionproducto = models.TextField(db_column='descripcionProducto')  # Field name made lowercase.
     precioproducto = models.FloatField(db_column='precioProducto')  # Field name made lowercase.
     cantidad = models.IntegerField()
+    foto = models.CharField(max_length=200, blank=True, null=True)
     idadministrador = models.ForeignKey(Administrador, models.DO_NOTHING, db_column='idAdministrador', blank=True, null=True)  # Field name made lowercase.
     idcategoriaproducto = models.ForeignKey(Categoriasproductos, models.DO_NOTHING, db_column='idCategoriaProducto', blank=True, null=True)  # Field name made lowercase.
     idproveedorproducto = models.ForeignKey('Proveedoresproductos', models.DO_NOTHING, db_column='idProveedorProducto', blank=True, null=True)  # Field name made lowercase.
@@ -301,6 +436,7 @@ class Servicios(models.Model):
     idservicio = models.AutoField(db_column='idServicio', primary_key=True)  # Field name made lowercase.
     nombreservicio = models.TextField(db_column='nombreServicio')  # Field name made lowercase.
     descripcionservicio = models.TextField(db_column='descripcionServicio')  # Field name made lowercase.
+    precioservicio = models.FloatField(db_column='precioServicio', blank=True, null=True)  # Field name made lowercase.
     idcategoriaservicio = models.ForeignKey(Categoriasservicios, models.DO_NOTHING, db_column='idCategoriaServicio', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -351,6 +487,7 @@ class Usuarios(models.Model):
     class Meta:
         managed = False
         db_table = 'usuarios'
+
 
 
 

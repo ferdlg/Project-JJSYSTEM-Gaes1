@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Pqrsf
-from .models import Estadospqrsf
-from .models import Tipospqrsf
+from Account.models import Pqrsf
+from Account.models import Estadospqrsf
+from Account.models import Tipospqrsf
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 
 # Create your views here

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import *
+from Account.models import *
 
 #creamos una clase serializers para cada tabla
 class RolesSerializers(serializers.ModelSerializer):

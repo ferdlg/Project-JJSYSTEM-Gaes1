@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import *
+from Account.models import *
 
 class EnviosSerializers(serializers.ModelSerializer):
     class Meta:

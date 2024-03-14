@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from ..models import Actividadescronogramatecnicos
+from Account.models import Actividadescronogramatecnicos
 from .serializers import ActividadescronogramatecnicosSerializer
 
 

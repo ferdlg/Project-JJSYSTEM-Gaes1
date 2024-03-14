@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from ..models import Permisos
+from Account.models import Permisos
 from .serializers import PermisosSerializers
 
 

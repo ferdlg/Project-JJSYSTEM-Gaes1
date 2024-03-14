@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import viewsets, status
 from django.shortcuts import render, redirect
-from ..models import Cotizaciones
+from Account.models import Cotizaciones
 from .serializers import CotizacionesSerializer
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 

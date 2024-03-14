@@ -6,7 +6,7 @@ import pytest
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jjsystemPrueba.settings')
 django.setup()
 
-from ..models import Servicios, Categoriasservicios
+from Account.models import Servicios, Categoriasservicios
 
 class TestServicio(TestCase):
 

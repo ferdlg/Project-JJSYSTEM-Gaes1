@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from ..models import Roles
+from Account.models import Roles
 from .serializers import RolesSerializers
 
 

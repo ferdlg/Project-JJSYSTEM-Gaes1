@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from ..models import Proveedoresproductos
+from Account.models import Proveedoresproductos
 from .serializers import ProveedoresProductosSerializer
 
 

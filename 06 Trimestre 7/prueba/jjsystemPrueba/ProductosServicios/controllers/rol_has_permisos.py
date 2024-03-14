@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from ..models import RolesHasPermisos
+from Account.models import RolesHasPermisos
 from .serializers import Rol_has_permisosSerializers
 
 

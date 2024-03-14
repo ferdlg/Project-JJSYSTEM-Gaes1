@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Productos, Servicios
-from .models import Categoriasproductos 
+from Account.models import Productos, Servicios
+from Account.models import Categoriasproductos 
 
 
 # Create your views here.
@@ -50,3 +50,7 @@ def buscar_productos_servicios(request):
         return render(request, 'landing/resultados_busqueda.html', {'productos': productos, 'servicios': servicios})
     else:
         return render(request, 'landing/index.html')
+
+
+def agregar_producto_cotizacion(request):
+    return
