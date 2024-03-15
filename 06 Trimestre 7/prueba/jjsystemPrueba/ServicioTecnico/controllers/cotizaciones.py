@@ -77,7 +77,8 @@ class CotizacionesCRUD(viewsets.ModelViewSet):
             productos = Productos.objects.all()
             servicios = Servicios.objects.all()
 
-            return render(request, 'asignarProductosServicios.html', {'productos': productos, 'servicios': servicios, 'idcotizacion': idcotizacion})
+            return redirect('index')
+            
 
         else:
             productos = Productos.objects.all()
