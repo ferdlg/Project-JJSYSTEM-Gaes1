@@ -46,3 +46,14 @@ class ClientesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clientes
         fields = '__all__'
+
+class CotizacionesProductosSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = CotizacionesProductos
+        fields = '__all__'
+
+class CotizacionesServiciosSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = CotizacionesServicios
+        fields = '__all__'
+

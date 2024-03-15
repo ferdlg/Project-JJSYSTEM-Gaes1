@@ -43,7 +43,8 @@ urlpatterns=[
     path('eliminar_citas/<int:idcita>/',citasCRUD.as_view({'delete':'eliminar_citas'}),name='eliminar_citas'),
 
     path('ver_cotizaciones/', CotizacionesCRUD.as_view({'get':'listar_cotizaciones'}), name='ver_cotizaciones'),
-    path('crear_cotizaciones/', CotizacionesCRUD.as_view({'post':'crear_cotizaciones'}), name='crear_cotizaciones')
+    path('crear_cotizaciones/', CotizacionesCRUD.as_view({'post':'crear_cotizaciones'}), name='crear_cotizaciones'),
+    path('crear_cotizaciones/productos_servicios/<int:idcotizacion>', CotizacionesCRUD.as_view({'post':'asignar_productos_servicios'}), name='asignar_productos_servicios')
 
 
 
