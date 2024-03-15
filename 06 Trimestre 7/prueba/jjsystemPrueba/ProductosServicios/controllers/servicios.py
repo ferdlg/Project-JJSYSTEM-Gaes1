@@ -25,7 +25,7 @@ def home_servicios(request):
     servicios_list = Servicios.objects.all()
 
     # Configurar la paginación
-    paginator = Paginator(servicios_list, 10)  # Mostrar 10 productos por página
+    paginator = Paginator(servicios_list, 5)  # Mostrar 10 productos por página
     page_number = request.GET.get('page')      # Obtener el número de página solicitado
     try:
         servicios = paginator.page(page_number)

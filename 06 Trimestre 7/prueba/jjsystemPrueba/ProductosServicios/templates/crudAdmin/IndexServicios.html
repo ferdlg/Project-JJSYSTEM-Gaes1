@@ -29,7 +29,7 @@
                     <th scope="col">Descripción</th>
                     <th scope="col">Categoría</th>
                     <th></th>
-                    <th></th>
+                    <!-- <th></th> -->
                 </tr>
             </thead>
             <tbody>
@@ -42,9 +42,9 @@
                     <td> 
                         <a href="{% url 'editarServicio' idServicio=servicio.idservicio %}" class="btn btn-primary btn-sw"> Editar </a>
                     </td>
-                    <td>
+                    <!-- <td>
                         <a href="{% url 'eliminarServicio' idServicio=servicio.idservicio %}" class="btn btn-danger btn-sw"> eliminar </a>
-                    </td>
+                    </td> -->
                 </tr>
                 {% endfor %}
             </tbody>
