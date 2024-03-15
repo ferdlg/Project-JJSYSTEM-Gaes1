@@ -21,4 +21,7 @@ urlpatterns=[
     path('detalles/<idEnvio>/', views.detallesView, name='detallesView'),
     path('tecnicos/', views.homeEnviosTecnico, name='homeTecnicosEnvios'),
     path('api/', include(router.urls)),
+
+    path('clientes/<int:idCliente>/', views.enviosCliente, name='vista_cliente'),
+
 ]

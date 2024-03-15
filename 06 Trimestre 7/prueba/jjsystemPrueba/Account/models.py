@@ -500,3 +500,17 @@ class Ventas(models.Model):
     class Meta:
         managed = False
         db_table = 'ventas'
+
+class EnviosClientes(models.Model):
+    idEnvio = models.IntegerField(primary_key=True)
+    direccionEnvio = models.CharField(max_length=100)
+    idTecnico = models.IntegerField()
+    idEstadoEnvio = models.IntegerField()
+    idCliente = models.IntegerField()
+    direccionCliente = models.CharField(max_length=100)
+    documentoCliente = models.IntegerField()
+
+    class Meta:
+        managed = False  
+        db_table = 'VistaEnviosClientes'
+

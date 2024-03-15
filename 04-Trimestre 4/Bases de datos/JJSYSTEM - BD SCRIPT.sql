@@ -941,6 +941,20 @@ VALUES
         JOIN detallesventas ON ventas.idVenta = detallesventas.idVenta
         JOIN tecnicos ON envios.idTecnico = tecnicos.idTecnico;
 
+    CREATE VIEW VistaEnviosClientes AS
+    SELECT
+        e.idEnvio AS idEnvio,
+        e.direccionEnvio AS direccionEnvio,
+        e.idTecnico AS idTecnico,
+        e.idEstadoEnvio AS idEstadoEnvio,
+        c.idCliente AS idCliente,
+        c.direccionCliente AS direccionCliente,
+        c.numeroDocumento AS documentoCliente
+    FROM
+        jjsystem_db.envios e
+    JOIN jjsystem_db.clientes c ON e.direccionEnvio = c.direccionCliente;
+
+
 /*Procedimiento*/
 
 
