@@ -44,7 +44,7 @@ urlpatterns=[
 
     path('ver_cotizaciones/', CotizacionesCRUD.as_view({'get':'listar_cotizaciones'}), name='ver_cotizaciones'),
     path('crear_cotizaciones/', CotizacionesCRUD.as_view({'post':'crear_cotizaciones'}), name='crear_cotizaciones'),
-    path('crear_cotizaciones/productos_servicios/<int:idcotizacion>', CotizacionesCRUD.as_view({'post':'asignar_productos_servicios'}), name='asignar_productos_servicios')
+    path('crear_cotizaciones/productos_servicios/<int:idcotizacion>/', CotizacionesCRUD.as_view({'post':'asignar_productos_servicios', 'get':'asignar_productos_servicios'}), name='asignar_productos_servicios')
 
 
 

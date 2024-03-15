@@ -58,46 +58,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary"data-bs-toggle="modal" data-bs-target="#modalAsignarProductosServicios">Guardar cambios</button>
-                            <!-- Modal de asignación de productos y servicios -->
-                            <div class="modal fade" id="modalAsignarProductosServicios" tabindex="-1" aria-labelledby="modalAsignarProductosServiciosLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalAsignarProductosServiciosLabel">Asignar productos y servicios</h5>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="post">
-                                                {% csrf_token %}
-                                                <!-- Selección de productos y cantidad -->
-                                                {% for producto in productos %}
-                                                <div class="mb-3">
-                                                    <label for="producto{{ producto.idproducto }}" class="form-label">{{ producto.nombre }}:</label>
-                                                    <div class="input-group">
-                                                        <select class="form-select" id="producto{{ producto.idproducto }}" name="producto[]" multiple>
-                                                            <option value="{{ producto.idproducto }}">{{ producto.nombre }}</option>
-                                                        </select>
-                                                        <input type="number" class="form-control" id="cantidad{{ producto.idproducto }}" name="cantidad[]" placeholder="Cantidad" required>
-                                                    </div>
-                                                </div>
-                                                {% endfor %}
-                                            
-                                                <!-- Selección de servicios -->
-                                                <div class="mb-3">
-                                                    <label for="servicio" class="form-label">Servicios:</label>
-                                                    <select class="form-select" id="servicio" name="servicio[]" multiple>
-                                                        {% for servicio in servicios %}
-                                                            <option value="{{ servicio.idservicio }}">{{ servicio.nombre }}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                </div>
-                                            
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         </form>
                     </div>
