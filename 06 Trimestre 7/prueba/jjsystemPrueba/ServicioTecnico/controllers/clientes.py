@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
-from Account.models import Clientes
+from Account.models import Clientes, Usuarios
 from .serializers import ClientesSerializer
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 
@@ -21,3 +21,23 @@ class ClientesCRUD(viewsets.ModelViewSet):
         except EmptyPage:
             clientes = paginator.page(paginator.num_pages)
         return render(request, 'clientes.html', {'clientes': clientes})
+    
+    def actualizar_datos(self, request, idcliente):
+        cliente = Clientes.objects.get(idcliente = idcliente)
+        usuario = Usuarios.objects.get(numerodocumento = cliente.numerodocumento.numerodocumento)
+
+        if request.method == 'POST':
+            nombre = request.POST.get('nombre')
+            apellido = request.POST.get('apellido')
+            email = request.POST.get('email')
+
+        # Actualizar los datos del cliente
+            usuario.nombre = nombre
+            usuario.apellido = apellido
+            usuario.email = email
+            usuario.save()
+            
+            return redirect('ver_clientes')
+
+        return redirect('ver_clientes')
+

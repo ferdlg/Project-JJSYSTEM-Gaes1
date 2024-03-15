@@ -1,12 +1,12 @@
 {% extends "menu.html" %}
-{% block titulo %} Servicios {% endblock %}
+{% block titulo %} Clientes {% endblock %}
 {% block contenido %}
 <div class="content">
     <nav class="available_prod">
         <div class="container">
             <div class="row">
                 <div class="allowed_prod">
-                    <h2 class="font-weight-bold text-center text-lg-left">Servicios</h2>
+                    <h2 class="font-weight-bold text-center text-lg-left">Clientes</h2>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
                     <th scope="col">Contacto</th>
                     <th scope="col">Correo</th>
                     <th></th>
-                    <th></th>
+                    <!-- <th></th> -->
                 </tr>
             </thead>
             <tbody>
@@ -43,11 +43,43 @@
                     <td>{{cliente.numerodocumento.numerocontacto}}</td>
                     <td>{{cliente.numerodocumento.email}}</td>
                     <td> 
-                        <a href="#" class="btn btn-primary btn-sw"> Editar </a>
+                        <!-- Botón para abrir el modal -->
+                        <button type="button" class="btn btn-primary btn-sw" data-bs-toggle="modal" data-bs-target="#modalActualizarDatos">Actualizar Datos</button>
+
+                        <!-- Modal para actualizar datos -->
+                        <div class="modal fade" id="modalActualizarDatos" tabindex="-1" aria-labelledby="modalActualizarDatosLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalActualizarDatosLabel">Actualizar Datos del Cliente</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{% url 'actualizar_datos_clientes' idcliente=cliente.idcliente %}" method="post">
+                                {% csrf_token %}
+                                <!-- Campos del formulario para actualizar datos -->
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre:</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ cliente.numerodocumento.nombre }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apellido" class="form-label">Apellido:</label>
+                                    <input type="text" class="form-control" id="apellido" name="apellido" value="{{ cliente.numerodocumento.apellido }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email:</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ cliente.numerodocumento.email }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                     </td>
-                    <td>
+                    <!-- <td>
                         <a href="#" class="btn btn-danger btn-sw"> eliminar </a>
-                    </td>
+                    </td> -->
                 </tr>
                 {% endfor %}
             </tbody>

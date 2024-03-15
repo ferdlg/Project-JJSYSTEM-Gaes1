@@ -34,6 +34,8 @@ urlpatterns=[
     path('index/tecnicos/', indexTecnicos, name='indexTecnicos'),
     path('index/tecnicos/ver_tecnicos', tecnicosCRUD.listar_tecnicos, name='verTecnicos'),
     path('index/ver_clientes/',ClientesCRUD.as_view({'get':'listar_clientes'}), name='ver_clientes'),
+    path('index/ver_clientes/actualizar_datos/<idcliente>',ClientesCRUD.as_view({'get':'actualizar_datos', 'post':'actualizar_datos'}), name='actualizar_datos_clientes'),
+
 
     path('cita_analisis/', citasCRUD.as_view({'get':'cita_analisis'}), name='cita_analisis'),
     path('cita_instalacion/', citasCRUD.as_view({'get':'cita_instalacion'}), name='cita_instalacion'),
