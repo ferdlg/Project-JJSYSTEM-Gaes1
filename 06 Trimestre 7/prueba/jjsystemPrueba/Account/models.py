@@ -134,7 +134,7 @@ class Clientes(models.Model):
 
 class Cotizaciones(models.Model):
     idcotizacion = models.AutoField(db_column='idCotizacion', primary_key=True)  # Field name made lowercase.
-    fechacotizacion = models.DateField(db_column='fechaCotizacion')  # Field name made lowercase.
+    fechacotizacion = models.DateField(db_column='fechaCotizacion', auto_now_add=True)
     totalcotizacion = models.FloatField(db_column='totalCotizacion')  # Field name made lowercase.
     descripcioncotizacion = models.TextField(db_column='descripcionCotizacion')  # Field name made lowercase.
     idcliente = models.ForeignKey(Clientes, models.DO_NOTHING, db_column='idCliente')  # Field name made lowercase.
