@@ -37,9 +37,9 @@ def userLogin(request):
             return redirect('homeEnvios')
         elif request.user.idrol.idrol == 2:
             # Obtener información del cliente
-            cliente = Clientes.objects.get(idCliente=request.user.id)
+            # cliente = Clientes.objects.get(numerodocumento=request.user.numerodocumento)
             # Redireccionar al cliente a una vista especial
-            return redirect('vista_cliente', idCliente=request.user.id)
+            return HttpResponse('Si sirveeee 1')
         elif request.user.idrol.idrol == 3:
             return redirect('homeTecnicosEnvios')
         else:
@@ -64,7 +64,7 @@ def userLogin(request):
                     return redirect('homeEnvios')
                 elif user.idrol.idrol == 2:
                     # Redireccionar al cliente a una vista especial
-                    return redirect('vista_cliente', idCliente=user.id)
+                    return HttpResponse('Si sirveeee')
                 elif user.idrol.idrol == 3:
                     return redirect('homeTecnicosEnvios')
                 else:
