@@ -8,8 +8,6 @@ from Account.models import EnviosClientes
 from Account.views import role_required
 # Create your views here.
 
-@login_required
-@role_required(1)
 def homeEnvios(request):
     search_query = request.GET.get('search', '')
 
@@ -93,6 +91,13 @@ def detallesView(request, idEnvio):
     detallesEnvio = DetalleEnviosVentas.objects.get(idenvio=idEnvio)
     return render(request, 'crudAdmin/Detalles.html', {'detallesEnvio': detallesEnvio})
 
+def enviosEntregados(request):
+    # Filtrar los envíos por estado "Entregado" 
+    envios = Envios.objects.filter(idestadoenvio=3)
+
+    return render(request, "crudAdmin/EnviosEntregados.html", {"envios": envios})
+
+
 #Views del tecnico
 
 @login_required
@@ -107,9 +112,22 @@ def homeEnviosTecnico(request):
 
     return render(request, "tecnico/IndexTecnico.html", {"envios": envios, "search_query": search_query})
 
+
+#Views cliente
+
 def enviosCliente(request, idCliente):
     # Filtrar los envíos del cliente utilizando el ID del cliente pasado en la URL
-    enviosCliente = EnviosClientes.objects.filter(idCliente=idCliente)
+    enviosCliente = EnviosClientes.objects.filter(idcliente=idCliente)
 
-    # Renderizar el template de envíos con los envíos del cliente
-    return render(request, 'usuarios/EnviosCliente.html', {'envios_cliente': enviosCliente})
+    # Excluir los envíos con estado "Entregado"
+    enviosCliente = enviosCliente.exclude(nombreestadoenvio="Entregado")
+
+    return render(request, 'usuarios/EnviosCliente.html', {'envios_cliente': enviosCliente, 'idCliente': idCliente})
+
+    
+def historialEnviosCliente(request, idCliente):
+    # Filtrar todos los envíos del cliente con estado "Entregado"
+    historialEnviosCliente = EnviosClientes.objects.filter(idcliente=idCliente, nombreestadoenvio="Entregado")
+
+    # Renderizar el template de historial de envíos con los envíos del cliente
+    return render(request, 'usuarios/HistorialEnviosCliente.html', {'historial_envios_cliente': historialEnviosCliente})

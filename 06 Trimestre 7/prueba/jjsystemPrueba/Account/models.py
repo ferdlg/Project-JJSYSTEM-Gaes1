@@ -502,15 +502,15 @@ class Ventas(models.Model):
         db_table = 'ventas'
 
 class EnviosClientes(models.Model):
-    idEnvio = models.IntegerField(primary_key=True)
-    direccionEnvio = models.CharField(max_length=100)
-    idTecnico = models.IntegerField()
-    idEstadoEnvio = models.IntegerField()
-    idCliente = models.IntegerField()
-    direccionCliente = models.CharField(max_length=100)
-    documentoCliente = models.IntegerField()
+    idenvio = models.IntegerField(primary_key=True)
+    direccionenvio = models.CharField(max_length=100)
+    idtecnico = models.IntegerField()
+    nombreestadoenvio = models.CharField(max_length=100)
+    idcliente = models.IntegerField()
+    direccioncliente = models.CharField(max_length=100)
+    documentocliente = models.IntegerField()
 
     class Meta:
         managed = False  
-        db_table = 'VistaEnviosClientes'
+        db_table = 'vistaenviosclientes'
 
