@@ -36,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for envio in envios_cliente %}
+                    {% for envio in historial_envios_cliente %}
                     <tr>
                         <td>{{ envio.idenvio }}</td>
                         <td>{{ envio.direccionenvio }}</td>
@@ -47,10 +47,5 @@
                 </tbody>
             </table>
         </section>
-        <div class="container">
-            <a href="{% url 'historial_envios_cliente' idCliente=idCliente %}">
-                <button type="button" class="btn btn-primary">Ver historial de envíos</button>
-            </a>
-        </div>       
     </div>
 {% endblock %}
