@@ -28,6 +28,7 @@
                     <th scope="col">Direccion</th>
                     <th scope="col">Contacto</th>
                     <th scope="col">Correo</th>
+                    <th scope="col">Estado Usuario</th>
                     <th></th>
                     <!-- <th></th> -->
                 </tr>
@@ -42,6 +43,7 @@
                     <td>{{cliente.direccioncliente}}</td>
                     <td>{{cliente.numerodocumento.numerocontacto}}</td>
                     <td>{{cliente.numerodocumento.email}}</td>
+                    <td>{{cliente.numerodocumento.idestadosusuarios.nombreestadousuario}}</td>
                     <td> 
                         <!-- Botón para abrir el modal -->
                         <button type="button" class="btn btn-primary btn-sw" data-bs-toggle="modal" data-bs-target="#modalActualizarDatos">Actualizar Datos</button>

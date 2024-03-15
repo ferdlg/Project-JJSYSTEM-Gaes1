@@ -6,7 +6,14 @@ from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 
 # Create your views here
 def home_pqrsf(request):
+    # Obtener los tipos de PQRSF para el filtro
+    tipos = Tipospqrsf.objects.all()
+
+    # Filtrar las PQRSF si se seleccionó un tipo específico
+    tipo_seleccionado = request.GET.get('tipopqrsf', '-1')
     pqrsf_list = Pqrsf.objects.all()
+    if tipo_seleccionado and tipo_seleccionado != '-1':
+        pqrsf_list = pqrsf_list.filter(idtipopqrsf=tipo_seleccionado)
 
     paginator = Paginator(pqrsf_list, 5)
     page_number = request.GET.get('page')
@@ -17,7 +24,7 @@ def home_pqrsf(request):
     except EmptyPage:
         pqrsf_item = paginator.page(paginator.num_pages)
     
-    return render(request, "pqrsf.html", {"pqrsf":pqrsf_item})
+    return render(request, "pqrsf.html", {"pqrsf": pqrsf_item, 'tipos': tipos})
 
     
 
