@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.utils.encoding import force_bytes
 from django.shortcuts import render, HttpResponse
 from .forms import LoginForm, RegisterForm
-from .models import Roles, Estadosusuarios, Usuarios
+from .models import Roles, Estadosusuarios, Usuarios, Clientes
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect
 from django.contrib.auth import login , logout 
@@ -36,7 +36,10 @@ def userLogin(request):
         if request.user.idrol.idrol == 1:
             return redirect('homeEnvios')
         elif request.user.idrol.idrol == 2:
-            return HttpResponse('Vista cliente')
+            # Obtener información del cliente
+            cliente = Clientes.objects.get(idCliente=request.user.id)
+            # Redireccionar al cliente a una vista especial
+            return redirect('vista_cliente', idCliente=request.user.id)
         elif request.user.idrol.idrol == 3:
             return redirect('homeTecnicosEnvios')
         else:
@@ -60,7 +63,8 @@ def userLogin(request):
                 if user.idrol.idrol == 1:
                     return redirect('homeEnvios')
                 elif user.idrol.idrol == 2:
-                    return HttpResponse('Vista cliente')
+                    # Redireccionar al cliente a una vista especial
+                    return redirect('vista_cliente', idCliente=user.id)
                 elif user.idrol.idrol == 3:
                     return redirect('homeTecnicosEnvios')
                 else:

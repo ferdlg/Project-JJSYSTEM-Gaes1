@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envíos del Cliente</title>
+</head>
+<body>
+    <h1>Envíos del Cliente</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID de Envío</th>
+                <th>Dirección de Envío</th>
+                <th>ID de Técnico</th>
+                <th>ID de Estado de Envío</th>
+                <th>ID de Cliente</th>
+                <th>Dirección del Cliente</th>
+                <th>Documento del Cliente</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for envio in envios_cliente %}
+                <tr>
+                    <td>{{ envio.idEnvio }}</td>
+                    <td>{{ envio.direccionEnvio }}</td>
+                    <td>{{ envio.idTecnico }}</td>
+                    <td>{{ envio.idEstadoEnvio }}</td>
+                    <td>{{ envio.idCliente }}</td>
+                    <td>{{ envio.direccionCliente }}</td>
+                    <td>{{ envio.documentoCliente }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

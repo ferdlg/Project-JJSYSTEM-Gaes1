@@ -4,6 +4,7 @@ from Account.models import Envios
 from Account.models import Estadosenvios
 from Account.models import Tecnicos
 from Account.models import DetalleEnviosVentas
+from Account.models import EnviosClientes
 from Account.views import role_required
 # Create your views here.
 
@@ -106,3 +107,9 @@ def homeEnviosTecnico(request):
 
     return render(request, "tecnico/IndexTecnico.html", {"envios": envios, "search_query": search_query})
 
+def enviosCliente(request, idCliente):
+    # Filtrar los envíos del cliente utilizando el ID del cliente pasado en la URL
+    enviosCliente = EnviosClientes.objects.filter(idCliente=idCliente)
+
+    # Renderizar el template de envíos con los envíos del cliente
+    return render(request, 'usuarios/EnviosCliente.html', {'envios_cliente': enviosCliente})
