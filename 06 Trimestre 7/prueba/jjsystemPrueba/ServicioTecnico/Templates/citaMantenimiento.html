@@ -1,127 +1,109 @@
 {% extends "menu.html" %}
-{% block titulo %} Citas | Mantenimiento {% endblock %}
-
+{% block titulo %} Citas | Analisis {% endblock %}
 {% block contenido %}
-<div class="content margin-top: 70px; margin-bottom: 70px;">
+
+<div class="content">
     <section class="available_prod">
         <div class="container">
             <div class="row">
                 <div class="allowed_prod">
-                    <h2 class="font-weight-bold text-center text-lg-left">Citas de Mantenimiento</h2>
+                    <h2 class="font-weight-bold text-center text-lg-left">Citas de mantenimiento</h2>
                 </div>
             </div>
         </div>
     </section>
     <section style="padding: 30px;">
+        <!-- Formulario de búsqueda -->
         <form class="form-inline position-relative my-2 d-inline-block">
             <input class="form-control mr-sm-2" type="search" placeholder="Buscar cita por id" aria-label="Search">
             <button class="btn btn-search position-absolute" type="submit"></button>
         </form>
     </section>
-    <section class="container-citas">
-        <table class="table">
-            <thead>
-                <tr>
-                <th scope="col">Cita </th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Direccion</th>
-                <th scope="col">Contacto</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Tecnico</th>
-                <th scope="col">Administrador</th>
-                <th scope="col">Cotizacion</th>
-                <th scope="col">Estado</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for cita in citas%}
-                <tr>
-                    <td>{{cita.idcita}}</td>
-                    <td>{{cita.fechacita}}</td>
-                    <td>{{cita.direccioncita}}</td>
-                    <td>{{cita.contactocliente}}</td>
-                    <td>{{cita.descripcioncita}}</td>
-                    <td>{{cita.idtecnico}}</td>
-                    <td>{{cita.idadministrador}}</td>
-                    <td>{{cita.idcotizacion}}</td>
-                    <td>{{cita.idestadocita}}</td>
-                    <td>
-                        <a href="{{cita.idcita}}" class="btn btn-primary btn-sw me-2"> Editar </a> 
-                    </td>
-                    <td>
-                        <a href="{{cita.idcita}}" class="btn btn-danger btn-sw"> Eliminar </a>                  
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            </table>
-        </section>
     <section>
-        <button type="button" class="btn btn-create btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">+ Crear cita</button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#agendar-cita">Agendar Cita</button>
+
+        <!-- Modal para Agendar Cita -->
+        <div class="modal fade" id="agendar-cita" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Cita</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black;">Agendar Cita</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        {% if form.errors %}
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <ul>
-                                {% for error in form.errors %}
-                                <li>{{ error }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        {% endif %}
-                        <form method="post" action="{% url 'crear_citas' %}">
+                        <form action="{% url 'crear_citas' %}" method="post">
                             {% csrf_token %}
-                            <div class="form-group">
-                                <label for="fechacita" class="col-form-label">Fecha:</label>
-                                <input type="date" class="form-control" name="fechacita" id="fechacita" value="{{ form.fechacita.value }}" required>
+                            <div class="mb-3">
+                                <label for="fechacita" class="form-label" style="color: black;">Fecha de la Cita:</label>
+                                <input type="date" class="form-control" id="fechacita" name="fechacita" required>
                             </div>
-                            <div class="form-group">
-                                <label for="direccioncita" class="col-form-label">Dirección:</label>
-                                <input type="text" class="form-control" name="direccioncita" id="direccioncita" value="{{ form.direccioncita.value }}" required>
+                            <div class="mb-3">
+                                <label for="direccioncita" class="form-label" style="color: black;">Dirección de la Cita:</label>
+                                <input type="text" class="form-control" id="direccioncita" name="direccioncita" required>
                             </div>
-                            <div class="form-group">
-                                <label for="contactocliente" class="col-form-label">Número de contacto del cliente:</label>
-                                <input type="number" class="form-control" name="contactocliente" id="contactocliente" value="{{ form.contactocliente.value }}" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="descripcioncita" class="col-form-label">Descripción:</label>
-                                <textarea class="form-control" name="descripcioncita" id="descripcioncita" required>{{ form.descripcioncita.value }}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="idtecnico" class="col-form-label">ID Tecnico:</label>
-                                <input type="number" class="form-control" name="idtecnico" id="idtecnico" value="{{ form.idtecnico.value }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="idadministrador" class="col-form-label">ID Administrador:</label>
-                                <input type="number" class="form-control" name="idadministrador" id="idadministrador" value="{{ form.idadministrador.value }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="idcotizacion" class="col-form-label">ID Cotizacion:</label>
-                                <input type="number" class="form-control" name="idcotizacion" id="idcotizacion" value="{{ form.idcotizacion.value }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="idestadocita" class="col-form-label">Estado cita:</label>
-                                <input type="number" class="form-control" name="idestadocita" id="idestadocita" value="{{ form.idestadocita.value }}">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-cancelar btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-create btn-success">Aceptar</button>
-                            </div>
+                            
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Agendar</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        
+    <section class="s-data-table">
+        <!-- Tabla de citas -->
+        <table class="table data-table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Cita</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Contacto</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Técnico</th>
+                    <th scope="col">Administrador</th>
+                    <th scope="col">Cotización</th>
+                    <th scope="col">Estado</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cita in citas_page %}
+                <tr>
+                    <td>{{ cita.idcita }}</td>
+                    <td>{{ cita.fechacita }}</td>
+                    <td>{{ cita.direccioncita }}</td>
+                    <td>{{ cita.contactocliente }}</td>
+                    <td>{{ cita.descripcioncita }}</td>
+                    <td>{{ cita.idtecnico.numerodocumento.nombre }}</td>
+                    <td>{{ cita.idadministrador }}</td>
+                    <td>{{ cita.idcotizacion }}</td>
+                    <td>{{ cita.idestadocita }}</td>
+                    <td>
+                        <a href="{{ cita.idcita }}" class="btn btn-primary btn-sw me-2">Editar</a>
+                    </td>
+                    <td>
+                        <a href="{{ cita.idcita }}" class="btn btn-danger btn-sw">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Paginación -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if citas_page.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ citas_page.previous_page_number }}">&laquo;</a></li>
+                {% endif %}
+                {% for i in citas_page.paginator.page_range %}
+                <li class="page-item {% if citas_page.number == i %}active{% endif %}"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endfor %}
+                {% if citas_page.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ citas_page.next_page_number }}">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
     </section>
 </div>
 {% endblock %}

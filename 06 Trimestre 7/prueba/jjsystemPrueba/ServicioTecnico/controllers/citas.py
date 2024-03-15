@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from Account.models import Citas , Servicios, Cotizaciones, Categoriasservicios, Tecnicos, Administrador , Estadoscitas
 from .serializers import CitasSerializer
-from rest_framework.decorators import api_view
+from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
+
 
 
 class citasCRUD(viewsets.ModelViewSet):
@@ -11,30 +12,64 @@ class citasCRUD(viewsets.ModelViewSet):
 
     #Metodo para obtener solo las citas de analisis
     def cita_analisis(self, request):
-        #Obtener datos de la cita
+        # Obtener datos de la cita
         citas_queryset = Citas.objects.filter(idcotizacion__cotizacionesservicios__idservicio__idcategoriaservicio=3)
-        citas_serializer = CitasSerializer(citas_queryset, many = True)
+        paginator = Paginator(citas_queryset, 5)  # Mostrar 5 citas por página
+
+        page_number = request.GET.get('page')
+
+        try:
+            citas_page = paginator.page(page_number)
+        except PageNotAnInteger:
+            citas_page = paginator.page(1)
+        except EmptyPage:
+            citas_page = paginator.page(paginator.num_pages)
+
+        # Obtener los datos de la página de citas
+        citas_serializer = CitasSerializer(citas_page, many=True)
         citas_data = citas_serializer.data
-        print(citas_data)
-        return render(request, 'citaAnalisis.html', {'citas': citas_data})
-    
+
+        # Devolver la página renderizada con las citas y la paginación
+        return render(request, 'citaAnalisis.html', {'citas': citas_data, 'citas_page': citas_page})
     #Metodo para obtener solo las citas de instalacion
     def cita_instalacion(self, request):
-        #Obtener datos de la cita
-        citas_queryset = Citas.objects.filter(idcotizacion__cotizacionesservicios__idservicio__idcategoriaservicio = 2)
-        citas_serializer = CitasSerializer(citas_queryset, many = True)
+        # Obtener datos de la cita
+        citas_queryset = Citas.objects.filter(idcotizacion__cotizacionesservicios__idservicio__idcategoriaservicio=2)
+        paginator = Paginator(citas_queryset, 5)  # Mostrar 5 citas de instalación por página
+
+        page_number = request.GET.get('page')
+
+        try:
+            citas_page = paginator.page(page_number)
+        except PageNotAnInteger:
+            citas_page = paginator.page(1)
+        except EmptyPage:
+            citas_page = paginator.page(paginator.num_pages)
+
+        # Obtener los datos de la página de citas
+        citas_serializer = CitasSerializer(citas_page, many=True)
         citas_data = citas_serializer.data
-        print(citas_data)
-        return render(request, 'citaInstalacion.html', {'citas': citas_data})
-        
-    #Metodo para obtener solo las citas de mantenimiento
-    def cita_mantenimiento(self, request):
-        #Obtener datos de la cita
-        citas_queryset = Citas.objects.filter(idcotizacion__cotizacionesservicios__idservicio__idcategoriaservicio = 4)
-        citas_serializer = CitasSerializer(citas_queryset, many = True)
-        citas_data = citas_serializer.data
-        return render(request, 'citaMantenimiento.html', {'citas': citas_data})
+
+        # Devolver la página renderizada con las citas y la paginación
+        return render(request, 'citaInstalacion.html', {'citas': citas_data, 'citas_page': citas_page})
     
+    def cita_mantenimiento(self, request):
+        citas_queryset = Citas.objects.filter(idcotizacion__cotizacionesservicios__idservicio__idcategoriaservicio=4)
+        paginator = Paginator(citas_queryset, 5)  # Mostrar 5 citas de mantenimiento por página
+
+        page_number = request.GET.get('page')
+
+        try:
+            citas_page = paginator.page(page_number)
+        except PageNotAnInteger:
+            citas_page = paginator.page(1)
+        except EmptyPage:
+            citas_page = paginator.page(paginator.num_pages)
+
+        citas_serializer = CitasSerializer(citas_page, many=True)
+        citas_data = citas_serializer.data
+
+        return render(request, 'citaMantenimiento.html', {'citas': citas_data, 'citas_page': citas_page})
     
     def crear_citas(self, request):
         if request.method == 'POST':

@@ -17,89 +17,67 @@
             <button class="btn btn-search position-absolute" type="submit"></button>
         </form>
     </section>
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#agregar-cotizacion">Agregar cotizacion</button>
-    <!-- Modal de agregar  -->
-    <div class="modal fade" id="agregar-cotizacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black;">Agregar Cotizacion</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{% url 'crear_cotizaciones' %}" method="post">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="fechaCotizacion" class="form-label" style="color: black;">Fecha:</label>
-                            <input type="datetime-local" class="form-control" id="fechaCotizacion" name="fechaCotizacion" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="totalCotizacion" class="form-label" style="color: black;">Total:</label>
-                            <input type="number" class="form-control" id="totalCotizacion" name="totalCotizacion" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="descripcionCotizacion" class="form-label" style="color: black;">Descripcion:</label>
-                            <input type="text" class="form-control" id="descripcionCotizacion" name="descripcionCotizacion" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="idCliente" class="form-label" style="color: black;">Cliente:</label>
-                            <select class="form-select" id="idCliente" name="idCliente" required>
-                                <option value="">Seleccionar cliente...</option>
-                                {% for cotizacion in cotizaciones %}
-                                    <option value="{{ cliente.idcliente }}">{{ cliente.idcliente.numerodocumento.nombre }} {{ cliente.idcliente.numerodocumento.apellido }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="idProducto" class="form-label" style="color: black;">Producto:</label>
-                            <select class="form-select" id="idProducto" name="idProducto" required>
-                                <option value="">Seleccionar producto...</option>
-                                {% for cotizacion in cotizaciones %}
-                                    <option value="{{ cotizacion.idproducto.id }}">{{ cotizacion.idproducto.nombreproducto }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="idServicio" class="form-label" style="color: black;">Servicio:</label>
-                            <select class="form-select" id="idServicio" name="idServicio" required>
-                                <option value="">Seleccionar servicio...</option>
-                                {% for cotizacion in cotizaciones %}
-                                    <option value="{{ cotizacion.idservicio.id }}">{{ cotizacion.idservicio.nombreservicio }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="idEstadoCotizacion" class="form-label" style="color: black;">Estado:</label>
-                            <select class="form-select" id="idEstadoCotizacion" name="idEstadoCotizacion" required>
-                                <option value="">Seleccionar estado...</option>
-                                {% for cotizacion in cotizaciones %}
-                                    <option value="{{ cotizacion.idestadocotizacion.id }}">{{ cotizacion.idestadocotizacion.nombreestadocotizacion }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        
-                    
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    </form>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#agregar-cotizacion">Agregar cotización</button>
+
+        <!-- Modal de agregar cotización -->
+        <div class="modal fade" id="agregar-cotizacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black;">Agregar Cotización</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{% url 'crear_cotizaciones' %}" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="totalCotizacion" class="form-label" style="color: black;">Total:</label>
+                                <input type="number" class="form-control" id="totalCotizacion" name="totalCotizacion" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="descripcionCotizacion" class="form-label" style="color: black;">Descripción:</label>
+                                <input type="text" class="form-control" id="descripcionCotizacion" name="descripcionCotizacion" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cliente" class="form-label" style="color: black;">Cliente:</label>
+                                <select class="form-select" id="cliente" name="cliente" required>
+                                    <option value="">Seleccionar cliente:</option>
+                                    {% for cliente in clientes %}
+                                    <option value="{{ cliente.idcliente }}">{{ cliente.numerodocumento.nombre }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="estado" class="form-label" style="color: black;">Estado:</label>
+                                <div>
+                                    <select class="form-select" id="estado" name="estado" required>
+                                        <option value="">Seleccionar estado:</option>
+                                        {% for estado in estados %}
+                                        <option value="{{ estado.idestadocotizacion }}">{{ estado.nombreestadocotizacion }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
         <section class="s-data-table">
         <table class="table data-table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Total</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">Num. Documento</th>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Servicio</th>
                     <th scope="col">Estado</th>
-                    <th></th>
+                    <th scope="col">Descargar</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -113,19 +91,17 @@
                     <td>{{cotizacion.totalcotizacion}}</td>
                     <td>{{cotizacion.idcliente.numerodocumento.nombre}} {{cotizacion.idcliente.numerodocumento.apellido}}</td>
                     <td>{{cotizacion.idcliente.numerodocumento.numerodocumento}}</td>
-                    <td>{{cotizacion.idproducto.nombreproducto}}</td>
-                    <td>{{cotizacion.idservicio.nombreservicio}}</td>
                     <td>{{cotizacion.idestadocotizacion.nombreestadocotizacion}}</td>
+                    <td>
+                        <button class="btn btn-outline-dark text-dark" style="background-color: transparent; border-color: black;">
+                            <i class="bi bi-download text-dark"></i> PDF
+                        </button>
+                    </td>
                     <td> 
                         <a href="#" class="btn btn-primary btn-sw"> Editar </a>
                     </td>
                     <td>
                         <a href="#" class="btn btn-danger btn-sw"> eliminar </a>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-dark text-dark" style="background-color: transparent; border-color: black;">
-                            <i class="bi bi-download text-dark"></i> PDF
-                        </button>
                     </td>
                 </tr>
                 {% endfor %}

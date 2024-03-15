@@ -42,4 +42,7 @@ class EstadoscotizacionesSerializer(serializers.ModelSerializer):
         model = Estadoscotizaciones
         fields = '__all__'
 
-
+class ClientesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Clientes
+        fields = '__all__'
