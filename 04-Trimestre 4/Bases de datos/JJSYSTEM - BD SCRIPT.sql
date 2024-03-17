@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS Usuarios(
 
 CREATE TABLE IF NOT EXISTS Clientes(
     idCliente INT NOT NULL AUTO_INCREMENT,
-    direccionCliente VARCHAR(50) NOT NULL,
+    direccionCliente VARCHAR(50)  NULL,
     numeroDocumento BIGINT NOT NULL,
     PRIMARY KEY (idCliente),
     FOREIGN KEY (numeroDocumento) REFERENCES Usuarios (numeroDocumento)
