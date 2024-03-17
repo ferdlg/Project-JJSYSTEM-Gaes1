@@ -8,7 +8,7 @@ from .controllers.clientes import clientesCRUD
 from .controllers.permisos import permisosCRUD
 from .controllers.productos import productosCRUD , home_productos , createProductoView, editarProducto, eliminarProducto
 from .controllers.ventas import ventasCRUD, home_ventas,createVenta, editVenta, deleteVenta
-from .controllers.proveedoresproductos import proveedoresCRUD
+from .controllers.proveedoresproductos import proveedoresCRUD, home_proveedorProductos, createProveedorProductoView, editarProveedorProductoView, eliminarProveedorProductoView
 from .controllers.rol_has_permisos import rol_has_permisosCRUD
 from .controllers.roles import rolesCRUD
 from .controllers.servicios import serviciosCRUD, servicios, servicios_landing, home_servicios, createServiciosView, editarServicio, eliminarServicio
@@ -63,6 +63,9 @@ urlpatterns=[
     path('agregar_elemento/<str:tipo_elemento>/<int:id_elemento>/', CotizacionesCRUD.as_view({'post': 'agregar_elemento','get': 'agregar_elemento'}), name='agregar_elemento'),
     path('quitar_elemento/<tipo_elemento>/<int:id_elemento>/', CotizacionesCRUD.as_view({'post': 'quitar_elemento','get': 'quitar_elemento'}), name='quitar_elemento'),
 
-
+    path('proveedores/', home_proveedorProductos, name='proveedorProductos'),
+    path('crearProveedor/', createProveedorProductoView, name='crearProveedor'),
+    path('editarProveedor/<int:idProveedorProducto>/', editarProveedorProductoView, name='editarProveedor'),
+    path('eliminarProveedor/<int:idProveedorProducto>/', eliminarProveedorProductoView, name='eliminarProveedor'),
 
 ]
