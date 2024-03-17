@@ -6,6 +6,9 @@ from Account.models import Tecnicos
 from Account.models import DetalleEnviosVentas
 from Account.models import EnviosClientes
 from Account.views import role_required
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 # Create your views here.
 
 def homeEnvios(request):
@@ -18,8 +21,8 @@ def homeEnvios(request):
 
     return render(request, "crudAdmin/Index.html", {"envios": envios, "search_query": search_query})
 
-@login_required
-@role_required(1)
+#@login_required
+#@role_required(1)
 def createEnvioView(request):
     if request.method == 'POST':
         direccion = request.POST.get('direccion')
@@ -53,8 +56,8 @@ def createEnvioView(request):
     estados = Estadosenvios.objects.all()
     return render(request, "crudAdmin/Create.html", {"estados": estados})
 
-@login_required
-@role_required(1)
+#@login_required
+#@role_required(1)
 def editarEnvio(request, idEnvio):
     envio = Envios.objects.get(idenvio=idEnvio)
     estados = Estadosenvios.objects.all()
@@ -79,8 +82,8 @@ def editarEnvio(request, idEnvio):
 
     return render(request, "crudAdmin/Editar.html", {"envio": envio, "estados": estados})
 
-@login_required
-@role_required(1)
+#@login_required
+#@role_required(1)
 def eliminarEnvio(request, idEnvio):
     envio = Envios.objects.get(idenvio = idEnvio)
     envio.delete()
@@ -100,8 +103,8 @@ def enviosEntregados(request):
 
 #Views del tecnico
 
-@login_required
-@role_required(1)
+#@login_required
+#@role_required(1)
 def homeEnviosTecnico(request):
     search_query = request.GET.get('search', '')
 
@@ -131,3 +134,22 @@ def historialEnviosCliente(request, idCliente):
 
     # Renderizar el template de historial de envíos con los envíos del cliente
     return render(request, 'usuarios/HistorialEnviosCliente.html', {'historial_envios_cliente': historialEnviosCliente})
+
+#PDF
+
+# views.py
+def generar_pdf(request, templateName):
+    # Obtener los datos de los envíos que deseas mostrar en la tabla de contenido
+    envios = Envios.objects.all()  # Obtén todos los envíos, ajusta según tu lógica
+    # Renderizar solo la tabla de contenido de la plantilla
+    context = {'envios': envios}  # Pasar los datos de los envíos al contexto
+    html_template = get_template(f'crudAdmin/{templateName}') 
+    html_content = html_template.render(context)
+    # Crear un objeto PDF
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{templateName}.pdf"'
+    # Convertir HTML a PDF
+    pisa.CreatePDF(html_content, dest=response)
+    return response
+
+

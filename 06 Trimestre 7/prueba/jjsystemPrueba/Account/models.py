@@ -182,10 +182,11 @@ class DetalleEnviosVentas(models.Model):
     tecnicoasignado = models.IntegerField(blank=True, null=True)
     numerodocumento = models.CharField(max_length=255, blank=True, null=True)
     fechaventa = models.DateField(blank=True, null=True)
+    idventa = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'detalle_envios_ventas'
+        db_table = 'detalle_envios_y_ventas'
 
 
 class Detallesactividadcronograma(models.Model):

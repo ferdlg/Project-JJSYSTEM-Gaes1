@@ -935,6 +935,7 @@ VALUES
         tecnicos.idTecnico AS tecnicoAsignado,
         tecnicos.numeroDocumento,
         ventas.fechaVenta
+        ventas.idVenta
     FROM
         envios
         JOIN ventas ON envios.idEnvio = ventas.idEnvio
