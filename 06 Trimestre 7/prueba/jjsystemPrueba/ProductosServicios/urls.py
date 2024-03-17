@@ -12,6 +12,7 @@ from .controllers.proveedoresproductos import proveedoresCRUD
 from .controllers.rol_has_permisos import rol_has_permisosCRUD
 from .controllers.roles import rolesCRUD
 from .controllers.servicios import serviciosCRUD, servicios, servicios_landing, home_servicios, createServiciosView, editarServicio, eliminarServicio
+from .controllers.cotizaciones import CotizacionesCRUD
 
 router = DefaultRouter()
 router.register(r'categoriasproductos', categoriaproductosCRUD)
@@ -52,6 +53,13 @@ urlpatterns=[
     path('categoriaServicio/', home_categoriaServicios, name = 'categoriaServicios'),
     path('createCategoriaServicio/', createCategoriaServicioView, name="createCategoriaServicio"),
     path('editarCategoriaServicio/<idCategoriaServicio>', editarCategoriaServicioView, name='editarCategoriaServicio'),
-    path('eliminarCategoriaServicio/<idCategoriaServicio>', eliminarCategoriaServicioView, name = 'eliminarCategoriaServicio')
+    path('eliminarCategoriaServicio/<idCategoriaServicio>', eliminarCategoriaServicioView, name = 'eliminarCategoriaServicio'),
+
+    path('cotizacion/', CotizacionesCRUD.as_view({'post':'crear_cotizacion', 'get':'crear_cotizacion'}), name='crear_cotizacion'),
+    path('verCotizacion/<idcotizacion>', CotizacionesCRUD.as_view({'post':'mostrar_cotizacion', 'get':'mostrar_cotizacion'}), name='cotizacion'),
+    path('agregar_elemento/<str:tipo_elemento>/<int:id_elemento>/', CotizacionesCRUD.as_view({'post': 'agregar_elemento','get': 'agregar_elemento'}), name='agregar_elemento'),
+    path('quitar_elemento/<tipo_elemento>/<int:id_elemento>/', CotizacionesCRUD.as_view({'post': 'quitar_elemento','get': 'quitar_elemento'}), name='quitar_elemento'),
+
+
 
 ]
