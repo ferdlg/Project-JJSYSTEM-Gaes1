@@ -1110,3 +1110,19 @@ BEGIN
 	SELECT NEW.idPQRSF, NEW.idTipoPQRSF, NEW.idEstadoPQRSF, NOW();
 END; //
 DELIMITER ;
+
+use jjsystem_db;
+
+DELIMITER //
+CREATE TRIGGER crear_cliente_desde_usuario
+AFTER INSERT ON usuarios
+FOR EACH ROW
+BEGIN
+    IF NEW.idrol = 2 THEN
+        -- Insertar el cliente con la dirección fija para usuarios con idrol = 2
+        INSERT INTO clientes (direccioncliente, numerodocumento) 
+        VALUES ('Dirección por defecto', NEW.numerodocumento);
+    END IF;
+END;
+//
+DELIMITER ;
