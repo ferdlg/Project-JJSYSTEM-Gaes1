@@ -388,6 +388,8 @@ class Productos(models.Model):
     idadministrador = models.ForeignKey(Administrador, models.DO_NOTHING, db_column='idAdministrador', blank=True, null=True)  # Field name made lowercase.
     idcategoriaproducto = models.ForeignKey(Categoriasproductos, models.DO_NOTHING, db_column='idCategoriaProducto', blank=True, null=True)  # Field name made lowercase.
     idproveedorproducto = models.ForeignKey('Proveedoresproductos', models.DO_NOTHING, db_column='idProveedorProducto', blank=True, null=True)  # Field name made lowercase.
+    imagen = models.BinaryField(blank=True, null=True)
+
 
     class Meta:
         managed = False
@@ -481,6 +483,9 @@ class Usuarios(models.Model):
     def is_authenticated(self):
         return True
     
+    def is_active(self):
+        return True
+
     @classmethod
     def get_email_field_name(cls):
         return 'email'

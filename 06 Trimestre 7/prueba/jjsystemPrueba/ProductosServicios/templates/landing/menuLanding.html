@@ -14,9 +14,17 @@
 <body>
     <nav class="navbar-landing">
         <div class="container-fluid">
+            {% if user.is_authenticated %}
+            <a class="navbar-brand" href="{% url 'productos' %}" style="text-decoration: none; color: #263465;">JJSYSTEM</a>
+            {% else %}
             <a class="navbar-brand" href="{% url 'landing' %}" style="text-decoration: none; color: #263465;">JJSYSTEM</a>
+            {% endif %} 
+            {% if user.is_authenticated %}
+                <h6>{{user.nombre}} {{user.apellido}}</h6>
+            {% else %} 
             <button ><a href="{% url 'login' %}">Iniciar sesión </a></button>
             <button ><a href="{% url 'register' %}">Registrarse</a></button>
+            {% endif %} 
             <a href="#"><img class="user_img" src="{% static 'images/landing/fotoperfil.png' %}" alt="Foto de perfil"></a>
         </div>
     </nav>
@@ -31,35 +39,46 @@
             </form>            
             <button class="btn btn-info"><a class="navbar-brand" href="{% url 'productos' %}">Productos</a></button>
             <button class="btn btn-info"><a class="navbar-brand" href="{% url 'servicios' %}">Servicios</a></button>
-            <button class="btn btn-info"><a class="navbar-brand" href="#about_us">Acerca de nosotros</a></button>
+            {% if user.is_authenticated %}
+            <button class="btn btn-info"><a class="navbar-brand" href="#">Mis compras</a></button>
+            {% else %}
+            <!-- Abre un modal si el usuario no está autenticado -->
+            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Acerca de nosotros</button>
+            {% endif %} 
             <button class="btn btn-info"><a class="navbar-brand" href="#">PQRSF</a></button>
-            <a class="navbar-brand" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
-                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4z"/>
-              </svg>
-            </a>
-            <a></a>
+            {% if user.is_authenticated %}
+                <a class="navbar-brand" href="{% url 'crear_cotizacion' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4z"/>
+                    </svg>
+                </a>
+            {% else %}
+                <!-- Abre un modal si el usuario no está autenticado -->
+                <a class="navbar-brand" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4z"/>
+                    </svg>
+                </a>
+            {% endif %}
         </div>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Mi Cotizacion</h5>
-            </div>
-            <div class="offcanvas-body">
-                <div>
-                    {% for producto in cotizacion %}
-                    {% endfor %}
+    </nav>
+
+    <!-- Modal para iniciar sesión -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: black;">Debes iniciar sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="color: black;">
+                    <p>Por favor, inicia sesión para acceder a esta función.</p>
                 </div>
             </div>
-            <div class="offcanvas-footer" style="justify-items: space-between; margin-bottom: 2px;">
-                <button type="button" class="btn" data-bs-dismiss="offcanvas">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
-                    </svg> Seguir cotizando
-                </button>
-                <button type="button" class="btn btn-success" style="margin-left: 70px;">Cotizar</button>
-            </div>            
-    </nav>
-        {% block contenido %}
-        {% endblock %} 
+        </div>
+    </div>
+    {% block contenido %}
+    {% endblock %} 
     <footer class="footer mt-auto py-3 ">
         <div class="container text-center">
             <span class="text-muted">© 2024 JJSystem Project | Todos los derechos reservados.</span>

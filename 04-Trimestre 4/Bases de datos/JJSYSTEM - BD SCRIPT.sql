@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Usuarios(
     nombre VARCHAR(50) DEFAULT NULL,
     apellido VARCHAR(50) DEFAULT NULL,
     email VARCHAR(120) DEFAULT NULL,
-    password VARCHAR(100) DEFAULT NULL,
+    password VARCHAR(200) DEFAULT NULL,
     numeroContacto FLOAT DEFAULT NULL,
     idRol INT NOT NULL,
     idEstadosUsuarios INT NOT NULL,

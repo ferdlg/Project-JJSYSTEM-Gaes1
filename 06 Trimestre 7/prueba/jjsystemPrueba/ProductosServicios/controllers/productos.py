@@ -4,18 +4,17 @@ from Account.models import *
 from .serializers import ProductosSerializer
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 
-
 '''
     Importamos la biblioteca viewsets 
     de Django Rest Framework la cual nos proporciona las
     operaciones de un crud 
 '''
 
-#definimos la clase 
+# Definimos la clase 
 class productosCRUD(viewsets.ModelViewSet):
-    # usamos queryset, que traera todos los objetos de la clase
+    # Usamos queryset, que traerá todos los objetos de la clase
     queryset = Productos.objects.all()
-    # usamos serializer class para poder ver los objetos que se traen 
+    # Usamos serializer class para poder ver los objetos que se traen 
     serializer_class = ProductosSerializer
 
 # Productos en dashboard admin
@@ -35,7 +34,10 @@ def home_productos(request):
 
     return render(request, "crudAdmin/IndexProductos.html", {"productos": productos})
 
-# crud de productos
+# CRUD de productos
+import os
+from django.conf import settings
+
 def createProductoView(request):
     if request.method == 'POST':
         nombreproducto = request.POST.get('nombre')
@@ -44,22 +46,28 @@ def createProductoView(request):
         cantidad = request.POST.get('cantidad')
         idcategoriaproducto = request.POST.get('categoria')
         idproveedorproducto = request.POST.get('proveedor')
-            
-        # Obtener la instancia de categorias
-        categoria = Categoriasproductos.objects.get(idcategoriaproducto=idcategoriaproducto)
+        imagen = request.FILES.get('imagen')
 
-        # Obtener la instancia de proveedor
+        categoria = Categoriasproductos.objects.get(idcategoriaproducto=idcategoriaproducto)
         proveedor = Proveedoresproductos.objects.get(idproveedorproducto=idproveedorproducto)
 
-        # Crear la instancia de producto
+        if imagen:
+            # Ruta de destino para guardar la imagen en la carpeta "productos" dentro de "static"
+            ruta_imagen = os.path.join(settings.STATIC_ROOT, 'productos', imagen.name)
+            with open(ruta_imagen, 'wb+') as destination:
+                for chunk in imagen.chunks():
+                    destination.write(chunk)
+
         producto = Productos.objects.create(
-                nombreproducto = nombreproducto,
-                descripcionproducto = descripcionproducto,
-                precioproducto = precioproducto,
-                cantidad = cantidad,
-                idcategoriaproducto = categoria,
-                idproveedorproducto = proveedor
-            )
+            nombreproducto=nombreproducto,
+            descripcionproducto=descripcionproducto,
+            precioproducto=precioproducto,
+            cantidad=cantidad,
+            idcategoriaproducto=categoria,
+            idproveedorproducto=proveedor,
+            imagen=ruta_imagen
+        )
+
         return redirect('homeProductos')
 
     categorias = Categoriasproductos.objects.all()
@@ -79,20 +87,22 @@ def editarProducto(request, idProducto):
         cantidad = request.POST.get('cantidad')
         idcategoriaproducto = request.POST.get('categoria')
         idproveedorproducto = request.POST.get('proveedor')
+        imagen = request.FILES.get('imagen')
 
-        # Obtener la instancia de categorias
+        # Obtener la instancia de categorías
         categoria = Categoriasproductos.objects.get(idcategoriaproducto=idcategoriaproducto)
 
         # Obtener la instancia de proveedor
         proveedor = Proveedoresproductos.objects.get(idproveedorproducto=idproveedorproducto)
 
-        # Actualizar los campos del objeto envio
+        # Actualizar los campos del objeto producto
         producto.nombreproducto = nombreproducto
         producto.descripcionproducto = descripcionproducto
         producto.precioproducto = precioproducto
         producto.cantidad = cantidad
         producto.idcategoriaproducto = categoria
         producto.idproveedorproducto = proveedor
+        producto.imagen = imagen
         producto.save()
 
         return redirect('homeProductos')
@@ -100,7 +110,7 @@ def editarProducto(request, idProducto):
     return render(request, "crudAdmin/EditarProducto.html", {"producto": producto, "categorias": categorias, "proveedores": proveedores})
 
 def eliminarProducto(request, idProducto):
-    producto = Productos.objects.get(idproducto = idProducto)
+    producto = Productos.objects.get(idproducto=idProducto)
     producto.delete()
 
     return redirect('homeProductos')
