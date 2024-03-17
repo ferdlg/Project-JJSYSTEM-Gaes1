@@ -25,6 +25,7 @@ urlpatterns=[
 
     path('clientes/<int:idCliente>/', views.enviosCliente, name='vista_cliente'),
     path('historialEnvios/<int:idCliente>/', views.historialEnviosCliente, name='historial_envios_cliente'),
+    path('generar_pdf/<str:templateName>/', views.generar_pdf, name='generar_pdf'),
 
 
 ]
