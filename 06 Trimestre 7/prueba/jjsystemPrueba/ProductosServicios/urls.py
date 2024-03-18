@@ -60,7 +60,8 @@ urlpatterns=[
     path('cotizaciones/asignar_productos_servicios/<int:id_cotizacion>/', CotizacionesCRUD.as_view({'post': 'asignar_productos_servicios', 'get': 'asignar_productos_servicios'}), name='asignar_productos_servicios'),
     path('cotizaciones/ver_cotizacion_cliente/<int:id_cotizacion>/',vista_detalle_cotizacion, name='ver_cotizacion_cliente'),
 
-    path('mis_compras/historial/',ventasCRUD.as_view({'get':'historial_compras'}), name='historial_compras')
+    path('mis_compras/historial/',ventasCRUD.as_view({'get':'historial_compras'}), name='historial_compras'),
+    path('mi_perfil/', clientesCRUD.as_view({'get':'actualizar_mis_datos','post':'actualizar_mis_datos'}), name='actualizar_mis_datos')
 
 
 ]
