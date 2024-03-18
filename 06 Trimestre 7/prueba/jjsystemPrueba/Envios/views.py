@@ -137,8 +137,8 @@ def historialEnviosCliente(request, idCliente):
     # Filtrar todos los envíos del cliente con estado "Entregado"
     historialEnviosCliente = EnviosClientes.objects.filter(idcliente=idCliente, nombreestadoenvio="Entregado")
 
-    # Renderizar el template de historial de envíos con los envíos del cliente
-    return render(request, 'usuarios/HistorialEnviosCliente.html', {'historial_envios_cliente': historialEnviosCliente})
+    # Incluir 'idCliente' en el contexto
+    return render(request, 'usuarios/HistorialEnviosCliente.html', {'historial_envios_cliente': historialEnviosCliente, 'idCliente': idCliente})
 
 #PDF
 
