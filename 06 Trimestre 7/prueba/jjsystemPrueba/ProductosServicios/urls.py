@@ -12,7 +12,7 @@ from .controllers.proveedoresproductos import proveedoresCRUD
 from .controllers.rol_has_permisos import rol_has_permisosCRUD
 from .controllers.roles import rolesCRUD
 from .controllers.servicios import serviciosCRUD, servicios, servicios_landing, home_servicios, createServiciosView, editarServicio, eliminarServicio
-from .controllers.cotizaciones import CotizacionesCRUD
+from .controllers.cotizaciones import CotizacionesCRUD, obtener_detalles_cotizacion, vista_detalle_cotizacion
 
 router = DefaultRouter()
 router.register(r'categoriasproductos', categoriaproductosCRUD)
@@ -55,10 +55,10 @@ urlpatterns=[
     path('editarCategoriaServicio/<idCategoriaServicio>', editarCategoriaServicioView, name='editarCategoriaServicio'),
     path('eliminarCategoriaServicio/<idCategoriaServicio>', eliminarCategoriaServicioView, name = 'eliminarCategoriaServicio'),
 
-    path('cotizacion/', CotizacionesCRUD.as_view({'post':'crear_cotizacion', 'get':'crear_cotizacion'}), name='crear_cotizacion'),
-    path('verCotizacion/<idcotizacion>', CotizacionesCRUD.as_view({'post':'mostrar_cotizacion', 'get':'mostrar_cotizacion'}), name='cotizacion'),
-    path('agregar_elemento/<str:tipo_elemento>/<int:id_elemento>/', CotizacionesCRUD.as_view({'post': 'agregar_elemento','get': 'agregar_elemento'}), name='agregar_elemento'),
-    path('quitar_elemento/<tipo_elemento>/<int:id_elemento>/', CotizacionesCRUD.as_view({'post': 'quitar_elemento','get': 'quitar_elemento'}), name='quitar_elemento'),
+    path('cotizaciones/', CotizacionesCRUD.as_view({'get': 'ir_a_cotizaciones'}), name='ir_a_cotizaciones'),
+    path('cotizaciones/crear_cotizacion/', CotizacionesCRUD.as_view({'post': 'crear_cotizacion'}), name='crear_cotizacion'),
+    path('cotizaciones/asignar_productos_servicios/<int:id_cotizacion>/', CotizacionesCRUD.as_view({'post': 'asignar_productos_servicios', 'get': 'asignar_productos_servicios'}), name='asignar_productos_servicios'),
+    path('cotizaciones/ver_cotizacion_cliente/<int:id_cotizacion>/',vista_detalle_cotizacion, name='ver_cotizacion_cliente')
 
 
 

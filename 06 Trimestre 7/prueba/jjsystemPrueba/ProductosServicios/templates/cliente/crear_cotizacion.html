@@ -6,105 +6,26 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 mb-4">
-                <div class="card text-center">
+                <div class="card">
                     <div class="card-header">
-                        Resumen
+                        Crear Cotización
                     </div>
                     <div class="card-body">
-                            <ul class="list-group">
-                                {% for producto in productos %}
-                                <li class="list-group-item" style="display: flex;  ">
-                                    <span style="flex: 1;">{{ producto.nombre }}</span> 
-                                    <span style="flex: 1;">{{ cantidad }}</span> 
-                                    <a type="button" href="{% url 'quitar_elemento' tipo_elemento='producto' id_elemento=producto.id %}" class="btn btn-danger btn-quitar" style="margin-left: 10px;">Quitar</a>
-                                </li>                                
-                                {% endfor %}
-                            </ul>
-                            <ul class="list-group">
-                                {% for servicio in servicios %}
-                                <li class="list-group-item" style="display: flex;">
-                                    <span style="flex: 1;">{{ servicio.nombre }}</span> 
-                                    <a type="button" href="{% url 'quitar_elemento' tipo_elemento='servicio' id_elemento=servicio.id %}" class="btn btn-danger btn-quitar" style="margin-left: 10px;">Quitar</a>
-                                </li>                                
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <div class="card-footer text-body-secondary"></div>
+                        <form method="post" action="{% url 'crear_cotizacion' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="cliente">Cliente:</label>
+                                <input type="number" class="form-control" id="cliente" name="cliente" readonly value="{{request.user.numerodocumento}}" required>
+                                <input type="text" class="form-control" id="nombres" name="nombres" readonly style="margin-top: 5px;" placeholder="{{ request.user.nombre }} {{ request.user.apellido }}" required>
+                                <label for="descripcioncotizacion">Descripción:</label>
+                                <textarea class="form-control" id="descripcioncotizacion" name="descripcioncotizacion" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" style="margin-top: 5px;" class="btn btn-outline-success">Crear Cotización</button>
+                        </form>
                     </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-header">
-                            Cotizacion
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group">
-                                <form>
-                                    <li class="list-group-item" style="display: flex;"><label for="cliente"><strong>Cliente: </strong></label> <input type="text" value=" {{ request.user.nombre }}" style="border: none;" name="cliente" readonly></li>                                    </li>
-                                    <li class="list-group-item" style="display: flex;">Productos Seleccionados: </li>
-                                    <ul class="list-group">
-                                        {% for producto in productos %}
-                                        <li class="list-group-item">{{ producto.nombre }} - Cantidad: {{ cantidad }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                    <li class="list-group-item" style="display: flex;">Servicios Seleccionados: </li>
-                                    <ul class="list-group">
-                                        {% for servicio in Servicios %}
-                                        <li class="list-group-item">{{ servicio.nombre }} </li>
-                                        {% endfor %}
-                                    </ul>
-                                    <div class="d-flex justify-content" style="margin-top: 10px;">
-                                        <button type="submit" style="margin: 10px;" class="btn btn-outline-success">Finalizar Cotización</button>
-                                        <a type="button"  style="margin: 10px;" class="btn btn-outline-primary" href="{% url 'productos' %}">Seguir cotizando</a>
-                                    </div>
-                                </form>
-                            </ul>
-                        </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
-    function agregarProducto(idProducto) {
-        fetch(`/agregar_producto/${idProducto}/`)
-            .then(response => response.json())
-            .then(data => {
-                const productosSeleccionadosInput = document.getElementById('productos_seleccionados');
-                const productosSeleccionados = data.productos.map(producto => producto.id);
-                productosSeleccionadosInput.value = productosSeleccionados.join(',');
-            })
-            .catch(error => console.error('Error:', error));
-    }
-
-    // Llamar a la función agregarProducto con el ID del producto cuando se haga clic en el botón "Agregar a cotización"
-    const botonesAgregarProducto = document.querySelectorAll('.btn-agregar-producto');
-    botonesAgregarProducto.forEach(boton => {
-        boton.addEventListener('click', () => {
-            const idProducto = boton.dataset.idProducto;
-            agregarProducto(idProducto);
-        });
-    });
-
-    function agregarServicio(idServicio) {
-        fetch(`/agregar_servicio/${idServicio}/`)
-            .then(response => response.json())
-            .then(data => {
-                const serviciosSeleccionadosInput = document.getElementById('servicios_seleccionados');
-                const serviciosSeleccionados = data.servicios.map(servicio => servicio.id);
-                serviciosSeleccionadosInput.value = serviciosSeleccionados.join(',');
-            })
-            .catch(error => console.error('Error:', error));
-    }
-
-    // Llamar a la función agregarServicio con el ID del servicio cuando se haga clic en el botón "Agregar a cotización"
-    const botonesAgregarServicio = document.querySelectorAll('.btn-agregar-servicio');
-    botonesAgregarServicio.forEach(boton => {
-        boton.addEventListener('click', () => {
-            const idServicio = boton.dataset.idServicio;
-            agregarServicio(idServicio);
-        });
-    });
-</script>
-
 {% endblock %}

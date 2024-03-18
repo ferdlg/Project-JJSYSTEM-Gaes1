@@ -1126,3 +1126,40 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS ObtenerDetallesCotizacion;
+DELIMITER //
+
+CREATE PROCEDURE ObtenerDetallesCotizacion(IN id_cotizacion INT)
+BEGIN
+    SELECT 
+        cotizaciones.idCotizacion, 
+        cotizaciones.fechaCotizacion, 
+        cotizaciones.descripcionCotizacion,
+        estadoscotizaciones.nombreEstadoCotizacion AS nombreEstado,
+        productos.idProducto, 
+        productos.nombreProducto, 
+        productos.descripcionProducto, 
+        productos.precioProducto,
+        servicios.idServicio,
+        servicios.nombreServicio,
+        servicios.descripcionServicio,
+        servicios.precioServicio
+    FROM 
+        cotizaciones
+    LEFT JOIN 
+        cotizaciones_productos ON cotizaciones.idCotizacion = cotizaciones_productos.idCotizacion
+    LEFT JOIN 
+        productos ON cotizaciones_productos.idProducto = productos.idProducto
+    LEFT JOIN 
+        cotizaciones_servicios ON cotizaciones.idCotizacion = cotizaciones_servicios.idCotizacion
+    LEFT JOIN 
+        servicios ON cotizaciones_servicios.idServicio = servicios.idServicio
+    LEFT JOIN 
+        estadoscotizaciones ON cotizaciones.idEstadoCotizacion = estadoscotizaciones.idEstadoCotizacion
+    WHERE 
+        cotizaciones.idCotizacion = id_cotizacion;
+END //
+
+DELIMITER ;

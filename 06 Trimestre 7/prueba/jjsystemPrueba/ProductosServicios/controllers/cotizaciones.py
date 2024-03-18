@@ -1,109 +1,79 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from requests import request
 from ServicioTecnico.controllers.cotizaciones import CotizacionesCRUD as BaseCotizacionesCRUD
 from Account.models import *
+from django.db import connection
 
 class CotizacionesCRUD(BaseCotizacionesCRUD):
     # Métodos heredados de la clase base
-
-    def crear_cotizacion(self, request):
-        return render (request,'cliente/crear_cotizacion.html')
-
-    def agregar_elemento(self, request, id_elemento, tipo_elemento):
-        elementos_seleccionados = request.session.get(f'{tipo_elemento}s_seleccionados', [])
-        if id_elemento:
-            elementos_seleccionados.append(id_elemento)
-            request.session[f'{tipo_elemento}s_seleccionados'] = elementos_seleccionados
-
-        elementos = []
-        if tipo_elemento == 'producto':
-            ElementoModel = Productos
-            for id_elemento_seleccionado in elementos_seleccionados:
-                producto = ElementoModel.objects.get(pk=id_elemento_seleccionado)
-                cantidad = request.POST.get(f'cantidad_{ producto.idproducto }')
-                elementos.append({'id': producto.idproducto, 'nombre': producto.nombreproducto, 'cantidad': cantidad})
-        elif tipo_elemento == 'servicio':
-            ElementoModel = Servicios
-            for id_elemento_seleccionado in elementos_seleccionados:
-                servicio = ElementoModel.objects.get(pk=id_elemento_seleccionado)
-                cantidad = request.POST.get(f'cantidad_{servicio.idservicio}')
-                elementos.append({'id': servicio.idservicio, 'nombre': servicio.nombreservicio})
-
-        context = {
-            'productos_all': Productos.objects.all(),
-            'servicios_all': Servicios.objects.all(),
-            tipo_elemento + 's': elementos
-        }
-        return render(request, 'cliente/crear_cotizacion.html', context)
-
-    def quitar_elemento(self, request, id_elemento, tipo_elemento):
-        elementos_seleccionados = request.session.get(f'{tipo_elemento}s_seleccionados', [])
-        if id_elemento in elementos_seleccionados:
-            elementos_seleccionados.remove(id_elemento)
-            request.session[f'{tipo_elemento}s_seleccionados'] = elementos_seleccionados
-
-        elementos = []
-        
-        if tipo_elemento == 'producto':
-            ElementoModel = Productos
-            for id_elemento_seleccionado in elementos_seleccionados:
-                producto = ElementoModel.objects.get(pk=id_elemento_seleccionado)
-                cantidad = request.POST.get(f'cantidad_{producto.idproducto}')
-                elementos.append({'id': producto.idproducto, 'nombre': producto.nombreproducto, 'cantidad': cantidad})
-        elif tipo_elemento == 'servicio':
-            ElementoModel = Servicios
-            for id_elemento_seleccionado in elementos_seleccionados:
-                servicio = ElementoModel.objects.get(pk=id_elemento_seleccionado)
-                elementos.append({'id': servicio.idservicio, 'nombre': servicio.nombreservicio})
-
-        context = {
-            'productos_all': Productos.objects.all(),
-            'servicios_all': Servicios.objects.all(),
-            tipo_elemento + 's': elementos
-        }
-        return render(request, 'cliente/crear_cotizacion.html', context)
-
-    def crear_cotizacion_cliente(request):
+    def ir_a_cotizaciones(self, request):
+        return render(request, 'cliente/crear_cotizacion.html')
+    
+    def crear_cotizacion(self,request):
         if request.method == 'POST':
+            # Obtener los datos del formulario de creación de cotización
             numerodocumento = request.user.numerodocumento
             cliente = get_object_or_404(Clientes, numerodocumento=numerodocumento)
             idcliente = cliente.idcliente
-
-            productos_seleccionados = request.session.get('productos_seleccionados', [])
-            servicios_seleccionados = request.session.get('servicios_seleccionados', [])
-
+            descripcion_cotizacion = request.POST.get('descripcioncotizacion', '')
+            estado = Estadoscotizaciones.objects.get(idestadocotizacion =1)
+            # Crear la nueva cotización
             nueva_cotizacion = Cotizaciones.objects.create(
-                idcliente=idcliente,
+                idcliente=cliente,
                 totalcotizacion=0.0,  
-                descripcioncotizacion=request.POST.get('descripcioncotizacion', '')
+                descripcioncotizacion=descripcion_cotizacion,
+                idestadocotizacion = estado
             )
-            # Asociar los productos seleccionados con la nueva cotización
-            for id_producto in productos_seleccionados:
-                producto = Productos.objects.get(pk=id_producto)
-                CotizacionesProductos.objects.create(idcotizacion=nueva_cotizacion, idproducto=producto, cantidad=1)
 
-            # Asociar los servicios seleccionados con la nueva cotización
-            for id_servicio in servicios_seleccionados:
-                servicio = Servicios.objects.get(pk=id_servicio)
-                CotizacionesServicios.objects.create(idcotizacion=nueva_cotizacion, idservicio=servicio)
-                    
-            return redirect('mostrar_cotizacion', id_cotizacion=nueva_cotizacion.idcotizacion)
-        
-        # Obtener la lista de productos seleccionados del request.session
-        
-        return render(request, 'crear_cotizacion.html', {'productos': Productos.objects.filter(pk__in=productos_seleccionados), 'servicios': Servicios.objects.all()})
+            # Redirigir a la vista para agregar productos a la cotización recién creada
+            return redirect('asignar_productos_servicios', id_cotizacion=nueva_cotizacion.idcotizacion)
+        # Renderizar el formulario de creación de cotización
+        return render(request, 'cliente/crear_cotizacion.html')
+    
+    def asignar_productos_servicios(self,request, id_cotizacion):
+        if request.method == 'POST':
+            productos_seleccionados = request.POST.getlist('producto[]')
+            servicios_seleccionados = request.POST.getlist('servicio[]')
 
+            cotizacion = Cotizaciones.objects.get(idcotizacion=id_cotizacion)
 
+            for idproducto in productos_seleccionados:
+                cantidad = request.POST.get('cantidad_' + idproducto)
+                if cantidad:  # Verifica si se ingresó una cantidad
+                    producto = Productos.objects.get(idproducto=idproducto)
+                    producto_cotizacion = CotizacionesProductos.objects.create(
+                        idcotizacion=cotizacion,
+                        idproducto=producto,
+                        cantidad=cantidad
+                    )
+                else:
+                    print("No se ha ingresado una cantidad para el producto", idproducto)
 
-    def obtener_productos_servicios_cotizacion(self, request, idcotizacion):
-        productos_cotizacion = CotizacionesProductos.objects.filter(idcotizacion=idcotizacion)
-        servicios_cotizacion = CotizacionesServicios.objects.filter(idcotizacion=idcotizacion)
-        return productos_cotizacion, servicios_cotizacion
+            for idservicio in servicios_seleccionados:
+                servicio = Servicios.objects.get(idservicio=idservicio)
+                servicio_cotizacion = CotizacionesServicios.objects.create(
+                    idcotizacion=cotizacion,
+                    idservicio=servicio
+                )
 
-    def mostrar_cotizacion(self, request, idcotizacion):
-        productos_cotizacion, servicios_cotizacion = self.obtener_productos_servicios_cotizacion(request, idcotizacion)
-        if productos_cotizacion.exists() or servicios_cotizacion.exists():
-            return render(request, 'ver_cotizacion.html', {'productos': productos_cotizacion, 'servicios': servicios_cotizacion})
+            productos = Productos.objects.all()
+            servicios = Servicios.objects.all()
+
+            return redirect('ver_cotizacion_cliente', idcotizacion=id_cotizacion )
+            
+
         else:
-            mensaje = 'Aún no has agregado productos ni servicios a esta cotización.'
-            return render(request, 'mensaje.html', {'mensaje': mensaje})
+            productos = Productos.objects.all()
+            servicios = Servicios.objects.all()
+            return render(request, 'cliente/agregar_productos_servicios.html', {'productos': productos, 'servicios': servicios, 'idcotizacion': id_cotizacion})
+
+def obtener_detalles_cotizacion(id_cotizacion):
+    with connection.cursor() as cursor:
+        cursor.callproc('ObtenerDetallesCotizacion', [id_cotizacion])
+        resultados = cursor.fetchall()
+    return resultados
+
+def vista_detalle_cotizacion(request, id_cotizacion):
+    detalles_cotizacion = obtener_detalles_cotizacion(id_cotizacion)
+    return render(request, 'cliente/ver_cotizacion.html', {'detalles_cotizacion': detalles_cotizacion})
