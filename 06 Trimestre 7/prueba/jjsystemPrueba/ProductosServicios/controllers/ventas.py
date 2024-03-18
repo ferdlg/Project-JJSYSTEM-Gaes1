@@ -10,6 +10,28 @@ class ventasCRUD(viewsets.ModelViewSet):
     queryset = Ventas.objects.all()
     serializer_class = VentasSerializer
 
+    #cliente Historial de compras 
+    def historial_compras(self,request):
+        numerodocumento = request.user.numerodocumento        
+        compras_queryset = Ventas.objects.filter(idcotizacion__idcliente__numerodocumento=numerodocumento)
+        paginator = Paginator(compras_queryset, 10)
+        page_number = request.GET.get('page')
+
+        try:
+            compras = paginator.page(page_number)
+        except PageNotAnInteger:
+            compras = paginator.page(1)
+        except EmptyPage:
+            compras = paginator.page(paginator.num_pages)
+
+        if compras:
+            return render(request, 'cliente/compras.html', {"compras": compras})
+        return render(request, 'cliente/compras.html', {"compras": compras})
+
+        # else:
+        #     mensaje = 'Aún no tienes compras.'
+        #     return render(request, 'mensaje.html', {'mensaje': mensaje})
+
 # Ventas en dashboard admin
 def home_ventas(request):
     idventa = request.GET.get('idventa')
@@ -112,3 +134,4 @@ def deleteVenta(request, idVenta):
     else:
         # Si la solicitud no es POST, redirigir al home de ventas
         return HttpResponseRedirect('/productos_servicios/ventas')
+
