@@ -7,8 +7,13 @@ from Account.models import DetalleEnviosVentas
 from Account.models import EnviosClientes
 from Account.views import role_required
 from django.http import HttpResponse
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from io import BytesIO
 from django.template.loader import get_template
-from xhtml2pdf import pisa
+from django.template import Context
+from Account.models import Envios
 # Create your views here.
 
 def homeEnvios(request):
@@ -137,19 +142,50 @@ def historialEnviosCliente(request, idCliente):
 
 #PDF
 
-# views.py
-def generar_pdf(request, templateName):
-    # Obtener los datos de los envíos que deseas mostrar en la tabla de contenido
-    envios = Envios.objects.all()  # Obtén todos los envíos, ajusta según tu lógica
-    # Renderizar solo la tabla de contenido de la plantilla
-    context = {'envios': envios}  # Pasar los datos de los envíos al contexto
-    html_template = get_template(f'crudAdmin/{templateName}') 
-    html_content = html_template.render(context)
-    # Crear un objeto PDF
+def generar_pdf(request):
+    # Obtener los datos de los envíos
+    envios = Envios.objects.all()
+
+    # Crear un buffer de bytes para el PDF
+    buffer = BytesIO()
+
+    # Configurar el tamaño del documento
+    doc = SimpleDocTemplate(buffer, pagesize=letter)
+
+    # Crear una tabla para los envíos
+    tabla_datos = []
+    tabla_datos.append(["ID", "Dirección", "ID Técnico", "Estado"])
+    for envio in envios:
+        tabla_datos.append([envio.idenvio, envio.direccionenvio, envio.idtecnico.idtecnico, envio.idestadoenvio.nombreestadoenvio])
+
+    tabla = Table(tabla_datos)
+
+    # Aplicar estilos a la tabla
+    estilo_tabla = TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                               ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                               ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                               ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                               ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                               ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                               ('GRID', (0, 0), (-1, -1), 1, colors.black)])
+
+    tabla.setStyle(estilo_tabla)
+
+    # Agregar la tabla al documento
+    elementos = []
+    elementos.append(tabla)
+    doc.build(elementos)
+
+    # Obtener el PDF generado
+    pdf = buffer.getvalue()
+    buffer.close()
+
+    # Devolver el PDF como una respuesta HTTP
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="{templateName}.pdf"'
-    # Convertir HTML a PDF
-    pisa.CreatePDF(html_content, dest=response)
+    response['Content-Disposition'] = 'attachment; filename="envios.pdf"'
+    response.write(pdf)
     return response
+
+
 
 

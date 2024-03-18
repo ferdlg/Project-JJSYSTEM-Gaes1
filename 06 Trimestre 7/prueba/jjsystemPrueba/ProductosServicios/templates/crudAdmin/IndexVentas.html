@@ -1,25 +1,23 @@
 {% extends "menu.html" %}
-{% block titulo %} ventas {% endblock %}
+{% block titulo %} Ventas {% endblock %}
 {% block contenido %}
 <div class="content">
     <nav class="available_prod">
         <div class="container">
             <div class="row">
                 <div class="allowed_prod">
-                    <h2 class="font-weight-bold text-center text-lg-left">ventas</h2>
+                    <h2 class="font-weight-bold text-center text-lg-left">Ventas</h2>
                 </div>
             </div>
         </div>
     </nav>
     <section style="padding: 10px;">
-        <form class="form-inline position-relative my-2 d-inline-block">
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-            <button class="btn btn-search position-absolute" type="submit"></button>
-        </form>
+        <form class="form-inline position-relative my-2 d-inline-block" method="get" action="{% url 'homeVentas' %}">
+            <input class="form-control mr-sm-2" type="search" name="idventa" placeholder="Buscar por ID" aria-label="Search">
+        </form>        
     </section>
-        <a href="#" class="btn btn-success" style="margin-bottom:  5px;">Agregar Venta</a>
-        <a href="#" class="btn btn-success" style="margin-bottom:  5px; background-color: rgb(73, 2, 139); border: none;"">Detalles de ventas</a>
-        <section class="s-data-table">
+    <a href="{% url 'createVenta' %}" class="btn btn-success" style="margin-bottom:  5px;">Agregar Venta</a>
+    <section class="s-data-table">
         <table class="table data-table table-bordered">
             <thead>
                 <tr>
@@ -33,16 +31,45 @@
             </thead>
             <tbody>
                 {% for venta in ventas %}
-                <tr>
-                    <td>{{venta.idventa}}</td>
-                    <td>{{venta.fechaventa}}</td>
-                    <td>{{venta.idenvio.idenvio}}</td>
-                    <td>{{venta.idcotizacion.idcotizacion}}</td>
-                    <td> 
-                        <a href="#" class="btn btn-primary btn-sw"> Editar </a>
+                <tr data-toggle="collapse" data-target="#detalle_{{ venta.idventa }}" class="accordion-toggle">
+                    <td>{{ venta.idventa }}</td>
+                    <td>{{ venta.fechaventa }}</td>
+                    <td>{{ venta.idenvio.idenvio }}</td>
+                    <td>{{ venta.idcotizacion.idcotizacion }}</td>
+                    <td>
+                        <a href="{% url 'editarVenta' idVenta=venta.idventa %}" class="btn btn-primary btn-sw">Editar</a>
                     </td>
                     <td>
-                        <a href="#" class="btn btn-danger btn-sw"> eliminar </a>
+                        <form id="deleteForm_{{ venta.idventa }}" action="{% url 'deleteVenta' venta.idventa %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="idVenta" value="{{ venta.idventa }}">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta venta?')">Eliminar</button>
+                        </form>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td colspan="6" class="hiddenRow">
+                        <div class="accordian-body collapse" id="detalle_{{ venta.idventa }}">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Detalle</th>
+                                        <th>Subtotal</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for detalle in venta.detallesventas_set.all %}
+                                    <tr>
+                                        <td>{{ detalle.detallesventa }}</td>
+                                        <td>{{ detalle.subtotalventa }}</td>
+                                        <td>{{ detalle.totalventa }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}

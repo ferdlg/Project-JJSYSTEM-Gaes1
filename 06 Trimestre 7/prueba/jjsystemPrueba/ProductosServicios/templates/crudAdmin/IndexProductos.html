@@ -19,7 +19,7 @@
     </section>
         <a href="{% url 'createProducto'%}" class="btn btn-success" style="margin-bottom:  5px;">Agregar Producto</a>
         <a href="{% url 'categoriaProductos' %}" class="btn btn-success" style="margin-bottom:  5px; background-color: rgb(73, 2, 139); border: none;">Categorias</a>
-        <a href="#" class="btn btn-success" style="margin-bottom:  5px; background-color: rgba(209, 125, 30, 0.941); border: none;">Proveedores</a>
+        <a href="{% url 'proveedorProductos' %}" class="btn btn-success" style="margin-bottom:  5px; background-color: rgba(209, 125, 30, 0.941); border: none;">Proveedores</a>
         <section class="s-data-table">
         <table class="table data-table table-bordered">
             <thead>
@@ -36,7 +36,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for producto in productos %}
+                {% for producto in productos_list %}
                 <tr>
                     <td>{{producto.idproducto}}</td>
                     <td>{{producto.nombreproducto}}</td>

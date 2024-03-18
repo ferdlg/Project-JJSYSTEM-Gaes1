@@ -8,7 +8,7 @@ from .controllers.clientes import clientesCRUD
 from .controllers.permisos import permisosCRUD
 from .controllers.productos import productosCRUD , home_productos , createProductoView, editarProducto, eliminarProducto
 from .controllers.ventas import ventasCRUD, home_ventas,createVenta, editVenta, deleteVenta
-from .controllers.proveedoresproductos import proveedoresCRUD
+from .controllers.proveedoresproductos import proveedoresCRUD, home_proveedorProductos, createProveedorProductoView, editarProveedorProductoView, eliminarProveedorProductoView
 from .controllers.rol_has_permisos import rol_has_permisosCRUD
 from .controllers.roles import rolesCRUD
 from .controllers.servicios import serviciosCRUD, servicios, servicios_landing, home_servicios, createServiciosView, editarServicio, eliminarServicio
@@ -31,6 +31,9 @@ urlpatterns=[
     path('', views.home, name='home'),
     path('productos',home_productos, name='homeProductos'),
     path('ventas', home_ventas, name='homeVentas' ),
+    path('createVenta/', createVenta, name='createVenta' ),
+    path('editarVenta/<int:idVenta>/', editVenta, name='editarVenta'),
+    path('deleteVenta/<int:idVenta>/', deleteVenta, name='deleteVenta'),
     path('serviciosLanding/<int:categoria>/',servicios_landing, name='serviciosLanding'),
     path('buscar/', views.buscar_productos_servicios, name='buscar'),
     path('verProducto/<id>/', views.producto, name='verProducto'),
@@ -60,6 +63,9 @@ urlpatterns=[
     path('cotizaciones/asignar_productos_servicios/<int:id_cotizacion>/', CotizacionesCRUD.as_view({'post': 'asignar_productos_servicios', 'get': 'asignar_productos_servicios'}), name='asignar_productos_servicios'),
     path('cotizaciones/ver_cotizacion_cliente/<int:id_cotizacion>/',vista_detalle_cotizacion, name='ver_cotizacion_cliente')
 
-
+    path('proveedores/', home_proveedorProductos, name='proveedorProductos'),
+    path('crearProveedor/', createProveedorProductoView, name='crearProveedor'),
+    path('editarProveedor/<int:idProveedorProducto>/', editarProveedorProductoView, name='editarProveedor'),
+    path('eliminarProveedor/<int:idProveedorProducto>/', eliminarProveedorProductoView, name='eliminarProveedor'),
 
 ]
