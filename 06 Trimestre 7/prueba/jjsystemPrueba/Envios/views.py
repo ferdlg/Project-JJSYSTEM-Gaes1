@@ -142,7 +142,7 @@ def historialEnviosCliente(request, idCliente):
 
 #PDF
 
-def generar_pdf(request):
+def generar_pdf(request, templateName):
     # Obtener los datos de los envíos
     envios = Envios.objects.all()
 

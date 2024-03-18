@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 
 from .controllers.actividadesCrogTec import actividadesCrogTecCRUD
 from .controllers.citas import citasCRUD
-from .controllers.cotizaciones import CotizacionesCRUD
+from .controllers.cotizaciones import CotizacionesCRUD, generar_pdf
 from .controllers.cronogramatecnicos import cronogramatecnicosCRUD
 from .controllers.detallesactividades import detallesactividadesCRUD
 from .controllers.disponibilidadcronograma import disponibilidadcronogramaCRUD
@@ -45,6 +45,9 @@ urlpatterns=[
     path('eliminar_citas/<int:idcita>/',citasCRUD.as_view({'delete':'eliminar_citas'}),name='eliminar_citas'),
 
     path('ver_cotizaciones/', CotizacionesCRUD.as_view({'get':'listar_cotizaciones'}), name='ver_cotizaciones'),
+    path('editar_cotizaciones/<int:idcotizacion>/', CotizacionesCRUD.as_view({'get': 'editar_cotizacion', 'post': 'editar_cotizacion'}), name='editar_cotizaciones'),
+    #path('editar_productos_servicios/<int:idcotizacion>/', CotizacionesCRUD.as_view({'get': 'editar_productos_servicios', 'post': 'editar_productos_servicios'}), name='editar_productos_servicios'),
+    path('generar_pdf/<int:idcotizacion>/', generar_pdf, name='generar_pdf'),
     path('crear_cotizaciones/', CotizacionesCRUD.as_view({'post':'crear_cotizaciones'}), name='crear_cotizaciones'),
     path('crear_cotizaciones/productos_servicios/<int:idcotizacion>/', CotizacionesCRUD.as_view({'post':'asignar_productos_servicios', 'get':'asignar_productos_servicios'}), name='asignar_productos_servicios')
 
