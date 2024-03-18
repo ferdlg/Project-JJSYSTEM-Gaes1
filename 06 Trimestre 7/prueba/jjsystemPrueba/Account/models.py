@@ -144,10 +144,26 @@ class Cotizaciones(models.Model):
         managed = False
         db_table = 'cotizaciones'
 
+class Productos(models.Model):
+    idproducto = models.AutoField(db_column='idProducto', primary_key=True)  # Field name made lowercase.
+    nombreproducto = models.TextField(db_column='nombreProducto')  # Field name made lowercase.
+    descripcionproducto = models.TextField(db_column='descripcionProducto')  # Field name made lowercase.
+    precioproducto = models.FloatField(db_column='precioProducto')  # Field name made lowercase.
+    cantidad = models.IntegerField()
+    imagen = models.BinaryField(blank=True, null=True)
+    idadministrador = models.ForeignKey(Administrador, models.DO_NOTHING, db_column='idAdministrador', blank=True, null=True)  # Field name made lowercase.
+    idcategoriaproducto = models.ForeignKey(Categoriasproductos, models.DO_NOTHING, db_column='idCategoriaProducto', blank=True, null=True)  # Field name made lowercase.
+    idproveedorproducto = models.ForeignKey('Proveedoresproductos', models.DO_NOTHING, db_column='idProveedorProducto', blank=True, null=True)  # Field name made lowercase.
+
+
+
+    class Meta:
+        managed = False
+        db_table = 'productos'
 
 class CotizacionesProductos(models.Model):
     idcotizacion = models.ForeignKey(Cotizaciones, models.DO_NOTHING, db_column='idCotizacion', blank=True, null=True)  # Field name made lowercase.
-    idproducto = models.ForeignKey('Productos', models.DO_NOTHING, db_column='idProducto', blank=True, null=True)  # Field name made lowercase.
+    idproducto = models.ForeignKey(Productos, models.DO_NOTHING, db_column='idProducto', blank=True, null=True)  # Field name made lowercase.
     cantidad = models.IntegerField(blank=True, null=True)
 
     class Meta:
@@ -376,25 +392,6 @@ class Pqrsf(models.Model):
     class Meta:
         managed = False
         db_table = 'pqrsf'
-
-
-class Productos(models.Model):
-    idproducto = models.AutoField(db_column='idProducto', primary_key=True)  # Field name made lowercase.
-    nombreproducto = models.TextField(db_column='nombreProducto')  # Field name made lowercase.
-    descripcionproducto = models.TextField(db_column='descripcionProducto')  # Field name made lowercase.
-    precioproducto = models.FloatField(db_column='precioProducto')  # Field name made lowercase.
-    cantidad = models.IntegerField()
-    imagen = models.BinaryField(blank=True, null=True)
-    idadministrador = models.ForeignKey(Administrador, models.DO_NOTHING, db_column='idAdministrador', blank=True, null=True)  # Field name made lowercase.
-    idcategoriaproducto = models.ForeignKey(Categoriasproductos, models.DO_NOTHING, db_column='idCategoriaProducto', blank=True, null=True)  # Field name made lowercase.
-    idproveedorproducto = models.ForeignKey('Proveedoresproductos', models.DO_NOTHING, db_column='idProveedorProducto', blank=True, null=True)  # Field name made lowercase.
-
-
-
-    class Meta:
-        managed = False
-        db_table = 'productos'
-
 
 class Proveedoresproductos(models.Model):
     idproveedorproducto = models.AutoField(db_column='idProveedorProducto', primary_key=True)  # Field name made lowercase.

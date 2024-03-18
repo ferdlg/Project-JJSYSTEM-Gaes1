@@ -12,10 +12,9 @@
         </div>
     </nav>
     <section style="padding: 10px;">
-        <form class="formdir-inline position-relative my-2 d-inline-block">
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-            <button class="btn btn-search position-absolute" type="submit"></button>
-        </form>
+        <form class="form-inline position-relative my-2 d-inline-block" method="get" action="{% url 'ver_cotizaciones' %}">
+            <input class="form-control mr-sm-2" type="search" name="id_cotizacion" placeholder="Buscar por ID" aria-label="Search">
+        </form>        
     </section>
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#agregar-cotizacion">Agregar cotización</button>
 
@@ -93,18 +92,21 @@
                     <td>{{cotizacion.idcliente.numerodocumento.numerodocumento}}</td>
                     <td>{{cotizacion.idestadocotizacion.nombreestadocotizacion}}</td>
                     <td>
-                        <button class="btn btn-outline-dark text-dark" style="background-color: transparent; border-color: black;">
-                            <i class="bi bi-download text-dark"></i> PDF
-                        </button>
+                        <form method="post" action="{% url 'generar_pdf' cotizacion.idcotizacion %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-dark text-dark" style="background-color: transparent; border-color: black;">
+                                <i class="bi bi-download text-dark"></i> PDF
+                            </button>
+                        </form>
                     </td>
                     <td> 
-                        <a href="#" class="btn btn-primary btn-sw"> Editar </a>
+                        <a href="{% url 'editar_cotizaciones' idcotizacion=cotizacion.idcotizacion %}" class="btn btn-primary btn-sw"> Editar </a>
                     </td>
                     <td>
                         <a href="#" class="btn btn-danger btn-sw"> eliminar </a>
                     </td>
                 </tr>
-                {% endfor %}
+                {% endfor %}                
             </tbody>
         </table>
         <nav aria-label="Page navigation example">
