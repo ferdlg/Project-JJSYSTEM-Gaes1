@@ -384,11 +384,11 @@ class Productos(models.Model):
     descripcionproducto = models.TextField(db_column='descripcionProducto')  # Field name made lowercase.
     precioproducto = models.FloatField(db_column='precioProducto')  # Field name made lowercase.
     cantidad = models.IntegerField()
-    foto = models.CharField(max_length=200, blank=True, null=True)
+    imagen = models.BinaryField(blank=True, null=True)
     idadministrador = models.ForeignKey(Administrador, models.DO_NOTHING, db_column='idAdministrador', blank=True, null=True)  # Field name made lowercase.
     idcategoriaproducto = models.ForeignKey(Categoriasproductos, models.DO_NOTHING, db_column='idCategoriaProducto', blank=True, null=True)  # Field name made lowercase.
     idproveedorproducto = models.ForeignKey('Proveedoresproductos', models.DO_NOTHING, db_column='idProveedorProducto', blank=True, null=True)  # Field name made lowercase.
-    imagen = models.BinaryField(blank=True, null=True)
+
 
 
     class Meta:

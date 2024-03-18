@@ -87,7 +87,7 @@ def editarProducto(request, idProducto):
         cantidad = request.POST.get('cantidad')
         idcategoriaproducto = request.POST.get('categoria')
         idproveedorproducto = request.POST.get('proveedor')
-        imagen = request.FILES.get('imagen')
+        foto = request.FILES.get('imagen')
 
         # Obtener la instancia de categorías
         categoria = Categoriasproductos.objects.get(idcategoriaproducto=idcategoriaproducto)
@@ -102,7 +102,7 @@ def editarProducto(request, idProducto):
         producto.cantidad = cantidad
         producto.idcategoriaproducto = categoria
         producto.idproveedorproducto = proveedor
-        producto.imagen = imagen
+        producto.imagen = foto
         producto.save()
 
         return redirect('homeProductos')
