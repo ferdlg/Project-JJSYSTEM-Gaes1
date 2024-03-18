@@ -27,11 +27,11 @@ class CotizacionesCRUD(BaseCotizacionesCRUD):
             )
 
             # Redirigir a la vista para agregar productos a la cotización recién creada
-            return redirect('asignar_productos_servicios', id_cotizacion=nueva_cotizacion.idcotizacion)
+            return redirect('asignar_productos_servicios_cliente', id_cotizacion=nueva_cotizacion.idcotizacion)
         # Renderizar el formulario de creación de cotización
         return render(request, 'cliente/crear_cotizacion.html')
     
-    def asignar_productos_servicios(self,request, id_cotizacion):
+    def asignar_productos_servicios_cliente(self,request, id_cotizacion):
         if request.method == 'POST':
             productos_seleccionados = request.POST.getlist('producto[]')
             servicios_seleccionados = request.POST.getlist('servicio[]')
@@ -60,7 +60,7 @@ class CotizacionesCRUD(BaseCotizacionesCRUD):
             productos = Productos.objects.all()
             servicios = Servicios.objects.all()
 
-            return redirect('ver_cotizacion_cliente', idcotizacion=id_cotizacion )
+            return redirect('ver_cotizacion_cliente', id_cotizacion=id_cotizacion )
             
 
         else:
