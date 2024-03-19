@@ -108,14 +108,13 @@ def enviosEntregados(request):
 #@login_required
 #@role_required(1)
 def homeEnviosTecnico(request):
-    search_query = request.GET.get('search', '')
+    # Obtener el número de documento del técnico autenticado
+    numerodocumento = request.user.numerodocumento
 
-    if search_query:
-        envios = Envios.objects.filter(idtecnico__exact=search_query)
-    else:
-        envios = Envios.objects.all()
+    # Obtener todos los envíos asignados al técnico autenticado
+    envios_tecnico = Envios.objects.filter(idtecnico__numerodocumento=numerodocumento)
 
-    return render(request, "tecnico/IndexTecnico.html", {"envios": envios, "search_query": search_query})
+    return render(request, 'tecnico/IndexTecnico.html', {'envios': envios_tecnico})
 
 
 #Views cliente
@@ -136,7 +135,7 @@ def enviosCliente(request):
     return render(request, 'cliente/EnviosCliente.html', {'envios': envios})
 
     
-def historialEnviosCliente(request, idCliente):
+def historialEnviosCliente(request):
     # Obtener el número de documento del cliente autenticado
     numerodocumento = request.user.numerodocumento
 
