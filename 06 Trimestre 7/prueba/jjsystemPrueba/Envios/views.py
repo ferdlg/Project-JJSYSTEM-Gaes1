@@ -136,7 +136,7 @@ def enviosCliente(request):
     return render(request, 'cliente/EnviosCliente.html', {'envios': envios})
 
     
-def historialEnviosCliente(request, idCliente):
+def historialEnviosCliente(request):
     # Obtener el número de documento del cliente autenticado
     numerodocumento = request.user.numerodocumento
 
@@ -150,7 +150,7 @@ def historialEnviosCliente(request, idCliente):
     envios = Envios.objects.filter(idenvio__in=ids_envios)
 
     # Filtrar solo los envíos con estado "Entregado"
-    envios_entregados = envios.filter(idestadoenvio__nombreestado="Entregado")
+    envios_entregados = envios.filter(idestadoenvio__nombreestadoenvio="Entregado")
 
     return render(request, 'cliente/HistorialEnviosCliente.html', {'envios': envios_entregados})
 
