@@ -8,7 +8,7 @@ from .controllers.clientes import clientesCRUD
 from .controllers.permisos import permisosCRUD
 from .controllers.productos import productosCRUD , home_productos , createProductoView, editarProducto, eliminarProducto
 from .controllers.ventas import ventasCRUD, home_ventas,createVenta, editVenta, deleteVenta
-from .controllers.proveedoresproductos import proveedoresCRUD
+from .controllers.proveedoresproductos import proveedoresCRUD, home_proveedorProductos, createProveedorProductoView, editarProveedorProductoView, eliminarProveedorProductoView
 from .controllers.rol_has_permisos import rol_has_permisosCRUD
 from .controllers.roles import rolesCRUD
 from .controllers.servicios import serviciosCRUD, servicios, servicios_landing, home_servicios, createServiciosView, editarServicio, eliminarServicio
@@ -38,6 +38,11 @@ urlpatterns=[
     path('buscar/', views.buscar_productos_servicios, name='buscar'),
     path('verProducto/<id>/', views.producto, name='verProducto'),
     path('api/', include(router.urls)),
+
+    path('proveedores/',home_proveedorProductos, name='proveedorProductos'),
+    path('crearProveedor/',createProveedorProductoView, name='crearProveedor'),
+    path('editarProveedor/<int:idProveedorProducto>',editarProveedorProductoView, name='editarProveedor'),
+    path('elimiarProveedor/<int:idProveedorProducto>',eliminarProveedorProductoView, name='eliminarProveedor'),
 
     path('createProducto/',createProductoView, name='createProducto'),
     path('editarProducto/<idProducto>',editarProducto, name='editarProducto'),
