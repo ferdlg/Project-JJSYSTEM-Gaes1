@@ -55,14 +55,14 @@ body {
 
 /* Estilos para la barra de navegación de búsqueda */
 .navbar-buscar {
-    position: fixed; /* Navbar fija */
-    top: 60px; /* Espaciado desde la parte superior */
-    left: 0; /* Posiciona en el lado izquierdo */
-    width: 100%; /* Ancho completo */
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
-    background-color: var(--color-primary) !important; /* Fondo en color principal */
-    color: var(--color-white); /* Texto en color blanco */
-    padding: 10px; /* Espaciado interno */
+    position: fixed;
+    top: 50px !important;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--color-primary) !important;
+    color: var(--color-white);
+    padding: 10px;
 }
 
 .navbar-buscar .form-control {
