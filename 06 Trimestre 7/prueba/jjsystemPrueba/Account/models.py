@@ -489,9 +489,6 @@ class Usuarios(models.Model):
         managed = False
         db_table = 'usuarios'
 
-
-
-
 class Ventas(models.Model):
     idventa = models.AutoField(db_column='idVenta', primary_key=True)  # Field name made lowercase.
     fechaventa = models.DateField(db_column='fechaVenta')  # Field name made lowercase.

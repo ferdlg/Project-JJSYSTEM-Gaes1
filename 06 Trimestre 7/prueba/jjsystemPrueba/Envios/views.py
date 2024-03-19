@@ -1,10 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from Account.models import Envios
-from Account.models import Estadosenvios
-from Account.models import Tecnicos
-from Account.models import DetalleEnviosVentas
-from Account.models import EnviosClientes
+from Account.models import *
 from Account.views import role_required
 from django.http import HttpResponse
 from reportlab.lib import colors
@@ -14,6 +10,7 @@ from io import BytesIO
 from django.template.loader import get_template
 from django.template import Context
 from Account.models import Envios
+from django.db import connection
 # Create your views here.
 
 def homeEnvios(request):
@@ -128,7 +125,7 @@ def enviosCliente(request):
     numerodocumento = request.user.numerodocumento
     
     # Filtrar los envíos basados en el número de documento del cliente
-    envios = EnviosClientes.objects.filter(documentocliente=numerodocumento)
+    envios = Envios.objects.filter(idventa__idcotizacion__idcliente__numerodocumento=numerodocumento)
     
     return render(request, 'cliente/EnviosCliente.html', {'envios': envios})
 
