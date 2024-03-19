@@ -65,7 +65,6 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -97,23 +96,17 @@ WSGI_APPLICATION = 'jjsystemPrueba.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-import dj_database_url
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'jjsystem_db',
-    #     'USER': 'root',
-    #     'PASSWORD': '1021662854',
-    #     #'PASSWORD': '',
-    #     'HOST': 'localhost',
-    #     'PORT': '3306'
-    # }
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'jjsystem_db',
+        'USER': 'root',
+        'PASSWORD': '1021662854',
+        #'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306'
+    }
 }
 
 
@@ -170,15 +163,6 @@ EMAIL_HOST_PASSWORD = 'oybttoqvhrehynlq'
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
-# Este código de producción podría afectar el modo de desarrollo, así que comprobamos si estamos en modo DEBUG
-if not DEBUG:
-    # Indicamos a Django copiar los activos estáticos en una ruta llamada `staticfiles` (esto es específico para Render)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    # Habilitamos el backend de almacenamiento WhiteNoise, que comprime los archivos estáticos para reducir el uso de disco
-    # y renombra los archivos con nombres únicos para cada versión para admitir el almacenamiento en caché a largo plazo
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'ServicioTecnico', 'static'),
     os.path.join(BASE_DIR, 'Account', 'static'),
