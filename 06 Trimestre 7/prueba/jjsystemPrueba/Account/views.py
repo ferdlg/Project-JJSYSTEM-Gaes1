@@ -96,8 +96,12 @@ def logoutView(request):
     return redirect('login')
 
 #Restablecer contraseña
+
 token_generator = PasswordResetTokenGenerator()
 class PasswordResetRequestView(APIView):
+    def get(self, request):
+
+        return
     def post(self, request):
         email = request.data.get('email')
         user = User.objects.filter(email=email).first()

@@ -123,9 +123,10 @@ def homeEnviosTecnico(request):
 def enviosCliente(request):
     # Obtener la dirección del cliente autenticado
     numerodocumento = request.user.numerodocumento
-    
+
+    ventas = Ventas.objects.filter(idcotizacion__idcliente__numerodocumento=numerodocumento)
     # Filtrar los envíos basados en el número de documento del cliente
-    envios = Envios.objects.filter(idventa__idcotizacion__idcliente__numerodocumento=numerodocumento)
+    envios = ventas.idenvio
     
     return render(request, 'cliente/EnviosCliente.html', {'envios': envios})
 
