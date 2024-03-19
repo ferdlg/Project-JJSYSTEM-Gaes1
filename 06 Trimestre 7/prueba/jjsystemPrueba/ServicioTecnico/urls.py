@@ -49,7 +49,8 @@ urlpatterns=[
     #path('editar_productos_servicios/<int:idcotizacion>/', CotizacionesCRUD.as_view({'get': 'editar_productos_servicios', 'post': 'editar_productos_servicios'}), name='editar_productos_servicios'),
     path('generar_pdf/<int:idcotizacion>/', generar_pdf, name='generar_pdf'),
     path('crear_cotizaciones/', CotizacionesCRUD.as_view({'post':'crear_cotizaciones'}), name='crear_cotizaciones'),
-    path('crear_cotizaciones/productos_servicios/<int:idcotizacion>/', CotizacionesCRUD.as_view({'post':'asignar_productos_servicios', 'get':'asignar_productos_servicios'}), name='asignar_productos_servicios')
+    path('crear_cotizaciones/productos_servicios/<int:idcotizacion>/', CotizacionesCRUD.as_view({'post':'asignar_productos_servicios', 'get':'asignar_productos_servicios'}), name='asignar_productos_servicios'),
+    path('eliminar_cotizacion/<int:idcotizacion>/', CotizacionesCRUD.as_view({'post': 'eliminar_cotizacion'}), name='eliminar_cotizacion'),
 
 
 

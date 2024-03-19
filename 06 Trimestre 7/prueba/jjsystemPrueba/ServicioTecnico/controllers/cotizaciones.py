@@ -91,7 +91,7 @@ class CotizacionesCRUD(viewsets.ModelViewSet):
             productos = Productos.objects.all()
             servicios = Servicios.objects.all()
 
-            return redirect('index')
+            return redirect('ver_cotizaciones')
             
 
         else:
@@ -131,6 +131,23 @@ class CotizacionesCRUD(viewsets.ModelViewSet):
         estados = Estadoscotizaciones.objects.all()
 
         return render(request, 'EditarCotizacion.html', {'cotizacion': cotizacion, 'clientes': clientes, 'estados': estados})
+
+    def eliminar_cotizacion(self, request, idcotizacion):
+        cotizacion = Cotizaciones.objects.get(idcotizacion=idcotizacion)
+
+        if request.method == 'POST':
+            # Eliminar los registros relacionados en las tablas de productos y servicios
+            CotizacionesProductos.objects.filter(idcotizacion=cotizacion).delete()
+            CotizacionesServicios.objects.filter(idcotizacion=cotizacion).delete()
+
+            # Ahora puedes eliminar la cotización
+            cotizacion.delete()
+
+            # Redirigir a la página de listar cotizaciones después de la eliminación
+            return redirect('ver_cotizaciones')
+
+        return render(request, 'ConfirmarEliminarCotizacion.html', {'cotizacion': cotizacion})
+
 
 def generar_pdf(request, idcotizacion):
     # Obtener la cotización específica

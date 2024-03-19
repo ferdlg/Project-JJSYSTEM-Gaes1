@@ -103,7 +103,10 @@
                         <a href="{% url 'editar_cotizaciones' idcotizacion=cotizacion.idcotizacion %}" class="btn btn-primary btn-sw"> Editar </a>
                     </td>
                     <td>
-                        <a href="#" class="btn btn-danger btn-sw"> eliminar </a>
+                        <form action="{% url 'eliminar_cotizacion' idcotizacion=cotizacion.idcotizacion %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Eliminar Cotización</button>
+                        </form>
                     </td>
                 </tr>
                 {% endfor %}                
