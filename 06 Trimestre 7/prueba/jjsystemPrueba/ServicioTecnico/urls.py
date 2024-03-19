@@ -52,7 +52,7 @@ urlpatterns=[
     path('crear_cotizaciones/productos_servicios/<int:idcotizacion>/', CotizacionesCRUD.as_view({'post':'asignar_productos_servicios', 'get':'asignar_productos_servicios'}), name='asignar_productos_servicios'),
 
     path('index/tecnicos/ver_tecnicos/registrar_tecnico/', tecnicosCRUD.as_view({'post':'registrar_tecnico'}), name='registrar_tecnico'),
-    path('index/tecnicos/ver_tecnicos/editar_tecnico/<int:idtecnico>', tecnicosCRUD.as_view({'post':'editar_tecnico'}), name='editar_tecnico')
+    path('index/tecnicos/ver_tecnicos/editar_tecnico/<int:idtecnico>', tecnicosCRUD.as_view({'post':'editar_tecnico'}), name='editar_tecnico'),
 
     path('crear_cotizaciones/productos_servicios/<int:idcotizacion>/', CotizacionesCRUD.as_view({'post':'asignar_productos_servicios', 'get':'asignar_productos_servicios'}), name='asignar_productos_servicios'),
     path('eliminar_cotizacion/<int:idcotizacion>/', CotizacionesCRUD.as_view({'post': 'eliminar_cotizacion'}), name='eliminar_cotizacion'),
