@@ -19,8 +19,5 @@ urlpatterns=[
     path('createPqrsf/', views.createPqrsfView, name='createPqrsf'),
     path('eliminarPqrsf/<idPqrsf>', views.eliminarPqrsf, name='eliminarPqrsf'),
 
-    path('pqrsf/ver_pqrsf', pqrsfCRUD.as_view({'get': 'ir_a_pqrsf'}), name='ir_a_pqrsf'),
-    path('pqrsf/crear_pqrsf/', pqrsfCRUD.as_view({'post': 'crear_pqrsf'}), name='crear_pqrsf')
-
     # path('crear_pqrsf/',)
 ]
