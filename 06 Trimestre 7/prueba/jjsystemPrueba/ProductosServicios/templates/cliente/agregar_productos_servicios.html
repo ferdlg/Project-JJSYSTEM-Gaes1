@@ -11,7 +11,7 @@
                         <h4>Agregar Productos y Servicios</h4>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{% url 'asignar_productos_servicios' idcotizacion=idcotizacion %}">
+                        <form method="post" action="{% url 'asignar_productos_servicios_cliente' id_cotizacion=idcotizacion %}">
                             {% csrf_token %}
                             <input type="hidden" name="idcotizacion" value="{{ idcotizacion }}">
                             <div class="card mb-3">
@@ -25,8 +25,8 @@
                                             <h5 class="card-title">{{ producto.nombreproducto }}</h5>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id="producto{{ producto.idproducto }}" name="producto[]" value="{{ producto.idproducto }}" onchange="mostrarCantidad(this)">
-                                                <label class="form-check-label" for="producto{{ producto.idproducto }}">Seleccionar</label>
-                                                <input type="number" class="form-control cantidad" id="cantidad{{ producto.idproducto }}" name="cantidad_{{ producto.idproducto }}" placeholder="Cantidad" style="display: none;">
+                                        <label class="form-check-label" for="producto{{ producto.idproducto }}">{{ producto.nombreproducto }}</label>
+                                        <input type="number" class="form-control cantidad" id="cantidad{{ producto.idproducto }}" name="cantidad_{{ producto.idproducto }}" placeholder="Cantidad" style="display: none;">
                                             </div>
                                         </div>
                                     </div>

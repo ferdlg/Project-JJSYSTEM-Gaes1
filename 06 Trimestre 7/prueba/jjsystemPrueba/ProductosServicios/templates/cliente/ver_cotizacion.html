@@ -2,6 +2,7 @@
 {% block titulo %} Productos {% endblock %}
 {% load static %} 
 {% block contenido %}
+<div class="contenido" style="margin-bottom: 130px;">
     <div class="row justify-content-center align-items-center vh-100">
         <div class="col-md-8">
             <div class="card bg-light border-primary">
@@ -35,10 +36,7 @@
                             {% for producto in detalles_cotizacion.4 %}
                             <div class="card m-2">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ producto.nombreProducto }}</h5>
-                                    <p class="card-text">{{ producto.descripcionProducto }}</p>
-                                    <p class="card-text">Precio: {{ producto.precioProducto }}</p>
-                                    <!-- Agrega otros detalles del producto si es necesario -->
+                                    <p class="card-title">Nombre:{{ producto.nombreproducto }}<p/>
                                 </div>
                             </div>
                             {% endfor %}
@@ -49,9 +47,7 @@
                         {% for servicio in detalles_cotizacion.5 %}
                             <div class="card m-2" style="width: 200px;">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ servicio.nombreServicio }}</h5>
-                                    <p class="card-text">{{ servicio.descripcionServicio }}</p>
-                                    <p class="card-text">Precio: {{ servicio.precioServicio }}</p>
+                                    <h5 class="card-title">Nombre:{{ servicio.nombreServicio }}</h5>
                                     <!-- Agrega otros detalles del servicio si es necesario -->
                                 </div>
                             </div>
@@ -61,4 +57,5 @@
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

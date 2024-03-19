@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from rest_framework import viewsets
 from Account.models import Clientes
 from .serializers import ClientesSerializers
+from django.contrib.auth.hashers import make_password, check_password
 
 
 class clientesCRUD(viewsets.ModelViewSet):
@@ -29,3 +30,21 @@ class clientesCRUD(viewsets.ModelViewSet):
 
             return redirect('ver_perfil')
         return render(request, 'cliente/ver_perfil.html', {'usuario':usuario, 'cliente':cliente})
+    
+    def validar_password(self, request):
+        usuario = request.user
+        password = make_password(request.POST.get('password'))
+        if check_password(password, usuario.password):
+            password_correct = True
+        else:
+            password_correct = False
+        return render(request, 'cliente/cambiar_password.html', {'password_correct': password_correct})
+    
+    def cambiar_password(self, request):
+        usuario = request.user
+        new_password = request.POST.get('new_password')
+
+        usuario.password = make_password(new_password)
+        usuario.save()
+
+        return redirect('actualizar_mis_datos')

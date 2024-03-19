@@ -59,12 +59,12 @@ urlpatterns=[
     path('eliminarCategoriaServicio/<idCategoriaServicio>', eliminarCategoriaServicioView, name = 'eliminarCategoriaServicio'),
 
     path('cotizaciones/', CotizacionesCRUD.as_view({'get': 'ir_a_cotizaciones'}), name='ir_a_cotizaciones'),
-    path('cotizaciones/crear_cotizacion/', CotizacionesCRUD.as_view({'post': 'crear_cotizacion'}), name='crear_cotizacion'),
-    path('cotizaciones/asignar_productos_servicios/<int:id_cotizacion>/', CotizacionesCRUD.as_view({'post': 'asignar_productos_servicios', 'get': 'asignar_productos_servicios'}), name='asignar_productos_servicios'),
-    path('cotizaciones/ver_cotizacion_cliente/<int:id_cotizacion>/',vista_detalle_cotizacion, name='ver_cotizacion_cliente'),
+    path('cotizaciones/crear_cotizacion/', CotizacionesCRUD.as_view({'post': 'crear_cotizacion', 'get': 'crear_cotizacion'}), name='crear_cotizacion'),
+    path('cotizaciones/asignar_productos_servicios/<id_cotizacion>/', CotizacionesCRUD.as_view({'post': 'asignar_productos_servicios_cliente', 'get': 'asignar_productos_servicios_cliente'}), name='asignar_productos_servicios_cliente'),
+    path('cotizaciones/ver_cotizacion_cliente/<id_cotizacion>/',vista_detalle_cotizacion, name='ver_cotizacion_cliente'),
 
     path('mis_compras/historial/',ventasCRUD.as_view({'get':'historial_compras'}), name='historial_compras'),
-    path('mi_perfil/', clientesCRUD.as_view({'get':'actualizar_mis_datos','post':'actualizar_mis_datos'}), name='actualizar_mis_datos')
-
-
+    path('mi_perfil/', clientesCRUD.as_view({'get':'actualizar_mis_datos','post':'actualizar_mis_datos'}), name='actualizar_mis_datos'),
+    path('mi_perfil/validar_contraseña/',clientesCRUD.as_view({'post':'validar_password'}), name = 'validar_password'),
+    path('mi_perfil/validar_contraseña/cambiar_contraseña', clientesCRUD.as_view({'post':'cambiar_password'}), name='cambiar_password')
 ]
