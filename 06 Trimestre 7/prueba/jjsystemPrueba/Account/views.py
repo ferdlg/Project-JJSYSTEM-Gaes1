@@ -102,12 +102,12 @@ class PasswordResetRequestView(APIView):
     
     def post(self, request):
         email = request.data.get('email')
-        user = User.objects.filter(email=email).first()
+        user = Usuarios.objects.filter(email=email).first()
         if user:
             token_generator = PasswordResetTokenGenerator()
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
             token = token_generator.make_token(user)
-            reset_link = f'http://example.com/reset-password/{uidb64}/{token}'
+            reset_link = f'http://127.0.0.1:8000/account/reestablecer_password_confirmar/{uidb64}/{token}'
             send_mail(
                     'Solicitud de restablecimiento de contraseña',
                     f'Por favor, sigue este enlace para restablecer tu contraseña: {reset_link}',
@@ -120,10 +120,10 @@ class PasswordResetRequestView(APIView):
             return Response({'error': 'No se encontró ningún usuario con este correo electrónico'}, status=status.HTTP_404_NOT_FOUND)
 
 class PasswordResetView(APIView):
-    def post(self, request, uidb64, token):
+    def get(self, request, uidb64, token):
         try:
             uid = base64.urlsafe_b64decode(uidb64).decode()
-            user = User.objects.get(pk=uid)
+            user = Usuarios.objects.get(pk=uid)
             if token_generator.check_token(user, token):
                 # Actualizar la contraseña del usuario
                 return Response({'message': 'Contraseña restablecida exitosamente'}, status=status.HTTP_200_OK)
