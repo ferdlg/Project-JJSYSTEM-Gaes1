@@ -56,7 +56,7 @@
             <!-- Abre un modal si el usuario no está autenticado -->
             <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Acerca de nosotros</button>
             {% endif %} 
-            <button class="btn btn-info"><a class="navbar-brand" href="#">PQRSF</a></button>
+            <button class="btn btn-info"><a class="navbar-brand" href="{% url 'ir_a_pqrsf' %}">PQRSF</a></button>
             {% if user.is_authenticated %}
                 <a class="navbar-brand" href="{% url 'ir_a_cotizaciones' %}"> Cotizar
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
