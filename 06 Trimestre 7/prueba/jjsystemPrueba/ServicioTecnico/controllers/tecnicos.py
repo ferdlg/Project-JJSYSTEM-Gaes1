@@ -29,20 +29,20 @@ class tecnicosCRUD(viewsets.ModelViewSet):
             tecnico = paginator.page(paginator.num_pages)
         return render(request, 'vertecnicos.html', {'tecnicos': tecnico,'form': form, 'edit_form': edit_form })
     
-    @classmethod
+    
     def registrar_tecnico(cls, request):
         if request.method == 'POST':
-            
             form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            # Cifrar la contraseña antes de guardarla
-            numerodocumento_str = str(form.cleaned_data['numerodocumento'])  # Convertir a cadena
-            user.password = make_password(numerodocumento_str)
-            user.idrol = Roles.objects.get(idrol=3)  # Asigna el rol de tecnico
-            user.idestadosusuarios = Estadosusuarios.objects.get(idestadousuario=1)  # Asigna el estado de usuario activo
-            user.save()
-            return redirect('index')
+            if form.is_valid():
+                user = form.save(commit=False)
+                # Cifrar la contraseña antes de guardarla
+                numerodocumento_str = str(form.cleaned_data['numerodocumento'])  # Convertir a cadena
+                user.password = make_password(numerodocumento_str)
+                user.idrol = Roles.objects.get(idrol=3)  # Asigna el rol de tecnico
+                user.idestadosusuarios = Estadosusuarios.objects.get(idestadousuario=1)  # Asigna el estado de usuario activo
+                user.save()
+
+                return redirect('verTecnicos')
         else:
             form = RegisterForm()
 
@@ -59,6 +59,16 @@ class tecnicosCRUD(viewsets.ModelViewSet):
             form = EditTecnicosForm(instance=tecnico)
         
         return render(request, 'verTecnicos.html', {'edit_form': edit_form, 'idtecnico': idtecnico})
+    
+    def eliminar_tecnico(self, request, idtecnico):
+            tecnico = Tecnicos.objects.get(idtecnico=idtecnico)
+            tecnico.delete()
+            
+            # Obtener el número de página actual
+            current_page = request.GET.get('page')
+            
+            # Redireccionar a la página de listar técnicos manteniendo la paginación
+            return redirect('verTecnicos')
     #registrar tecnicos
     #actualizar datos de tecnicos
     #eliminar tecnicos
