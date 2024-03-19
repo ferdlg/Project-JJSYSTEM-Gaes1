@@ -32,7 +32,7 @@ urlpatterns=[
     path('',include(router.urls)),
     path('index/', index , name='index'),
     path('index/tecnicos/', indexTecnicos, name='indexTecnicos'),
-    path('index/tecnicos/ver_tecnicos', tecnicosCRUD.listar_tecnicos, name='verTecnicos'),
+    path('index/tecnicos/ver_tecnicos', tecnicosCRUD.as_view({'post':'listar_tecnicos','get':'listar_tecnicos'}), name='verTecnicos'),
     path('index/ver_clientes/',ClientesCRUD.as_view({'get':'listar_clientes'}), name='ver_clientes'),
     path('index/ver_clientes/actualizar_datos/<idcliente>',ClientesCRUD.as_view({'get':'actualizar_datos', 'post':'actualizar_datos'}), name='actualizar_datos_clientes'),
 
@@ -49,7 +49,11 @@ urlpatterns=[
     #path('editar_productos_servicios/<int:idcotizacion>/', CotizacionesCRUD.as_view({'get': 'editar_productos_servicios', 'post': 'editar_productos_servicios'}), name='editar_productos_servicios'),
     path('generar_pdf/<int:idcotizacion>/', generar_pdf, name='generar_pdf'),
     path('crear_cotizaciones/', CotizacionesCRUD.as_view({'post':'crear_cotizaciones'}), name='crear_cotizaciones'),
-    path('crear_cotizaciones/productos_servicios/<int:idcotizacion>/', CotizacionesCRUD.as_view({'post':'asignar_productos_servicios', 'get':'asignar_productos_servicios'}), name='asignar_productos_servicios')
+    path('crear_cotizaciones/productos_servicios/<int:idcotizacion>/', CotizacionesCRUD.as_view({'post':'asignar_productos_servicios', 'get':'asignar_productos_servicios'}), name='asignar_productos_servicios'),
+
+    path('index/tecnicos/ver_tecnicos/registrar_tecnico/', tecnicosCRUD.as_view({'post':'registrar_tecnico'}), name='registrar_tecnico'),
+    path('index/tecnicos/ver_tecnicos/editar_tecnico/<int:idtecnico>', tecnicosCRUD.as_view({'post':'editar_tecnico'}), name='editar_tecnico')
+
 
 
 
