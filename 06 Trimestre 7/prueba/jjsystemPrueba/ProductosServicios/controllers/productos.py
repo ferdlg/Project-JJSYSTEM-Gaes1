@@ -26,13 +26,13 @@ def home_productos(request):
     paginator = Paginator(productos_list, 5)  # Mostrar 10 productos por página
     page_number = request.GET.get('page')      # Obtener el número de página solicitado
     try:
-        productos = paginator.page(page_number)
+        productos_list = paginator.page(page_number)
     except PageNotAnInteger:
-        productos = paginator.page(1)
+        productos_list = paginator.page(1)
     except EmptyPage:
-        productos = paginator.page(paginator.num_pages)
+        productos_list = paginator.page(paginator.num_pages)
 
-    return render(request, "crudAdmin/IndexProductos.html", {"productos": productos})
+    return render(request, "crudAdmin/IndexProductos.html", {"productos": productos_list})
 
 # CRUD de productos
 import os
