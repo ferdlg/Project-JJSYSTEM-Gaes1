@@ -8,7 +8,9 @@ from django.db import connection
 class CotizacionesCRUD(BaseCotizacionesCRUD):
     # Métodos heredados de la clase base
     def ir_a_cotizaciones(self, request):
-        return render(request, 'cliente/crear_cotizacion.html')
+        numerodocumento = request.user.numerodocumento
+        cotizaciones = Cotizaciones.objects.filter(idcliente__numerodocumento=numerodocumento)
+        return render(request, 'cliente/crear_cotizacion.html', {'cotizaciones':cotizaciones})
     
     def crear_cotizacion(self,request):
         if request.method == 'POST':
