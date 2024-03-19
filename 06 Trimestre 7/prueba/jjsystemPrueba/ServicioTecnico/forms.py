@@ -15,9 +15,10 @@ class RegisterForm(forms.ModelForm):
         exclude = ['password','idrol', 'idestadosusuarios', 'last_login']
 
 class EditTecnicosForm(forms.ModelForm):
-    numerodocumento = forms.ModelChoiceField(queryset=Usuarios.objects.all(), label='Numero de documento', widget=forms.Select(attrs={'class': 'form-control', 'required': True}))
     especialidad = forms.CharField(label='Especialidad', widget=forms.TextInput(attrs={'class': 'form-control', 'required': True}))
 
     class Meta:
         model = Tecnicos
-        fields = '__all__'
+        fields = ['numerodocumento', 'especialidad']
+        exclude = ['numerodocumento']
+
