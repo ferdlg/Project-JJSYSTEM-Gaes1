@@ -99,9 +99,7 @@ def logoutView(request):
 
 token_generator = PasswordResetTokenGenerator()
 class PasswordResetRequestView(APIView):
-    def get(self, request):
-
-        return
+    
     def post(self, request):
         email = request.data.get('email')
         user = User.objects.filter(email=email).first()
@@ -133,3 +131,7 @@ class PasswordResetView(APIView):
                 return Response({'error': 'Token de restablecimiento de contraseña inválido'}, status=status.HTTP_400_BAD_REQUEST)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             return Response({'error': 'Enlace de restablecimiento de contraseña inválido'}, status=status.HTTP_400_BAD_REQUEST)
+        
+
+def password_reset_request(request):
+    return render(request, 'password_reset_form.html')
