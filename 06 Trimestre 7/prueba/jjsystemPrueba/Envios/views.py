@@ -149,7 +149,7 @@ def historialEnviosCliente(request):
     envios = Envios.objects.filter(idenvio__in=ids_envios)
 
     # Filtrar solo los envíos con estado "Entregado"
-    envios_entregados = envios.filter(idestadoenvio__nombreestado="Entregado")
+    envios_entregados = envios.filter(idestadoenvio__nombreestadoenvio="Entregado")
 
     return render(request, 'cliente/HistorialEnviosCliente.html', {'envios': envios_entregados})
 
