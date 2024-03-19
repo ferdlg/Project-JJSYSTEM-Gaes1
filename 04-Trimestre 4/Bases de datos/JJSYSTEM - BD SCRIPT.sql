@@ -1127,6 +1127,17 @@ END;
 //
 DELIMITER ;
 
+DELIMITER //
+CREATE TRIGGER usuario_tecnico
+AFTER INSERT ON usuarios
+FOR EACH ROW
+BEGIN
+    IF NEW.idRol = 3 THEN
+        INSERT INTO tecnicos (especialidad, numeroDocumento) VALUES ('', NEW.numeroDocumento);
+    END IF;
+END;
+//
+DELIMITER ;
 
 DROP PROCEDURE IF EXISTS ObtenerDetallesCotizacion;
 DELIMITER //
@@ -1163,3 +1174,4 @@ BEGIN
 END //
 
 DELIMITER ;
+
