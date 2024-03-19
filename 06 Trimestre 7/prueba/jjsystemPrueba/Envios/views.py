@@ -121,12 +121,18 @@ def homeEnviosTecnico(request):
 #Views cliente
 
 def enviosCliente(request):
-    # Obtener la dirección del cliente autenticado
+    # Obtener el número de documento del cliente autenticado
     numerodocumento = request.user.numerodocumento
-    
-    # Filtrar los envíos basados en el número de documento del cliente
-    envios = Envios.objects.filter(idventa__idcotizacion__idcliente__numerodocumento=numerodocumento)
-    
+
+    # Obtener todas las ventas del cliente autenticado que tienen un envío asociado
+    ventas_con_envio = Ventas.objects.filter(idcotizacion__idcliente__numerodocumento=numerodocumento, idenvio__isnull=False)
+
+    # Obtener los ids de envío asociados a estas ventas
+    ids_envios = ventas_con_envio.values_list('idenvio', flat=True)
+
+    # Obtener los objetos de envío correspondientes a los ids de envío obtenidos
+    envios = Envios.objects.filter(idenvio__in=ids_envios)
+
     return render(request, 'cliente/EnviosCliente.html', {'envios': envios})
 
     
