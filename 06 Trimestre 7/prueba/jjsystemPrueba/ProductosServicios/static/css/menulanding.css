@@ -53,13 +53,6 @@ body {
     color: var(--color-white); /* Texto en color blanco al pasar el cursor */
 }
 
-.navbar-landing .user_img {
-    width: 3rem; /* Tamaño de la imagen de perfil */
-    height: 3rem;
-    border-radius: 50%; /* Forma circular */
-    margin-right: 10px; /* Margen derecho */
-}
-
 /* Estilos para la barra de navegación de búsqueda */
 .navbar-buscar {
     position: fixed; /* Navbar fija */

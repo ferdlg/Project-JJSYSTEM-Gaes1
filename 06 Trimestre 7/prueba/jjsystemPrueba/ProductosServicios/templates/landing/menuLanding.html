@@ -24,17 +24,18 @@
             {% else %} 
             <button ><a href="{% url 'login' %}">Iniciar sesión </a></button>
             <button ><a href="{% url 'register' %}">Registrarse</a></button>
-            {% endif %} 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img class="user_img" src="{% static 'images/landing/fotoperfil.png' %}" alt="Foto de perfil">
+            {% endif %}
+            <li class="nav-item dropdown" style="margin-top: 0px; display: flex;">
+                <a class="nav-link dropdown-toggle font-weight-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{% static 'images/fotoperfil.png' %}" class="img-fluid rounded-circle avatar mr-2" alt="Foto de perfil" style="width: 30px; height: 30px; border-radius: 50px;">
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="ver_perfil">Mi perfil</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
-                </ul>
-            </li>
+                <div class="dropdown-menu dropdown-menu-dark">
+                    <a class="dropdown-item" href="#">Mi perfil</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a>        
+                </div>
+            </li> 
+            
         </div>
     </nav>
     
