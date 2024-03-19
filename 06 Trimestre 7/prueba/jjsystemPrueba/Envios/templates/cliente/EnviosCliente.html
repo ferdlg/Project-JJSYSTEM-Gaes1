@@ -17,13 +17,6 @@
         </nav>
     </div>    
     <div id="content" style="margin: 40px">
-        <section style="padding: 5px; padding-top: 0%;">
-            <form class="form-inline" method="GET" style="width:25%">
-                <div class="input-group">
-                    <input type="search" class="form-control" name="search" placeholder="Buscar" aria-label="Search" >
-                </div>
-            </form>
-        </section>
 
         <section class="s-data-table">
             <table class="table data-table table-bordered">
@@ -51,8 +44,7 @@
             </table>
         </section>
         <div class="d-flex justify-content-start" style="margin-bottom: 70px;">
-            <a href="{% url 'generar_pdf_envios' envios%}" class="btn btn-success btn">Exportar</a>
-            <a href="{% url 'enviosEntregados' %}" class="btn btn-warning btn">Envios Entregados</a>
+            <a href="{% url 'historial_envios_cliente' %}" class="btn btn-warning btn">Historial Envios</a>
         </div>
     </div>
 {% endblock %}

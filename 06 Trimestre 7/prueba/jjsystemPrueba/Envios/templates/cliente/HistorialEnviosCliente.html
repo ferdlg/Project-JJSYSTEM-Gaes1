@@ -1,5 +1,5 @@
-{% extends "menu.html" %}
-{% block titulo %} Envios {% endblock %}    
+{% extends "landing/menuLanding.html" %}
+{% block titulo %} Envios {% endblock %}
 
 {% block contenido %}
 {% load static %}
@@ -10,47 +10,41 @@
             <div class="container">
                 <div class="row">
                     <div class="allowed_prod">
-                        <h2 class="font-weight-bold text-center text-lg-left">Envios</h2>
+                        <h2 class="font-weight-bold text-center text-lg-left">Historial Envios</h2>
                     </div>
                 </div>
             </div>
         </nav>
     </div>    
     <div id="content" style="margin: 40px">
-        <section style="padding: 5px; padding-top: 0%;">
-            <form class="form-inline" method="GET" style="width:25%">
-                <div class="input-group">
-                    <input type="search" class="form-control" name="search" placeholder="Buscar" aria-label="Search" >
-                </div>
-            </form>
-        </section>
 
         <section class="s-data-table">
             <table class="table data-table table-bordered">
                 <thead>
                     <tr>
-                        <th>ID de Envío</th>
-                        <th>Dirección de Envío</th>
-                        <th>ID de Técnico</th>
-                        <th>Estado de Envío</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">ID Tecnico</th>
+                        <th scope="col">Estado</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for envio in historial_envios_cliente %}
+                    {% for e in envios %}
                     <tr>
-                        <td>{{ envio.idenvio }}</td>
-                        <td>{{ envio.direccionenvio }}</td>
-                        <td>{{ envio.idtecnico }}</td>
-                        <td>{{ envio.nombreestadoenvio }}</td>
+                        <td>{{e.idenvio}}</td>
+                        <td>{{e.direccionenvio}}</td>
+                        <td>{{e.idtecnico.idtecnico}}</td>
+                        <td>{{e.idestadoenvio.nombreestadoenvio}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </section>
-        <div class="container">
-            <a href="{% url 'vista_cliente' idCliente=idCliente %}">
-                <button type="button" class="btn btn-secondary">Regresar</button>
-            </a>
-        </div>   
+        <div class="d-flex justify-content-start" style="margin-bottom: 70px;">
+            <a href="{% url 'vista_cliente' %}" class="btn btn-secundary btn">Regresar</a>
+        </div>
     </div>
 {% endblock %}
