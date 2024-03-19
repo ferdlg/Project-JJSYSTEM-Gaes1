@@ -1,7 +1,8 @@
 import base64
 from django.utils.encoding import force_bytes
 from django.shortcuts import render, HttpResponse
-from .forms import LoginForm, RegisterForm
+from django.views import View
+from .forms import LoginForm, NewPasswordForm, RegisterForm
 from .models import Roles, Estadosusuarios, Usuarios
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect
@@ -107,7 +108,7 @@ class PasswordResetRequestView(APIView):
             token_generator = PasswordResetTokenGenerator()
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
             token = token_generator.make_token(user)
-            reset_link = f'http://127.0.0.1:8000/account/reestablecer_password_confirmar/{uidb64}/{token}'
+            reset_link = f'http://127.0.0.1:8000/account/reestablecer_password_enlace/{uidb64}/{token}'
             send_mail(
                     'Solicitud de restablecimiento de contraseña',
                     f'Por favor, sigue este enlace para restablecer tu contraseña: {reset_link}',
@@ -119,19 +120,36 @@ class PasswordResetRequestView(APIView):
         else:
             return Response({'error': 'No se encontró ningún usuario con este correo electrónico'}, status=status.HTTP_404_NOT_FOUND)
 
-class PasswordResetView(APIView):
+class PasswordResetConfirmView(View):
     def get(self, request, uidb64, token):
         try:
-            uid = base64.urlsafe_b64decode(uidb64).decode()
+            uid = force_bytes(base64.urlsafe_b64decode(uidb64))
             user = Usuarios.objects.get(pk=uid)
             if token_generator.check_token(user, token):
-                # Actualizar la contraseña del usuario
-                return Response({'message': 'Contraseña restablecida exitosamente'}, status=status.HTTP_200_OK)
+                form = NewPasswordForm()
+                return render(request, 'password_reset_confirm.html', {'form': form, 'uidb64': uidb64, 'token': token})
             else:
-                return Response({'error': 'Token de restablecimiento de contraseña inválido'}, status=status.HTTP_400_BAD_REQUEST)
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            return Response({'error': 'Enlace de restablecimiento de contraseña inválido'}, status=status.HTTP_400_BAD_REQUEST)
-        
+                return HttpResponse('Token de restablecimiento de contraseña inválido', status=400)
+        except (TypeError, ValueError, OverflowError, Usuarios.DoesNotExist):
+            return HttpResponse('Enlace de restablecimiento de contraseña inválido', status=400)
+
+    def post(self, request, uidb64, token):
+        try:
+            uid = force_bytes(base64.urlsafe_b64decode(uidb64))
+            user = Usuarios.objects.get(pk=uid)
+            if token_generator.check_token(user, token):
+                form = NewPasswordForm(request.POST)
+                if form.is_valid():
+                    user.password = make_password(form.cleaned_data['new_password'])
+                    user.save()
+                    return redirect('login')
+                else:
+                    return render(request, 'password_reset_confirm.html', {'form': form})
+            else:
+                return HttpResponse('Token de restablecimiento de contraseña inválido', status=400)
+        except (TypeError, ValueError, OverflowError, Usuarios.DoesNotExist):
+            return HttpResponse('Enlace de restablecimiento de contraseña inválido', status=400)
 
 def password_reset_request(request):
     return render(request, 'password_reset_form.html')
+

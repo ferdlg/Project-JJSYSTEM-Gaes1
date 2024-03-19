@@ -20,3 +20,4 @@ class EditTecnicosForm(forms.ModelForm):
 
     class Meta:
         model = Tecnicos
+        fields = '__all__'

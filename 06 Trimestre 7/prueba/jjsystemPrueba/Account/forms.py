@@ -18,3 +18,13 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = Usuarios
         exclude = ['idrol', 'idestadosusuarios', 'last_login']
+
+
+class NewPasswordForm(forms.Form):
+    new_password = forms.CharField(label='Nueva Contraseña', widget=forms.PasswordInput)
+
+    def clean_new_password(self):
+        new_password = self.cleaned_data.get('new_password')
+        if not new_password:
+            raise forms.ValidationError('Debes ingresar una nueva contraseña.')
+        return new_password
