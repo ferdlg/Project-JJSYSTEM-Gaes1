@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envíos del Cliente</title>
+</head>
+<body>
+    <h1>Envíos del Cliente</h1>
+    <ul>
+        {% for envio in envios %}
+            <tr>
+                <td>{{ envio.idenvio }}</td>
+                <td>{{ envio.direccionenvio }}</td>
+                <td>{{ envio.idtecnico }}</td>
+                <td>{{ envio.nombreestadoenvio }}</td>
+            </tr>
+        {% endfor %}
+    </ul>
+</body>
+</html>

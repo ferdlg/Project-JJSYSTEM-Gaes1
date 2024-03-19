@@ -23,7 +23,7 @@ urlpatterns=[
     path('tecnicos/', views.homeEnviosTecnico, name='homeTecnicosEnvios'),
     path('api/', include(router.urls)),
 
-    path('clientes/<int:idCliente>/', views.enviosCliente, name='vista_cliente'),
+    path('clientes/', views.enviosCliente, name='vista_cliente'),
     path('historialEnvios/<int:idCliente>/', views.historialEnviosCliente, name='historial_envios_cliente'),
     path('generar_pdf/<str:templateName>/', views.generar_pdf, name='generar_pdf_envios'),
 

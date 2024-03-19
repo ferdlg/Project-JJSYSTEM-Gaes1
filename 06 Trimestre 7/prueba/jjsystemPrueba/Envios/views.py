@@ -123,14 +123,14 @@ def homeEnviosTecnico(request):
 
 #Views cliente
 
-def enviosCliente(request, idCliente):
-    # Filtrar los envíos del cliente utilizando el ID del cliente pasado en la URL
-    enviosCliente = EnviosClientes.objects.filter(idcliente=idCliente)
-
-    # Excluir los envíos con estado "Entregado"
-    enviosCliente = enviosCliente.exclude(nombreestadoenvio="Entregado")
-
-    return render(request, 'usuarios/EnviosCliente.html', {'envios_cliente': enviosCliente, 'idCliente': idCliente})
+def enviosCliente(request):
+    # Obtener la dirección del cliente autenticado
+    numerodocumento = request.user.numerodocumento
+    
+    # Filtrar los envíos basados en el número de documento del cliente
+    envios = EnviosClientes.objects.filter(documentocliente=numerodocumento)
+    
+    return render(request, 'cliente/EnviosCliente.html', {'envios': envios})
 
     
 def historialEnviosCliente(request, idCliente):
