@@ -929,18 +929,22 @@ VALUES
 
     CREATE VIEW detalle_envios_y_ventas AS
     SELECT
-        envios.idEnvio,
-        envios.direccionEnvio,
-        detallesventas.detallesVenta,
-        tecnicos.idTecnico AS tecnicoAsignado,
-        tecnicos.numeroDocumento,
-        ventas.fechaVenta
-        ventas.idVenta
+        e.idEnvio,
+        e.direccionEnvio,
+        dv.detallesVenta,
+        t.idTecnico AS tecnicoAsignado,
+        CONCAT(u.nombre, ' ', u.apellido) AS nombreTecnico,
+        t.numeroDocumento,
+        v.fechaVenta,
+        v.idVenta
     FROM
-        envios
-        JOIN ventas ON envios.idEnvio = ventas.idEnvio
-        JOIN detallesventas ON ventas.idVenta = detallesventas.idVenta
-        JOIN tecnicos ON envios.idTecnico = tecnicos.idTecnico;
+        jjsystem_db.envios e
+        JOIN jjsystem_db.ventas v ON e.idEnvio = v.idEnvio
+        JOIN jjsystem_db.detallesventas dv ON v.idVenta = dv.idVenta
+        JOIN jjsystem_db.tecnicos t ON e.idTecnico = t.idTecnico
+        JOIN jjsystem_db.usuarios u ON t.numeroDocumento = u.numeroDocumento
+    WHERE
+        u.idRol = 3;
 
     CREATE VIEW VistaEnviosClientes AS
     SELECT
